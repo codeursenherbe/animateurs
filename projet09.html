@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 9 – Jeu de plateforme (Chat qui saute) | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 9 – Jeu de plateforme (Chat qui saute)</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Gravité, plateformes & collecte</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu de plateforme 2D simple</span>
+      <p>
+        Les élèves créent un mini jeu de plateforme : un chat se déplace
+        horizontalement, saute sur des plateformes et collecte des pièces
+        (ou diamants) sans tomber dans le vide. Le projet introduit une
+        version simplifiée de la “gravité” (le personnage redescend s’il
+        n’est pas sur une plateforme) et une condition de victoire.
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : commencer avec peu de plateformes et 3 à 5 pièces.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Programmer des déplacements horizontaux (gauche/droite) et un saut.</li>
+        <li>Comprendre une forme de “gravité” (le personnage tombe s’il n’est pas sur une plateforme).</li>
+        <li>Créer des plateformes et gérer le contact sol/personnage.</li>
+        <li>Collecter des objets (pièces) avec un score.</li>
+        <li>Définir une condition de Game Over (chute) et de victoire (toutes les pièces collectées).</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Décor & déplacements du chat</h2>
+      <p class="meta">Objectif : avoir un décor de plateforme + un chat qui se déplace gauche/droite et saute (même sans gravité parfaite).</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Imaginer un décor simple : sol en bas + 2–3 plateformes en hauteur.</li>
+        <li>Décider des touches de contrôle :  
+          – flèche gauche / flèche droite pour les déplacements,  
+          – barre espace (ou flèche haut) pour le saut.</li>
+        <li>Préparer une explication simple de la gravité :  
+          « Quand on saute, on monte, puis on redescend toujours. »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – « Saut sur place » (3–4 min)</h3>
+      <ul>
+        <li>Faire lever tous les élèves derrière leur chaise.</li>
+        <li>Dire : « Quand je dis "SAUTE", vous sautez une seule fois, puis vous retombez. »</li>
+        <li>Poser la question : « On peut rester en l’air longtemps ? » → réponse : non, on finit toujours par redescendre.</li>
+        <li>Transition : « Notre chat dans Scratch fera pareil : il pourra monter, mais il devra redescendre. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer le décor de plateforme (10–12 min)</p>
+      <ul>
+        <li>Arrière-plan :  
+          – ciel uni,  
+          – un grand rectangle en bas pour représenter le “sol” (plateforme principale).</li>
+        <li>Créer 2–3 plateformes en hauteur :</li>
+        <li>
+          <ul>
+            <li>Option A (facile) : dessiner directement des petits rectangles sur l’arrière-plan.</li>
+            <li>Option B (plus flexible) : créer des sprites “plateforme” (rectangles) que l’on positionne ensuite.</li>
+          </ul>
+        </li>
+        <li>Recommandation : commencer par des plateformes dessinées dans le décor pour simplifier les collisions.</li>
+      </ul>
+
+      <p class="time">2) Ajouter le personnage (chat) (5–7 min)</p>
+      <ul>
+        <li>Garder le chat Scratch ou choisir un autre personnage.</li>
+        <li>Le placer sur le sol, légèrement à gauche du centre.</li>
+        <li>Réduire sa taille si nécessaire (50–70%) pour qu’il tienne bien sur les plateformes.</li>
+      </ul>
+
+      <p class="time">3) Déplacements horizontaux (10–15 min)</p>
+      <ul>
+        <li>Script sur le chat :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « aller à x:-150 y:(hauteur du sol) » (coordonnées de départ)  
+              – « répéter indéfiniment » :  
+                · « si touche flèche droite alors changer x de 5 »  
+                · « si touche flèche gauche alors changer x de -5 ».</li>
+          </ul>
+        </li>
+        <li>Option : retourner visuellement le chat selon la direction (bloc « pointer dans la direction 90 / -90 »).</li>
+        <li>Test : chaque élève déplace le chat sur le sol de gauche à droite.</li>
+      </ul>
+
+      <p class="time">4) Saut simple (sans gravité avancée) (10–12 min)</p>
+      <ul>
+        <li>Ajouter un script :</li>
+        <li>
+          <ul>
+            <li>« quand touche barre espace pressée »  
+              – « répéter 10 fois → changer y de 4 » (montée)  
+              – « répéter 10 fois → changer y de -4 » (descente).</li>
+          </ul>
+        </li>
+        <li>Expliquer :  
+          « On monte un petit peu 10 fois, puis on redescend un petit peu 10 fois. »</li>
+        <li>Tester : le chat saute sur place, puis retombe sur le sol.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Insister : « On ne touche pas encore aux plateformes en hauteur, on s’occupe juste du sol et du saut. »</li>
+        <li>Pour les rapides : autoriser à modifier légèrement la vitesse (changer x de 4 ou 6) ou la hauteur du saut (répéter 12 fois au lieu de 10).</li>
+        <li>Si l’excitation monte :  
+          – proposer un “saut au ralenti” à l’écran (baisser les valeurs de déplacement) pour faire redescendre le rythme.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Trois sauts parfaits » (3–4 min)</h3>
+      <ul>
+        <li>Consigne : « Vous avez 30 secondes pour réaliser 3 sauts propres sans sortir de l’écran. »</li>
+        <li>But : tester le code en restant concentré.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons créé un décor avec un sol, placé un personnage
+        et programmé ses déplacements : marche gauche/droite et saut simple.
+        La prochaine fois, nous utiliserons ce saut pour grimper sur des plateformes
+        en hauteur et éviter le vide. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Plateformes en hauteur & chutes (Game Over)</h2>
+      <p class="meta">Objectif : permettre au chat de sauter sur des plateformes en hauteur et gérer la chute (perte) si l’on tombe dans le vide.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Décider si les plateformes sont :  
+          – intégrées au décor (plus simple),  
+          – ou des sprites séparés (plus flexible, mais plus technique).</li>
+        <li>Préparer une phrase pour expliquer la “chute” :  
+          « Si le chat n’est pas sur une plateforme, il doit redescendre. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Montagne / vide » (3–4 min)</h3>
+      <ul>
+        <li>Au tableau, dessiner un “sol” et une “plateforme”.</li>
+        <li>Demander : « Si tu sautes ici (sur la plateforme), où tu retombes ? Et si tu sors du bord ? »</li>
+        <li>Transition : « Notre chat dans Scratch ne devra pas tomber dans le vide sinon la partie sera terminée. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Ajuster le sol & ajouter des “vraies” plateformes (10–12 min)</p>
+      <ul>
+        <li>Vérifier que le sol est bien horizontal et d’une couleur uniforme.</li>
+        <li>Ajouter 2–3 plateformes en hauteur (dessinées ou en sprites) :  
+          – suffisamment larges pour accueillir le chat,  
+          – pas trop collées au bord de l’écran.</li>
+      </ul>
+
+      <p class="time">2) Simuler la gravité vers le bas (15–18 min)</p>
+      <ul>
+        <li>Créer une couleur unique pour les “surfaces solides” : sol + plateformes (par ex. marron foncé).</li>
+        <li>Sur le chat, dans la boucle « répéter indéfiniment » :</li>
+        <li>
+          <ul>
+            <li>Ajouter, après les déplacements gauche/droite :  
+              – « si ne touche pas la couleur [sol/plateforme] alors changer y de -4 »  
+              (le chat descend petit à petit si rien ne le porte).</li>
+          </ul>
+        </li>
+        <li>Expliquer :  
+          « Si le chat ne touche pas le sol ou une plateforme, il tombe. »</li>
+        <li>Tester : déplacer le chat, sauter, vérifier qu’il s’arrête lorsqu’il touche une plateforme. </li>
+      </ul>
+
+      <p class="time">3) Chute dans le vide = Game Over (10–12 min)</p>
+      <ul>
+        <li>Décider où se trouve le “vide” : très bas dans l’écran (par ex. y < -150).</li>
+        <li>Dans la boucle du chat, ajouter :  
+          – « si y < -150 alors dire "Tu es tombé !" pendant 2 s, aller à x:(départ) y:(sol), et mettre Score à 0 (plus tard) »</li>
+        <li>(On pourra améliorer cette partie à la séance 3 avec un vrai écran Game Over.)</li>
+        <li>Tester : faire volontairement tomber le chat pour voir si le reset fonctionne.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Inviter les élèves à <strong>observer</strong> avant de corriger :  
+          – « Regarde exactement quand ton chat commence à tomber. »</li>
+        <li>Pour ceux qui sont perdus : faire remettre un décor très simple (sol + 1 plateforme) et tester à nouveau la “gravité”.</li>
+        <li>Pour les rapides : autoriser à ajuster la hauteur des plateformes, ou à rajouter un petit décor non-interactif (décor de fond).</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Saut sécurisé » (3–5 min)</h3>
+      <ul>
+        <li>Consigne : « Essayez de faire un saut du sol vers une plateforme, sans tomber dans le vide, 3 fois de suite. »</li>
+        <li>But : tester la jouabilité et calmer les clics inutiles.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, notre chat ne flotte plus dans l’air : il retombe quand
+        il n’est pas sur le sol ou une plateforme. Il peut grimper de plateforme
+        en plateforme, et s’il tombe trop bas, la partie est perdue et on recommence.
+        La prochaine fois, nous ajouterons des pièces à collecter et un score, ainsi
+        qu’un vrai message de victoire. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Pièces à collecter, score & victoire</h2>
+      <p class="meta">Objectif : ajouter des pièces à collecter, un score et une condition de victoire (toutes les pièces collectées).</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Décider du nombre de pièces : 3 à 5 suffit pour un premier niveau.</li>
+        <li>Préparer une phrase simple :  
+          « Pour gagner, il faudra ramasser toutes les pièces sans tomber. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Chasse aux pièces » (3–4 min)</h3>
+      <ul>
+        <li>Poser la question : « Qu’est-ce qui fait qu’un jeu de plateforme est intéressant ? »</li>
+        <li>Attendre quelques réponses (pièces, danger, fin, etc.).</li>
+        <li>Transition : « Nous allons ajouter des pièces à ramasser et un vrai but au jeu. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer une pièce & la dupliquer (10–12 min)</p>
+      <ul>
+        <li>Créer un nouveau sprite “Pièce” (ou diamant, étoile…).</li>
+        <li>La placer sur une plateforme accessible par un saut.</li>
+        <li>Dupliquer la pièce plusieurs fois (3 à 5 copies) et les répartir sur différentes plateformes.</li>
+      </ul>
+
+      <p class="time">2) Créer la variable Score (5–7 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Score</strong> (pour tous les sprites).</li>
+        <li>Au démarrage du jeu (drapeau vert sur le chat ou sur un sprite gestion) :  
+          – « mettre Score à 0 ».</li>
+        <li>Vérifier que Score s’affiche sur la scène.</li>
+      </ul>
+
+      <p class="time">3) Collecte des pièces (15–20 min)</p>
+      <ul>
+        <li>Sur chaque sprite Pièce :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué → montrer »</li>
+            <li>« répéter indéfiniment »  
+              – « si touche [Chat] alors »  
+                · « changer Score par 1 »  
+                · « cacher ».</li>
+          </ul>
+        </li>
+        <li>Tester : déplacer le chat jusqu’à une pièce, vérifier que le score augmente et que la pièce disparaît.</li>
+      </ul>
+
+      <p class="time">4) Condition de victoire (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>PiecesTotales</strong> (si tu veux que ce soit automatique) ou noter juste le nombre total de pièces.</li>
+        <li>Au début du jeu :  
+          – « mettre PiecesTotales à X » (X = nb de pièces sur la scène).</li>
+        <li>Dans un script de gestion (sur le décor ou le chat) :</li>
+        <li>
+          <ul>
+            <li>« répéter indéfiniment »  
+              – « si Score = PiecesTotales alors »  
+                · « dire "Bravo, tu as tout ramassé !" pendant 3 s »  
+                · éventuellement « arrêter tous ».</li>
+          </ul>
+        </li>
+        <li>Tester une partie entière :  
+          – sauter, collecter toutes les pièces,  
+          – vérifier que le message de victoire apparaît.</li>
+      </ul>
+
+      <h3>Tests en binômes (8–10 min)</h3>
+      <ul>
+        <li>Mettre les élèves par deux :</li>
+        <li>
+          <ul>
+            <li>élève A joue au jeu de B,  
+            <li>élève B observe et se pose deux questions :  
+              – « Est-ce que toutes les pièces sont accessibles ? »  
+              – « Est-ce que la difficulté est raisonnable (ni trop facile, ni impossible) ? »</li>
+          </ul>
+        </li>
+        <li>Ils échangent ensuite les rôles.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Plateforme préférée » (5 min)</h3>
+      <ul>
+        <li>Demander à quelques élèves de décrire à voix haute leur “plateforme préférée” :</li>
+        <li>
+          <ul>
+            <li>« Où est-elle ? (haut, milieu, bas) »</li>
+            <li>« Pourquoi tu l’aimes bien ? (difficile à atteindre, amusante, etc.) »</li>
+          </ul>
+        </li>
+        <li>En profiter pour faire ressortir ce qui rend le niveau intéressant sans être frustrant.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Nous avons maintenant un jeu de plateforme complet : un chat qui se
+        déplace, saute sur des plateformes, tombe dans le vide s’il se rate,
+        collecte des pièces et gagne quand il a tout ramassé. Les élèves ont
+        testé les jeux des autres et réfléchi à ce qui rend un niveau agréable
+        à jouer. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Le chat “tombe à travers” le sol</strong>  
+          → Vérifier la couleur utilisée dans « si ne touche pas la couleur … »  
+          → S’assurer que le sol et les plateformes ont bien la même couleur exacte.</li>
+
+        <li><strong>Le chat reste suspendu en l’air</strong>  
+          → Vérifier que le test “ne touche pas la couleur” est bien dans la boucle « répéter indéfiniment ».  
+          → Ajouter ou augmenter « changer y de -4 » (gravité). </li>
+
+        <li><strong>Les pièces ne disparaissent pas</strong>  
+          → Vérifier que le test « si touche [Chat] » est dans une boucle.  
+          → Vérifier que le sprite du chat est bien celui utilisé dans le bloc “touche”.</li>
+
+        <li><strong>Score ne bouge pas</strong>  
+          → Vérifier que « changer Score par 1 » est juste après “touche [Chat]”.  
+          → Vérifier que la variable Score est bien visible.</li>
+
+        <li><strong>La victoire ne se déclenche pas</strong>  
+          → Vérifier la valeur de PiecesTotales.  
+          → Tester en mettant temporairement PiecesTotales à 1 pour voir si la condition marche.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire expliquer à voix haute par un élève :  
+          « Que se passe-t-il si le chat n’est pas sur une couleur de sol ? »</li>
+        <li>Encourager un travail par petites étapes :
+          <ul>
+            <li>1 : déplacements,</li>
+            <li>2 : saut,</li>
+            <li>3 : gravité et sol,</li>
+            <li>4 : pièces,</li>
+            <li>5 : victoire.</li>
+          </ul>
+        </li>
+        <li>Pour les plus rapides :  
+          – ajouter une “zone dangereuse” (lave) qui renvoie au début,  
+          – ou créer un deuxième niveau avec davantage de plateformes.</li>
+        <li>En cas d’agitation :  
+          – proposer un “mode observation” : personne ne touche au clavier pendant 30 secondes, on regarde juste ce que fait le chat et on commente le comportement du programme.</li>
+      </ul>
+    </div>
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  /* --- PARTIE ALGORITHME --- */
+  .algo-section {
+    margin-top: 18px;
+    padding: 18px 16px 20px 16px;
+    border-radius: var(--radius);
+    border: 1px solid #d0d7de;
+    background: #f7f7f7;
+    box-shadow: var(--shadow-soft);
+    font-family: "Courier New", monospace;
+  }
+
+  .algo-section > h2 {
+    color: #2c3e50;
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+  }
+
+  .algo-section > p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .titre-sprite {
+    font-weight: bold;
+    font-size: 0.95rem;
+    background: #eaf2f8;
+    padding: 6px 10px;
+    border-left: 6px solid #5dade2;
+    margin: 10px 0 6px;
+    border-radius: 4px;
+  }
+
+  .bloc {
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-left: 6px solid;
+    background-color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  }
+
+  .evenement { border-color: #FFD500; background-color: #fff8d1; }
+  .mouvement { border-color: #4C97FF; background-color: #dceeff; }
+  .apparence { border-color: #9966FF; background-color: #f0e6ff; }
+  .controle { border-color: #FFAB19; background-color: #ffe9cc; }
+  .son { border-color: #CF63CF; background-color: #fce4fc; }
+  .capteurs { border-color: #5CB1D6; background-color: #e0f6fb; }
+  .operateurs { border-color: #59C059; background-color: #e5fbe5; }
+
+  @media (max-width: 600px) {
+    .algo-section { padding: 14px 12px 16px 12px; }
+  }
+</style>
+
+<!-- === ALGORYTHME DU PROJET 9 – JEU DE PLATEFORME === -->
+<div class="algo-section">
+  <h2>🐾 Algorithme du Projet Scratch – Jeu de Plateforme (Chat qui saute)</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Gravité, plateformes & collecte</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🏗️ Séance 1 – Décor & déplacements du chat</h2>
+
+    <div class="titre-sprite">🎨 Scène – Décor</div>
+    <div class="bloc apparence">dessiner un sol en bas (rectangle marron ou vert)</div>
+    <div class="bloc apparence">ajouter 2 ou 3 plateformes au-dessus (rectangles séparés)</div>
+    <div class="bloc apparence">fond clair : ciel ou décor simple</div>
+
+    <div class="titre-sprite">🐱 Sprite – Chat</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à x:(-150) y:(-120)</div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [touche flèche droite pressée ?] alors → <span class="mouvement">changer x de (5)</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [touche flèche gauche pressée ?] alors → <span class="mouvement">changer x de (-5)</span>
+    </div>
+
+    <div class="bloc evenement">quand [touche espace] pressée</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      répéter (10) fois → <span class="mouvement">changer y de (4)</span>  
+      répéter (10) fois → <span class="mouvement">changer y de (-4)</span>
+    </div>
+    <div class="bloc apparence">tester : le chat se déplace et saute sur place</div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>🌍 Séance 2 – Plateformes & gravité (Game Over)</h2>
+
+    <div class="titre-sprite">🐱 Sprite – Chat (suite)</div>
+    <div class="bloc controle">dans la boucle principale :</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">ne touche pas la couleur [marron]</span> alors  
+      <span class="mouvement">changer y de (-4)</span>  
+      (le chat descend quand il n’est pas sur une plateforme)
+    </div>
+
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">y &lt; -150</span> alors  
+      <span class="apparence">dire [Tu es tombé !] pendant (2) secondes</span>  
+      <span class="mouvement">aller à x:(-150) y:(-120)</span>
+    </div>
+
+    <div class="titre-sprite">🪵 Plateformes</div>
+    <div class="bloc apparence">dessiner des rectangles marron ou gris</div>
+    <div class="bloc capteurs">le chat doit détecter la couleur du sol/plateforme</div>
+
+    <div class="bloc apparence">tester : le chat monte, saute, retombe et s’arrête sur les plateformes</div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>💎 Séance 3 – Pièces, score & victoire</h2>
+
+    <div class="titre-sprite">🪙 Sprite – Pièce</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → <span class="apparence">montrer</span></div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="capteurs">touche [Chat]</span> alors →  
+      <span class="controle">changer [Score] de (1)</span> →  
+      <span class="apparence">cacher</span>
+    </div>
+
+    <div class="titre-sprite">📊 Variable – Score</div>
+    <div class="bloc controle">créer [Score] (pour tous les sprites)</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → <span class="controle">mettre [Score] à (0)</span></div>
+
+    <div class="titre-sprite">🏁 Condition de victoire</div>
+    <div class="bloc controle">créer [PiecesTotales]</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → <span class="controle">mettre [PiecesTotales] à (3)</span> (par ex.)</div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">[Score = PiecesTotales]</span> alors →  
+      <span class="apparence">dire [Bravo, tu as tout ramassé !] pendant (3) secondes</span> →  
+      <span class="controle">arrêter tous</span>
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc apparence">ajouter une “zone dangereuse” (couleur rouge = lave) → retour au début</div>
+    <div class="bloc mouvement">faire défiler le décor (effet de caméra) avec variables x/y</div>
+    <div class="bloc son">jouer un son [saut] à chaque pression sur espace</div>
+    <div class="bloc son">jouer un son [victoire] quand Score = PiecesTotales</div>
+    <div class="bloc apparence">créer un deuxième niveau plus difficile (plus de plateformes)</div>
+  </div>
+</div>
+
+
+
+  </div>
+</body>
+</html>

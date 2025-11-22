@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 3 – Histoire interactive / BD animée | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 3 – Histoire interactive / BD animée</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 2 à 3 séances · Dialogues, bulles, changement de scènes</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Storytelling & animation</span>
+      <p>
+        Les élèves créent une petite histoire animée dans Scratch avec plusieurs scènes : 
+        décors qui changent, personnages qui se déplacent et parlent dans des bulles, 
+        éventuellement un petit choix interactif (par exemple : “aller à gauche” ou “aller à droite”).  
+        L’accent est mis sur la narration simple et la bonne utilisation des blocs Apparence et Événements.
+      </p>
+      <p class="meta">
+        Organisation type : 2 ou 3 séances de 45 min.  
+        Recommandation : CE2 → histoire linéaire en 2 scènes ; CM1/CM2 → 3 scènes + 1 petit choix interactif.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Structurer une histoire courte (début – milieu – fin).</li>
+        <li>Utiliser plusieurs décors et costumes de sprites.</li>
+        <li>Programmer des dialogues (bloc <strong>dire … pendant … secondes</strong>).</li>
+        <li>Synchroniser les personnages avec les changements de décors.</li>
+        <li>Pour les plus avancés : gérer un petit choix (bloc <strong>si… alors… sinon</strong>).</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Storyboard & première scène animée</h2>
+      <p class="meta">
+        Objectif : à la fin, chaque élève a une scène 1 complète : décor, 1 ou 2 personnages, 
+        début de l’histoire (ils parlent et/ou bougent un peu).
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Prévoir 2–3 idées de trames très simples, au choix des élèves :</li>
+        <li>
+          <ul>
+            <li>Une rencontre (ex : un enfant rencontre un animal / un robot).</li>
+            <li>Une quête (ex : partir à la recherche d’un objet perdu).</li>
+            <li>Un voyage (ex : partir de la maison et arriver dans un lieu spécial).</li>
+          </ul>
+        </li>
+        <li>Prévoir une phrase d’intro :  
+          « On va créer une petite BD animée : votre histoire, avec des décors, des personnages et des dialogues. »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – “Histoire en 3 phrases” (5–7 min)</h3>
+      <ul>
+        <li>Au tableau, dessiner 3 colonnes : Début / Milieu / Fin.</li>
+        <li>Faire construire collectivement une mini-histoire :</li>
+        <li>
+          <ul>
+            <li>Début : “Un enfant se promène dans le parc.”</li>
+            <li>Milieu : “Il trouve un objet étrange.”</li>
+            <li>Fin : “Il découvre que c’est un cadeau magique.”</li>
+          </ul>
+        </li>
+        <li>Insister : 3 étapes suffisent pour une histoire simple.  
+            Transition : « On va maintenant créer VOTRE histoire en 2 ou 3 scènes. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Choisir la trame & les 2–3 scènes (10–12 min)</p>
+      <ul>
+        <li>Demander à chaque élève (ou binôme) de choisir une trame parmi : rencontre / quête / voyage.</li>
+        <li>Sur feuille ou brouillon, en 3 lignes maximum :</li>
+        <li>
+          <ul>
+            <li>Scène 1 : Où sommes-nous ? Qui est là ? (présentation)</li>
+            <li>Scène 2 : Quel est le problème ou l’évènement ?</li>
+            <li>Scène 3 : Comment ça se termine ? (optionnelle pour CE2)</li>
+          </ul>
+        </li>
+        <li>But : avoir UNE idée simple, pas un roman.  
+            L’animateur passe voir les idées et valide le plan rapide.</li>
+      </ul>
+
+      <p class="time">2) Créer la scène 1 (décor + personnages) (10–12 min)</p>
+      <ul>
+        <li>Arrière-plan :  
+          – choisir un décor correspondant à la scène 1 (ex : parc, maison, ville, forêt).  
+          – expliquer qu’on ajoutera d’autres décors plus tard pour scène 2 et 3.</li>
+        <li>Personnages :</li>
+        <li>
+          <ul>
+            <li>Garder le chat ou choisir un sprite “enfant” / “héros”.</li>
+            <li>Ajouter éventuellement un deuxième sprite (ami, animal, robot…).</li>
+            <li>Placer les sprites sur le décor (à gauche / à droite, pas tous collés au centre).</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="time">3) Programmer le début de l’histoire (15–18 min)</p>
+      <ul>
+        <li>Sur le héros (Personnage 1) :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « basculer sur l’arrière-plan Scène1 » (sur la scène)  
+              – « aller à (position de départ) »  
+              – « dire "Bonjour, je m’appelle …" pendant 2 s »  
+              – « dire "Aujourd’hui, il va m’arriver quelque chose !" pendant 2 s ».</li>
+          </ul>
+        </li>
+        <li>Sur le Personnage 2 (si présent) :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « aller à (autre position) »  
+              – « attendre 2 s »  
+              – « dire "Salut !" pendant 2 s ».</li>
+          </ul>
+        </li>
+        <li>Option simple de mouvement :</li>
+        <li>
+          <ul>
+            <li>Ajouter pour le héros :  
+              – « glisser en 1 s à x:(un peu plus à droite) y:(même hauteur) »  
+              – pour donner l’impression qu’il marche jusqu’au centre.</li>
+          </ul>
+        </li>
+        <li>Objectif : quand on clique sur le drapeau vert, on voit une petite scène cohérente :  
+            décor + personnages en place + premières répliques.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler : « D’abord on termine la scène 1, ensuite seulement on ajoutera le reste. On ne saute pas déjà à la fin. »</li>
+        <li>Pour les rapides : autoriser à soigner un peu la mise en scène (regarder à gauche/droite, changer de costume) plutôt que de partir sur 10 personnages.</li>
+        <li>En cas de dispersion : demander une “pause drapeau vert” : tout le monde arrête de coder, clique une seule fois sur le drapeau et regarde sa scène 1 jusqu’au bout, sans toucher au clavier.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Pitch en 10 secondes” (3–5 min)</h3>
+      <ul>
+        <li>Demander à quelques élèves de présenter leur histoire en une phrase :</li>
+        <li>
+          <ul>
+            <li>« Dans mon histoire, … arrive à … et … » (10 secondes max).</li>
+          </ul>
+        </li>
+        <li>But : vérifier que l’histoire reste simple et claire.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, les élèves ont choisi une petite histoire, préparé la 
+        scène 1 (décor + personnages) et programmé les premières répliques. 
+        La prochaine séance, nous ajouterons la suite : changement de décor, 
+        scène 2 et éventuellement une troisième scène ou un petit choix interactif. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Changement de scènes & fin de l’histoire</h2>
+      <p class="meta">
+        Objectif : ajouter la scène 2 (et 3 si possible), gérer le changement de décor 
+        et terminer l’histoire avec une petite mise en scène propre.
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Relire quelques idées d’histoires notées séance 1 pour aider ceux qui ont oublié.</li>
+        <li>Préparer une phrase :  
+          « Aujourd’hui, on va faire avancer l’histoire : nouvel endroit, nouvelle situation, puis une fin. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Scène 1 / Scène 2 / Scène 3” (5–7 min)</h3>
+      <ul>
+        <li>Au tableau, rappeler la structure :</li>
+        <li>
+          <ul>
+            <li>Scène 1 = présentation,</li>
+            <li>Scène 2 = problème ou évènement,</li>
+            <li>Scène 3 = solution / fin.</li>
+          </ul>
+        </li>
+        <li>Demander à 2–3 élèves de redire rapidement leur plan (1 phrase par scène).</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Ajouter les nouveaux décors (10–12 min)</p>
+      <ul>
+        <li>Sur la scène (arrière-plans) :</li>
+        <li>
+          <ul>
+            <li>Ajouter un arrière-plan pour la scène 2 (ex : forêt, autre pièce, ville, etc.).</li>
+            <li>Ajouter éventuellement un 3e décor pour la fin (ex : pièce lumineuse, ciel étoilé, etc.).</li>
+          </ul>
+        </li>
+        <li>Renommer clairement les décors : “Scene1_parc”, “Scene2_foret”, “Scene3_maison”, plutôt que “fond2/fond3”.</li>
+      </ul>
+
+      <p class="time">2) Programmer le passage à la scène 2 (15–18 min)</p>
+      <ul>
+        <li>Sur le héros (Personnage 1), à la suite de la scène 1 :</li>
+        <li>
+          <ul>
+            <li>Après les premières répliques de la séance 1, ajouter :</li>
+            <li>« attendre 1 s »</li>
+            <li>« envoyer à tous [Aller_Scene2] ».</li>
+          </ul>
+        </li>
+        <li>Sur la scène :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois [Aller_Scene2] »  
+              – « basculer sur l’arrière-plan Scene2_foret ».</li>
+          </ul>
+        </li>
+        <li>Sur les personnages (héros, ami) :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois [Aller_Scene2] »  
+              – « aller à (nouvelles positions) »  
+              – « dire "Nous voilà maintenant dans…" pendant 2 s »  
+              – continuer les dialogues / petites actions de la scène 2.</li>
+          </ul>
+        </li>
+        <li>But : quand on lance le jeu, la scène 1 se joue, puis la scène 2 prend le relais sans rien recliquer.</li>
+      </ul>
+
+      <p class="time">3) Ajouter la fin (scène 3 simple) (10–12 min)</p>
+      <ul>
+        <li>Pour CE2 : la fin peut se faire directement sur la scène 2 (pas obligé de changer de décor).</li>
+        <li>Pour CM1/CM2 : on ajoute une vraie scène 3 :</li>
+        <li>
+          <ul>
+            <li>vers la fin de la scène 2 (après 1–2 répliques) :</li>
+            <li>« envoyer à tous [Aller_Scene3] ».</li>
+          </ul>
+        </li>
+        <li>Sur la scène :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois [Aller_Scene3] »  
+              – « basculer sur l’arrière-plan Scene3_maison » (ou autre décor) </li>
+          </ul>
+        </li>
+        <li>Sur le héros :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois [Aller_Scene3] »  
+              – « aller à (position finale) »  
+              – « dire "Tout est bien qui finit bien." pendant 2 s »  
+              – ou une phrase adaptée à l’histoire.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Petit choix interactif (option CM1/CM2)</h3>
+      <ul>
+        <li>Idée simple : à la fin de la scène 1 ou au début de la scène 2, proposer un choix :</li>
+        <li>
+          <ul>
+            <li>Bloc : « demander "Tu veux aller à gauche (G) ou à droite (D) ?" et attendre ».</li>
+            <li>Ensuite :  
+              – « si réponse = "G" alors envoyer [Chemin_Gauche] »  
+              – « sinon envoyer [Chemin_Droite] ».</li>
+          </ul>
+        </li>
+        <li>Les deux chemins peuvent mener à deux versions de la scène 2 ou simplement changer une réplique.</li>
+        <li>Important : ne pas faire un labyrinthe de choix, juste une petite variation.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler que l’objectif n’est pas d’ajouter 100 scènes mais de finir une petite histoire propre.</li>
+        <li>Pour les rapides :  
+          – soigner les timings (durée des “dire … pendant …”),  
+          – ajouter un petit mouvement (glisser, tourner un peu) au bon moment.</li>
+        <li>En cas de désordre : faire une “projection intérieure” :  
+          demander à tous de fermer les yeux pendant 20 secondes et d’imaginer clairement les 3 scènes de leur histoire ; puis reprendre le code calmement.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Résumé en 3 images” (3–5 min)</h3>
+      <ul>
+        <li>Demander aux élèves de décrire à voix haute leur histoire en 3 images :</li>
+        <li>
+          <ul>
+            <li>Image 1 (Scène 1),</li>
+            <li>Image 2 (Scène 2),</li>
+            <li>Image 3 (Scène 3 ou fin sur la 2).</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Les élèves ont maintenant une petite histoire complète : plusieurs scènes,
+        des dialogues, un changement de décor et une fin claire. Certains ont ajouté
+        un petit choix interactif. La dernière séance (optionnelle) pourra servir à
+        peaufiner, enregistrer des voix ou tester les histoires des camarades. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 (OPTIONNELLE) -->
+    <div class="card">
+      <h2>Séance 3 – Finitions, voix & tests croisés (optionnelle)</h2>
+      <p class="meta">
+        Objectif : améliorer la lisibilité, ajouter éventuellement des sons ou voix, 
+        et permettre aux élèves de tester les histoires des autres.
+      </p>
+      <p class="time">Durée indicative : 45 min (ou 30 min si temps réduit)</p>
+
+      <h3>Jeu d’activation – “Le metteur en scène” (5 min)</h3>
+      <ul>
+        <li>Expliquer que cette séance, on n’ajoute pas beaucoup de nouvelles scènes : on se comporte comme un “metteur en scène” qui améliore le spectacle.</li>
+        <li>Poser la question : « Qu’est-ce qui rend une histoire agréable à regarder ? »  
+            (réponses attendues : on comprend tout, ça va ni trop vite ni trop lentement, les personnages ne se superposent pas…)</li>
+      </ul>
+
+      <h3>Finitions recommandées (20–25 min)</h3>
+      <ul>
+        <li>Vérifier les timings :</li>
+        <li>
+          <ul>
+            <li>adapter les durées des “dire … pendant …” pour laisser le temps de lire.</li>
+          </ul>
+        </li>
+        <li>Vérifier les positions :</li>
+        <li>
+          <ul>
+            <li>les personnages ne doivent pas être cachés par les bords ou l’interface,</li>
+            <li>éviter qu’ils “sautent” d’un coin à l’autre sans glisser.</li>
+          </ul>
+        </li>
+        <li>Option audio simple :</li>
+        <li>
+          <ul>
+            <li>ajouter un fond sonore discret (musique de fond courte en boucle) ou un son particulier pour un évènement (magie, porte qui s’ouvre…).</li>
+          </ul>
+        </li>
+        <li>Option avancée (si matériel micro et temps) :</li>
+        <li>
+          <ul>
+            <li>enregistrer 1–2 phrases en voix off (mais ce n’est pas obligatoire).</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Tests croisés (10–15 min)</h3>
+      <ul>
+        <li>Par groupes de 2 ou 3 :</li>
+        <li>
+          <ul>
+            <li>élève A lance son histoire, les autres regardent jusqu’au bout sans interrompre,</li>
+            <li>puis répondent à 3 questions :</li>
+            <li>1. “Est-ce que tu as compris l’histoire ?”</li>
+            <li>2. “Quel moment tu as préféré ?”</li>
+            <li>3. “Est-ce qu’il y a un endroit où ça va trop vite / trop lentement ?”</li>
+          </ul>
+        </li>
+        <li>On change de rôle ensuite (B, puis C).</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Clap de fin” (5 min)</h3>
+      <ul>
+        <li>Demander à chaque élève de lancer son histoire, et à la fin, de laisser l’écran sur la dernière image (scène finale).</li>
+        <li>Faire un “clap de fin” symbolique pour la classe (tout le monde tape dans les mains une fois). </li>
+      </ul>
+
+      <h3>Résumé animateur fin de projet</h3>
+      <p>
+        « Les élèves ont réalisé une BD animée complète : ils ont imaginé une 
+        petite histoire, créé plusieurs scènes, programmé des dialogues, des 
+        changements de décor et parfois un petit choix interactif. Ils ont aussi 
+        appris à régler les détails (timing, positions, sons) pour rendre 
+        l’histoire agréable à regarder. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Les personnages parlent tous en même temps</strong>  
+          → Vérifier les “attendre … secondes” entre les répliques.  
+          → Penser à faire parler un seul personnage à la fois.</li>
+
+        <li><strong>La scène change trop vite</strong>  
+          → Ajouter un petit “attendre 1 s” avant d’envoyer le message [Aller_Scene2] ou [Aller_Scene3].</li>
+
+        <li><strong>On n’arrive pas à écrire dans les champs (bug Scratch)</strong>  
+          → Si aucun texte ni chiffre ne s’écrit dans les blocs (et que ce n’est pas le cadenas clavier) :  
+            1. Réduire la fenêtre de Scratch avec le bouton “–” à côté du carré et de la croix.  
+            2. Puis la réagrandir.  
+            → L’écriture redevient en général possible.</li>
+
+        <li><strong>Un personnage reste sur l’ancien décor</strong>  
+          → Vérifier qu’il a bien un script “quand je reçois [Aller_Scene2] / [Aller_Scene3] → aller à (nouvelle position)”.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire expliquer l’histoire à l’oral AVANT de coder :  
+          un élève qui n’arrive pas à dire clairement son début/milieu/fin aura du mal à coder.</li>
+        <li>Limiter volontairement la longueur :  
+          mieux vaut une histoire courte et bien faite qu’un truc trop ambitieux jamais terminé.</li>
+        <li>Pour les plus rapides :  
+          – ajouter des petits effets (changer de costume, clignoter, tourner léger),  
+          – ou un mini-texte de “Crédits” à la fin (“Histoire par …”).</li>
+        <li>En cas d’agitation : proposer une minute “sans clavier” où les élèves regardent une fois leur histoire du début à la fin sans rien toucher, puis seulement après ils ajustent.</li>
+      </ul>
+    </div>
+  
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  /* --- PARTIE ALGORITHME --- */
+  .algo-section {
+    margin-top: 18px;
+    padding: 18px 16px 20px 16px;
+    border-radius: var(--radius);
+    border: 1px solid #d0d7de;
+    background: #f7f7f7;
+    box-shadow: var(--shadow-soft);
+    font-family: "Courier New", monospace;
+  }
+
+  .algo-section > h2 {
+    color: #2c3e50;
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+  }
+
+  .algo-section > p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .algo-session {
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px dashed #ccc;
+  }
+
+  .titre-sprite {
+    font-weight: bold;
+    font-size: 0.95rem;
+    background: #eaf2f8;
+    padding: 6px 10px;
+    border-left: 6px solid #5dade2;
+    margin: 10px 0 6px;
+    border-radius: 4px;
+  }
+
+  .script {
+    margin-bottom: 12px;
+    padding-left: 8px;
+    border-left: 3px dotted #ccc;
+  }
+
+  .script .bloc {
+    margin-left: 10px;
+  }
+
+  .bloc {
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-left: 6px solid;
+    background-color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  }
+
+  .evenement {
+    border-color: #FFD500;
+    background-color: #fff8d1;
+  }
+
+  .mouvement {
+    border-color: #4C97FF;
+    background-color: #dceeff;
+  }
+
+  .apparence {
+    border-color: #9966FF;
+    background-color: #f0e6ff;
+  }
+
+  .controle {
+    border-color: #FFAB19;
+    background-color: #ffe9cc;
+  }
+
+  .son {
+    border-color: #CF63CF;
+    background-color: #fce4fc;
+  }
+
+  .capteurs {
+    border-color: #5CB1D6;
+    background-color: #e0f6fb;
+  }
+
+  .operateurs {
+    border-color: #59C059;
+    background-color: #e5fbe5;
+  }
+
+  @media (max-width: 600px) {
+    .algo-section {
+      padding: 14px 12px 16px 12px;
+    }
+  }
+</style>
+
+<!-- === ALGORYTHME DU PROJET 3 – HISTOIRE INTERACTIVE / BD ANIMÉE === -->
+<div class="algo-section">
+  <h2>📘 Algorithme du Projet Scratch – Histoire interactive / BD animée</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 2 à 3 séances · Dialogues, bulles, changement de scènes</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🎬 Séance 1 – Scène 1 : Début de l’histoire</h2>
+
+    <div class="titre-sprite">🎭 Sprite 1 – Héros (personnage principal)</div>
+
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc apparence">basculer sur l’arrière-plan [Scene1_parc]</div>
+    <div class="bloc mouvement">aller à x:(-100) y:(-50)</div>
+    <div class="bloc apparence">dire [Bonjour, je m’appelle ...] pendant (2) secondes</div>
+    <div class="bloc apparence">dire [Aujourd’hui, il va m’arriver quelque chose !] pendant (2) secondes</div>
+    <div class="bloc mouvement">glisser en (1) s à x:(0) y:(-50)</div>
+
+    <div class="titre-sprite">🐶 Sprite 2 – Ami / Animal / Robot</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à x:(100) y:(-50)</div>
+    <div class="bloc controle">attendre (2) secondes</div>
+    <div class="bloc apparence">dire [Salut !] pendant (2) secondes</div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>🎭 Séance 2 – Changement de scènes & suite de l’histoire</h2>
+
+    <div class="titre-sprite">🎭 Sprite 1 – Héros</div>
+    <div class="bloc controle">attendre (1) seconde</div>
+    <div class="bloc evenement">envoyer à tous [Aller_Scene2]</div>
+
+    <div class="titre-sprite">🌳 Scène – Arrière-plans</div>
+    <div class="bloc evenement">quand je reçois [Aller_Scene2]</div>
+    <div class="bloc apparence">basculer sur l’arrière-plan [Scene2_foret]</div>
+
+    <div class="titre-sprite">🎭 Sprite 1 – Héros</div>
+    <div class="bloc evenement">quand je reçois [Aller_Scene2]</div>
+    <div class="bloc mouvement">aller à x:(-80) y:(-40)</div>
+    <div class="bloc apparence">dire [Nous voilà maintenant dans la forêt !] pendant (2) secondes</div>
+
+    <div class="titre-sprite">🐶 Sprite 2 – Ami / Robot</div>
+    <div class="bloc evenement">quand je reçois [Aller_Scene2]</div>
+    <div class="bloc mouvement">aller à x:(80) y:(-40)</div>
+    <div class="bloc apparence">dire [Oui, on dirait un lieu magique !] pendant (2) secondes</div>
+
+    <div class="titre-sprite">🎭 Sprite 1 – Héros</div>
+    <div class="bloc controle">attendre (2) secondes</div>
+    <div class="bloc evenement">envoyer à tous [Aller_Scene3]</div>
+
+    <div class="titre-sprite">🌇 Scène – Arrière-plans (fin)</div>
+    <div class="bloc evenement">quand je reçois [Aller_Scene3]</div>
+    <div class="bloc apparence">basculer sur l’arrière-plan [Scene3_maison]</div>
+
+    <div class="titre-sprite">🎭 Sprite 1 – Héros (fin)</div>
+    <div class="bloc evenement">quand je reçois [Aller_Scene3]</div>
+    <div class="bloc mouvement">aller à x:(0) y:(-50)</div>
+    <div class="bloc apparence">dire [Tout est bien qui finit bien.] pendant (2) secondes</div>
+  </div>
+
+  <!-- CHOIX INTERACTIF (OPTIONNEL CM1/CM2) -->
+  <div class="section">
+    <h2>🧭 Choix interactif (option CM1/CM2)</h2>
+    <div class="bloc capteurs">demander [Tu veux aller à gauche (G) ou à droite (D) ?] et attendre</div>
+    <div class="bloc controle">si [réponse = G] alors → <span class="evenement">envoyer [Chemin_Gauche]</span></div>
+    <div class="bloc controle">sinon → <span class="evenement">envoyer [Chemin_Droite]</span></div>
+
+    <div class="titre-sprite">🌲 Scène – Chemin gauche</div>
+    <div class="bloc evenement">quand je reçois [Chemin_Gauche]</div>
+    <div class="bloc apparence">basculer sur l’arrière-plan [Scene2_gauche]</div>
+
+    <div class="titre-sprite">🏠 Scène – Chemin droite</div>
+    <div class="bloc evenement">quand je reçois [Chemin_Droite]</div>
+    <div class="bloc apparence">basculer sur l’arrière-plan [Scene2_droite]</div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🎧 Séance 3 – Finitions, sons & tests</h2>
+    <div class="bloc son">ajouter un fond sonore [musique douce en boucle]</div>
+    <div class="bloc apparence">vérifier les durées des "dire ..." pour bonne lisibilité</div>
+    <div class="bloc mouvement">ajuster les positions pour éviter les superpositions</div>
+    <div class="bloc son">ajouter un effet sonore spécial [magie / porte / bruit]</div>
+    <div class="bloc apparence">afficher un texte final [Histoire par …]</div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc apparence">ajouter un léger changement de costume entre les scènes</div>
+    <div class="bloc mouvement">faire glisser les personnages lors du changement de décor</div>
+    <div class="bloc controle">ajouter un petit “attendre 1 s” avant chaque enchaînement pour plus de rythme</div>
+    <div class="bloc apparence">faire apparaître un petit “THE END” en fin de scène</div>
+  </div>
+</div>
+
+
+
+
+
+
+</div>
+</body>
+</html>

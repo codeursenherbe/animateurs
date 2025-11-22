@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 16 – Labyrinthe avec clé et porte | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 16 – Labyrinthe avec clé et porte</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Déplacements, collisions, clé & porte verrouillée</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu de labyrinthe avec objectif</span>
+      <p>
+        Les élèves créent un jeu de labyrinthe : un personnage se déplace avec les flèches 
+        dans un couloir de murs. Il doit d’abord récupérer une clé, puis rejoindre une porte 
+        de sortie. La porte ne s’ouvre que si la clé a été ramassée. On peut ajouter un 
+        chronomètre ou un compteur d’essais pour augmenter le défi.
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : commencer avec un labyrinthe simple, puis laisser les plus avancés complexifier le tracé.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Programmer des déplacements avec les flèches (haut, bas, gauche, droite).</li>
+        <li>Gérer les collisions avec les murs (empêcher de traverser la couleur des murs).</li>
+        <li>Utiliser une variable d’état (<strong>aCle</strong>) pour mémoriser si la clé est ramassée.</li>
+        <li>Définir une condition de victoire : atteindre la porte avec la clé.</li>
+        <li>Pour les plus avancés : ajouter un chrono ou un compteur de tentatives.</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Labyrinthe & déplacements sans clé</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a un labyrinthe basique et un personnage qui se déplace, sans traverser les murs.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Préparer un exemple simple de labyrinthe sur papier (départ en bas à gauche, arrivée en haut à droite).</li>
+        <li>Prévoir une couleur unique pour les murs (par exemple bleu foncé) pour faciliter la détection.</li>
+        <li>Préparer une phrase d’accroche :  
+          « Votre personnage doit sortir d’un labyrinthe… mais il n’a pas encore la clé ! »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – “Labyrinthe au tableau” (5–7 min)</h3>
+      <ul>
+        <li>Tracer rapidement un petit labyrinthe au tableau.</li>
+        <li>Choisir un élève : il doit tracer le chemin au marqueur sans toucher les murs (tu peux chronométrer, mais calmement).</li>
+        <li>Transition : « Dans Scratch, le personnage devra aussi éviter les murs. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Dessiner le labyrinthe (10–12 min)</p>
+      <ul>
+        <li>Créer un nouveau projet Scratch.</li>
+        <li>Aller dans l’onglet <strong>Arrière-plan</strong> de la scène.</li>
+        <li>Avec l’outil rectangle / trait, dessiner :</li>
+        <li>
+          <ul>
+            <li>un cadre extérieur (les bords du labyrinthe),</li>
+            <li>quelques couloirs et murs internes.</li>
+          </ul>
+        </li>
+        <li>Utiliser UNE seule couleur pour tous les murs (ex : bleu foncé). Noter la couleur pour la suite.</li>
+        <li>Marquer le point de départ (ex : petit cercle vert) et l’arrivée (ex : zone rouge ou porte dessinée pour l’instant).</li>
+      </ul>
+
+      <p class="time">2) Choisir & placer le personnage (5–7 min)</p>
+      <ul>
+        <li>Garder le chat ou choisir un autre sprite (explorateur, robot, etc.).</li>
+        <li>Réduire sa taille (30–50 %) pour qu’il passe dans les couloirs.</li>
+        <li>Le placer sur le point de départ (zone verte).</li>
+      </ul>
+
+      <p class="time">3) Programmer les déplacements (15–18 min)</p>
+      <ul>
+        <li>Sur le sprite du personnage, créer 4 scripts simples :</li>
+        <li>
+          <ul>
+            <li>« quand touche flèche droite pressée → changer x de 3 »</li>
+            <li>« quand touche flèche gauche pressée → changer x de -3 »</li>
+            <li>« quand touche flèche haut pressée → changer y de 3 »</li>
+            <li>« quand touche flèche bas pressée → changer y de -3 »</li>
+          </ul>
+        </li>
+        <li>Tester : se déplacer dans le labyrinthe (pour l’instant, on peut encore traverser les murs).</li>
+      </ul>
+
+      <p class="time">4) Empêcher de traverser les murs (10–12 min)</p>
+      <ul>
+        <li>Stratégie simple : avancer, vérifier, reculer si on touche un mur.</li>
+        <li>Exemple pour la flèche droite :</li>
+        <li>
+          <ul>
+            <li>« quand touche flèche droite pressée »  
+              – « changer x de 3 »  
+              – « si touche couleur [bleu foncé des murs] alors changer x de -3 ».</li>
+          </ul>
+        </li>
+        <li>Faire la même logique pour les 4 directions (changer y pour haut/bas).</li>
+        <li>Tester : le personnage semble “bloqué” par les murs (c’est exactement ce qu’on veut).</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Règle simple : « On teste un couloir à la fois, sans zigzaguer partout. »</li>
+        <li>Pour les rapides : autoriser à lisser un peu le dessin du labyrinthe ou à ajouter un décor léger (sans toucher à la couleur des murs).</li>
+        <li>En cas d’agitation : proposer un test guidé :  
+          « Tout le monde essaye de rejoindre le coin en haut à gauche, puis on s’arrête. »</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Trouve un chemin possible” (3–5 min)</h3>
+      <ul>
+        <li>Demander aux élèves : « Est-ce que ton labyrinthe est faisable ? Tu peux atteindre la zone d’arrivée ? »</li>
+        <li>2–3 élèves montrent à l’animateur que leur chemin existe bien.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons créé un labyrinthe avec des murs que le 
+        personnage ne peut pas traverser. Il peut se déplacer avec les flèches 
+        et commencer à explorer le parcours. La prochaine fois, nous ajouterons 
+        une clé à ramasser, une porte et une vraie condition de victoire. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Clé, variable “aCle” & porte</h2>
+      <p class="meta">Objectif : ajouter une clé à ramasser, une porte de sortie, et faire en sorte que la porte ne s’ouvre que si la clé est obtenue.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Préparer une explication simple de la variable :  
+          « aCle = 0 → tu n’as pas la clé, aCle = 1 → tu as la clé. »</li>
+        <li>Repérer dans chaque labyrinthe un endroit logique pour la clé (pas trop près du départ) et pour la porte.</li>
+      </ul>
+
+      <h3>Jeu d’activation – “As-tu la clé ?” (5 min)</h3>
+      <ul>
+        <li>Dire : « Imagine une porte fermée. Est-ce que tu peux sortir sans clé ? »</li>
+        <li>Faire un mini jeu :  
+          – Un élève joue le gardien de porte,  
+          – Un autre joue le héros : il a ou non une “clé” (crayon dans la main).  
+          – Le gardien doit accepter de le laisser passer seulement s’il voit la clé.</li>
+        <li>Transition : « La variable aCle va jouer le rôle de “clé invisible” dans le code. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer le sprite Clé (10–12 min)</p>
+      <ul>
+        <li>Ajouter un nouveau sprite “Clé” (ou petit objet brillant).</li>
+        <li>Le placer dans un couloir du labyrinthe, loin du départ mais atteignable.</li>
+        <li>Réduire sa taille si nécessaire.</li>
+      </ul>
+
+      <p class="time">2) Créer la variable aCle (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>aCle</strong> (pour tous les sprites).</li>
+        <li>Au démarrage du jeu (par exemple sur le sprite du personnage) :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « mettre aCle à 0 »  
+              – « aller à (position de départ) ».</li>
+          </ul>
+        </li>
+        <li>Option : afficher aCle pour vérifier en phase de test, puis la cacher ensuite.</li>
+      </ul>
+
+      <p class="time">3) Ramasser la clé (15–18 min)</p>
+      <ul>
+        <li>Sur le sprite Clé :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « montrer »  
+              – « aller à (sa position dans le labyrinthe) »  
+              – « répéter indéfiniment » :  
+                · « si touche [Personnage] alors »  
+                  · « mettre aCle à 1 »  
+                  · « cacher ».</li>
+          </ul>
+        </li>
+        <li>Tester : vérifier qu’en passant sur la clé, elle disparaît et que aCle passe à 1.</li>
+      </ul>
+
+      <p class="time">4) Ajouter la porte & sa condition (10–12 min)</p>
+      <ul>
+        <li>Créer un sprite “Porte” (ou utiliser la zone d’arrivée déjà dessinée, mais c’est plus clair avec un sprite).</li>
+        <li>Le placer à l’endroit choisi pour la sortie.</li>
+        <li>Sur le sprite Porte :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « montrer »  
+              – « répéter indéfiniment » :  
+                · « si touche [Personnage] alors »  
+                  · « si aCle = 1 alors »  
+                    · « dire "Bravo, tu as la clé ! Tu sors." pendant 3 s »  
+                    · « arrêter tous »  
+                  · « sinon »  
+                    · « dire "Tu as besoin de la clé !" pendant 2 s ».</li>
+          </ul>
+        </li>
+        <li>Tester les deux cas :  
+          – arriver à la porte SANS prendre la clé → message “Tu as besoin de la clé”,  
+          – revenir avec la clé → message de victoire + fin du jeu.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler : « On essaye dans l’ordre : d’abord ramasser la clé, puis rejoindre la porte. »</li>
+        <li>Pour les rapides : autoriser à ajouter un petit effet de lumière sur la clé ou la porte (effet couleur). Garder la logique simple.</li>
+        <li>Si ça s’excite : proposer une consigne claire :  
+          « Vous avez 2 minutes pour réussir le parcours complet. Ensuite, on lève les mains du clavier et on regarde ensemble. »</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Parcours complet” (3–5 min)</h3>
+      <ul>
+        <li>Demander : « Qui a réussi à prendre la clé puis ouvrir la porte au moins une fois ? »</li>
+        <li>Éventuellement, en choisir un et lancer son jeu au tableau (si possible) pour montrer un parcours complet.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons ajouté une clé et une porte à notre labyrinthe.
+        Le personnage ne peut gagner que s’il a ramassé la clé : la variable aCle
+        nous permet de mémoriser cet état. Le jeu commence à ressembler à une
+        vraie mission. La prochaine fois, nous pourrons ajouter un chronomètre,
+        un compteur d’essais ou plusieurs niveaux. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Chrono, niveaux & tests croisés</h2>
+      <p class="meta">Objectif : enrichir le labyrinthe (temps limité, essais), laisser les élèves ajuster la difficulté et tester les jeux entre eux.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Décider des options avancées possibles :  
+          – un simple chronomètre,  
+          – un compteur de “touches mur” (nombre de fois où l’on touche les murs),  
+          – ou un deuxième niveau (second labyrinthe).</li>
+        <li>Préparer une phrase de consigne :  
+          « Aujourd’hui, on transforme le labyrinthe en vrai défi, mais sans le rendre impossible. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Défi temps” (5–7 min)</h3>
+      <ul>
+        <li>Demander : « Qu’est-ce qui rend un labyrinthe difficile mais amusant ? »</li>
+        <li>Réponses attendues : plus de murs, chemin étroit, temps limité…</li>
+        <li>Transition : « On va ajouter un peu de pression, mais pas trop. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Option A : Chronomètre (10–15 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Temps</strong> (pour tous les sprites).</li>
+        <li>Sur un sprite gestion (ou le personnage) :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « mettre Temps à 30 » (par exemple)  
+              – « répéter jusqu’à ce que Temps = 0 »  
+                · « attendre 1 seconde »  
+                · « changer Temps par -1 »  
+              – « dire "Temps écoulé !" pendant 2 s »  
+              – « arrêter tous ».</li>
+          </ul>
+        </li>
+        <li>Tester : vérifier que le temps descend bien et que la partie s’arrête si le joueur est trop lent.</li>
+        <li>Option : ajuster la durée (20–40 secondes) selon la complexité du labyrinthe.</li>
+      </ul>
+
+      <p class="time">2) Option B : Compteur de chocs (pour murs) (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Chocs</strong> (pour tous les sprites).</li>
+        <li>Dans chaque script de déplacement du personnage :</li>
+        <li>
+          <ul>
+            <li>juste après le test “si touche couleur murs” :  
+              – « changer Chocs par 1 ».</li>
+          </ul>
+        </li>
+        <li>Ajouter, quelque part (par ex. sur le personnage) :</li>
+        <li>
+          <ul>
+            <li>« si Chocs > 20 alors » (ou autre valeur)  
+              – « dire "Trop de chocs ! Tu dois recommencer." pendant 2 s »  
+              – « arrêter tous ».</li>
+          </ul>
+        </li>
+        <li>Expliquer : « Plus tu touches les murs, plus tu risques la fin de partie. »</li>
+      </ul>
+
+      <p class="time">3) Ajuster la difficulté (10–12 min)</p>
+      <ul>
+        <li>Demander aux élèves :</li>
+        <li>
+          <ul>
+            <li>« Ton labyrinthe est plutôt facile, moyen ou difficile ? »</li>
+            <li>« Est-ce que tu peux le rendre un peu plus simple ou plus dur sans le rendre frustrant ? »</li>
+          </ul>
+        </li>
+        <li>Idées de réglages :</li>
+        <li>
+          <ul>
+            <li>élargir certains couloirs trop étroits,</li>
+            <li>raccourcir le chemin si le temps est trop court,</li>
+            <li>augmenter Temps ou le nombre de Chocs autorisés.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="time">4) Tests croisés (8–10 min)</p>
+      <ul>
+        <li>Par deux :</li>
+        <li>
+          <ul>
+            <li>élève A joue au labyrinthe de B (une ou deux parties),</li>
+            <li>B regarde et note mentalement :</li>
+            <li>– “Est-ce qu’on comprend bien où est la clé ?”</li>
+            <li>– “Est-ce que la porte est facile à trouver ?”</li>
+            <li>– “Est-ce que le temps / les chocs sont raisonnables ?”</li>
+          </ul>
+        </li>
+        <li>Ils échangent les rôles ensuite.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Chemin préféré” (5 min)</h3>
+      <ul>
+        <li>Demander à quelques élèves :  
+          – « À quel endroit de ton labyrinthe tu es le plus fier ? (un passage difficile, une salle spéciale, etc.) »</li>
+        <li>Mettre en valeur la créativité du tracé, pas seulement la difficulté brute.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Nous avons transformé un simple labyrinthe en jeu complet : déplacement,
+        murs solides, clé à ramasser, porte de sortie, parfois un chronomètre ou
+        un compteur de chocs. Les élèves ont testé les niveaux des autres et ont
+        réfléchi à ce qui rend un labyrinthe amusant sans être impossible. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Le personnage traverse encore certains murs</strong>  
+          → Vérifier que la couleur testée est exactement la couleur des murs (pipette dans Scratch).  
+          → Vérifier qu’on a ajouté le test “si touche couleur…” dans les 4 directions.</li>
+
+        <li><strong>La clé ne disparaît pas</strong>  
+          → Vérifier que le test « si touche [Personnage] » est dans une boucle « répéter indéfiniment ».  
+          → Vérifier que c’est bien le bon sprite personnage dans le bloc “touche”.</li>
+
+        <li><strong>La porte s’ouvre même sans clé</strong>  
+          → Vérifier la condition : « si aCle = 1 alors … sinon … ».  
+          → Vérifier qu’on met bien aCle à 0 au début et à 1 seulement en touchant la clé.</li>
+
+        <li><strong>Le chrono n’arrête pas le jeu</strong>  
+          → Vérifier que la boucle contient bien “changer Temps par -1” et qu’on teste “Temps = 0” après la boucle ou dans une condition.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire expliquer aux élèves en langage naturel :  
+          – « Que se passe-t-il si le joueur va à la porte sans clé ? »  
+          – « Que se passe-t-il si aCle vaut 1 ? »</li>
+        <li>Insister sur la lisibilité du labyrinthe (pas trop serré, pas trop de “pièges invisibles”).</li>
+        <li>Pour les plus rapides :  
+          – ajouter un deuxième niveau avec un autre arrière-plan,  
+          – ou un petit message intermédiaire après la clé (“Tu as récupéré la clé magique !”).</li>
+        <li>En cas d’agitation : proposer une courte “pause sans clavier” :  
+          les élèves décrivent simplement à l’oral leur labyrinthe et les étapes de la mission. Ensuite seulement, retour au test du jeu.</li>
+      </ul>
+    </div>
+
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  .algo-section{
+    margin-top:18px;padding:18px 16px 20px 16px;border-radius:var(--radius);
+    border:1px solid #d0d7de;background:#f7f7f7;box-shadow:var(--shadow-soft);
+    font-family:"Courier New",monospace;
+  }
+  .algo-section>h2{color:#2c3e50;margin-bottom:4px;font-size:1.05rem;}
+  .algo-section>p{font-size:.85rem;color:#555;margin-bottom:10px;}
+  .titre-sprite{font-weight:bold;font-size:.95rem;background:#eaf2f8;
+    padding:6px 10px;border-left:6px solid #5dade2;margin:10px 0 6px;border-radius:4px;}
+  .bloc{padding:6px 10px;margin:4px 0;border-left:6px solid;background:#fff;
+    border-radius:6px;font-size:.85rem;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .evenement{border-color:#FFD500;background:#fff8d1;}
+  .mouvement{border-color:#4C97FF;background:#dceeff;}
+  .apparence{border-color:#9966FF;background:#f0e6ff;}
+  .controle{border-color:#FFAB19;background:#ffe9cc;}
+  .son{border-color:#CF63CF;background:#fce4fc;}
+  .capteurs{border-color:#5CB1D6;background:#e0f6fb;}
+  .operateurs{border-color:#59C059;background:#e5fbe5;}
+  @media(max-width:600px){.algo-section{padding:14px 12px 16px 12px;}}
+</style>
+
+<!-- === ALGORYTHME DU PROJET 16 – LABYRINTHE AVEC CLÉ ET PORTE === -->
+<div class="algo-section">
+  <h2>🗝️ Algorithme du Projet Scratch – Labyrinthe avec clé et porte</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Déplacements, collisions, clé & porte verrouillée</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🚶 Séance 1 – Labyrinthe & déplacements sans clé</h2>
+
+    <div class="titre-sprite">🎨 Scène – Labyrinthe</div>
+    <div class="bloc apparence">
+      dessiner le labyrinthe dans l’arrière-plan :<br>
+      – couleur unique pour les murs (ex. bleu foncé)<br>
+      – zone départ (vert) & zone arrivée (rouge)
+    </div>
+
+    <div class="titre-sprite">🧍 Sprite – Personnage</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → aller au point de départ</div>
+
+    <div class="bloc mouvement">quand flèche droite pressée → changer x de (3)</div>
+    <div class="bloc mouvement">quand flèche gauche pressée → changer x de (-3)</div>
+    <div class="bloc mouvement">quand flèche haut pressée → changer y de (3)</div>
+    <div class="bloc mouvement">quand flèche bas pressée → changer y de (-3)</div>
+
+    <div class="titre-sprite">🚫 Collision avec les murs</div>
+    <div class="bloc controle">
+      après chaque déplacement :<br>
+      si [touche couleur (bleu foncé)] alors → reculer<br>
+      (ex. après “x de 3” → “x de -3”)
+    </div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>🔑 Séance 2 – Clé, variable “aCle” & porte</h2>
+
+    <div class="titre-sprite">🔧 Variable d’état</div>
+    <div class="bloc controle">
+      créer variable [aCle]<br>
+      quand [drapeau vert] cliqué → mettre [aCle] à (0)
+    </div>
+
+    <div class="titre-sprite">🗝️ Sprite – Clé</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      montrer<br>
+      répéter indéfiniment :<br>
+      <span class="capteurs" style="margin-left:20px;">si touche [Personnage]</span><br>
+      <span class="controle" style="margin-left:40px;">mettre [aCle] à (1)</span><br>
+      <span class="apparence" style="margin-left:40px;">cacher</span>
+    </div>
+
+    <div class="titre-sprite">🚪 Sprite – Porte</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      montrer<br>
+      répéter indéfiniment :<br>
+      <span class="capteurs" style="margin-left:20px;">si touche [Personnage]</span><br>
+      <span class="controle" style="margin-left:40px;">si [aCle = 1] alors → dire [Bravo, tu sors !] 3 s → arrêter tous</span><br>
+      <span class="controle" style="margin-left:40px;">sinon → dire [Tu as besoin de la clé !] 2 s</span>
+    </div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>⏱️ Séance 3 – Chrono, niveaux & tests croisés</h2>
+
+    <div class="titre-sprite">🕒 Option A – Chronomètre</div>
+    <div class="bloc controle">
+      créer [Temps]<br>
+      quand [drapeau vert] cliqué → mettre [Temps] à (30)<br>
+      répéter jusqu’à ce que [Temps = 0] :<br>
+      <span class="controle" style="margin-left:20px;">attendre (1) s</span><br>
+      <span class="controle" style="margin-left:20px;">changer [Temps] par (-1)</span><br>
+      dire [Temps écoulé !] 2 s → arrêter tous
+    </div>
+
+    <div class="titre-sprite">💥 Option B – Compteur de chocs</div>
+    <div class="bloc controle">
+      créer [Chocs]<br>
+      dans les scripts de déplacement : si touche couleur mur → changer [Chocs] de (1)<br>
+      si [Chocs > 20] alors → dire [Trop de chocs ! Recommence !] 2 s → arrêter tous
+    </div>
+
+    <div class="titre-sprite">⚙️ Réglages & tests</div>
+    <div class="bloc apparence">
+      ajuster : largeur des couloirs, durée du Temps, tolérance de Chocs<br>
+      puis faire tester les labyrinthes entre élèves
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc operateurs">ajouter un 2ᵉ niveau avec un nouvel arrière-plan</div>
+    <div class="bloc apparence">effet couleur sur la clé ou la porte quand on s’en approche</div>
+    <div class="bloc controle">message “Tu as récupéré la clé magique !” après aCle = 1</div>
+    <div class="bloc apparence">afficher le chrono ou les chocs à l’écran pendant la partie</div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</body>
+</html>

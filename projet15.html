@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 15 – Super Quiz interactif (calcul & culture) | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 15 – Super Quiz interactif (calcul & culture)</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Questions, réponses, score & correction</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu éducatif – calcul mental & culture générale</span>
+      <p>
+        Les élèves créent un “super quiz” dans Scratch : le programme pose des questions 
+        (calcul mental simple, vocabulaire, géographie, sciences…), compare la réponse, 
+        compte les points et affiche un message final selon le score. Pour les plus grands, 
+        le quiz devient partiellement aléatoire avec des listes de questions.
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : CE2 → questions fixes et simples,  
+        CM1/CM2 → ajouts de listes, aléatoire, niveaux.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Utiliser la variable <strong>Score</strong> (initialisation, incrément, affichage).</li>
+        <li>Utiliser le bloc <strong>poser … et attendre</strong> et la variable <strong>réponse</strong> de Scratch.</li>
+        <li>Utiliser des conditions <strong>si … alors … sinon …</strong> pour vérifier les réponses.</li>
+        <li>Créer une boucle de questions (répéter plusieurs fois).</li>
+        <li>Pour les plus avancés : utiliser des listes (Questions, Réponses) et un indice tiré au hasard.</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Premier quiz : 3 à 5 questions fixes</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a un quiz simple avec 3–5 questions et un score affiché à la fin.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Choisir un thème de départ : calcul mental (additions, multiplications simples) ou culture générale simple.</li>
+        <li>Préparer 3–5 questions de base (adapter CE2 / CM1 / CM2).</li>
+        <li>Préparer une phrase d’intro courte :  
+          « Scratch va devenir le maître du quiz : il pose les questions, tu tapes la réponse, il corrige. »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – “Quiz humain” (5–7 min)</h3>
+      <ul>
+        <li>Tu joues le rôle de Scratch :  
+          – “Question 1 : 4 + 3 = ?”  
+          – “Question 2 : capitale du Maroc ?”</li>
+        <li>Les élèves écrivent la réponse sur leur ardoise ou répondent à l’oral.</li>
+        <li>Transition : « Maintenant, c’est l’ordi qui va poser les questions. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Préparer la scène & le “présentateur” (5–8 min)</p>
+      <ul>
+        <li>Arrière-plan : simple (couleur unie, petit décor de plateau TV).</li>
+        <li>Sprite “Présentateur” : garder le chat ou choisir un personnage.</li>
+        <li>Le placer au centre ou sur un côté.</li>
+      </ul>
+
+      <p class="time">2) Créer la variable Score (5–7 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Score</strong> (pour tous les sprites).</li>
+        <li>Sur le sprite Présentateur :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « mettre Score à 0 »  
+              – « dire "Bienvenue au super quiz !" pendant 2 s ».</li>
+          </ul>
+        </li>
+        <li>Afficher Score sur la scène (en haut à gauche par exemple).</li>
+      </ul>
+
+      <p class="time">3) Programmer les questions une par une (15–20 min)</p>
+      <ul>
+        <li>Sur le sprite Présentateur, ajouter la première question :</li>
+        <li>
+          <ul>
+            <li>« poser "Combien font 4 + 3 ?" et attendre »</li>
+            <li>« si &lt;réponse = 7&gt; alors »  
+              – « dire "Bravo !" pendant 1 s »  
+              – « changer Score par 1 »  
+              « sinon »  
+              – « dire "Non, c’était 7." pendant 2 s »</li>
+          </ul>
+        </li>
+        <li>Reproduire le même schéma pour 2 à 4 autres questions :  
+          – par exemple :  
+            “Combien font 5 + 5 ?” (réponse 10),  
+            “Combien font 3 × 3 ?” (réponse 9),  
+            ou “Capitale du Maroc ?” (réponse “Rabat”).</li>
+        <li>Attention aux réponses texte : choisir par exemple tout en minuscules et leur dire d’écrire pareil.</li>
+      </ul>
+
+      <p class="time">4) Message de fin simple (5–7 min)</p>
+      <ul>
+        <li>Après la dernière question, ajouter :</li>
+        <li>
+          <ul>
+            <li>« dire "Tu as obtenu " &amp; Score &amp; " point(s)." pendant 3 s ».</li>
+          </ul>
+        </li>
+        <li>Option : modifier le message selon le score (à garder pour séance 2 si trop chargé).</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Insister sur la lecture attentive :  
+          « Lisez bien la question avant de taper ! »</li>
+        <li>En cas de dispersion :  
+          – annoncer un “tour lent” : tout le monde suit l’animateur question par question, sans lancer le drapeau tout seul.</li>
+        <li>Pour les rapides : autoriser à ajouter 1–2 questions supplémentaires, mais pas à inventer un deuxième quiz complet.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Question bonus à l’oral” (3–5 min)</h3>
+      <ul>
+        <li>Demander à quelques élèves de proposer 1 question qu’ils aimeraient ajouter dans Scratch.</li>
+        <li>Noter les meilleures au tableau pour la séance suivante.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons créé un premier quiz simple : le programme pose
+        plusieurs questions, vérifie la réponse et compte les points. La prochaine
+        fois, nous allons améliorer le quiz avec des messages différents selon le
+        score et, pour certains, un peu d’aléatoire. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Améliorer le quiz : feedback & niveaux</h2>
+      <p class="meta">Objectif : personnaliser les messages selon le score, ajouter un nombre fixe de questions dans une boucle, commencer à varier les questions.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Préparer 1–2 exemples de messages selon le score :  
+          – Score 0–1 : “Tu peux faire mieux !”  
+          – Score moyen : “Pas mal !”  
+          – Score max : “Super champion !”</li>
+        <li>Prévoir de rappeler la différence entre “réponse” (variable de Scratch) et Score.</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Barème de quiz” (5–7 min)</h3>
+      <ul>
+        <li>Au tableau, écrire :  
+          – 0–1 bonne réponse → “On s’entraîne encore”,  
+          – 2–3 réponses → “Bien”,  
+          – 4–5 → “Excellent”.</li>
+        <li>Demander : “Vous préférez quel type de message si vous avez 1/5 ?” → lancer la discussion pour améliorer la formulation (bienveillance).</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Mettre les questions dans une structure plus claire (10–12 min)</p>
+      <ul>
+        <li>Option simple : garder les questions “en dur” mais les séparer visuellement :</li>
+        <li>
+          <ul>
+            <li>Ajouter des commentaires dans Scratch ou espacer les blocs.</li>
+          </ul>
+        </li>
+        <li>Option (pour CM1/CM2 à l’aise) : passer à une structure avec une boucle :</li>
+        <li>
+          <ul>
+            <li>« mettre Score à 0 »</li>
+            <li>« pour i de 1 à 3 »  
+              – poser une question (on peut commencer avec 3 questions fixes dans la boucle)  
+              – vérifier la réponse  
+              – adapter Score.</li>
+          </ul>
+        </li>
+        <li>Ne pas forcer cette étape si les élèves sont justes : l’important est que les questions fonctionnent déjà correctement.</li>
+      </ul>
+
+      <p class="time">2) Ajouter des messages selon le score (15–18 min)</p>
+      <ul>
+        <li>Après le « dire "Tu as obtenu …" », ajouter :</li>
+        <li>
+          <ul>
+            <li>« si Score = 0 ou Score = 1 alors »  
+              – « dire "Tu peux t’entraîner encore, courage !" pendant 3 s »</li>
+            <li>« sinon si Score = 2 ou Score = 3 alors »  
+              – « dire "Bien joué, continue comme ça !" pendant 3 s »</li>
+            <li>« sinon »  
+              – « dire "Bravo, tu es un super champion du quiz !" pendant 3 s »</li>
+          </ul>
+        </li>
+        <li>Expliquer le principe des “embranchements” : plus le score est haut, plus le message est positif.</li>
+      </ul>
+
+      <p class="time">3) Ajouter 1–2 nouvelles questions (10–12 min)</p>
+      <ul>
+        <li>Reprendre les idées des élèves notées en fin de séance 1.</li>
+        <li>Ajouter 1 ou 2 questions de plus, tout en gardant le code lisible.</li>
+        <li>Adapter si besoin le barème (ex : 5 ou 6 questions → Score max plus élevé, mais garder des paliers simples).</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler que ce n’est pas un “concours de vitesse” :  
+          « Ce qui compte, c’est que ton quiz fonctionne, pas d’avoir le plus de questions. »</li>
+        <li>En cas de tension : proposer un test collectif au vidéoprojecteur (si tu en as un) avec un seul quiz, pour recentrer.</li>
+        <li>Pour les plus rapides : leur proposer de soigner les formulations (orthographe, ponctuation) plutôt que d’ajouter des dizaines de questions.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Test croisé rapide” (5 min)</h3>
+      <ul>
+        <li>Par deux : chacun teste le quiz de l’autre une fois.</li>
+        <li>Ils doivent donner un feedback :  
+          – “J’ai compris toutes les questions ? oui/non”  
+          – “J’ai aimé ton message de fin ?”</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons amélioré le quiz : messages différents selon le
+        score, plus de questions, et parfois une structure un peu plus organisée.
+        La prochaine fois, pour les plus grands, nous ajouterons des listes et un
+        peu d’aléatoire pour varier les questions. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Listes, aléatoire & partage</h2>
+      <p class="meta">
+        Objectif : pour CM1/CM2 (ou CE2 à l’aise), introduire les listes de questions/réponses et un tirage aléatoire.  
+        Pour les autres, consolider les questions et les messages.
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Préparer une démonstration simple de liste : “Questions = [4+4, 3+5, 10-2]”, “Réponses = [8, 8, 8]”.</li>
+        <li>Prévoir 2 trajectoires de séance :  
+          – piste “avancée” listes & aléatoire,  
+          – piste “consolidation” pour ceux qui doivent stabiliser la version fixe.</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Piocher une question” (5–7 min)</h3>
+      <ul>
+        <li>Préparer quelques cartes papier avec des questions.</li>
+        <li>Demander à un élève de “piocher” une carte au hasard, de lire la question aux autres.</li>
+        <li>Transition : « Dans Scratch, on va faire la même chose avec des listes. »</li>
+      </ul>
+
+      <h3>Déroulé – Piste avancée (listes & aléatoire)</h3>
+
+      <p class="time">1) Créer les listes Questions et Réponses (10–12 min)</p>
+      <ul>
+        <li>Créer une liste <strong>Questions</strong> (pour tous les sprites).</li>
+        <li>Créer une liste <strong>Reponses</strong> (pour tous les sprites).</li>
+        <li>Ajouter quelques paires :</li>
+        <li>
+          <ul>
+            <li>Questions : “4 + 4 ?”, “3 + 5 ?”, “10 - 2 ?”</li>
+            <li>Reponses : “8”, “8”, “8” (ou varier les exemples).</li>
+          </ul>
+        </li>
+        <li>Expliquer que l’élément 1 de Questions correspond à l’élément 1 de Reponses, etc.</li>
+      </ul>
+
+      <p class="time">2) Tirer une question au hasard (15–18 min)</p>
+      <ul>
+        <li>Créer une variable <strong>indice</strong>.</li>
+        <li>Script (après avoir mis Score à 0) :</li>
+        <li>
+          <ul>
+            <li>« répéter 5 fois » (par exemple) :  
+              – « mettre indice à nombre aléatoire entre 1 et longueur de la liste Questions »  
+              – « poser item (indice) de Questions et attendre »  
+              – « si &lt;réponse = item (indice) de Reponses&gt; alors »  
+                · « dire "Correct !" pendant 1 s »  
+                · « changer Score par 1 »  
+                « sinon »  
+                · « dire "Non, c’était " &amp; item (indice) de Reponses pendant 2 s ».</li>
+          </ul>
+        </li>
+        <li>Tester : lancer le quiz plusieurs fois, constater que les questions sont mélangées.</li>
+      </ul>
+
+      <p class="time">3) Adapter le message final (8–10 min)</p>
+      <ul>
+        <li>Fin du script :</li>
+        <li>
+          <ul>
+            <li>« dire "Tu as eu " &amp; Score &amp; " bonnes réponses." pendant 3 s »</li>
+            <li>Garder ou adapter le système de paliers (0–1, 2–3, 4–5...).</li>
+          </ul>
+        </li>
+        <li>Pour les plus avancés :  
+          – ajouter une variable <strong>QuestionsPosees</strong> si besoin,  
+          – ou un thème (“niveau 1 : additions”, “niveau 2 : multiplications”).</li>
+      </ul>
+
+      <h3>Déroulé – Piste consolidation (sans listes)</h3>
+      <ul>
+        <li>Pour les élèves en difficulté ou plus jeunes, proposer :</li>
+        <li>
+          <ul>
+            <li>améliorer l’orthographe et la syntaxe des questions,</li>
+            <li>ajouter 1–2 questions en plus,</li>
+            <li>peaufiner les messages de feedback (plus encourageants, plus clairs).</li>
+          </ul>
+        </li>
+        <li>Objectif : un quiz “nickel” plutôt qu’un quiz compliqué mais instable.</li>
+      </ul>
+
+      <h3>Tests croisés & partage (10–12 min)</h3>
+      <ul>
+        <li>Mettre les élèves par deux ou par trois :</li>
+        <li>
+          <ul>
+            <li>élève A joue au quiz de B, le termine jusqu’au score final,</li>
+            <li>puis répond oralement à :  
+              – “Qu’est-ce que tu as aimé dans ce quiz ?”  
+              – “Est-ce qu’une question était difficile à comprendre ?”</li>
+          </ul>
+        </li>
+        <li>Ensuite, on inverse les rôles.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “La question la plus sympa” (5 min)</h3>
+      <ul>
+        <li>Demander à quelques élèves :  
+          – “Dans ton quiz (ou celui d’un camarade), quelle question tu as trouvée la plus sympa ou intéressante ?”</li>
+        <li>Rappeler que la qualité des questions compte autant que la technique.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de projet</h3>
+      <p>
+        « Les élèves ont maintenant un vrai “super quiz” : questions, réponses,
+        score, messages personnalisés, et parfois des questions tirées au hasard 
+        dans des listes. Le projet est réutilisable pour d’autres thèmes (histoire,
+        sciences, vocabulaire…) et peut servir d’outil pédagogique dans les classes. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Score ne change pas</strong>  
+          → Vérifier que “changer Score par 1” est bien à l’intérieur du “si” de la bonne réponse.  
+          → Vérifier que Score est bien remis à 0 au drapeau vert.</li>
+
+        <li><strong>Réponses texte mal reconnues</strong>  
+          → Standardiser : tout en minuscules, sans accents si besoin.  
+          → Expliquer aux élèves qu’ils doivent taper “rabat” et pas “Rabat ” (avec espace).</li>
+
+        <li><strong>Problème avec les listes</strong>  
+          → Vérifier que Questions et Reponses ont le même nombre d’éléments.  
+          → Vérifier que l’indice tiré au hasard va bien de 1 à “longueur de Questions”.</li>
+
+        <li><strong>Le quiz ne s’arrête pas</strong>  
+          → Vérifier la boucle “répéter X fois” ou les limites de la variable de boucle.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Utiliser ce projet comme support disciplinaire : quiz de révisions (maths, géo, vocabulaire…).</li>
+        <li>Valoriser les élèves non seulement sur le code, mais aussi sur la qualité des questions : clarté, justesse, intérêt.</li>
+        <li>Pour les plus rapides :  
+          – ajouter un “mode entraînement” (questions infinies, sans score),  
+          – ou un bouton “Rejouer” qui remet Score à 0 et relance le quiz.</li>
+        <li>En cas de montée de bruit : pause “quiz oral” sans écran, pendant 2 minutes, puis retour au calme devant Scratch.</li>
+      </ul>
+    </div>
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  .algo-section{
+    margin-top:18px;padding:18px 16px 20px 16px;border-radius:var(--radius);
+    border:1px solid #d0d7de;background:#f7f7f7;box-shadow:var(--shadow-soft);
+    font-family:"Courier New",monospace;
+  }
+  .algo-section>h2{color:#2c3e50;margin-bottom:4px;font-size:1.05rem;}
+  .algo-section>p{font-size:.85rem;color:#555;margin-bottom:10px;}
+  .titre-sprite{font-weight:bold;font-size:.95rem;background:#eaf2f8;
+    padding:6px 10px;border-left:6px solid #5dade2;margin:10px 0 6px;border-radius:4px;}
+  .bloc{padding:6px 10px;margin:4px 0;border-left:6px solid;background:#fff;
+    border-radius:6px;font-size:.85rem;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .evenement{border-color:#FFD500;background:#fff8d1;}
+  .mouvement{border-color:#4C97FF;background:#dceeff;}
+  .apparence{border-color:#9966FF;background:#f0e6ff;}
+  .controle{border-color:#FFAB19;background:#ffe9cc;}
+  .son{border-color:#CF63CF;background:#fce4fc;}
+  .capteurs{border-color:#5CB1D6;background:#e0f6fb;}
+  .operateurs{border-color:#59C059;background:#e5fbe5;}
+  @media(max-width:600px){.algo-section{padding:14px 12px 16px 12px;}}
+</style>
+
+<!-- === ALGORYTHME DU PROJET 15 – SUPER QUIZ INTERACTIF === -->
+<div class="algo-section">
+  <h2>🧠 Algorithme du Projet Scratch – Super Quiz interactif (calcul & culture)</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Questions, réponses, score & correction</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>📋 Séance 1 – Premier quiz : 3 à 5 questions fixes</h2>
+
+    <div class="titre-sprite">🎤 Sprite – Présentateur</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      mettre [Score] à (0)<br>
+      dire [Bienvenue au super quiz !] pendant (2) s
+    </div>
+
+    <div class="titre-sprite">💬 Exemple de question</div>
+    <div class="bloc controle">
+      poser [Combien font 4 + 3 ?] et attendre<br>
+      si [réponse = 7] alors<br>
+      <span class="apparence" style="margin-left:20px;">dire [Bravo !] pendant (1) s</span><br>
+      <span class="controle" style="margin-left:20px;">changer [Score] de (1)</span><br>
+      sinon<br>
+      <span class="apparence" style="margin-left:20px;">dire [Non, c’était 7.] pendant (2) s</span>
+    </div>
+
+    <div class="bloc apparence">répéter ce schéma pour 3 à 5 questions différentes</div>
+
+    <div class="bloc apparence">
+      à la fin → dire [Tu as obtenu : (Score) point(s)] pendant (3) s
+    </div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>⭐ Séance 2 – Feedback & niveaux de réussite</h2>
+
+    <div class="titre-sprite">🎯 Barème de fin</div>
+    <div class="bloc controle">
+      si [Score ≤ 1] alors → dire [Tu peux t’entraîner encore !]<br>
+      sinon si [Score ≤ 3] alors → dire [Bien joué, continue !]<br>
+      sinon → dire [Super champion !]
+    </div>
+
+    <div class="titre-sprite">🔁 Structure avec boucle (option avancée)</div>
+    <div class="bloc controle">
+      pour [i] de 1 à 3 :<br>
+      <span class="controle" style="margin-left:20px;">poser une question</span><br>
+      <span class="controle" style="margin-left:20px;">vérifier la réponse et ajuster le Score</span>
+    </div>
+
+    <div class="bloc apparence">afficher la variable Score sur la scène (coin supérieur gauche)</div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🎲 Séance 3 – Listes, aléatoire & partage</h2>
+
+    <div class="titre-sprite">📋 Création des listes</div>
+    <div class="bloc controle">
+      créer liste [Questions] → ex : [4+4 ?] [3+5 ?] [10-2 ?]<br>
+      créer liste [Reponses] → ex : [8] [8] [8]
+    </div>
+
+    <div class="titre-sprite">🎲 Tirage aléatoire</div>
+    <div class="bloc controle">
+      créer variable [indice]<br>
+      répéter (5) fois :<br>
+      <span class="controle" style="margin-left:20px;">
+        mettre [indice] à nombre aléatoire entre (1) et (longueur de [Questions])
+      </span><br>
+      <span class="capteurs" style="margin-left:20px;">
+        poser (élément [indice] de [Questions]) et attendre
+      </span><br>
+      si [réponse = élément (indice) de [Reponses]] alors<br>
+      <span class="apparence" style="margin-left:20px;">dire [Correct !] pendant (1) s</span><br>
+      <span class="controle" style="margin-left:20px;">changer [Score] de (1)</span><br>
+      sinon<br>
+      <span class="apparence" style="margin-left:20px;">dire [Non, c’était : (élément indice de Réponses)] pendant (2) s</span>
+    </div>
+
+    <div class="titre-sprite">🏁 Message final</div>
+    <div class="bloc apparence">
+      dire [Tu as eu : (Score) bonne(s) réponse(s)] pendant (3) s<br>
+      puis appliquer le barème (messages selon score)
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc apparence">
+      ajouter un bouton [Rejouer] → remet Score à 0 et relance le quiz
+    </div>
+    <div class="bloc controle">
+      créer un “mode entraînement” : boucle infinie de questions sans score
+    </div>
+    <div class="bloc operateurs">
+      ajouter un thème aléatoire (maths / géo / vocabulaire)
+    </div>
+    <div class="bloc apparence">
+      améliorer la mise en scène : décor de plateau TV, sons d’applaudissements, etc.
+    </div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</body>
+</html>

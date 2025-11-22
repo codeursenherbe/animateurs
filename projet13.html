@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 13 – Histoire interactive à choix | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 13 – Histoire interactive à choix</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Narration, embranchements & variables</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Histoire à embranchements / livre dont tu es le héros</span>
+      <p>
+        Les élèves créent une histoire interactive : un personnage vit une aventure
+        et le joueur doit choisir entre plusieurs options (« Tu ouvres la porte ? »
+        / « Tu restes caché ? »). Selon les choix, l’histoire change et on arrive
+        à différentes fins (bonne fin, fin neutre, fin “ratée”…).
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : 2 à 3 niveaux de choix, 2 à 4 fins différentes.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Structurer un récit en plusieurs scènes (début / choix / conséquences / fin).</li>
+        <li>Utiliser plusieurs arrière-plans pour représenter des lieux ou moments différents.</li>
+        <li>Utiliser les blocs <strong>si … alors … sinon …</strong> pour gérer les choix.</li>
+        <li>Utiliser des messages (broadcast) pour changer de scène proprement.</li>
+        <li>Introduire une variable d’“état” de l’histoire (ex : <strong>Chapitre</strong> ou <strong>ScoreAventure</strong>).</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Imaginer l’histoire & créer les scènes principales</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a une trame d’histoire (sur papier) et 3–4 décors Scratch prêts (début, deux choix, une fin).</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Préparer quelques idées de thèmes :  
+          – aventure dans un château,  
+          – enquête policière,  
+          – voyage dans l’espace,  
+          – exploration d’une île, etc.</li>
+        <li>Prévoir une fiche papier ou un tableau pour tracer un schéma de type :  
+          Départ → Choix 1 → Scène A ou Scène B → Fin A / Fin B.</li>
+        <li>Préparer une phrase simple :  
+          « On ne va pas écrire un roman, mais une petite histoire avec quelques choix qui changent la suite. »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – « Histoire à deux choix » (5–7 min)</h3>
+      <ul>
+        <li>Raconter très brièvement à l’oral :  
+          « Tu marches dans la forêt, tu arrives devant une maison.  
+           – Si tu entres, tu trouves un trésor.  
+           – Si tu continues ton chemin, tu te perds un peu… »</li>
+        <li>Demander : « Quel choix tu ferais ? » → lever de mains.</li>
+        <li>Transition : « Notre programme va faire la même chose : afficher une scène, proposer un choix, puis suivre le chemin choisi. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Écrire la trame de l’histoire sur papier (10–15 min)</p>
+      <ul>
+        <li>Demander aux élèves de choisir un thème : château, espace, école, jungle…</li>
+        <li>Les guider pour écrire uniquement les grandes étapes (pas toutes les phrases) :</li>
+        <li>
+          <ul>
+            <li>Scène 1 : début (où, qui, problème ?)</li>
+            <li>Scène 2A : conséquence du choix 1</li>
+            <li>Scène 2B : conséquence du choix 2</li>
+            <li>Scène 3A / 3B : fin(s) possibles (heureuse, drôle, ratée…)</li>
+          </ul>
+        </li>
+        <li>Passer dans les rangs pour aider à simplifier : phrases courtes, claires.</li>
+      </ul>
+
+      <p class="time">2) Créer les décors principaux dans Scratch (15–20 min)</p>
+      <ul>
+        <li>Dans Scratch, ouvrir un nouveau projet et supprimer le chat si besoin.</li>
+        <li>Dans l’onglet <strong>Arrière-plans</strong>, choisir ou créer :</li>
+        <li>
+          <ul>
+            <li>Arrière-plan 1 = début de l’histoire (ex : extérieur du château).</li>
+            <li>Arrière-plan 2 = première conséquence (ex : intérieur du château).</li>
+            <li>Arrière-plan 3 = autre conséquence (ex : forêt sombre).</li>
+            <li>Arrière-plan 4 = fin (par exemple la “bonne fin”).  
+                → Les autres fins pourront réutiliser ou dupliquer un décor.</li>
+          </ul>
+        </li>
+        <li>Renommer les arrière-plans avec des noms simples : “Debut”, “Chemin1”, “Chemin2”, “FinA”, “FinB”…</li>
+      </ul>
+
+      <p class="time">3) Ajouter le personnage principal (5–8 min)</p>
+      <ul>
+        <li>Choisir un sprite “héros” (enfant, chevalier, astronaute…).</li>
+        <li>Le positionner à un endroit cohérent sur le décor “Début”.</li>
+        <li>Facultatif : ajouter un deuxième sprite “narrateur” ou bulles de texte.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler que cette séance est surtout une séance de <strong>préparation / scénarisation</strong>, pas de coding intensif.</li>
+        <li>Pour les élèves qui finissent vite la trame papier : les encourager à améliorer les formulations (réduire, rendre plus clair).</li>
+        <li>En cas d’agitation : recentrer avec une question commune :  
+          « Quelle est la scène la plus importante de ton histoire ? »</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Pitch de 20 secondes » (5 min)</h3>
+      <ul>
+        <li>Proposer à 3–4 élèves de présenter leur histoire en une phrase :  
+          « Dans mon histoire, … (héros) … doit … et peut choisir entre … ou … ».</li>
+        <li>But : vérifier que la trame est claire avant le coding.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, chacun a imaginé une petite histoire avec au moins un
+        choix important et a préparé les décors principaux dans Scratch.
+        La prochaine fois, nous allons programmer les choix et faire en sorte
+        que l’histoire change selon ce que le joueur décide. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Programmer les choix & les embranchements</h2>
+      <p class="meta">Objectif : faire fonctionner au moins un choix qui mène à deux chemins différents, avec changement d’arrière-plan et de dialogues.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Décider si les choix seront :  
+          – des boutons (sprites “Bouton 1” / “Bouton 2”),  
+          – ou des touches du clavier (1 / 2).</li>
+        <li>Préparer une phrase simple :  
+          « Scratch va dire “Si tu choisis 1, je montre cette scène, sinon je montre l’autre.” »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Choix à main levée » (3–4 min)</h3>
+      <ul>
+        <li>Dire :  
+          « Si tu préfères la plage, lève la main droite.  
+           Si tu préfères la montagne, lève la main gauche. »</li>
+        <li>Montrer physiquement que la classe se “sépare” en deux chemins.</li>
+        <li>Transition : « Nos histoires vont faire pareil, mais dans un écran. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Variable Chapitre (ou Étape) (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Chapitre</strong> (pour tous les sprites).</li>
+        <li>Sur le décor (ou un sprite “Gestion”) :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « mettre Chapitre à 1 »  
+              – « basculer sur l’arrière-plan "Debut" ».</li>
+          </ul>
+        </li>
+        <li>Expliquer :  
+          « Chapitre = 1 → début de l’histoire. Chapitre = 2 → après choix 1, etc. »</li>
+      </ul>
+
+      <p class="time">2) Afficher le début & proposer les choix (15–20 min)</p>
+      <ul>
+        <li>Sur le sprite du héros (ou sur un sprite “Texte”) :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « attendre 0.2 s »  
+              – « dire "Texte de début…" pendant 3 s »  
+              – « dire "Choisis : 1 = …, 2 = …" pendant 3 s ».</li>
+          </ul>
+        </li>
+        <li>Choix au clavier (option la plus simple) :</li>
+        <li>
+          <ul>
+            <li>« quand touche 1 pressée »  
+              – « si Chapitre = 1 alors »  
+                · « mettre Chapitre à 2 »  
+                · « basculer sur l’arrière-plan "Chemin1" »  
+                · « dire "Tu as choisi …" pendant 2 s »  
+            </li>
+            <li>« quand touche 2 pressée »  
+              – « si Chapitre = 1 alors »  
+                · « mettre Chapitre à 3 »  
+                · « basculer sur l’arrière-plan "Chemin2" »  
+                · « dire "Tu as choisi …" pendant 2 s »</li>
+          </ul>
+        </li>
+        <li>Expliquer :  
+          « On vérifie d’abord qu’on est bien au Chapitre 1, puis on envoie vers la bonne scène. »</li>
+        <li>Tester : lancer le projet, lire le début, appuyer sur 1 ou 2 et vérifier le changement de décor et de texte.</li>
+      </ul>
+
+      <p class="time">3) Continuer l’histoire après le choix (10–12 min)</p>
+      <ul>
+        <li>Pour Chapitre 2 (chemin 1), par exemple :</li>
+        <li>
+          <ul>
+            <li>« si Chapitre = 2 alors »  
+              – sur arrivée dans l’arrière-plan, faire dire au héros : « Tu entres dans le château… ».</li>
+          </ul>
+        </li>
+        <li>Deux options :  
+          – s’arrêter là (fin courte),  
+          – ou prévoir un second choix dans Chapitre 2 (niveau avancé).</li>
+        <li>Pour cette séance, viser déjà un chemin complet simple :  
+          Début → Choix 1 → Scène 2 → Mini-fin (le héros s’en sort bien ou pas). </li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Bien séparer les moments “on code” et les moments “on lit à haute voix” :</li>
+        <li>
+          <ul>
+            <li>« Maintenant, on ne code plus, on teste juste la lecture. »</li>
+          </ul>
+        </li>
+        <li>Pour les élèves perdus : proposer de ne gérer qu’UN seul choix pour l’instant.</li>
+        <li>Pour les rapides : autoriser un deuxième embranchement (Chapitre 3/4) mais en gardant des phrases simples.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « On joue ton histoire » (5 min)</h3>
+      <ul>
+        <li>Choisir 1 ou 2 élèves volontaires :</li>
+        <li>
+          <ul>
+            <li>Tu te mets à leur poste, tu lis ce que le personnage dit,  
+            <li>La classe décide si on appuie sur 1 ou 2.</li>
+          </ul>
+        </li>
+        <li>But : valoriser l’effet “interactif” devant le groupe.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons commencé à programmer l’interactivité :
+        à partir d’un même début, le joueur peut faire un choix qui envoie
+        l’histoire sur deux chemins différents. Nous avons utilisé une
+        variable Chapitre pour savoir où on en est. La prochaine fois, nous
+        terminerons les fins possibles et nous mettrons l’accent sur la
+        relecture et la clarté de l’histoire. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Fins possibles, relecture & tests croisés</h2>
+      <p class="meta">Objectif : terminer les différentes fins, clarifier les textes et faire tester les histoires par d’autres élèves.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Prévoir quelques exemples de fins possibles :  
+          – fin “réussite”,  
+          – fin “neutre”,  
+          – fin “ratée mais drôle”.</li>
+        <li>Préparer une consigne de relecture :  
+          « Est-ce que ton histoire est compréhensible pour quelqu’un qui ne la connaît pas ? »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « 3 types de fins » (5 min)</h3>
+      <ul>
+        <li>Au tableau, lister :</li>
+        <li>
+          <ul>
+            <li>Fin heureuse → tout se passe bien.</li>
+            <li>Fin neutre → rien de grave, mais rien d’exceptionnel.</li>
+            <li>Fin ratée → le héros échoue ou doit recommencer.</li>
+          </ul>
+        </li>
+        <li>Demander : « Qui peut donner un exemple de fin ratée mais rigolote ? »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Terminer les fins (15–20 min)</p>
+      <ul>
+        <li>Pour chaque chemin (Chapitre 2, 3, etc.), prévoir une fin :</li>
+        <li>
+          <ul>
+            <li>Par exemple :  
+              – Chapitre 2 : si le joueur prend une décision, on peut mettre Chapitre à 4 et basculer sur fond “FinA”.  
+              – Chapitre 3 : autre décision → Chapitre 5 → fond “FinB”.</li>
+          </ul>
+        </li>
+        <li>Dans chaque fin, prévoir un message clair :</li>
+        <li>
+          <ul>
+            <li>« Tu as trouvé le trésor et tu rentres chez toi. Fin de l’histoire. »</li>
+            <li>« Tu t’es perdu dans la forêt, mais tu as appris à faire un feu de camp. Fin de l’histoire. »</li>
+          </ul>
+        </li>
+        <li>Option : ajouter un bouton “Rejouer” (sprite bouton) avec script :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué → mettre Chapitre à 1 → basculer sur l’arrière-plan "Debut" ».</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="time">2) Relecture et amélioration des textes (10–12 min)</p>
+      <ul>
+        <li>Par binômes : chaque élève lit à voix haute son histoire à un camarade pendant que le programme tourne.</li>
+        <li>Le camarade doit pouvoir répondre :</li>
+        <li>
+          <ul>
+            <li>“Est-ce que j’ai compris ce que je devais choisir ?”</li>
+            <li>“Est-ce que les phrases sont trop longues ou difficiles ?”</li>
+          </ul>
+        </li>
+        <li>Encourager à raccourcir les phrases trop longues et à éviter les textes qui défilent trop vite.</li>
+      </ul>
+
+      <p class="time">3) Tests croisés (10–12 min)</p>
+      <ul>
+        <li>Changer de binôme ou de table : un élève joue l’histoire d’un autre, sans explication au début.</li>
+        <li>Il doit ensuite répondre :  
+          – « J’ai compris les choix ? oui/non »  
+          – « J’ai trouvé une fin heureuse ? oui/non ».</li>
+        <li>Eventuellement, collecter quelques retours positifs à l’oral :  
+          – “Dans l’histoire de X, j’ai aimé que…”</li>
+      </ul>
+
+      <h3>Jeu de clôture – « La fin que je préfère » (5 min)</h3>
+      <ul>
+        <li>Demander à quelques élèves :  
+          – « Parmi toutes tes fins, laquelle préfères-tu et pourquoi ? »</li>
+        <li>But : mettre en valeur la créativité plutôt que la “performance technique”.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Nous avons terminé des histoires interactives complètes : un début
+        commun, des choix qui changent le chemin, plusieurs fins possibles et
+        parfois un bouton pour rejouer. Les élèves ont relu et testé les
+        histoires de leurs camarades pour vérifier que les textes et les choix
+        sont clairs. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Les touches 1/2 ne font rien</strong>  
+          → Vérifier que les blocs « quand touche 1 pressée » contiennent bien un test « si Chapitre = 1 ».  
+          → Vérifier que Chapitre est bien remis à 1 au drapeau vert.</li>
+
+        <li><strong>L’arrière-plan ne change pas</strong>  
+          → Vérifier que les blocs « basculer sur l’arrière-plan … » utilisent exactement le bon nom (Debut, Chemin1, etc.).</li>
+
+        <li><strong>On ne revient jamais au début</strong>  
+          → Ajouter un bouton “Rejouer” ou demander au joueur de cliquer sur le drapeau vert.  
+          → Vérifier que Chapitre est remis à 1 à ce moment-là.</li>
+
+        <li><strong>Les textes défilent trop vite</strong>  
+          → Augmenter le temps des blocs “dire … pendant X secondes”.  
+          → Réduire la longueur des phrases (2 petites phrases plutôt qu’une très longue).</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Encourager les élèves à expliquer leur logique :  
+          « Pourquoi, quand on appuie sur 1, on va dans cette scène-là ? »</li>
+        <li>Travailler la cohérence :  
+          – début → problème → choix → conséquence → fin.</li>
+        <li>Pour les plus rapides :  
+          – ajouter une petite variable <strong>ScoreAventure</strong> (par exemple +1 pour une bonne action, -1 pour un choix risqué)  
+          – et une fin différente selon le score.</li>
+        <li>En cas d’agitation : faire une mini-pause où un élève vient au tableau dessiner le schéma de son histoire (nœuds et flèches), pendant que les autres observent en silence.</li>
+      </ul>
+    </div>
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  .algo-section{margin-top:18px;padding:18px 16px 20px 16px;border-radius:var(--radius);
+    border:1px solid #d0d7de;background:#f7f7f7;box-shadow:var(--shadow-soft);
+    font-family:"Courier New",monospace;}
+  .algo-section>h2{color:#2c3e50;margin-bottom:4px;font-size:1.05rem;}
+  .algo-section>p{font-size:.85rem;color:#555;margin-bottom:10px;}
+  .titre-sprite{font-weight:bold;font-size:.95rem;background:#eaf2f8;
+    padding:6px 10px;border-left:6px solid #5dade2;margin:10px 0 6px;border-radius:4px;}
+  .bloc{padding:6px 10px;margin:4px 0;border-left:6px solid;background:#fff;
+    border-radius:6px;font-size:.85rem;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .evenement{border-color:#FFD500;background:#fff8d1;}
+  .mouvement{border-color:#4C97FF;background:#dceeff;}
+  .apparence{border-color:#9966FF;background:#f0e6ff;}
+  .controle{border-color:#FFAB19;background:#ffe9cc;}
+  .son{border-color:#CF63CF;background:#fce4fc;}
+  .capteurs{border-color:#5CB1D6;background:#e0f6fb;}
+  .operateurs{border-color:#59C059;background:#e5fbe5;}
+  @media(max-width:600px){.algo-section{padding:14px 12px 16px 12px;}}
+</style>
+
+<!-- === ALGORYTHME DU PROJET 13 – HISTOIRE INTERACTIVE À CHOIX === -->
+<div class="algo-section">
+  <h2>📖 Algorithme du Projet Scratch – Histoire interactive à choix</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Narration, embranchements & variables</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🧩 Séance 1 – Imaginer l’histoire & créer les scènes principales</h2>
+    <div class="titre-sprite">🧠 Étape 1 – Trame papier</div>
+    <div class="bloc apparence">dessiner le schéma : Début → Choix 1 → Scène A / Scène B → Fin(s)</div>
+
+    <div class="titre-sprite">🎨 Étape 2 – Arrière-plans Scratch</div>
+    <div class="bloc apparence">
+      créer 3 – 4 décors : “Début”, “Chemin1”, “Chemin2”, “FinA”, “FinB”<br>
+      renommer clairement les arrière-plans
+    </div>
+
+    <div class="titre-sprite">🧍 Sprite – Héros</div>
+    <div class="bloc mouvement">placer le personnage sur le décor “Début”</div>
+    <div class="bloc apparence">facultatif : ajouter un narrateur ou des bulles de texte</div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>🔀 Séance 2 – Programmer les choix & les embranchements</h2>
+
+    <div class="titre-sprite">📦 Variable : Chapitre</div>
+    <div class="bloc controle">
+      créer [Chapitre]<br>
+      quand [drapeau vert] cliqué → mettre [Chapitre] à (1)<br>
+      basculer sur l’arrière-plan : “Début”
+    </div>
+
+    <div class="titre-sprite">💬 Sprite – Héros / Narrateur</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc apparence" style="margin-left:20px;">
+      dire [Tu arrives devant un château…] pendant (3) s<br>
+      dire [Choisis : 1 = Entrer / 2 = Continuer] pendant (3) s
+    </div>
+
+    <div class="titre-sprite">⌨️ Choix au clavier</div>
+    <div class="bloc evenement">quand touche [1] pressée</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [Chapitre = 1] alors → mettre [Chapitre] à 2 → basculer sur “Chemin1” → dire [Tu entres !]
+    </div>
+    <div class="bloc evenement">quand touche [2] pressée</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [Chapitre = 1] alors → mettre [Chapitre] à 3 → basculer sur “Chemin2” → dire [Tu continues ton chemin…]
+    </div>
+
+    <div class="titre-sprite">🏞️ Suite de l’histoire</div>
+    <div class="bloc controle">si [Chapitre = 2] alors → dire [Tu explores le château…]</div>
+    <div class="bloc controle">si [Chapitre = 3] alors → dire [Tu t’enfonces dans la forêt sombre…]</div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🏁 Séance 3 – Fins possibles, relecture & tests</h2>
+
+    <div class="titre-sprite">✨ Fins de l’histoire</div>
+    <div class="bloc controle">
+      si [Chapitre = 4] → basculer sur fond “FinA” → dire [Tu as trouvé le trésor ! Fin heureuse.]
+    </div>
+    <div class="bloc controle">
+      si [Chapitre = 5] → basculer sur fond “FinB” → dire [Tu t’es perdu… Fin ratée mais drôle.]
+    </div>
+
+    <div class="titre-sprite">🔁 Bouton Rejouer</div>
+    <div class="bloc evenement">quand ce sprite est cliqué → mettre [Chapitre] à 1 → basculer sur “Début”</div>
+
+    <div class="titre-sprite">👥 Tests & relecture</div>
+    <div class="bloc apparence">
+      par binômes : un élève lit, l’autre joue<br>
+      vérifier : les choix sont clairs ? les textes sont lisibles ?
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc operateurs">
+      ajouter une variable [ScoreAventure] : +1 pour une bonne action, −1 pour un risque<br>
+      fin différente selon le score
+    </div>
+    <div class="bloc apparence">ajouter des sons ou musiques selon les scènes</div>
+    <div class="bloc controle">prévoir un second niveau de choix pour les élèves rapides</div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</body>
+</html>

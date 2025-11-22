@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 17 – Tirs au but (jeu de foot) | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 17 – Tirs au but (jeu de foot)</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Direction, hasard, collisions & score</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu sportif – tirs au but</span>
+      <p>
+        Les élèves créent un mini-jeu de foot : un joueur frappe des tirs au but 
+        face à un gardien. Avant chaque tir, le joueur choisit une direction 
+        (gauche, centre, droite) avec le clavier. Le gardien plonge dans une 
+        direction (au hasard ou selon un schéma). Si le tir et le gardien sont 
+        dans la même zone, le tir est arrêté, sinon c’est but. Un score compte 
+        le nombre de buts sur une série de tirs.
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : commencer avec un gardien immobile (Séance 1), puis ajouter le hasard 
+        et le score (Séances 2 et 3).
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Programmer un tir avec animation (déplacement du ballon vers le but).</li>
+        <li>Utiliser des variables pour suivre le score (<strong>Buts</strong>) et le nombre de tirs (<strong>Tirs</strong>).</li>
+        <li>Utiliser le hasard pour la direction du gardien.</li>
+        <li>Utiliser des conditions pour comparer la direction choisie par le joueur et celle du gardien.</li>
+        <li>Structurer une boucle de jeu : préparation → tir → résultat → tir suivant.</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Terrain, cage & tir simple</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a un terrain, une cage, un ballon et un tir simple qui va vers le but.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Préparer une explication simple :  
+          « D’abord, on va juste réussir à tirer un ballon dans le but, sans gardien. »</li>
+        <li>Avoir en tête une disposition claire :  
+          – ballon en bas au centre,  
+          – cage et gardien en haut de l’écran.</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – “Tirs imaginaires” (5–7 min)</h3>
+      <ul>
+        <li>Demander aux élèves de se lever et de mimer un tir au but (sans bouger de place) :</li>
+        <li>
+          <ul>
+            <li>1 : préparation → ils reculent le pied,</li>
+            <li>2 : tir → coup de pied imaginaire,</li>
+            <li>3 : ballon qui part → ils suivent du regard.</li>
+          </ul>
+        </li>
+        <li>Transition : « Dans Scratch, on va programmer ces 3 étapes pour le ballon. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer le terrain & la cage (10–12 min)</p>
+      <ul>
+        <li>Arrière-plan : vert (pelouse), avec une surface de réparation, un point de penalty, une cage dessinée en haut.</li>
+        <li>On peut dessiner la cage directement sur le décor (rectangle blanc) pour simplifier la collision au début.</li>
+      </ul>
+
+      <p class="time">2) Créer le ballon (8–10 min)</p>
+      <ul>
+        <li>Ajouter un sprite “Ballon” (bibliothèque Scratch ou cercle dessiné).</li>
+        <li>Réduire un peu la taille pour rester lisible.</li>
+        <li>Le placer au point de penalty (milieu en bas de l’écran).</li>
+      </ul>
+
+      <p class="time">3) Tir simple vers le haut (15–18 min)</p>
+      <ul>
+        <li>Sur le sprite Ballon :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « aller à x:0 y:-120 » (par exemple, point de départ)  
+              – « montrer ».</li>
+          </ul>
+        </li>
+        <li>Ajouter un script de tir quand on appuie sur une touche (par exemple la barre espace) :</li>
+        <li>
+          <ul>
+            <li>« quand touche espace pressée »  
+              – « répéter 20 fois » (adapter)  
+                · « changer y de 10 »  
+              – « attendre 0.02 s » (dans la boucle)  
+              – à la fin, remettre le ballon au point de départ :</li>
+            <li>« aller à x:0 y:-120 ».</li>
+          </ul>
+        </li>
+        <li>Tester : le ballon monte vers la cage puis revient.</li>
+      </ul>
+
+      <p class="time">4) Ajouter un feedback “BUT” (option simple) (5–7 min)</p>
+      <ul>
+        <li>Pour l’instant, considérer que si le ballon atteint une certaine hauteur, c’est but :</li>
+        <li>
+          <ul>
+            <li>Dans la boucle du tir, après “changer y de 10” :  
+              – « si y > 130 alors dire "BUT !" pendant 1 s » (ou jouer un son),  
+              – puis sortir de la boucle (on peut utiliser “arrêter ce script” après avoir repositionné).</li>
+          </ul>
+        </li>
+        <li>On affinera avec la position latérale et le gardien aux séances suivantes.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler qu’on ne spamme pas la barre espace :  
+          « On teste un tir, le ballon revient, puis on recommence. »</li>
+        <li>Pour les rapides : autoriser à ajouter un léger effet (le ballon grossit un peu au moment du tir, puis redevient normal).</li>
+        <li>En cas de bruit : proposer un “tir silencieux” : 1 minute où chacun teste sans parler, puis on commente les difficultés.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “3 tirs réussis” (3–5 min)</h3>
+      <ul>
+        <li>Consigne : « Essayez calmement d’enchaîner 3 tirs qui vont bien dans la cage (sans vous tromper de touche). »</li>
+        <li>But : fixer le geste clavier + logique du tir avant d’ajouter le gardien.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons mis en place le terrain, la cage et un ballon 
+        qui tire vers le but. Les élèves ont commencé à manipuler la notion de 
+        déplacement en boucle (le ballon monte et revient au point de départ). 
+        La prochaine fois, nous ajouterons un gardien et la direction du tir. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Directions de tir & gardien qui plonge</h2>
+      <p class="meta">Objectif : choisir la direction du tir (gauche / centre / droite) et faire bouger le gardien dans une des 3 zones.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Bien visualiser les 3 zones du but : gauche, centre, droite.</li>
+        <li>Préparer une phrase :  
+          « Le ballon et le gardien auront chacun une direction. Si les deux choisissent la même, le tir est arrêté, sinon c’est but. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Choisis ton côté” (5–7 min)</h3>
+      <ul>
+        <li>Au tableau, dessiner un but avec 3 zones (Gauche, Centre, Droite).</li>
+        <li>Les élèves se lèvent : tu annonces “TIREZ !” → chacun doit montrer la direction avec la main (gauche / centre / droite).</li>
+        <li>Tu joues le gardien et choisis une direction différente ou identique, puis tu annonces “Arrêté” ou “But”.</li>
+        <li>Transition : « On va coder exactement ce genre de choix dans Scratch. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Ajouter le gardien (10–12 min)</p>
+      <ul>
+        <li>Créer un sprite “Gardien” (personnage, rectangle, etc.).</li>
+        <li>Le placer devant la cage, légèrement au-dessus du ballon (en haut de l’écran).</li>
+        <li>Prévoir 3 positions possibles :  
+          – x gauche,  
+          – x centre,  
+          – x droite (y constant).</li>
+      </ul>
+
+      <p class="time">2) Variable DirectionTir & DirectionGardien (10–12 min)</p>
+      <ul>
+        <li>Créer deux variables (pour tous les sprites) :</li>
+        <li>
+          <ul>
+            <li><strong>DirectionTir</strong> (1 = gauche, 2 = centre, 3 = droite)</li>
+            <li><strong>DirectionGardien</strong> (1, 2, 3 avec la même convention)</li>
+          </ul>
+        </li>
+        <li>Au démarrage :  
+          – « mettre DirectionTir à 2 »  
+          – « mettre DirectionGardien à 2 » (par exemple).</li>
+      </ul>
+
+      <p class="time">3) Choisir la direction avec le clavier (10–12 min)</p>
+      <ul>
+        <li>Sur le sprite Ballon :</li>
+        <li>
+          <ul>
+            <li>« quand touche 1 pressée → mettre DirectionTir à 1 » (gauche)</li>
+            <li>« quand touche 2 pressée → mettre DirectionTir à 2 » (centre)</li>
+            <li>« quand touche 3 pressée → mettre DirectionTir à 3 » (droite)</li>
+          </ul>
+        </li>
+        <li>Option : afficher un petit texte (“1 = gauche, 2 = centre, 3 = droite”) sur le décor ou via un sprite.</li>
+      </ul>
+
+      <p class="time">4) Faire plonger le gardien (10–12 min)</p>
+      <ul>
+        <li>Sur le sprite Gardien, avant chaque tir :</li>
+        <li>
+          <ul>
+            <li>Au moment où on appuie sur espace (début du tir), on peut envoyer un message :</li>
+            <li>Sur le Ballon :  
+              – ajouter « envoyer à tous [TirCommence] » juste avant la boucle de tir.</li>
+            <li>Sur le Gardien :</li>
+            <li>« quand je reçois [TirCommence] »  
+              – « mettre DirectionGardien à nombre aléatoire entre 1 et 3 »  
+              – « si DirectionGardien = 1 alors aller à x:(position gauche) y:(position gardien) »  
+              – « si DirectionGardien = 2 alors aller à x:(centre) y:(…) »  
+              – « si DirectionGardien = 3 alors aller à x:(droite) y:(…) ».</li>
+          </ul>
+        </li>
+        <li>Tester : à chaque tir (touche espace), le gardien se place dans une des 3 zones.</li>
+      </ul>
+
+      <p class="time">5) Adapter la trajectoire du ballon (en fonction de DirectionTir)</p>
+      <ul>
+        <li>Dans la boucle de tir du Ballon :</li>
+        <li>
+          <ul>
+            <li>Avant la boucle, régler sa position de départ (x=0 y=-120) et, dans la boucle :  
+              – si DirectionTir = 1, changer x de -2 à chaque répétition,  
+              – si DirectionTir = 2, garder x constant,  
+              – si DirectionTir = 3, changer x de 2.</li>
+          </ul>
+        </li>
+        <li>Approche simple : dans la boucle :</li>
+        <li>
+          <ul>
+            <li>« répéter 20 fois » :  
+              – « changer y de 10 »  
+              – « si DirectionTir = 1 alors changer x de -2 »  
+              – « si DirectionTir = 3 alors changer x de 2 ».</li>
+          </ul>
+        </li>
+        <li>Tester : le ballon monte légèrement en diagonale à gauche ou à droite selon le choix.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler : « On choisit la direction AVANT de tirer (1, 2 ou 3), puis on appuie sur espace. »</li>
+        <li>Pour les rapides : leur permettre d’ajouter une petite animation au gardien (changer de costume, lever les bras…).</li>
+        <li>En cas d’agitation : faire un tour “sans hasard” en fixant provisoirement DirectionGardien à 2 pour tout le monde (gardien au centre).</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Lecture des directions” (3–5 min)</h3>
+      <ul>
+        <li>Demander à quelques élèves d’expliquer :</li>
+        <li>
+          <ul>
+            <li>« Si je mets DirectionTir à 1, qu’est-ce que ça veut dire ? »</li>
+            <li>« Si le gardien a DirectionGardien = 3, où se place-t-il ? »</li>
+          </ul>
+        </li>
+        <li>But : vérifier que les variables “1, 2, 3” ont un sens concret pour eux.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Nous avons ajouté un gardien qui se déplace dans l’une des trois zones 
+        du but et un système de direction de tir. Le ballon peut maintenant 
+        partir à gauche, au centre ou à droite, selon ce que choisit le joueur. 
+        La prochaine fois, nous ajouterons le score et une série de tirs. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Score, série de tirs & tests croisés</h2>
+      <p class="meta">Objectif : gérer un nombre limité de tirs, compter les buts, afficher un résultat final et tester les jeux les uns des autres.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Décider d’une série de base : 5 ou 10 tirs par partie.</li>
+        <li>Préparer des phrases de fin différentes :  
+          – “Super buteur”,  
+          – “Pas mal”,  
+          – “Il faut t’entraîner encore”.</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Série de 5 penalties” (5–7 min)</h3>
+      <ul>
+        <li>Au tableau, dessiner une série de 5 cercles (pour 5 tirs).</li>
+        <li>Simuler une série : tu annonces “tir 1 : but”, “tir 2 : arrêté”, etc., et tu coches ou non les cercles.</li>
+        <li>Transition : « On va faire pareil dans Scratch, avec des variables. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Variables Buts et Tirs (10–12 min)</p>
+      <ul>
+        <li>Créer deux variables (pour tous les sprites) :</li>
+        <li>
+          <ul>
+            <li><strong>Buts</strong></li>
+            <li><strong>Tirs</strong></li>
+          </ul>
+        </li>
+        <li>Au démarrage du jeu (par ex. sur le sprite Ballon) :</li>
+        <li>
+          <ul>
+            <li>« mettre Buts à 0 »</li>
+            <li>« mettre Tirs à 0 »</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="time">2) Incrémenter Tirs à chaque espace (tir) (8–10 min)</p>
+      <ul>
+        <li>Dans le script du tir (touche espace) du Ballon, au tout début :</li>
+        <li>
+          <ul>
+            <li>« changer Tirs par 1 »</li>
+          </ul>
+        </li>
+        <li>On pourra limiter à un certain nombre de tirs plus tard.</li>
+      </ul>
+
+      <p class="time">3) Détecter BUT ou ARRETÉ (15–18 min)</p>
+      <ul>
+        <li>À la fin du mouvement du ballon, comparer les directions :</li>
+        <li>
+          <ul>
+            <li>Après la boucle de déplacement, ajouter :</li>
+            <li>« si DirectionTir = DirectionGardien alors »  
+              – « dire "Arrêté !" pendant 1 s »  
+              – (pas de changement de Buts)</li>
+            <li>« sinon »  
+              – « dire "BUT !" pendant 1 s »  
+              – « changer Buts par 1 ».</li>
+          </ul>
+        </li>
+        <li>Ensuite, remettre le ballon à la position de départ (x:0 y:-120) pour le prochain tir.</li>
+        <li>Tester : faire quelques tirs et vérifier que Buts augmente seulement quand les directions sont différentes.</li>
+      </ul>
+
+      <p class="time">4) Limiter le nombre de tirs & afficher un message final (10–12 min)</p>
+      <ul>
+        <li>Choisir une limite, par ex. 5 tirs.</li>
+        <li>Dans le script du tir, après avoir remis le ballon en position de départ :</li>
+        <li>
+          <ul>
+            <li>« si Tirs = 5 alors »  
+              – « dire "Série terminée ! Tu as marqué " &amp; Buts &amp; " buts." pendant 3 s »  
+              – ajouter des paliers :  
+                · si Buts ≥ 4 → “Super buteur !”  
+                · si Buts = 2 ou 3 → “Pas mal du tout !”  
+                · sinon → “Tu peux t’entraîner encore.”  
+              – « arrêter tous ».</li>
+          </ul>
+        </li>
+        <li>Tester : après 5 tirs, le jeu doit afficher le bilan et s’arrêter.</li>
+      </ul>
+
+      <h3>Tests croisés (8–10 min)</h3>
+      <ul>
+        <li>Par deux :</li>
+        <li>
+          <ul>
+            <li>élève A joue une série de 5 tirs sur le jeu de B,</li>
+            <li>B observe : “Est-ce que les directions fonctionnent bien ? gardien pas trop fort ?”</li>
+            <li>puis on inverse les rôles.</li>
+          </ul>
+        </li>
+        <li>Demander : “Est-ce que ton jeu est plutôt facile, moyen ou difficile ? Pourquoi ?”</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Série calme” (5 min)</h3>
+      <ul>
+        <li>Consigne : « On joue une dernière série, mais le but est de jouer calmement, sans appuyer comme des fous sur les touches. »</li>
+        <li>Objectif : redescendre l’excitation du jeu avant la fin de séance.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Nous avons maintenant un vrai jeu de tirs au but : le joueur choisit 
+        la direction de son tir, le gardien plonge dans une zone aléatoire, et 
+        le score compte les buts marqués sur une série. Les élèves ont testé les 
+        jeux de leurs camarades et ont découvert comment combiner hasard, 
+        conditions et variables pour créer un vrai mini-match. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Le ballon ne va pas dans la bonne direction</strong>  
+          → Vérifier les conditions “si DirectionTir = 1/3” dans la boucle de déplacement.  
+          → Tester chaque direction séparément (gauche seule, centre seul, droite seule).</li>
+
+        <li><strong>Le gardien ne bouge pas</strong>  
+          → Vérifier qu’on envoie bien le message [TirCommence] au début du tir.  
+          → Vérifier le script “quand je reçois [TirCommence]” sur le gardien.</li>
+
+        <li><strong>Les buts ne sont pas comptés</strong>  
+          → Vérifier que “changer Buts par 1” est bien dans la branche “sinon” (quand DirectionTir ≠ DirectionGardien).  
+          → Vérifier que Buts est remis à 0 au drapeau vert.</li>
+
+        <li><strong>La partie ne s’arrête pas après 5 tirs</strong>  
+          → Vérifier que “changer Tirs par 1” est bien au début de chaque tir.  
+          → Vérifier que la condition “si Tirs = 5 alors … arrêter tous” est exécutée après chaque tir.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire verbaliser la logique :  
+          « Si le gardien et le ballon sont à gauche, c’est arrêté ; si le gardien va à droite et moi à gauche, c’est but. »</li>
+        <li>Insister sur l’équilibre :  
+          un gardien trop fort (toujours au bon endroit) rend le jeu frustrant ; un gardien trop nul n’a aucun intérêt.</li>
+        <li>Pour les plus rapides :  
+          – ajouter un “niveau 2” avec un gardien moins aléatoire (sequence : gauche-centre-droite),  
+          – ou un écran d’accueil avec le titre du jeu avant la série de tirs.</li>
+        <li>En cas d’excitation :  
+          – imposer une “série silencieuse” : tout le monde joue une série complète sans parler,  
+          – puis partager un retour calme sur ce qui marche bien dans le code.</li>
+      </ul>
+    </div>
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  .algo-section{
+    margin-top:18px;padding:18px 16px 20px 16px;border-radius:var(--radius);
+    border:1px solid #d0d7de;background:#f7f7f7;box-shadow:var(--shadow-soft);
+    font-family:"Courier New",monospace;
+  }
+  .algo-section>h2{color:#2c3e50;margin-bottom:4px;font-size:1.05rem;}
+  .algo-section>p{font-size:.85rem;color:#555;margin-bottom:10px;}
+  .titre-sprite{font-weight:bold;font-size:.95rem;background:#eaf2f8;
+    padding:6px 10px;border-left:6px solid #5dade2;margin:10px 0 6px;border-radius:4px;}
+  .bloc{padding:6px 10px;margin:4px 0;border-left:6px solid;background:#fff;
+    border-radius:6px;font-size:.85rem;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .evenement{border-color:#FFD500;background:#fff8d1;}
+  .mouvement{border-color:#4C97FF;background:#dceeff;}
+  .apparence{border-color:#9966FF;background:#f0e6ff;}
+  .controle{border-color:#FFAB19;background:#ffe9cc;}
+  .son{border-color:#CF63CF;background:#fce4fc;}
+  .capteurs{border-color:#5CB1D6;background:#e0f6fb;}
+  .operateurs{border-color:#59C059;background:#e5fbe5;}
+  @media(max-width:600px){.algo-section{padding:14px 12px 16px 12px;}}
+</style>
+
+<!-- === ALGORYTHME DU PROJET 17 – TIRS AU BUT === -->
+<div class="algo-section">
+  <h2>⚽ Algorithme du Projet Scratch – Tirs au but (jeu de foot)</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Direction, hasard, collisions & score</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🏟️ Séance 1 – Terrain, cage & tir simple</h2>
+
+    <div class="titre-sprite">🎨 Scène – Terrain</div>
+    <div class="bloc apparence">
+      fond vert (pelouse), cage dessinée en haut, point de penalty en bas
+    </div>
+
+    <div class="titre-sprite">⚽ Sprite – Ballon</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → aller à x:0 y:-120</div>
+    <div class="bloc evenement">quand touche [espace] pressée</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      répéter (20) fois :<br>
+      <span class="mouvement" style="margin-left:20px;">changer y de (10)</span><br>
+      <span class="controle" style="margin-left:20px;">attendre (0.02) s</span><br>
+      si [y > 130] alors → dire [BUT !] 1 s
+    </div>
+    <div class="bloc mouvement">puis → aller à x:0 y:-120 (retour au départ)</div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>🧤 Séance 2 – Directions & gardien qui plonge</h2>
+
+    <div class="titre-sprite">📦 Variables</div>
+    <div class="bloc controle">
+      créer [DirectionTir] et [DirectionGardien]<br>
+      (1 = gauche, 2 = centre, 3 = droite)
+    </div>
+
+    <div class="titre-sprite">⚽ Ballon – Choix du tir</div>
+    <div class="bloc evenement">quand touche [1] pressée → mettre [DirectionTir] à (1)</div>
+    <div class="bloc evenement">quand touche [2] pressée → mettre [DirectionTir] à (2)</div>
+    <div class="bloc evenement">quand touche [3] pressée → mettre [DirectionTir] à (3)</div>
+
+    <div class="titre-sprite">🧤 Sprite – Gardien</div>
+    <div class="bloc evenement">quand je reçois [TirCommence]</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      mettre [DirectionGardien] à nombre aléatoire entre (1) et (3)<br>
+      si [DirectionGardien = 1] → aller à x:-80 y:120<br>
+      si [DirectionGardien = 2] → aller à x:0 y:120<br>
+      si [DirectionGardien = 3] → aller à x:80 y:120
+    </div>
+
+    <div class="titre-sprite">🎯 Ballon – Tir dirigé</div>
+    <div class="bloc evenement">quand touche [espace] pressée</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      envoyer à tous [TirCommence]<br>
+      répéter (20) fois :<br>
+      <span class="mouvement" style="margin-left:20px;">changer y de (10)</span><br>
+      <span class="controle" style="margin-left:20px;">si [DirectionTir = 1] → changer x de (-2)</span><br>
+      <span class="controle" style="margin-left:20px;">si [DirectionTir = 3] → changer x de (2)</span>
+    </div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🥅 Séance 3 – Score, série de tirs & bilan</h2>
+
+    <div class="titre-sprite">📊 Variables de jeu</div>
+    <div class="bloc controle">
+      créer [Buts] et [Tirs]<br>
+      quand [drapeau vert] cliqué → mettre [Buts] à 0 → mettre [Tirs] à 0
+    </div>
+
+    <div class="titre-sprite">⚽ Ballon – Série de tirs</div>
+    <div class="bloc evenement">quand touche [espace] pressée</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      changer [Tirs] de (1)<br>
+      envoyer à tous [TirCommence]<br>
+      exécuter le tir (comme séance 2)<br>
+      après la boucle :<br>
+      si [DirectionTir = DirectionGardien] alors → dire [Arrêté !] 1 s<br>
+      sinon → dire [BUT !] 1 s → changer [Buts] de (1)<br>
+      retourner à la position initiale<br><br>
+      si [Tirs = 5] alors :<br>
+      <span class="apparence" style="margin-left:20px;">
+        dire [Série terminée ! Tu as marqué (Buts) but(s).] 3 s
+      </span><br>
+      <span class="controle" style="margin-left:20px;">
+        si [Buts ≥ 4] → dire [Super buteur !]<br>
+        sinon si [Buts ≥ 2] → dire [Pas mal !]<br>
+        sinon → dire [Tu peux t’entraîner encore !]
+      </span><br>
+      arrêter tous
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc operateurs">ajouter un “niveau 2” avec un gardien moins aléatoire (gauche → centre → droite)</div>
+    <div class="bloc apparence">ajouter un écran d’accueil “Penalty Challenge !” avant la série</div>
+    <div class="bloc son">jouer un son d’applaudissements en cas de BUT !</div>
+    <div class="bloc apparence">ajouter une jauge de puissance du tir (pour les rapides)</div>
+  </div>
+</div>
+
+
+  </div>
+</body>
+</html>

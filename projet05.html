@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 5 – Jeu de Pong | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 5 – Jeu de Pong</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Rebonds, score & vies</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL DU PROJET -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu d’arcade classique</span>
+      <p>
+        Les élèves programment un jeu de Pong : une raquette en bas de l’écran,
+        une balle qui rebondit sur les bords, un score qui augmente à chaque
+        rebond, et des vies qui diminuent quand la balle tombe. À la fin, on
+        obtient un petit jeu complet, simple mais très motivant.
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min (adaptable 35–60 min).
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Déplacer un sprite au clavier (flèches gauche/droite).</li>
+        <li>Gérer un mouvement continu (balle) avec boucle <strong>répéter indéfiniment</strong>.</li>
+        <li>Programmer des rebonds sur les bords et sur la raquette.</li>
+        <li>Créer et modifier des variables (<strong>Score</strong>, <strong>Vies</strong>).</li>
+        <li>Structurer un jeu : début, partie, fin (Game Over).</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Raquette et balle qui rebondit sur les bords</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a une raquette contrôlée au clavier et une balle qui rebondit sur les bords.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Prévoir un exemple sur papier : schéma simple avec une balle qui rebondit d’un côté à l’autre.</li>
+        <li>Décider des touches utilisées pour la raquette (flèches gauche/droite).</li>
+        <li>Ouvrir Scratch sur un poste et vérifier rapidement que la scène s’affiche bien.</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – « Raquette imaginaire » (3–4 min)</h3>
+      <ul>
+        <li>Dire : « Imaginez que ma main est une raquette et que j’ai une balle invisible. »</li>
+        <li>Lancer la “balle” d’un côté à l’autre, les élèves suivent avec la tête.</li>
+        <li>Poser 1–2 questions :  
+          – « Que doit faire la raquette pour que la balle rebondisse ? »  
+          – « Et si la raquette n’est pas là ? »</li>
+        <li>Transition : « On va créer exactement ce genre de jeu dans Scratch. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer le décor (5–7 min)</p>
+      <ul>
+        <li>Fond simple, par exemple : moitié supérieure bleu foncé, moitié inférieure plus sombre.</li>
+        <li>Option : dessiner une ligne fine tout en bas pour représenter “le vide” (servira plus tard).</li>
+        <li>Dire : « Pour que le jeu soit lisible, on évite les détails inutiles. »</li>
+      </ul>
+
+      <p class="time">2) Créer la raquette (10 min)</p>
+      <ul>
+        <li>Ajouter un sprite → rectangle horizontal (couleur vive).</li>
+        <li>Le placer en bas, centré.</li>
+        <li>Dans son script :  
+          – Événements : « quand touche flèche droite pressée » → Mouvement : « changer x de 10 ».  
+          – « quand touche flèche gauche pressée » → « changer x de -10 ».</li>
+        <li>Test rapide : « Pendant 30 secondes, vous ne faites que déplacer la raquette. »</li>
+      </ul>
+
+      <p class="time">3) Créer la balle & la faire bouger (15–20 min)</p>
+      <ul>
+        <li>Ajouter un sprite rond (balle), petite taille, couleur contrastée.</li>
+        <li>La placer au centre de l’écran, légèrement au-dessus de la raquette.</li>
+        <li>Dans son script :  
+          – « quand drapeau vert cliqué »  
+          – « aller à x:0 y:0 » (ou autre position de départ)  
+          – « pointer dans une direction 45° »  
+          – « répéter indéfiniment » :  
+            • « avancer de 8 »  
+            • « rebondir si bord touché ».</li>
+        <li>Faire tester à tous : « Essayez de suivre la balle avec votre raquette, juste pour la regarder. »</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Quand tu expliques, dire : « Mains loin du clavier, on regarde l’écran 10 secondes. »</li>
+        <li>Si certains finissent en avance : mini défi calme → « Change seulement la couleur de ta balle. »</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Balle en observation » (3–4 min)</h3>
+      <ul>
+        <li>Consigne : « Pendant 1 minute, vous laissez la balle tourner et vous observez simplement : sur quels bords elle rebondit ? »</li>
+        <li>Poser ensuite 1–2 questions :  
+          – « Est-ce qu’elle sort de l’écran ? »  
+          – « Est-ce que la vitesse te semble trop rapide ? »</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, on a posé la base du jeu : une raquette qu’on contrôle, une balle
+        qui rebondit sur les bords. La prochaine fois, on va faire en sorte qu’elle rebondisse
+        aussi sur la raquette et on ajoutera un score. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Rebond sur la raquette, score et “Perdu”</h2>
+      <p class="meta">Objectif : la balle rebondit sur la raquette, le score augmente, et le jeu s’arrête si la balle tombe.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Noter la structure à rappeler aux élèves :  
+          – balle → bouge dans une boucle,  
+          – si touche la raquette → rebond + score,  
+          – si tombe trop bas → perdu.</li>
+        <li>Prévoir une phrase simple pour expliquer le “si touche” :  
+          « On va dire : si la balle touche la raquette, tu rebondis vers le haut. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Touché / pas touché » (3–4 min)</h3>
+      <ul>
+        <li>L’animateur mime la balle et la raquette avec ses mains.</li>
+        <li>Il demande : « Là, est-ce que la balle touche la raquette ? » → les élèves disent « oui / non ».</li>
+        <li>Transition : « Dans Scratch, on va vérifier exactement ça avec un bloc “si touche… alors…”. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Réouverture & test rapide (5 min)</p>
+      <ul>
+        <li>Faire ouvrir le projet Pong de la séance 1.</li>
+        <li>Test drapeau vert : vérifier que la raquette bouge et que la balle rebondit sur les bords.</li>
+      </ul>
+
+      <p class="time">2) Rebond sur la raquette (15–20 min)</p>
+      <ul>
+        <li>Dans le script de la balle, à l’intérieur de la boucle « répéter indéfiniment » :</li>
+        <li>Ajouter :  
+          – Contrôle : « si … alors »  
+          – Capteurs : « touche [raquette] ? ».</li>
+        <li>Dans le <strong>alors</strong> :  
+          – Mouvement : « pointer dans une direction vers le haut » (ex : 45° ou 135° selon votre choix),  
+          – Option : « jouer un son court ».</li>
+        <li>Expliquer simplement :  
+          « Ça veut dire : si tu touches la raquette, tu repars vers le haut. »</li>
+      </ul>
+
+      <p class="time">3) Création de la variable Score (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Score</strong> (pour tous les sprites).</li>
+        <li>Au début du jeu (dans “quand drapeau vert cliqué” de la balle ou de la scène) :  
+          – « mettre Score à 0 ».</li>
+        <li>Dans le <strong>alors</strong> du rebond sur la raquette, ajouter :  
+          – « changer Score par 1 ».</li>
+        <li>Vérifier que la variable Score est visible sur la scène (cochée dans la liste des variables).</li>
+      </ul>
+
+      <p class="time">4) Condition de “Perdu” (8–10 min)</p>
+      <ul>
+        <li>Deux possibilités ; en choisir une pour toute la classe :</li>
+        <li><strong>Option simple par y :</strong>  
+          – dans la boucle de la balle, ajouter :  
+            « si y < -170 alors dire "Perdu !" pendant 2 s et arrêter tous. »</li>
+        <li><strong>Option ligne du bas :</strong>  
+          – ajouter un sprite “ligne du bas” en bas de l’écran ;  
+          – « si balle touche [ligne du bas] alors dire "Perdu !" et arrêter tous. »</li>
+      </ul>
+
+      <h3>Exercice test calmant (3–4 min)</h3>
+      <ul>
+        <li>Consigne : « Essayez d’atteindre 5 points sans perdre. Si vous perdez, vous recommencez. »</li>
+        <li>Objectif : tester le code sans se précipiter sur les modifications.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « 5 points pile » (3–5 min)</h3>
+      <ul>
+        <li>Consigne : « Vous devez vous arrêter exactement quand vous arrivez à 5 points. »</li>
+        <li>Tu peux demander à quelques élèves : « Qu’est-ce qui était le plus difficile : atteindre 5 ou s’arrêter ? »</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, la balle reconnaît la raquette : elle rebondit dessus et
+        augmente le score. Quand la balle tombe, la partie s’arrête. On a donc un
+        vrai jeu qui fonctionne. La prochaine fois, on ajoutera des vies et des
+        bonus pour rendre le jeu plus riche. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Vies, bonus et tests entre élèves</h2>
+      <p class="meta">Objectif : ajouter un système de vies, éventuellement un bonus, et tester les jeux en binômes.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Décider si tu introduis seulement les <strong>vies</strong>, ou aussi un petit <strong>bonus</strong> (pour les plus à l’aise).</li>
+        <li>Préparer une phrase simple :  
+          « On va compter combien de fois on “rate” la balle avant le Game Over. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « 3 essais » (3–4 min)</h3>
+      <ul>
+        <li>Dire : « Imagine un jeu où tu as 3 essais. À ton avis, qu’est-ce qui se passe quand tu rates 3 fois ? »</li>
+        <li>Laisser les élèves répondre : “on recommence tout”, “c’est fini”, etc.</li>
+        <li>Transition : « Dans notre Pong, on va ajouter ces 3 essais : ce seront les “vies”. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Ajouter les vies (15–20 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Vies</strong> (pour tous les sprites).</li>
+        <li>Au début du jeu (drapeau vert) :  
+          – « mettre Vies à 3 »  
+          – « mettre Score à 0 » (on recentre au démarrage).</li>
+        <li>Dans la condition de “Perdu” (balle en bas) :</li>
+        <li>Au lieu de « dire Perdu et arrêter tous », faire :  
+          – « changer Vies par -1 »  
+          – « aller à x:0 y:0 »  
+          – « attendre 1 s »  
+          – « si Vies = 0 alors dire "Game Over" pendant 2 s et arrêter tous. »</li>
+        <li>Expliquer :  
+          « Tu as le droit de rater 3 fois. À zéro vie, c’est vraiment terminé. »</li>
+      </ul>
+
+      <p class="time">2) Option bonus simple (10–12 min)</p>
+      <ul>
+        <li>Ajouter un sprite “bonus” (étoile, cœur…). Le placer à une position en haut de l’écran.</li>
+        <li>Dans son script (bonus) :  
+          – « quand drapeau vert cliqué → se cacher »  
+          – « attendre (nombre aléatoire entre 5 et 10) secondes »  
+          – « aller à x aléatoire en haut »  
+          – « montrer »  
+          – puis boucle pour recommencer.</li>
+        <li>Détecter le bonus dans la raquette :</li>
+        <li>Dans le script de la raquette ou du bonus :  
+          – « si touche [bonus] alors » → « changer Score par 3 » → « cacher le bonus ».  
+          (Rester simple.)</li>
+      </ul>
+
+      <p class="time">3) Tests en binômes (10–12 min)</p>
+      <ul>
+        <li>Mettre les élèves par deux devant un ordinateur :</li>
+        <li>Rôle A = Joueur, rôle B = Observateur.  
+          – Le joueur joue 1 partie.  
+          – L’observateur note mentalement :  
+            • 1 point positif (“Ce que j’ai aimé dans ton jeu”),  
+            • 1 piste d’amélioration (“Tu pourrais…”).</li>
+        <li>Échanger les rôles au bout de 5–7 minutes.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Dernière manche calmement » (5 min)</h3>
+      <ul>
+        <li>Consigne : « On joue une dernière partie chacun, mais le but n’est pas le score : le but est de jouer calmement. »</li>
+        <li>Tu peux demander :  
+          – « Qui a réussi à garder son calme même en perdant une vie ? »</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « On a maintenant un jeu de Pong complet : une raquette, une balle,
+        un score, des vies, parfois un bonus, et un vrai Game Over. Vous avez
+        aussi testé le jeu de quelqu’un d’autre et donné un retour. Tout ce
+        que vous avez appris ici pourra servir pour d’autres jeux : course,
+        labyrinthe, tir, etc. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>La balle traverse la raquette sans rebondir</strong>  
+          → Vérifier que le bloc « si touche [raquette] » est bien à l’intérieur de la boucle  
+          « répéter indéfiniment » de la balle.</li>
+
+        <li><strong>Le score ne change pas</strong>  
+          → Vérifier que le bloc « changer Score par 1 » est dans le même “si touche [raquette]”.  
+          → Vérifier que la variable Score est bien cochée pour s’afficher.</li>
+
+        <li><strong>La balle va trop vite</strong>  
+          → Baisser la valeur de « avancer de … » (ex : 5 au lieu de 8).</li>
+
+        <li><strong>Les vies ne descendent pas</strong>  
+          → Vérifier que « changer Vies par -1 » est bien dans la condition de balle en bas.  
+          → Vérifier l’orthographe exacte du nom de la variable (Vies). </li>
+
+        <li><strong>Game Over ne s’affiche jamais</strong>  
+          → Vérifier que le test « si Vies = 0 » est bien dans le script après la perte d’une vie.  
+          → Ajouter un « dire Vies » temporaire pour voir la valeur pendant les tests.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques (sans matériel supplémentaire)</h3>
+      <ul>
+        <li>Quand tu expliques un nouveau bloc, demande :  
+          « Qui peut répéter avec ses mots ce que fait ce bloc ? »</li>
+        <li>Garder une voix calme et posée : la classe s’aligne sur ton niveau sonore.</li>
+        <li>Les plus rapides peuvent : ajuster la taille de la raquette, changer les couleurs, ou inventer un simple “niveau 2” plus rapide.</li>
+        <li>Si la classe s’excite :  
+          – « Pause 30 secondes. On pose les mains, on regarde l’écran, on respire. Ensuite on reprend. »</li>
+      </ul>
+    </div>
+
+
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  /* --- PARTIE ALGORITHME --- */
+  .algo-section {
+    margin-top: 18px;
+    padding: 18px 16px 20px 16px;
+    border-radius: var(--radius);
+    border: 1px solid #d0d7de;
+    background: #f7f7f7;
+    box-shadow: var(--shadow-soft);
+    font-family: "Courier New", monospace;
+  }
+
+  .algo-section > h2 {
+    color: #2c3e50;
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+  }
+
+  .algo-section > p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .titre-sprite {
+    font-weight: bold;
+    font-size: 0.95rem;
+    background: #eaf2f8;
+    padding: 6px 10px;
+    border-left: 6px solid #5dade2;
+    margin: 10px 0 6px;
+    border-radius: 4px;
+  }
+
+  .bloc {
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-left: 6px solid;
+    background-color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  }
+
+  .evenement { border-color: #FFD500; background-color: #fff8d1; }
+  .mouvement { border-color: #4C97FF; background-color: #dceeff; }
+  .apparence { border-color: #9966FF; background-color: #f0e6ff; }
+  .controle { border-color: #FFAB19; background-color: #ffe9cc; }
+  .son { border-color: #CF63CF; background-color: #fce4fc; }
+  .capteurs { border-color: #5CB1D6; background-color: #e0f6fb; }
+  .operateurs { border-color: #59C059; background-color: #e5fbe5; }
+
+  @media (max-width: 600px) {
+    .algo-section { padding: 14px 12px 16px 12px; }
+  }
+</style>
+
+<!-- === ALGORYTHME DU PROJET 5 – JEU DE PONG === -->
+<div class="algo-section">
+  <h2>🏓 Algorithme du Projet Scratch – Jeu de Pong</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Rebonds, score & vies</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🎮 Séance 1 – Raquette et balle qui rebondit sur les bords</h2>
+
+    <div class="titre-sprite">🎨 Scène – Décor</div>
+    <div class="bloc apparence">créer un fond simple (bleu foncé / ligne du bas)</div>
+    <div class="bloc apparence">dessiner une ligne en bas pour la “zone de perte”</div>
+
+    <div class="titre-sprite">🟩 Sprite 1 – Raquette</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à x:(0) y:(-140)</div>
+    <div class="bloc evenement">quand [touche flèche droite] pressée → <span class="mouvement">changer x de (10)</span></div>
+    <div class="bloc evenement">quand [touche flèche gauche] pressée → <span class="mouvement">changer x de (-10)</span></div>
+
+    <div class="titre-sprite">⚪ Sprite 2 – Balle</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à x:(0) y:(0)</div>
+    <div class="bloc mouvement">pointer dans une direction (45°)</div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc mouvement" style="margin-left:20px;">avancer de (8)</div>
+    <div class="bloc mouvement" style="margin-left:20px;">rebondir si bord touché</div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>💥 Séance 2 – Rebond sur la raquette, score et “Perdu”</h2>
+
+    <div class="titre-sprite">⚪ Sprite 2 – Balle</div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc mouvement" style="margin-left:20px;">avancer de (8)</div>
+    <div class="bloc mouvement" style="margin-left:20px;">rebondir si bord touché</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="capteurs">touche [Raquette] ?</span> alors →
+      <span class="mouvement">pointer dans une direction vers le haut (ex : 45°)</span> →
+      <span class="son">jouer le son [pop]</span> →
+      <span class="controle">changer [Score] de (1)</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">y < -170</span> alors →
+      <span class="apparence">dire [Perdu !] pendant (2) secondes</span> →
+      <span class="controle">arrêter tous</span>
+    </div>
+
+    <div class="titre-sprite">📊 Variables</div>
+    <div class="bloc controle">créer une variable [Score]</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → <span class="controle">mettre [Score] à (0)</span></div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>❤️ Séance 3 – Vies, bonus et tests entre élèves</h2>
+
+    <div class="titre-sprite">⚪ Sprite 2 – Balle (ajout des vies)</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle">mettre [Vies] à (3)</div>
+    <div class="bloc controle">mettre [Score] à (0)</div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc mouvement" style="margin-left:20px;">avancer de (8)</div>
+    <div class="bloc mouvement" style="margin-left:20px;">rebondir si bord touché</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="capteurs">touche [Raquette] ?</span> alors →
+      <span class="mouvement">pointer direction vers le haut</span> →
+      <span class="controle">changer [Score] de (1)</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">y < -170</span> alors →
+      <span class="controle">changer [Vies] de (-1)</span> →
+      <span class="mouvement">aller à x:(0) y:(0)</span> →
+      <span class="controle">attendre (1) seconde</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">[Vies = 0]</span> alors →
+      <span class="apparence">dire [Game Over] pendant (2) secondes</span> →
+      <span class="controle">arrêter tous</span>
+    </div>
+
+    <div class="titre-sprite">⭐ Sprite 3 – Bonus (optionnel)</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc apparence">se cacher</div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc controle" style="margin-left:20px;">attendre (nombre aléatoire entre 5 et 10) secondes</div>
+    <div class="bloc mouvement" style="margin-left:20px;">aller à x:(nombre aléatoire entre -180 et 180) y:(130)</div>
+    <div class="bloc apparence" style="margin-left:20px;">montrer</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="capteurs">touche [Raquette] ?</span> alors →
+      <span class="controle">changer [Score] de (3)</span> →
+      <span class="apparence">cacher</span>
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc mouvement">accélérer la balle au fur et à mesure du score</div>
+    <div class="bloc apparence">changer la couleur de fond selon le niveau</div>
+    <div class="bloc controle">ajouter un message [Niveau 2] quand Score atteint 10</div>
+    <div class="bloc son">ajouter un son [game over] à la fin du jeu</div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 18 – Duel de réflexes à deux joueurs | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 18 – Duel de réflexes à deux joueurs</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Hasard, temps d’attente & réactions clavier</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu de réflexes 2 joueurs – “Qui appuie le plus vite ?”</span>
+      <p>
+        Deux joueurs partagent le clavier : chacun a une touche (par exemple A et L). 
+        Un signal apparaît à l’écran après un délai aléatoire. Le premier joueur qui 
+        appuie sur sa touche après le signal gagne le point. Mais s’il appuie trop tôt 
+        (avant le signal), il fait une faute et c’est le point pour l’autre !
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : CE2 → version simple (un seul type de signal),  
+        CM1/CM2 → variantes (plusieurs signaux, manches, vitesse croissante…).
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Utiliser le hasard (“attendre un nombre aléatoire de secondes”).</li>
+        <li>Programmer des événements clavier pour deux joueurs différents.</li>
+        <li>Gérer un état du jeu : “En attente du signal / signal lancé / manche finie”.</li>
+        <li>Utiliser des variables pour compter les points (<strong>ScoreJ1</strong>, <strong>ScoreJ2</strong>).</li>
+        <li>Travailler la lecture de consignes et le respect du temps de réaction (ne pas appuyer trop tôt).</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Découvrir le principe & afficher le signal</h2>
+      <p class="meta">Objectif : à la fin, le jeu affiche un fond “ATTENDS…”, puis un signal “GO !” après un temps aléatoire.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Préparer l’explication :  
+          « On va programmer un jeu de réflexes : on attend… on attend… SIGNAL ! et là il faut appuyer vite. »</li>
+        <li>Choisir des touches distinctes : par ex. Joueur 1 = A, Joueur 2 = L (ou Q et P).</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – “Réflexes sans ordi” (5–7 min)</h3>
+      <ul>
+        <li>Demander aux élèves de se mettre debout.</li>
+        <li>Donner la consigne : « Quand je dis “GO !”, vous tapez une fois dans vos mains. Mais si vous tapez AVANT, vous êtes “trop pressés”. »</li>
+        <li>Faire quelques essais :  
+          – faire des “Attends… attends… attends… GO !”,  
+          – parfois dire “GO !” très vite, parfois après un long temps.</li>
+        <li>Transition : « Scratch va faire la même chose avec un texte. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Préparer la scène (5–8 min)</p>
+      <ul>
+        <li>Arrière-plan simple, fond uni ou légèrement coloré.</li>
+        <li>Créer un sprite “TexteSignal” (ou utiliser la scène pour afficher les messages), mais le plus simple :</li>
+        <li>
+          <ul>
+            <li>garder le chat comme “présentateur” du signal.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="time">2) Créer la variable EtatJeu (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>EtatJeu</strong> (pour tous les sprites).</li>
+        <li>Expliquer simplement :  
+          – EtatJeu = "attente" → on attend le signal,  
+          – EtatJeu = "go" → signal lancé,  
+          – EtatJeu = "fini" → manche terminée.</li>
+        <li>Au démarrage, sur le sprite Présentateur :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « mettre EtatJeu à "attente" »  
+              – « dire "Préparez-vous…" pendant 2 s ».</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="time">3) Attendre un temps aléatoire, puis afficher “GO !” (15–18 min)</p>
+      <ul>
+        <li>Sur le même sprite :</li>
+        <li>
+          <ul>
+            <li>Après le message “Préparez-vous…” :</li>
+            <li>« attendre (nombre aléatoire entre 2 et 5) secondes »</li>
+            <li>« mettre EtatJeu à "go" »</li>
+            <li>« dire "GO !" pendant 1 s »</li>
+            <li>Option : changer la couleur du fond ou montrer un costume “vert”.</li>
+          </ul>
+        </li>
+        <li>Tester plusieurs fois : le “GO !” ne tombe jamais au même moment.</li>
+      </ul>
+
+      <p class="time">4) Remettre un affichage visuel clair (5–7 min)</p>
+      <ul>
+        <li>Pour plus de lisibilité, tu peux utiliser la scène pour afficher un texte :</li>
+        <li>
+          <ul>
+            <li>dessiner un gros “ATTENDS” sur l’arrière-plan 1,</li>
+            <li>dupliquer l’arrière-plan et remplacer par “GO !” sur l’arrière-plan 2,</li>
+            <li>puis :  
+              – au début → “basculer sur l’arrière-plan ATTENDS”,  
+              – au moment du signal → “basculer sur l’arrière-plan GO !”.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Bien distinguer les phases :  
+          – moments où on code ensemble en silence,  
+          – moments où on teste le hasard.</li>
+        <li>En cas de bruit, annoncer un test “tous ensemble” : tu lances un seul projet (au vidéoprojecteur si disponible), tout le monde observe le moment du “GO !”.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Devine le délai” (3–5 min)</h3>
+      <ul>
+        <li>Demander : « D’après vous, le “GO !” arrive plutôt entre combien et combien de secondes ? »</li>
+        <li>Faire expliquer le rôle du “nombre aléatoire entre 2 et 5”.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons programmé un signal qui apparaît après un temps
+        aléatoire. Scratch peut attendre une durée différente à chaque partie, 
+        ce qui est parfait pour faire un jeu de réflexes. La prochaine fois, 
+        nous ajouterons les deux joueurs qui appuient sur leurs touches. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Deux joueurs & gestion du “trop tôt”</h2>
+      <p class="meta">Objectif : permettre aux deux joueurs d’appuyer sur leurs touches, gérer la faute si l’un appuie avant le signal.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Fixer clairement les touches :  
+          – Joueur 1 : touche A,  
+          – Joueur 2 : touche L (par exemple).</li>
+        <li>Préparer une phrase :  
+          « Si tu appuies AVANT le “GO !”, c’est point pour ton adversaire. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Fausse alerte” (5–7 min)</h3>
+      <ul>
+        <li>Comme la veille, refaire un mini-jeu de réflexes, mais cette fois :</li>
+        <li>
+          <ul>
+            <li>si quelqu’un tape dans ses mains avant “GO !” → c’est “faute de réflexe”.</li>
+          </ul>
+        </li>
+        <li>Transition : « Notre programme doit être capable de savoir si un joueur a appuyé trop tôt. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer les variables ScoreJ1 & ScoreJ2 (10–12 min)</p>
+      <ul>
+        <li>Créer deux variables (pour tous les sprites) :</li>
+        <li>
+          <ul>
+            <li><strong>ScoreJ1</strong></li>
+            <li><strong>ScoreJ2</strong></li>
+          </ul>
+        </li>
+        <li>Au démarrage (sur le Sprite Présentateur par exemple) :</li>
+        <li>
+          <ul>
+            <li>« mettre ScoreJ1 à 0 »</li>
+            <li>« mettre ScoreJ2 à 0 »</li>
+          </ul>
+        </li>
+        <li>Afficher les scores sur la scène (J1 à gauche, J2 à droite).</li>
+      </ul>
+
+      <p class="time">2) Réagir à la touche du Joueur 1 (10–12 min)</p>
+      <ul>
+        <li>Sur un sprite “ZoneJ1” (ou sur le Présentateur) :</li>
+        <li>
+          <ul>
+            <li>« quand touche A pressée »</li>
+            <li>« si EtatJeu = "attente" alors »  
+              – « dire "Joueur 1 a appuyé trop tôt !" pendant 2 s »  
+              – « changer ScoreJ2 par 1 »  
+              – « mettre EtatJeu à "fini" »</li>
+            <li>« sinon si EtatJeu = "go" alors »  
+              – « dire "Point pour Joueur 1 !" pendant 2 s »  
+              – « changer ScoreJ1 par 1 »  
+              – « mettre EtatJeu à "fini" »</li>
+            <li>« sinon »  
+              – ne rien faire (manche déjà finie).</li>
+          </ul>
+        </li>
+        <li>Expliquer :  
+          – si EtatJeu = "attente" → faute, point pour l’autre,  
+          – si EtatJeu = "go" → bonne réaction, point pour celui qui appuie en premier.</li>
+      </ul>
+
+      <p class="time">3) Réagir pour le Joueur 2 (10–12 min)</p>
+      <ul>
+        <li>Copier le même schéma pour la touche L :</li>
+        <li>
+          <ul>
+            <li>« quand touche L pressée »</li>
+            <li>« si EtatJeu = "attente" alors »  
+              – « dire "Joueur 2 a appuyé trop tôt !" pendant 2 s »  
+              – « changer ScoreJ1 par 1 »  
+              – « mettre EtatJeu à "fini" »</li>
+            <li>« sinon si EtatJeu = "go" alors »  
+              – « dire "Point pour Joueur 2 !" pendant 2 s »  
+              – « changer ScoreJ2 par 1 »  
+              – « mettre EtatJeu à "fini" »</li>
+          </ul>
+        </li>
+        <li>Tester :  
+          – lancer le projet,  
+          – appuyer très tôt avec un joueur → point pour l’autre,  
+          – attendre le “GO !” et appuyer rapidement → point pour celui qui a appuyé en premier.</li>
+      </ul>
+
+      <p class="time">4) Revenir à une nouvelle manche (5–8 min)</p>
+      <ul>
+        <li>À la fin d’une manche (après “mettre EtatJeu à "fini"”), tu peux :</li>
+        <li>
+          <ul>
+            <li>demander aux élèves d’appuyer sur le drapeau vert pour rejouer (version simple),</li>
+            <li>ou automatiser :</li>
+            <li>après chaque message de point, ajouter :  
+              – « attendre 1 s »  
+              – « envoyer à tous [NouvelleManche] ».</li>
+          </ul>
+        </li>
+        <li>Et sur le Présentateur :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois [NouvelleManche] »  
+              – remettre l’arrière-plan “ATTENDS”  
+              – « mettre EtatJeu à "attente" »  
+              – « attendre (nombre aléatoire 2 à 5) s »  
+              – basculer sur “GO !” + « mettre EtatJeu à "go" ».</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Insister : « On n’écrase pas la touche A ou L comme des fous, on appuie une seule fois au bon moment. »</li>
+        <li>En cas de bruit : imposer 2–3 manches “en silence” puis commenter calmement les scores.</li>
+        <li>Pour les rapides : autoriser à personnaliser les messages (“trop pressé”, “super réflexe”, etc.).</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Manche observée” (3–5 min)</h3>
+      <ul>
+        <li>Choisir un binôme : l’animateur observe une manche complète et fait commenter :</li>
+        <li>
+          <ul>
+            <li>“Qui a appuyé trop tôt ?”</li>
+            <li>“Au moment du ‘GO !’, qu’est-ce qui s’est passé dans le programme ?”</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Les élèves ont maintenant un vrai duel de réflexes : deux touches pour 
+        deux joueurs, une faute si on appuie avant le signal, un point si on 
+        appuie juste après. La prochaine séance, nous ajouterons un compteur de 
+        manches, un écran de fin et des variantes de signal. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Nombre de manches, écran de fin & variantes</h2>
+      <p class="meta">Objectif : limiter le nombre de manches, afficher un message de fin, proposer des variantes de signal pour les plus avancés.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Choisir un nombre de manches simple : 5 ou 10 duels.</li>
+        <li>Préparer 2–3 messages de fin :  
+          – “Victoire Joueur 1 !”,  
+          – “Victoire Joueur 2 !”,  
+          – “Égalité !”.</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Match en 5 points” (5–7 min)</h3>
+      <ul>
+        <li>Expliquer que comme au foot ou au tennis de table, un match peut se jouer en un nombre de points ou de manches.</li>
+        <li>Sur le tableau, simuler un mini-match :  
+          – écrire J1 0–0 J2,  
+          – faire évoluer le score jusqu’à 5 manches.</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Variable Manches (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Manches</strong> (pour tous les sprites).</li>
+        <li>Au démarrage : « mettre Manches à 0 ».</li>
+        <li>À chaque fois qu’une manche se termine (dans le code où l’on met EtatJeu à "fini") :</li>
+        <li>
+          <ul>
+            <li>ajouter « changer Manches par 1 ».</li>
+          </ul>
+        </li>
+        <li>Choisir un maximum, par exemple 5 :</li>
+        <li>
+          <ul>
+            <li>après « changer Manches par 1 », tester :  
+              – « si Manches = 5 alors envoyer [FinMatch] » (et ne plus lancer de nouvelle manche).</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="time">2) Ecran de fin (10–12 min)</p>
+      <ul>
+        <li>Sur le Présentateur (ou la scène) :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois [FinMatch] »  
+              – basculer sur un arrière-plan “FIN DE MATCH”  
+              – « si ScoreJ1 > ScoreJ2 alors dire "Victoire Joueur 1 !" pendant 3 s »  
+              – « sinon si ScoreJ2 > ScoreJ1 alors dire "Victoire Joueur 2 !" pendant 3 s »  
+              – « sinon dire "Égalité parfaite !" pendant 3 s »  
+              – « arrêter tous ».</li>
+          </ul>
+        </li>
+        <li>Tester un match complet : après 5 manches, le jeu affiche la fin et le vainqueur.</li>
+      </ul>
+
+      <p class="time">3) Variante pour les plus avancés : faux signal (10–12 min)</p>
+      <ul>
+        <li>Idée : parfois, le décor passe par une couleur intermédiaire (“Orange”) avant le vrai signal.  
+            Si un joueur appuie sur “Orange”, c’est aussi une faute.</li>
+        <li>Sur la scène :</li>
+        <li>
+          <ul>
+            <li>Ajouter un état intermédiaire :</li>
+            <li>« mettre EtatJeu à "pre-signal" »</li>
+            <li>afficher “Prêt ?...” pendant 1 seconde, puis seulement après :</li>
+            <li>« mettre EtatJeu à "go" » + “GO !”.</li>
+          </ul>
+        </li>
+        <li>Les scripts de touches (A et L) restent valables :  
+          – si EtatJeu = "attente" ou "pre-signal" → faute,  
+          – si EtatJeu = "go" → point pour le plus rapide.</li>
+        <li>Ne pas imposer cette variante aux plus en difficulté : priorité à la stabilité du jeu de base.</li>
+      </ul>
+
+      <p class="time">4) Tests croisés & réglage de la difficulté (8–10 min)</p>
+      <ul>
+        <li>Par deux :</li>
+        <li>
+          <ul>
+            <li>Jouent un match complet (5 manches) sur le projet de l’un, puis de l’autre.</li>
+            <li>Doivent répondre à :</li>
+            <li>– “Est-ce que le signal est suffisamment lisible ?”</li>
+            <li>– “Est-ce que le temps d’attente est trop court / trop long ?”</li>
+            <li>– “Est-ce que c’est clair qui gagne chaque manche ?”</li>
+          </ul>
+        </li>
+        <li>Éventuellement, ajuster la durée (entre 1 et 5 secondes) selon la nervosité de la classe.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Match d’exemple” (5 min)</h3>
+      <ul>
+        <li>Choisir un duo pour jouer un match devant la classe (ou sur un poste projeté si tu peux).</li>
+        <li>Mettre l’accent sur l’attitude :  
+          – ne pas crier,  
+          – observer le signal,  
+          – se concentrer sur une réaction propre.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Les élèves ont terminé un jeu complet de duel de réflexes : signal 
+        aléatoire, gestion des fautes “trop tôt”, comptage des points et 
+        nombre limité de manches. Certains ont ajouté des variantes plus complexes 
+        avec des faux signaux. Ce projet met en avant la gestion d’états, 
+        le hasard et les conditions, tout en restant très ludique à deux. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Les touches semblent “inactives”</strong>  
+          → Vérifier que les blocs “quand touche A/L pressée” sont bien sur un sprite présent dans le projet.  
+          → Vérifier l’orthographe exacte des noms d’état : "attente", "go", "fini" (sans espaces en trop).</li>
+
+        <li><strong>Les points se donnent deux fois</strong>  
+          → Vérifier que l’on met bien « EtatJeu à "fini" » dès qu’un joueur a appuyé.  
+          → Ajouter un “sinon” vide pour bloquer les autres appuis.</li>
+
+        <li><strong>Le match ne s’arrête jamais</strong>  
+          → Vérifier que Manches est bien augmenté dans chaque manche.  
+          → Vérifier la condition “si Manches = 5 alors envoyer [FinMatch]”.</li>
+
+        <li><strong>Signal trop rapide ou trop lent</strong>  
+          → Ajuster le “nombre aléatoire entre X et Y”.  
+          → Pour des élèves très excités, préférer 3–6 secondes plutôt que 1–3.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire expliquer la logique d’état :  
+          – “Que signifie EtatJeu = 'attente' ?”  
+          – “Que se passe-t-il quand on passe à 'go' ?”</li>
+        <li>Encourager la coopération : même si c’est un duel, insister sur le respect, pas sur la moquerie.</li>
+        <li>Pour les plus rapides :  
+          – ajouter un écran d’accueil avec “Appuie sur espace pour démarrer le match”,  
+          – ou un tableau de “meilleur score” (nombre de victoires J1 vs J2).</li>
+        <li>En cas d’agitation : faire un “break sans clavier” : 2 minutes où les élèves dessinent le schéma d’états (Attente → Go → Fini) sur feuille, puis retour au jeu.</li>
+      </ul>
+    </div>
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  .algo-section{
+    margin-top:18px;padding:18px 16px 20px 16px;border-radius:var(--radius);
+    border:1px solid #d0d7de;background:#f7f7f7;box-shadow:var(--shadow-soft);
+    font-family:"Courier New",monospace;
+  }
+  .algo-section>h2{color:#2c3e50;margin-bottom:4px;font-size:1.05rem;}
+  .algo-section>p{font-size:.85rem;color:#555;margin-bottom:10px;}
+  .titre-sprite{font-weight:bold;font-size:.95rem;background:#eaf2f8;
+    padding:6px 10px;border-left:6px solid #5dade2;margin:10px 0 6px;border-radius:4px;}
+  .bloc{padding:6px 10px;margin:4px 0;border-left:6px solid;background:#fff;
+    border-radius:6px;font-size:.85rem;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .evenement{border-color:#FFD500;background:#fff8d1;}
+  .mouvement{border-color:#4C97FF;background:#dceeff;}
+  .apparence{border-color:#9966FF;background:#f0e6ff;}
+  .controle{border-color:#FFAB19;background:#ffe9cc;}
+  .son{border-color:#CF63CF;background:#fce4fc;}
+  .capteurs{border-color:#5CB1D6;background:#e0f6fb;}
+  .operateurs{border-color:#59C059;background:#e5fbe5;}
+  @media(max-width:600px){.algo-section{padding:14px 12px 16px 12px;}}
+</style>
+
+<!-- === ALGORYTHME DU PROJET 18 – DUEL DE RÉFLEXES À DEUX JOUEURS === -->
+<div class="algo-section">
+  <h2>⚡ Algorithme du Projet Scratch – Duel de réflexes à deux joueurs</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Hasard, temps d’attente & réactions clavier</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🟢 Séance 1 – Découvrir le signal “GO !”</h2>
+
+    <div class="titre-sprite">🎤 Sprite – Présentateur (Chat ou texte)</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      mettre [EtatJeu] à [attente]<br>
+      dire [Préparez-vous…] pendant (2) s<br>
+      attendre (nombre aléatoire entre 2 et 5) secondes<br>
+      mettre [EtatJeu] à [go]<br>
+      dire [GO !] pendant (1) s
+    </div>
+
+    <div class="bloc apparence">
+      Option : basculer l’arrière-plan “ATTENDS” → “GO !” au moment du signal.
+    </div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>🏁 Séance 2 – Deux joueurs & gestion du “trop tôt”</h2>
+
+    <div class="titre-sprite">📊 Variables</div>
+    <div class="bloc controle">
+      créer [ScoreJ1] [ScoreJ2] [EtatJeu]<br>
+      quand [drapeau vert] cliqué → mettre ScoreJ1 = 0, ScoreJ2 = 0, EtatJeu = "attente"
+    </div>
+
+    <div class="titre-sprite">🧍 Joueur 1 – touche A</div>
+    <div class="bloc evenement">quand touche [A] pressée</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [EtatJeu = "attente"] alors<br>
+      <span class="apparence" style="margin-left:20px;">dire [Joueur 1 trop pressé !]</span><br>
+      <span class="controle" style="margin-left:20px;">changer [ScoreJ2] de (1)</span><br>
+      <span class="controle" style="margin-left:20px;">mettre [EtatJeu] à [fini]</span><br><br>
+      sinon si [EtatJeu = "go"] alors<br>
+      <span class="apparence" style="margin-left:20px;">dire [Point pour Joueur 1 !]</span><br>
+      <span class="controle" style="margin-left:20px;">changer [ScoreJ1] de (1)</span><br>
+      <span class="controle" style="margin-left:20px;">mettre [EtatJeu] à [fini]</span>
+    </div>
+
+    <div class="titre-sprite">🧍 Joueur 2 – touche L</div>
+    <div class="bloc evenement">quand touche [L] pressée</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [EtatJeu = "attente"] alors<br>
+      <span class="apparence" style="margin-left:20px;">dire [Joueur 2 trop pressé !]</span><br>
+      <span class="controle" style="margin-left:20px;">changer [ScoreJ1] de (1)</span><br>
+      <span class="controle" style="margin-left:20px;">mettre [EtatJeu] à [fini]</span><br><br>
+      sinon si [EtatJeu = "go"] alors<br>
+      <span class="apparence" style="margin-left:20px;">dire [Point pour Joueur 2 !]</span><br>
+      <span class="controle" style="margin-left:20px;">changer [ScoreJ2] de (1)</span><br>
+      <span class="controle" style="margin-left:20px;">mettre [EtatJeu] à [fini]</span>
+    </div>
+
+    <div class="bloc controle">
+      Après chaque manche : attendre (1) s → envoyer [NouvelleManche]
+    </div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🏆 Séance 3 – Manches, écran de fin & variantes</h2>
+
+    <div class="titre-sprite">🔢 Variable Manches</div>
+    <div class="bloc controle">
+      créer [Manches]<br>
+      quand [drapeau vert] cliqué → mettre Manches à 0<br>
+      à la fin de chaque manche → changer [Manches] de (1)<br>
+      si [Manches = 5] → envoyer [FinMatch]
+    </div>
+
+    <div class="titre-sprite">🏁 Fin du match</div>
+    <div class="bloc evenement">quand je reçois [FinMatch]</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [ScoreJ1 > ScoreJ2] → dire [Victoire Joueur 1 !] 3 s<br>
+      sinon si [ScoreJ2 > ScoreJ1] → dire [Victoire Joueur 2 !] 3 s<br>
+      sinon → dire [Égalité parfaite !] 3 s<br>
+      arrêter tous
+    </div>
+
+    <div class="titre-sprite">⚠️ Variante – Faux signal (avancé)</div>
+    <div class="bloc controle">
+      avant “GO !” → ajouter étape “Prêt ?...”<br>
+      mettre [EtatJeu] à [pre-signal] → dire [Prêt ?...] 1 s<br>
+      ensuite → mettre [EtatJeu] à [go] → dire [GO !]
+    </div>
+
+    <div class="bloc apparence">
+      les touches A/L doivent considérer "attente" et "pre-signal" comme fautes
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc apparence">ajouter un écran d’accueil “Appuie sur espace pour démarrer”</div>
+    <div class="bloc controle">changer le nombre de manches (5, 10…)</div>
+    <div class="bloc son">ajouter sons : bip d’attente, buzzer de victoire</div>
+    <div class="bloc apparence">afficher des couleurs différentes pour “ATTENDS” / “GO !” / “Trop tôt !”</div>
+  </div>
+</div>
+
+
+  </div>
+</body>
+</html>

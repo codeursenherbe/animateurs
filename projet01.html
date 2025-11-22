@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 1 – Première animation Scratch : deux personnages qui parlent | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+      --shadow-soft: 0 2px 6px rgba(15,23,42,.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top left, #edf3fb, #f5f6fa 55%);
+      color: var(--text-main);
+      padding: 16px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto 32px auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: #fff;
+      padding: 6px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+
+    a.back-link::before {
+      content: "←";
+      font-size: 0.85rem;
+    }
+
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card + .card {
+      margin-top: 10px;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+
+    p,
+    li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* Séparateurs visuels légers dans les cartes longues */
+    .card h3 + .time {
+      margin-top: 2px;
+    }
+
+    /* --- PARTIE ALGORYTHME : uniformisée mais gardant les couleurs Scratch --- */
+
+    .algo-section {
+      margin-top: 18px;
+      padding: 18px 16px 20px 16px;
+      border-radius: var(--radius);
+      border: 1px solid #d0d7de;
+      background: #f7f7f7;
+      box-shadow: var(--shadow-soft);
+      font-family: "Courier New", monospace;
+    }
+
+    .algo-section > h2 {
+      color: #2c3e50;
+      margin-bottom: 4px;
+      font-size: 1.05rem;
+    }
+
+    .algo-section > p {
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .algo-section .section {
+      margin-bottom: 22px;
+    }
+
+    .algo-section .section h2 {
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+      color: #34495e;
+    }
+
+    .titre-sprite {
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: #34495e;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .bloc {
+      padding: 6px 10px;
+      margin: 4px 0;
+      border-left: 6px solid;
+      background-color: #ffffff;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+    }
+
+    .evenement {
+      border-color: #FFD500;
+      background-color: #fff8d1;
+    }
+
+    .mouvement {
+      border-color: #4C97FF;
+      background-color: #dceeff;
+    }
+
+    .apparence {
+      border-color: #9966FF;
+      background-color: #f0e6ff;
+    }
+
+    .controle {
+      border-color: #FFAB19;
+      background-color: #ffe9cc;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+      header h1 {
+        font-size: 1.3rem;
+      }
+      .card {
+        padding: 14px 14px;
+      }
+      .algo-section {
+        padding: 14px 12px 16px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 1 – Première animation Scratch : deux personnages qui parlent</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 2 séances · Découverte de l’interface, mouvements & dialogues</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Projet d’introduction à Scratch</span>
+      <p>
+        Les élèves découvrent Scratch en créant une petite scène : 2 personnages sur un décor
+        qui se déplacent et discutent avec des bulles de texte.  
+        Objectif : prendre en main l’interface, comprendre les blocs de base 
+        (Événements, Mouvement, Apparence) et réussir une petite animation complète.
+      </p>
+      <p class="meta">
+        Organisation type : 2 séances de 45 min.  
+        Recommandation : CE2 → version simple (déplacements + 2 répliques).  
+        CM1/CM2 → ajouter plus de répliques et un léger enchaînement.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Repérer les zones importantes de Scratch : scène, sprites, blocs.</li>
+        <li>Utiliser les blocs <strong>quand drapeau vert cliqué</strong>, <strong>dire … pendant … s</strong>, <strong>changer x de …</strong>.</li>
+        <li>Faire bouger un personnage avec les flèches gauche/droite.</li>
+        <li>Enchaîner des bulles de dialogue entre deux personnages.</li>
+        <li>Enregistrer et retrouver un projet Scratch.</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Découverte de Scratch & premier personnage qui bouge</h2>
+      <p class="meta">
+        Objectif : à la fin, chaque élève a une scène avec un décor, un premier personnage qui 
+        se déplace à gauche/droite au clavier, et qui peut dire une phrase.
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Vérifier que tous les postes ont accès à Scratch (en ligne ou version installée).</li>
+        <li>Préparer une phrase d’accueil claire :  
+          « Aujourd’hui, on découvre Scratch et on va créer une petite scène où un personnage marche et parle. »</li>
+        <li>Prévoir un signal d’attention :  
+          – “Mains sur le clavier mais on ne touche plus aux touches”,  
+          – ou “Mains sur la tête, on m’écoute”.</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – “Qui commande ?” (5–7 min)</h3>
+      <ul>
+        <li>Les élèves restent assis. Tu expliques :  
+          « Quand je dis DROITE, vous penchez juste votre buste légèrement à droite.  
+          Quand je dis GAUCHE, vous penchez à gauche. Quand je dis STOP, vous revenez au milieu. »</li>
+        <li>Faire 30–40 secondes de jeu rapide :  
+          – “Droite… gauche… droite… stop…”</li>
+        <li>Transition : « Dans Scratch, c’est pareil : un ordre = un mouvement. Les blocs sont nos ordres. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Ouvrir Scratch & choisir un décor (8–10 min)</p>
+      <ul>
+        <li>Demander à tout le monde de lancer Scratch et de rester sur le projet vide.</li>
+        <li>Utiliser le signal :  
+          « Mains sur la tête, on regarde l’écran de Scratch et on écoute. »</li>
+        <li>Expliquer les 3 zones rapidement :  
+          – scène à droite (où l’on voit le dessin),  
+          – liste des sprites en bas,  
+          – blocs de code à gauche.</li>
+        <li>Faire choisir un décor :</li>
+        <li>
+          <ul>
+            <li>Cliquer sur l’icône d’arrière-plan de la scène → choisir un fond (classe, nature, ville, espace…)</li>
+          </ul>
+        </li>
+        <li>Vérification rapide :  
+          « Levez la main si vous voyez votre décor sur la scène. »  
+          Passer dans les rangs pour 2–3 cas bloqués.</li>
+      </ul>
+
+      <p class="time">2) Garder ou remplacer le chat (5–7 min)</p>
+      <ul>
+        <li>Expliquer que le chat est le premier personnage (sprite).</li>
+        <li>Deux options simples :</li>
+        <li>
+          <ul>
+            <li>Option A (plus simple) : garder le chat comme héros.</li>
+            <li>Option B : supprimer le chat et choisir un autre sprite (enfant, animal, robot, etc.).</li>
+          </ul>
+        </li>
+        <li>Important :  
+          « Une fois votre personnage choisi, vous ne changez plus 10 fois. On garde celui-là pour le projet. »</li>
+      </ul>
+
+      <p class="time">3) Faire dire une phrase au personnage (8–10 min)</p>
+      <ul>
+        <li>Sur le sprite (chat ou autre) :</li>
+        <li>
+          <ul>
+            <li>Aller dans la catégorie <strong>Événements</strong> (jaune) → prendre <strong>quand drapeau vert cliqué</strong>.</li>
+            <li>Aller dans <strong>Apparence</strong> (violet) → prendre <strong>dire "Bonjour" pendant 2 secondes</strong>.</li>
+          </ul>
+        </li>
+        <li>Demander aux élèves de remplacer “Bonjour” par une phrase simple (prénom, par ex. “Bonjour, je suis la fusée !”).</li>
+        <li>Signal : « Maintenant, ne touchez plus au clavier, cliquez une seule fois sur le drapeau vert et regardez. »</li>
+        <li>Vérifier : le personnage doit parler au démarrage.</li>
+      </ul>
+
+      <p class="time">4) Programmer le déplacement gauche/droite (12–15 min)</p>
+      <ul>
+        <li>Sur le même sprite :</li>
+        <li>
+          <ul>
+            <li>Ajouter :</li>
+            <li>« quand touche flèche droite pressée »  
+              – catégorie <strong>Mouvement</strong> (bleu foncé) → <strong>changer x de 10</strong>.</li>
+            <li>« quand touche flèche gauche pressée »  
+              – <strong>changer x de -10</strong>.</li>
+          </ul>
+        </li>
+        <li>Expliquer simplement :  
+          – x = horizontal,  
+          – +10 = va à droite,  
+          – -10 = va à gauche.</li>
+        <li>Rappel verbal :  
+          « + c’est avancer sur la droite, – c’est reculer vers la gauche. »</li>
+        <li>Demander à chacun de tester en silence 10–20 secondes : on appuie doucement sur les flèches, on regarde le personnage glisser.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Instaurer un réflexe :  
+          – “Quand je dis STOP CLAVIER, vous posez les mains sur la table et vous regardez l’écran.”</li>
+        <li>En cas de bug ou blocage : rappeler qu’ils peuvent demander d’abord à leur voisin avant de t’appeler.</li>
+        <li>Pour les plus rapides : autoriser un léger bonus :  
+          – changer de costume quand il bouge (par ex. deux costumes de marche).  
+          Mais seulement si la base (mouvement + phrase) fonctionne bien.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Devine le bloc” (3–5 min)</h3>
+      <ul>
+        <li>Poser des questions à l’oral :</li>
+        <li>
+          <ul>
+            <li>« Quel bloc fait démarrer notre programme ? » → attendre qu’ils disent “le drapeau vert”.</li>
+            <li>« Quel bloc fait parler le personnage ? » → “dire … pendant …”.</li>
+            <li>« Quel bloc le fait aller à droite ? À gauche ? » → “changer x de 10 / -10”.</li>
+          </ul>
+        </li>
+        <li>Ne pas faire un quiz dur, juste fixer les noms des blocs et les couleurs (jaune, violet, bleu).</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Les élèves ont découvert l’interface de Scratch, choisi un décor, 
+        gardé ou remplacé le personnage principal, programmé un premier dialogue 
+        simple et le déplacement gauche/droite avec les flèches. La prochaine 
+        séance, nous ajouterons un deuxième personnage et une vraie mini-conversation. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Deux personnages qui discutent & petite scène jouée</h2>
+      <p class="meta">
+        Objectif : à la fin, les deux personnages discutent (au moins 3–4 répliques alternées) 
+        et la scène se joue proprement quand on clique sur le drapeau vert.
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Prévoir une mini-conversation type pour les élèves en manque d’inspiration :</li>
+        <li>
+          <ul>
+            <li>Personnage 1 : “Salut, ça va ?”</li>
+            <li>Personnage 2 : “Oui, prêt pour l’aventure !”</li>
+            <li>Personnage 1 : “Alors on y va !”</li>
+          </ul>
+        </li>
+        <li>Préparer la phrase d’intro :  
+          « Aujourd’hui, on va faire parler deux personnages ensemble, comme dans un petit dessin animé. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Dialogue ping-pong” (5–7 min)</h3>
+      <ul>
+        <li>Au tableau : écrire P1 / P2.</li>
+        <li>Choisir 2 élèves volontaires :</li>
+        <li>
+          <ul>
+            <li>P1 dit une courte phrase (“Salut !”).</li>
+            <li>P2 répond (“Bonjour !”).</li>
+            <li>P1 enchaîne (“On va à l’espace ?”).</li>
+            <li>P2 conclut (“Bonne idée !”).</li>
+          </ul>
+        </li>
+        <li>Faire remarquer l’alternance : P1, P2, P1, P2…  
+            Transition : « On va coder la même chose avec deux sprites. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Ajouter le deuxième personnage (8–10 min)</p>
+      <ul>
+        <li>Cliquer sur “Ajouter un sprite” → choisir un second personnage (ami, animal, robot…).</li>
+        <li>Le renommer (par ex. Ami, Robot, Chat2…).</li>
+        <li>Le placer à droite si le premier est à gauche (pour qu’ils se fassent face).</li>
+        <li>Signal d’attention :  
+          « STOP CLAVIER : on regarde un instant nos deux personnages sur la scène. »</li>
+      </ul>
+
+      <p class="time">2) Préparer la conversation sur papier (5–7 min)</p>
+      <ul>
+        <li>Demander aux élèves d’écrire 3–4 répliques maximum, en alternant :</li>
+        <li>
+          <ul>
+            <li>P1 : …</li>
+            <li>P2 : …</li>
+            <li>P1 : …</li>
+            <li>P2 : …</li>
+          </ul>
+        </li>
+        <li>Passer vérifier que les phrases sont courtes et positives (éviter les dialogues trop longs ou compliqués).</li>
+      </ul>
+
+      <p class="time">3) Programmer le dialogue (15–18 min)</p>
+      <ul>
+        <li>Sur le Personnage 1 (P1) :</li>
+        <li>
+          <ul>
+            <li>Compléter le script :</li>
+            <li>« quand drapeau vert cliqué »  
+              – « aller à (sa position de départ) »  
+              – « basculer sur l’arrière-plan de la scène »  
+              – « dire [phrase 1 de P1] pendant 2 s »  
+              – « attendre 2 s » (pour laisser P2 répondre)  
+              – « dire [phrase 3 de P1] pendant 2 s ».</li>
+          </ul>
+        </li>
+        <li>Sur le Personnage 2 (P2) :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « aller à (sa position de départ) »  
+              – « attendre 2 s » (le temps que P1 parle)  
+              – « dire [phrase 2 de P2] pendant 2 s »  
+              – « attendre 2 s »  
+              – « dire [phrase 4 de P2] pendant 2 s ».</li>
+          </ul>
+        </li>
+        <li>Tester plusieurs fois avec les élèves :  
+          – vérifier que les bulles ne se superposent pas,  
+          – ajuster les “attendre … s” selon la lecture réelle en classe.</li>
+      </ul>
+
+      <p class="time">4) Petit mouvement en début ou fin de scène (8–10 min)</p>
+      <ul>
+        <li>Pour donner un peu de vie :</li>
+        <li>
+          <ul>
+            <li>Sur P1, avant de parler :  
+              – « glisser en 1 s à x:(centre) y:(position) ».</li>
+            <li>Sur P2, éventuellement un petit mouvement (avancer de quelques pixels ou changer de costume une fois).</li>
+          </ul>
+        </li>
+        <li>Insister pour que ça reste sobre : l’objectif est que l’on comprenne toujours bien les dialogues.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler que tout le monde doit pouvoir lire les bulles :  
+          « Si ça défile trop vite, ce n’est pas un bon dessin animé. »</li>
+        <li>Encourager l’entraide par paires :  
+          – un élève lit le dialogue pendant que l’autre regarde le timing, puis ils échangent.</li>
+        <li>Pas de système de “cartons” : juste des consignes claires :  
+          – STOP CLAVIER quand tu veux reprendre la main,  
+          – 1 seule personne qui parle à la fois pour poser une question.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Mini séance cinéma” (5–7 min)</h3>
+      <ul>
+        <li>Demander à chacun :</li>
+        <li>
+          <ul>
+            <li>de lancer son projet,</li>
+            <li>de NE PAS toucher au clavier pendant que la scène se joue,</li>
+            <li>de regarder si tout s’enchaîne bien (positions, bulles, mouvements).</li>
+          </ul>
+        </li>
+        <li>Si tu as un poste relié à un écran, tu peux montrer 1–2 projets en exemple devant la classe pour valoriser.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Les élèves ont maintenant une petite scène complète : deux personnages,
+        un décor, un début de mouvement et un dialogue en plusieurs répliques. 
+        Ils ont manipulé les blocs Événements, Apparence, Mouvement et les 
+        temps d’attente. Ce projet peut servir de base à beaucoup d’autres 
+        animations dans l’année. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Les deux personnages parlent en même temps</strong><br>
+          → Vérifier les blocs “attendre … s” entre les répliques.  
+          → Règle simple : chaque personnage attend que l’autre ait fini de parler (2 s de parole = au moins 2 s d’attente de l’autre côté).</li>
+
+        <li><strong>Le personnage va à l’envers ou se retourne bizarrement</strong><br>
+          → Cliquer sur le sprite, puis sur l’icône de direction sous la scène : choisir le mode “gauche-droite” (flèche ↔).  
+          → Cela évite qu’il se retourne à l’envers quand il part à gauche.</li>
+
+        <li><strong>On n’arrive plus à écrire dans les blocs (chiffres ou texte)</strong><br>
+          → Si aucun champ ne se remplit (alors que le clavier fonctionne ailleurs) et que ce n’est pas le cadenas clavier :  
+          1. Réduire la fenêtre de Scratch avec le bouton “–” (le petit tiret à côté du carré et de la croix).  
+          2. Puis la réagrandir.  
+          → En général, l’édition des champs redevient possible après cette manip.</li>
+
+        <li><strong>Un personnage a disparu ou ne bouge plus</strong><br>
+          → Vérifier qu’il est bien “montré” (bloc <strong>montrer</strong> dans Apparence) ou qu’il n’a pas été déplacé hors de l’écran.  
+          → Vérifier qu’il a un bloc <strong>quand drapeau vert cliqué</strong> pour lancer son script.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire verbaliser les enchaînements :  
+          – “Qui parle en premier ? Qui répond ?”  
+          – “Quel bloc commence le programme ?”</li>
+        <li>Encourager les dialogues courts au début : meilleur pour la lecture et le timing.</li>
+        <li>Pour les plus rapides :</li>
+        <li>
+          <ul>
+            <li>ajouter une 3ᵉ petite phrase en fin de scène,</li>
+            <li>ou ajouter un léger changement de décor après le dialogue (ex. le ciel qui devient étoilé).</li>
+          </ul>
+        </li>
+        <li>En cas d’agitation : proposer une “projection muette” : 1 minute où chaque élève lance son animation et la regarde en silence, puis seulement après ils améliorent.</li>
+      </ul>
+    </div>
+
+    <!-- ALGORYTHME AJOUTÉ -->
+<div class="algo-section">
+  <h2>📘 Algorithme du Projet Scratch – Deux Personnages qui Parlent</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 2 séances de 45 minutes</p>
+
+  <div class="section">
+    <h2>🎬 Séance 1 – Un personnage bouge et parle</h2>
+
+    <div class="titre-sprite">🐱 Sprite 1 – Chat (ou personnage principal)</div>
+
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à x: (-100) y: (-50)</div>
+    <div class="bloc apparence">dire [Bonjour, je suis le chat !] pendant (2) secondes</div>
+
+    <div class="bloc evenement">quand [touche flèche droite] pressée</div>
+    <div class="bloc mouvement">changer x de (10)</div>
+
+    <div class="bloc evenement">quand [touche flèche gauche] pressée</div>
+    <div class="bloc mouvement">changer x de (-10)</div>
+
+    <div class="bloc apparence">changer de costume (si disponible) quand il bouge</div>
+  </div>
+
+  <div class="section">
+    <h2>🎭 Séance 2 – Dialogue entre deux personnages</h2>
+
+    <div class="titre-sprite">🐱 Sprite 1 – Chat</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">glisser en 1 s à x: (-100) y: (-50)</div>
+    <div class="bloc apparence">dire [Salut, ça va ?] pendant (2) secondes</div>
+    <div class="bloc controle">attendre (2) secondes</div>
+    <div class="bloc apparence">dire [Alors on y va !] pendant (2) secondes</div>
+
+    <div class="titre-sprite">🤖 Sprite 2 – Robot</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à x: (100) y: (-50)</div>
+    <div class="bloc apparence">montrer</div>
+    <div class="bloc controle">attendre (2) secondes</div>
+    <div class="bloc apparence">dire [Oui, prêt pour l’aventure !] pendant (2) secondes</div>
+    <div class="bloc controle">attendre (2) secondes</div>
+    <div class="bloc apparence">dire [Bonne idée !] pendant (2) secondes</div>
+  </div>
+
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc apparence">changer de décor [Nuit] après la scène</div>
+    <div class="bloc apparence">jouer un son [pop]</div>
+    <div class="bloc mouvement">ajouter un petit saut ou glissement en fin de scène</div>
+  </div>
+</div>
+
+
+  </div>
+</body>
+</html>

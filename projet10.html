@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 10 – Tir spatial (canon laser) | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 10 – Tir spatial (canon laser)</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Tir, collisions, score & vies</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu de tir vertical simple</span>
+      <p>
+        Les élèves créent un jeu de tir spatial : un petit canon en bas de l’écran
+        se déplace à gauche/droite et tire des lasers vers le haut pour détruire
+        des aliens qui descendent. Le joueur marque des points quand il touche
+        un alien, perd des vies si un alien atteint le bas, et la partie s’arrête
+        en cas de Game Over ou de score suffisant.
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : commencer avec 1 seul alien qui réapparaît, puis passer aux clones.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Déplacer un canon horizontalement avec le clavier.</li>
+        <li>Lancer un projectile (laser) dans une direction fixe.</li>
+        <li>Gérer des collisions : laser/alien, alien/bas de l’écran.</li>
+        <li>Utiliser des variables (<strong>Score</strong>, <strong>Vies</strong>).</li>
+        <li>Introduire les clones pour créer plusieurs ennemis (selon niveau).</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Canon qui bouge & tir simple</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a un canon en bas qui se déplace et tire un laser vers le haut.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Décider des touches :  
+          – flèche gauche / flèche droite pour déplacer le canon,  
+          – barre espace pour tirer.</li>
+        <li>Prévoir une explication simple :  
+          « Le canon ne peut bouger que à gauche et à droite, et il tire toujours vers le haut. »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – « Canon humain » (3–4 min)</h3>
+      <ul>
+        <li>Faire se lever un élève devant le tableau : il joue le “canon”.</li>
+        <li>Tu dis :  
+          – « Gauche » → il fait un pas à gauche,  
+          – « Droite » → un pas à droite,  
+          – « Tir ! » → il lève les bras vers le haut.</li>
+        <li>Transition : « Dans Scratch, le canon fera la même chose mais avec les flèches et la barre espace. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer le décor spatial (5–7 min)</p>
+      <ul>
+        <li>Arrière-plan : ciel noir, quelques étoiles simples (points blancs), rien de trop chargé.</li>
+        <li>Option : dessiner une ligne fine en bas pour symboliser le “sol de la base”.</li>
+      </ul>
+
+      <p class="time">2) Créer le canon (10–12 min)</p>
+      <ul>
+        <li>Ajouter un nouveau sprite : petit rectangle ou petit vaisseau, orienté vers le haut.</li>
+        <li>Le placer en bas de l’écran, centré.</li>
+        <li>Réduire la taille si besoin (50–70%) pour laisser de la place aux aliens.</li>
+      </ul>
+
+      <p class="time">3) Déplacement horizontal du canon (10–15 min)</p>
+      <ul>
+        <li>Script sur le canon :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « aller à x:0 y:-140 » (par exemple)  
+              – « répéter indéfiniment » :  
+                · « si touche flèche droite alors changer x de 6 »  
+                · « si touche flèche gauche alors changer x de -6 ».</li>
+          </ul>
+        </li>
+        <li>Tester : les élèves déplacent le canon de gauche à droite, sans sortir de l’écran si possible.</li>
+      </ul>
+
+      <p class="time">4) Créer le laser (10–15 min)</p>
+      <ul>
+        <li>Ajouter un sprite “Laser” : petit rectangle fin et allongé, vertical, d’une couleur vive (rouge ou vert).</li>
+        <li>Script simple pour un premier tir (version “laser unique”) :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué → cacher »</li>
+            <li>« quand touche barre espace pressée »  
+              – « aller à la position du canon » (bloc “aller à [canon]”)  
+              – « montrer »  
+              – « répéter jusqu’à ce que y > 180 » (haut de l’écran) :  
+                · « changer y de 10 »  
+                · « attendre 0.02 s »  
+              – « cacher ».</li>
+          </ul>
+        </li>
+        <li>Expliquer :  
+          « Le laser part du canon, monte vers le haut, puis disparaît. »</li>
+        <li>Tester calmement : appuyer sur espace, voir le laser partir, déplacer le canon puis tirer à nouveau.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Poser la règle : « On ne spamme pas la barre espace. On teste un tir à la fois. »</li>
+        <li>Quand tu expliques un bloc : « Mains loin du clavier 10 secondes, on regarde l’écran. »</li>
+        <li>Pour les rapides : autoriser à changer légèrement la vitesse du laser (changer y de 8 ou 12) et à ajuster la taille du canon.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Tir sans cible » (3–4 min)</h3>
+      <ul>
+        <li>Consigne : « Pendant 1 minute, déplacez calmement le canon de gauche à droite et tirez de temps en temps. Le but est que tout reste fluide, sans bug. »</li>
+        <li>But : tester le code sans enjeu de points, en gardant une ambiance calme.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons posé la base du jeu de tir : un canon qui se
+        déplace en bas et un laser qui part du canon vers le haut. La prochaine
+        fois, nous ajouterons des aliens qui descendent et un score quand on les touche. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Aliens qui descendent, collisions & score</h2>
+      <p class="meta">Objectif : ajouter un alien qui descend, le faire détruire par le laser, compter les points et gérer les vies.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Préparer une phrase pour expliquer la logique :  
+          « L’alien tombe, si le laser le touche → il disparaît et on gagne un point, sinon s’il atteint le bas → on perd une vie. »</li>
+        <li>Décider du nombre de vies : 3 est un bon point de départ.</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Tu le touches ou pas ? » (3–4 min)</h3>
+      <ul>
+        <li>Au tableau, tu dessines un canon en bas, un alien en haut, un laser qui monte.</li>
+        <li>Tu poses des cas :  
+          – « Ici, le laser passe à côté : est-ce qu’on gagne un point ? »  
+          – « Ici, l’alien touche le sol : est-ce qu’on a perdu quelque chose ? »</li>
+        <li>Transition : « Dans Scratch, c’est notre code qui décidera de tout ça. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer un alien qui descend (10–15 min)</p>
+      <ul>
+        <li>Ajouter un sprite “Alien” (ou monstre, soucoupe, etc.).</li>
+        <li>Le réduire pour qu’il soit plus petit que le canon.</li>
+        <li>Script de base (descente en boucle) :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « aller à x aléatoire entre -200 et 200 y:170 » (tout en haut)  
+              – « répéter indéfiniment » :  
+                · « changer y de -4 » (il descend)  
+                · « si y < -160 alors »  
+                  · (plus tard) : gérer la vie et le repositionner</li>
+          </ul>
+        </li>
+        <li>Tester : l’alien descend du haut vers le bas, puis disparaît de l’écran (en attendant la suite du code).</li>
+      </ul>
+
+      <p class="time">2) Variable Score & collision laser/alien (15–18 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Score</strong> (pour tous les sprites).</li>
+        <li>Au démarrage (drapeau vert) sur un sprite gestion ou le canon :  
+          – « mettre Score à 0 ».</li>
+        <li>Sur le sprite Alien, dans la boucle de descente :</li>
+        <li>
+          <ul>
+            <li>Ajouter :  
+              – « si touche [Laser] alors »  
+                · « changer Score par 1 »  
+                · « jouer un son court (optionnel) »  
+                · « aller à x aléatoire entre -200 et 200 y:170 »  
+                · « attendre 0.2 s » (pour éviter les doubles collisions)</li>
+          </ul>
+        </li>
+        <li>Option : cacher le laser quand il touche l’alien, ou le laisser continuer (au choix, mais rester simple).</li>
+        <li>Tester : tirer sur l’alien, vérifier que Score augmente.</li>
+      </ul>
+
+      <p class="time">3) Variable Vies & alien qui atteint le bas (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Vies</strong> (pour tous les sprites).</li>
+        <li>Au démarrage (même endroit que Score) :  
+          – « mettre Vies à 3 ».</li>
+        <li>Dans la boucle de l’alien, compléter la condition “y < -160” :</li>
+        <li>
+          <ul>
+            <li>« si y < -160 alors »  
+              – « changer Vies par -1 »  
+              – « aller à x aléatoire entre -200 et 200 y:170 »  
+              – « attendre 0.2 s ».</li>
+          </ul>
+        </li>
+        <li>Ajouter ensuite une vérification :</li>
+        <li>
+          <ul>
+            <li>Après avoir changé Vies :  
+              – « si Vies = 0 alors »  
+                · « dire "Game Over" pendant 2 s »  
+                · « arrêter tous ».</li>
+          </ul>
+        </li>
+        <li>Tester : laisser volontairement l’alien atteindre le bas 3 fois pour vérifier la fin de partie.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler : « On code d’abord un seul alien. On ne le duplique pas encore. »</li>
+        <li>Pour les rapides : autoriser à changer un peu la vitesse de l’alien (changer y de -3 ou -5), ou le style graphique (couleur, costume différent).</li>
+        <li>Si beaucoup d’excitation :  
+          – organiser une minute de “tir lent” : chacun doit tirer moins souvent et éviter le spam de touches pour vérifier les collisions proprement.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « 5 points sans perdre toutes ses vies » (3–5 min)</h3>
+      <ul>
+        <li>Consigne : « Essayez d’atteindre un Score de 5 sans perdre toutes vos vies. Si vous perdez, ce n’est pas grave, on réessaiera la prochaine fois. »</li>
+        <li>But : tester le jeu avec un objectif simple, mais sans surenchère de compétition.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, on a ajouté des aliens qui descendent, un score quand
+        on les touche avec le laser, et un système de vies quand ils arrivent
+        en bas. On a maintenant un jeu de tir qui fonctionne. La prochaine fois,
+        on pourra ajouter plusieurs aliens, augmenter la difficulté et tester les
+        jeux les uns des autres. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Plusieurs aliens, difficulté & tests croisés</h2>
+      <p class="meta">Objectif : enrichir le jeu (plusieurs ennemis / clones, difficulté réglable) et faire tester les jeux par les autres.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Décider si tu veux :
+          <ul>
+            <li>soit dupliquer le sprite Alien 2–3 fois,</li>
+            <li>soit introduire les <strong>clones</strong> (selon le niveau de la classe).</li>
+          </ul>
+        </li>
+        <li>Préparer une phrase simple :  
+          « On va faire en sorte que plusieurs aliens arrivent, mais pas tous en même temps. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Plus d’aliens, plus dur ? » (3–4 min)</h3>
+      <ul>
+        <li>Demander à la classe :  
+          – « Qu’est-ce qui rend un jeu de tir difficile mais amusant ? »</li>
+        <li>Réponses attendues : plus d’ennemis, plus de vitesse, moins de vies…</li>
+        <li>Transition : « On va ajouter quelques aliens de plus, mais on gardera un jeu jouable. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Option simple : dupliquer le sprite Alien (10–15 min)</p>
+      <ul>
+        <li>Dupliquer l’alien existant pour en faire Alien2, Alien3… (1 ou 2 de plus suffisent).</li>
+        <li>Adapter légèrement :
+          <ul>
+            <li>leur position de départ (x différent),</li>
+            <li>éventuellement leur vitesse (changer y de -3 pour un, -5 pour un autre).</li>
+          </ul>
+        </li>
+        <li>Veiller à ce que chaque alien ait le <strong>même système</strong> :  
+          – chute,  
+          – perte de vie en bas,  
+          – gain de Score quand il est touché par le Laser.</li>
+        <li>Tester : vérif que Score augmente bien à chaque alien détruit, que les vies descendent quand un alien passe.</li>
+      </ul>
+
+      <p class="time">Option plus avancée : clones (pour CM1/CM2 à l’aise)</p>
+      <ul>
+        <li>Sur un seul sprite Alien :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « répéter 5 fois » (par exemple) :  
+                · « créer un clone de moi-même »  
+                · « attendre 1 s ».</li>
+            <li>« quand je commence comme clone »  
+              – « aller à x aléatoire entre -200 et 200 y:170 »  
+              – « montrer »  
+              – boucle de descente avec collisions / score / vies, puis :  
+                · « si perdu ou touché → supprimer ce clone ».</li>
+          </ul>
+        </li>
+        <li>À n’utiliser que si les élèves ont déjà vu les clones, sinon rester sur la duplication simple.</li>
+      </ul>
+
+      <p class="time">2) Ajuster la difficulté (10–12 min)</p>
+      <ul>
+        <li>Proposer quelques réglages possibles :
+          <ul>
+            <li>vitesse des aliens,</li>
+            <li>nombre d’aliens en même temps,</li>
+            <li>nombre de vies au départ (2, 3 ou 5).</li>
+          </ul>
+        </li>
+        <li>Demander à chaque élève :  
+          – « Ton jeu, tu le classes comment : facile, moyen ou difficile ? »  
+          – « Qu’est-ce qui le rend comme ça ? »</li>
+      </ul>
+
+      <p class="time">3) Tests en binômes (10–12 min)</p>
+      <ul>
+        <li>Par deux ou trois :  
+          – élève A joue au jeu de B,  
+          – B observe et note :</li>
+        <li>
+          <ul>
+            <li>1 point positif : “J’ai aimé…”</li>
+            <li>1 idée d’amélioration : “Tu pourrais…”</li>
+          </ul>
+        </li>
+        <li>Échanger les rôles après 1–2 parties.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « 10 points maximum » (5 min)</h3>
+      <ul>
+        <li>Consigne : « On joue une dernière fois, mais le but n’est pas d’aller le plus haut possible : il faut essayer de s’arrêter autour de 10 points (entre 8 et 12). »</li>
+        <li>But : jouer calmement, apprendre à se contrôler plutôt qu’à se précipiter.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Nous avons maintenant un vrai jeu de tir spatial : un canon, des lasers,
+        plusieurs aliens qui descendent, un score, des vies et une difficulté que
+        chacun a pu régler. Les élèves ont testé les jeux des autres et remarqué
+        ce qui rend un jeu de tir amusant sans être impossible. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Le laser part de n’importe où</strong>  
+          → Vérifier que, au moment du tir, on a bien « aller à [Canon] » avant de montrer le laser.</li>
+
+        <li><strong>L’alien n’est jamais touché</strong>  
+          → Vérifier que le test « si touche [Laser] » est dans une boucle (répéter indéfiniment).  
+          → Vérifier que c’est bien le bon sprite Laser (et pas un autre nom).</li>
+
+        <li><strong>Score ne change pas</strong>  
+          → Vérifier que « changer Score par 1 » est dans le bon “si touche [Laser]”.  
+          → Vérifier que Score est visible sur la scène.</li>
+
+        <li><strong>Les vies ne descendent pas</strong>  
+          → Vérifier que la condition “y < -160” (ou autre) est bien atteinte.  
+          → Ajouter temporairement un « dire "Je suis en bas" pendant 1 s » pour tester.</li>
+
+        <li><strong>Game Over ne s’affiche jamais</strong>  
+          → Vérifier que le test « si Vies = 0 » est bien après chaque perte de vie.  
+          → Vérifier l’orthographe exacte de la variable (Vies).</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire verbaliser :  
+          – « Que doit faire l’alien quand il touche le bas ? »  
+          – « Que doit faire le laser quand il touche l’alien ? »</li>
+        <li>Insister sur les étapes :  
+          – d’abord 1 alien,  
+          – ensuite le score,  
+          – ensuite les vies,  
+          – ensuite seulement plusieurs aliens.</li>
+        <li>Pour les plus rapides :  
+          – changer les messages (“Bien joué !”, “Attention, plus que 1 vie !”),  
+          – ajouter un petit écran d’accueil avec le titre du jeu.</li>
+        <li>En cas d’agitation :  
+          – proposer une “partie d’observation” : une minute où un seul élève joue pendant que les autres regardent en silence, puis analyser ce que fait le code (“Pourquoi il a perdu ? Pourquoi il a gagné ?”).</li>
+      </ul>
+    </div>
+
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  .algo-section {
+    margin-top: 18px;
+    padding: 18px 16px 20px 16px;
+    border-radius: var(--radius);
+    border: 1px solid #d0d7de;
+    background: #f7f7f7;
+    box-shadow: var(--shadow-soft);
+    font-family: "Courier New", monospace;
+  }
+
+  .algo-section > h2 {
+    color: #2c3e50;
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+  }
+
+  .algo-section > p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .titre-sprite {
+    font-weight: bold;
+    font-size: 0.95rem;
+    background: #eaf2f8;
+    padding: 6px 10px;
+    border-left: 6px solid #5dade2;
+    margin: 10px 0 6px;
+    border-radius: 4px;
+  }
+
+  .bloc {
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-left: 6px solid;
+    background-color: #fff;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+  }
+
+  .evenement { border-color: #FFD500; background: #fff8d1; }
+  .mouvement { border-color: #4C97FF; background: #dceeff; }
+  .apparence { border-color: #9966FF; background: #f0e6ff; }
+  .controle { border-color: #FFAB19; background: #ffe9cc; }
+  .son { border-color: #CF63CF; background: #fce4fc; }
+  .capteurs { border-color: #5CB1D6; background: #e0f6fb; }
+  .operateurs { border-color: #59C059; background: #e5fbe5; }
+
+  @media(max-width:600px){ .algo-section{padding:14px 12px 16px 12px;} }
+</style>
+
+<!-- === ALGORYTHME DU PROJET 10 – TIR SPATIAL === -->
+<div class="algo-section">
+  <h2>🚀 Algorithme du Projet Scratch – Tir Spatial (Canon laser)</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Tir, collisions, score & vies</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🔫 Séance 1 – Canon qui bouge & tir simple</h2>
+
+    <div class="titre-sprite">🌌 Scène – Espace</div>
+    <div class="bloc apparence">dessiner un fond noir avec quelques étoiles</div>
+    <div class="bloc apparence">ajouter une ligne en bas (base du canon)</div>
+
+    <div class="titre-sprite">🧱 Sprite – Canon</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à x:(0) y:(-140)</div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [touche flèche droite pressée ?] → <span class="mouvement">changer x de (6)</span><br>
+      si [touche flèche gauche pressée ?] → <span class="mouvement">changer x de (-6)</span>
+    </div>
+
+    <div class="titre-sprite">🔴 Sprite – Laser</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → <span class="apparence">cacher</span></div>
+    <div class="bloc evenement">quand [touche espace pressée]</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      <span class="mouvement">aller à [Canon]</span> → <span class="apparence">montrer</span><br>
+      répéter jusqu’à <span class="operateurs">y > 180</span> → <span class="mouvement">changer y de (10)</span><br>
+      <span class="apparence">cacher</span>
+    </div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>👾 Séance 2 – Aliens, collisions & score</h2>
+
+    <div class="titre-sprite">👽 Sprite – Alien</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à x:(nombre aléatoire -200 à 200) y:(170)</div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc mouvement" style="margin-left:20px;">changer y de (-4)</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [touche [Laser] ?] alors → <span class="controle">changer [Score] de (1)</span> →  
+      <span class="son">jouer un son court</span> →  
+      <span class="mouvement">aller à x:(nombre aléatoire -200 à 200) y:(170)</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">y &lt; -160</span> alors →  
+      <span class="controle">changer [Vies] de (-1)</span> →  
+      <span class="mouvement">aller à x:(nombre aléatoire -200 à 200) y:(170)</span>
+    </div>
+
+    <div class="titre-sprite">📊 Variables</div>
+    <div class="bloc controle">créer [Score] et [Vies]</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué →  
+      <span class="controle">mettre [Score] à (0)</span> et <span class="controle">mettre [Vies] à (3)</span>
+    </div>
+
+    <div class="bloc controle">si <span class="operateurs">Vies = 0</span> alors →  
+      <span class="apparence">dire [Game Over] pendant (2) secondes</span> →  
+      <span class="controle">arrêter tous</span>
+    </div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🌠 Séance 3 – Plusieurs aliens, difficulté & tests</h2>
+
+    <div class="titre-sprite">👾 Option simple : plusieurs sprites</div>
+    <div class="bloc controle">dupliquer le sprite [Alien]</div>
+    <div class="bloc mouvement">modifier leur vitesse (ex. -3, -5) ou leur position de départ</div>
+    <div class="bloc controle">chacun conserve la même logique : chute, collision, score et vies</div>
+
+    <div class="titre-sprite">🌀 Option avancée : clones (CM1/CM2)</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → répéter (5) fois → <span class="controle">créer un clone de moi-même</span> → <span class="controle">attendre (1) seconde</span></div>
+    <div class="bloc evenement">quand je commence comme clone → <span class="mouvement">aller à x:(aléatoire -200 à 200) y:(170)</span> → exécuter la boucle de descente et de collisions</div>
+
+    <div class="titre-sprite">⚙️ Réglage de difficulté</div>
+    <div class="bloc controle">modifier vitesse des aliens, nombre de vies ou fréquence de clones</div>
+    <div class="bloc controle">demander aux élèves : “Ton jeu est facile, moyen ou difficile ?”</div>
+
+    <div class="titre-sprite">🎮 Tests en binômes</div>
+    <div class="bloc apparence">A joue au jeu de B, B observe et donne un point positif et une idée d’amélioration</div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc apparence">ajouter un écran de démarrage (“Appuie sur espace pour jouer”)</div>
+    <div class="bloc son">jouer un son [laser] à chaque tir</div>
+    <div class="bloc son">jouer un son [explosion] quand un alien est détruit</div>
+    <div class="bloc apparence">changer de fond selon le niveau (espace clair / sombre)</div>
+    <div class="bloc controle">ajouter une condition de victoire : “si Score = 10 alors dire [Mission réussie !]”</div>
+  </div>
+</div>
+
+  </div>
+</body>
+</html>

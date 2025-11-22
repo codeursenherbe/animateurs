@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 11 – Jeu de réflexes « Clique la cible » | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 11 – Jeu de réflexes « Clique la cible »</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 2 séances · Réaction, hasard & compte à rebours</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu de vitesse / réflexes</span>
+      <p>
+        Les élèves créent un jeu de réflexes : une cible apparaît à des positions
+        aléatoires sur l’écran, le joueur doit cliquer dessus le plus vite
+        possible pour gagner des points avant la fin du temps. On peut ajouter
+        plusieurs niveaux de difficulté en jouant sur la vitesse d’apparition,
+        la taille de la cible ou la durée du chronomètre.
+      </p>
+      <p class="meta">
+        Organisation type : 2 séances de 45 min.  
+        Recommandation : commencer avec une seule cible, sans niveaux, puis complexifier.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Utiliser le clic de souris pour interagir (« quand ce sprite est cliqué »).</li>
+        <li>Utiliser des positions aléatoires (<strong>x aléatoire</strong>, <strong>y aléatoire</strong>).</li>
+        <li>Créer et manipuler des variables (<strong>Score</strong>, <strong>Temps</strong>).</li>
+        <li>Programmer un <strong>compte à rebours</strong>.</li>
+        <li>Structurer une boucle de jeu simple : apparition → clic → disparition → réapparition.</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Cible qui apparaît et score au clic</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a une cible qui apparaît/disparaît et un score qui augmente à chaque clic réussi.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Décider du style de cible : simple rond coloré, ou petite image (bouton, ballon…).</li>
+        <li>Préparer un exemple oral de règle :  
+          « Quand tu vois la cible, tu cliques dessus. Chaque clic te donne 1 point. »</li>
+        <li>Gardez en tête une plage raisonnable pour les positions aléatoires :  
+          – x entre -200 et 200,  
+          – y entre -130 et 130 (pour ne pas sortir de l’écran).</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – « Touche la cible du doigt » (3–4 min)</h3>
+      <ul>
+        <li>Au tableau, dessiner une grande cible (ou coller une feuille).</li>
+        <li>Demander à un élève de venir au tableau, dos tourné.</li>
+        <li>Au signal « GO », il se retourne et doit toucher la cible du doigt le plus vite possible.</li>
+        <li>Transition : « Dans Scratch, ce sera la souris qui viendra toucher la cible en cliquant. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer la scène & la cible (5–8 min)</p>
+      <ul>
+        <li>Arrière-plan : couleur neutre et claire, pour bien voir la cible.</li>
+        <li>Créer un sprite « Cible » :  
+          – cercle coloré (rouge, vert, etc.) ou petite image simple,  
+          – taille assez grande au début (facile à cliquer).</li>
+        <li>Le placer au centre de la scène pour les premiers tests.</li>
+      </ul>
+
+      <p class="time">2) Faire apparaître / disparaître la cible (10–12 min)</p>
+      <ul>
+        <li>Script de base sur la cible :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « montrer »  
+              – « répéter indéfiniment » :  
+                · « attendre (1) seconde »  
+                · « aller à x: nombre aléatoire entre -200 et 200 y: nombre aléatoire entre -130 et 130 ».</li>
+          </ul>
+        </li>
+        <li>Expliquer :  
+          « Toutes les secondes, la cible se téléporte à un endroit aléatoire de l’écran. »</li>
+        <li>Tester : voir la cible sauter à différentes positions.</li>
+      </ul>
+
+      <p class="time">3) Créer la variable Score (5–7 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Score</strong> (pour tous les sprites).</li>
+        <li>Au début (dans “quand drapeau vert cliqué” soit sur la cible soit sur un sprite gestion) :  
+          – « mettre Score à 0 ».</li>
+        <li>Afficher la variable Score sur la scène.</li>
+      </ul>
+
+      <p class="time">4) Ajouter le clic sur la cible (10–15 min)</p>
+      <ul>
+        <li>Sur la cible, ajouter :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué »  
+              – « changer Score par 1 »  
+              – « jouer un son (optionnel) »  
+              – « aller à x aléatoire / y aléatoire »  
+              – « attendre 0.2 s » (petite pause pour éviter le double-clic). </li>
+          </ul>
+        </li>
+        <li>Maintenir la boucle générale d’apparition (le “répéter indéfiniment”).</li>
+        <li>Tester calmement : cliquer la cible, voir le Score monter.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler une règle : « On clique uniquement sur la cible, pas partout sur l’écran. »</li>
+        <li>En cas de spam de clics :  
+          – proposer un “mode entraînement lent” : augmenter « attendre » à 1,5 s et rappeler que le but est la précision, pas le bruit.</li>
+        <li>Pour les rapides : autoriser à changer la couleur de la cible ou à dessiner un joli fond, mais sans toucher encore au temps ni à la difficulté.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « 10 clics propres » (3–5 min)</h3>
+      <ul>
+        <li>Consigne : « Essayez d’atteindre un Score de 10 en cliquant la cible, sans cliquer à côté. Si vous cliquez à côté, vous ralentissez votre Score. »</li>
+        <li>But : tester la précision, pas la compétition de vitesse entre élèves.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons créé une cible qui se déplace de manière
+        aléatoire sur l’écran, et un Score qui augmente quand on clique dessus.
+        La prochaine fois, nous ajouterons un chronomètre, une vraie fin de partie
+        et peut-être plusieurs niveaux de difficulté. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Chronomètre, fin de partie & difficulté</h2>
+      <p class="meta">Objectif : ajouter un compte à rebours, une fin de partie et éventuellement des niveaux de difficulté.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Choisir une durée de jeu simple : 20 ou 30 secondes par partie.</li>
+        <li>Préparer une phrase pour expliquer :  
+          « Quand le temps atteint 0, la partie s’arrête et le Score final s’affiche. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « 10 secondes pour… » (3–4 min)</h3>
+      <ul>
+        <li>Dire : « Vous avez 10 secondes pour vous lever, toucher le mur du fond et revenir vous asseoir. » (adapter à l’espace).</li>
+        <li>Compter à voix haute : 10, 9, 8… puis stop.</li>
+        <li>Transition : « Notre jeu va lui aussi avoir un temps limité pour cliquer la cible. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Ajouter la variable Temps (compte à rebours) (10–15 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Temps</strong> (pour tous les sprites).</li>
+        <li>Décider de la durée (par ex. 20 secondes).</li>
+        <li>Sur un sprite “Gestion” ou sur la cible :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « mettre Temps à 20 »  
+              – « mettre Score à 0 »  
+              – « répéter jusqu’à ce que Temps = 0 » :  
+                · « attendre 1 seconde »  
+                · « changer Temps par -1 »  
+              – après la boucle :  
+                · « dire "Temps écoulé ! Score final : " + Score pendant 3 s »  
+                · « arrêter tous ».</li>
+          </ul>
+        </li>
+        <li>Afficher la variable Temps sur la scène.</li>
+        <li>Tester : sans s’occuper de cliquer, juste vérifier que le temps descend bien jusqu’à 0.</li>
+      </ul>
+
+      <p class="time">2) Adapter la cible au chronomètre (10–12 min)</p>
+      <ul>
+        <li>La boucle « répéter indéfiniment » de la cible peut rester telle quelle, mais on peut l’arrêter en fin de jeu :</li>
+        <li>
+          <ul>
+            <li>Option simple : laisser la cible continuer d’apparaître, mais accepter que tout s’arrête avec « arrêter tous » dans le script du Temps.</li>
+          </ul>
+        </li>
+        <li>Rappeler aux élèves :  
+          « Tant que Temps est au-dessus de 0, tu peux continuer à cliquer. Quand Temps atteint 0, tout s’arrête. »</li>
+      </ul>
+
+      <p class="time">3) Difficulter le jeu (10–15 min)</p>
+      <ul>
+        <li>Proposer plusieurs pistes de difficulté (choisir 1 ou 2 pour éviter l’usine à gaz) :</li>
+        <li>
+          <ul>
+            <li><strong>Taille de la cible</strong> :  
+              – facile : cible grande,  
+              – difficile : cible plus petite.</li>
+            <li><strong>Vitesse de déplacement</strong> :  
+              – facile : « attendre 1 seconde » entre les déplacements,  
+              – difficile : 0,5 seconde.</li>
+            <li><strong>Score bonus</strong> :  
+              – ajouter : « si Score ≥ 15 alors dire "Super rapide !" pendant 2 s »  
+              – ou des paliers : message différent si Score ≥ 10, etc.</li>
+          </ul>
+        </li>
+        <li>Demander à chaque élève :  
+          – « Est-ce que ton jeu est facile, moyen ou difficile ? »  
+          – « Qu’est-ce que tu as modifié pour ça ? »</li>
+      </ul>
+
+      <p class="time">4) Tests en binômes (8–10 min)</p>
+      <ul>
+        <li>Par deux :  
+          – élève A joue au jeu de B pendant 1 ou 2 manches,  
+          – B observe et évalue :</li>
+        <li>
+          <ul>
+            <li>« Est-ce que le temps est trop long ou trop court ? »</li>
+            <li>« Est-ce que la cible est trop simple ou trop difficile à cliquer ? »</li>
+          </ul>
+        </li>
+        <li>Ensuite, ils inversent les rôles.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Score raisonnable » (5 min)</h3>
+      <ul>
+        <li>Consigne : « On joue une dernière fois, mais l’objectif n’est pas d’avoir le plus gros score du monde. Essayez d’avoir un score compris entre 8 et 12. »</li>
+        <li>But : travailler l’auto-contrôle et calmer l’ambiance en fin de séance.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons transformé l’exercice de clic en vrai jeu :
+        un temps limité, un score, une fin de partie et parfois des niveaux
+        plus ou moins difficiles. Les élèves ont testé les jeux des autres et
+        réfléchi à ce qui rend un jeu de réflexes amusant sans être frustrant. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Score ne change pas</strong>  
+          → Vérifier que le bloc « changer Score par 1 » est bien dans « quand ce sprite est cliqué ».  
+          → Tester en cliquant lentement sur la cible.</li>
+
+        <li><strong>La cible sort de l’écran</strong>  
+          → Réduire la plage des nombres aléatoires :  
+          – x : -200 à 200,  
+          – y : -130 à 130.</li>
+
+        <li><strong>Le temps ne descend pas</strong>  
+          → Vérifier que la boucle « répéter jusqu’à ce que Temps = 0 » contient bien « attendre 1 seconde » et « changer Temps par -1 ».  
+          → Vérifier que Temps est visible sur la scène.</li>
+
+        <li><strong>La partie ne s’arrête jamais</strong>  
+          → Vérifier la condition de sortie : « répéter jusqu’à ce que Temps = 0 » (et non l’inverse).  
+          → Vérifier qu’on utilise bien « arrêter tous » à la fin du script du temps.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire expliquer aux élèves la différence entre :  
+          – précision (cliquer bien sur la cible),  
+          – vitesse (cliquer vite),  
+          – et “spam” (cliquer partout) → qui n’est pas efficace.</li>
+        <li>Encourager à modifier un seul paramètre à la fois (taille de cible, temps, vitesse) pour observer l’effet.</li>
+        <li>Pour les plus rapides :  
+          – ajouter un deuxième type de cible qui rapporte plus de points (mais apparaît moins souvent),  
+          – ou un message spécial si Score dépasse un certain seuil.</li>
+        <li>En cas d’agitation : annoncer une “manche silencieuse” :  
+          – tout le monde joue une partie complète sans parler, puis on commente ensemble ce qui s’est passé. </li>
+      </ul>
+    </div>
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  .algo-section {
+    margin-top: 18px;
+    padding: 18px 16px 20px 16px;
+    border-radius: var(--radius);
+    border: 1px solid #d0d7de;
+    background: #f7f7f7;
+    box-shadow: var(--shadow-soft);
+    font-family: "Courier New", monospace;
+  }
+  .algo-section>h2{color:#2c3e50;margin-bottom:4px;font-size:1.05rem;}
+  .algo-section>p{font-size:.85rem;color:#555;margin-bottom:10px;}
+  .titre-sprite{font-weight:bold;font-size:.95rem;background:#eaf2f8;
+    padding:6px 10px;border-left:6px solid #5dade2;margin:10px 0 6px;
+    border-radius:4px;}
+  .bloc{padding:6px 10px;margin:4px 0;border-left:6px solid;
+    background:#fff;border-radius:6px;font-size:.85rem;
+    box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .evenement{border-color:#FFD500;background:#fff8d1;}
+  .mouvement{border-color:#4C97FF;background:#dceeff;}
+  .apparence{border-color:#9966FF;background:#f0e6ff;}
+  .controle{border-color:#FFAB19;background:#ffe9cc;}
+  .son{border-color:#CF63CF;background:#fce4fc;}
+  .capteurs{border-color:#5CB1D6;background:#e0f6fb;}
+  .operateurs{border-color:#59C059;background:#e5fbe5;}
+  @media(max-width:600px){.algo-section{padding:14px 12px 16px 12px;}}
+</style>
+
+<!-- === ALGORYTHME DU PROJET 11 – JEU DE RÉFLEXES « CLIQUE LA CIBLE » === -->
+<div class="algo-section">
+  <h2>🎯 Algorithme du Projet Scratch – Jeu de réflexes « Clique la cible »</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 2 séances · Réaction, hasard & compte à rebours</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>👆 Séance 1 – Cible qui apparaît et score au clic</h2>
+
+    <div class="titre-sprite">🎨 Scène & Sprite : Cible</div>
+    <div class="bloc apparence">fond clair, couleur unie pour bien voir la cible</div>
+    <div class="bloc apparence">dessiner un cercle coloré (rouge, vert …)</div>
+
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc apparence">montrer</div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc mouvement" style="margin-left:20px;">
+      attendre (1) seconde<br>
+      aller à x:(nombre aléatoire -200 à 200) y:(nombre aléatoire -130 à 130)
+    </div>
+
+    <div class="titre-sprite">📊 Variable : Score</div>
+    <div class="bloc controle">créer [Score]</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → mettre [Score] à (0)</div>
+
+    <div class="titre-sprite">🖱️ Clic sur la cible</div>
+    <div class="bloc evenement">quand ce sprite est cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      changer [Score] de (1)<br>
+      <span class="son">jouer un son (optionnel)</span><br>
+      aller à x/y aléatoires <br>
+      attendre (0.2) s
+    </div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>⏱️ Séance 2 – Chronomètre, fin de partie & difficulté</h2>
+
+    <div class="titre-sprite">🕒 Variable : Temps</div>
+    <div class="bloc controle">créer [Temps]</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      mettre [Temps] à (20)<br>
+      mettre [Score] à (0)<br>
+      répéter jusqu’à ce que [Temps = 0] :<br>
+      <span class="controle" style="margin-left:20px;">attendre (1) seconde</span><br>
+      <span class="controle" style="margin-left:20px;">changer [Temps] de (-1)</span><br>
+      après : dire [Temps écoulé ! Score final : (Score)] pendant (3) s puis arrêter tous
+    </div>
+
+    <div class="titre-sprite">⚙️ Ajuster la difficulté</div>
+    <div class="bloc controle">réduire la taille de la cible pour un mode difficile</div>
+    <div class="bloc controle">accélérer le déplacement : attendre (0.5) s au lieu de 1 s</div>
+    <div class="bloc controle">ajouter un message :  
+      si [Score ≥ 15] → dire [Super rapide !] pendant (2) s
+    </div>
+
+    <div class="titre-sprite">🤝 Tests en binômes</div>
+    <div class="bloc apparence">
+      A joue au jeu de B puis inverse ; chacun donne 1 point positif et 1 idée d’amélioration
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc apparence">ajouter un deuxième type de cible (valant +2 points)</div>
+    <div class="bloc controle">modifier la durée du jeu (Temps = 30 s ou 15 s)</div>
+    <div class="bloc son">jouer un son différent selon la vitesse ou le score</div>
+    <div class="bloc apparence">afficher un message final personnalisé selon le score :</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [Score ≥ 10] → dire [Excellent !] sinon dire [Tu peux faire mieux !]
+    </div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</body>
+</html>

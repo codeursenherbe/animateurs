@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+
+
+
+<meta name="robots" content="noindex, nofollow" />
+
+  <!-- 🔥 Ajout du fichier CSS externe -->
+  <link rel="stylesheet" href="style.css">
+
+
+  <meta charset="UTF-8" />
+  <title>Espace Animateurs – Codeurs en Herbe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+</head>
+<body>
+
+  <div class="page">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <main>
+      <!-- HERO : titre + texte + gros boutons -->
+      <section class="hero">
+
+<!-- ============================= -->
+<!-- 🔍 BARRE DE RECHERCHE GLOBALE -->
+<!-- ============================= -->
+
+<div class="search-wrapper">
+  <input 
+    type="text" 
+    id="globalSearch" 
+    class="search-input" 
+    placeholder="🔍 Rechercher un projet, une vidéo, une consigne..."
+  >
+</div>
+
+
+        <div class="hero-header">
+          <div class="hero-logo">
+            <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+          </div>
+          <div class="hero-title-block">
+            <h1>Espace Animateurs – <span>Codeurs en Herbe</span></h1>
+            <p class="hero-subtitle">
+              Espace ressources pour vos ateliers Scratch CE2–CM1–CM2&nbsp;:
+              projets, planning, formulaires et consignes pratiques.
+            </p>
+            <p class="welcome">
+              👋 Bienvenue dans l’espace des animateurs Codeurs en Herbe&nbsp;!<br>
+              Retrouvez ici les projets, outils et ressources pédagogiques pour vos ateliers Scratch.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="https://docs.google.com/spreadsheets/d/1QIht_T4wIgcH5s1BcNUdzleWLJ_E8ijpN53-Xa6grMc/edit?usp=sharing"
+             target="_blank" class="btn-main">
+            📅 Voir le Planning
+          </a>
+          <a href="https://forms.gle/Lzfy86LSFJsrfND57"
+             target="_blank" class="btn-secondary">
+            📝 Je résume ma Séance
+          </a>
+          <a href="https://docs.google.com/spreadsheets/d/1QIht_T4wIgcH5s1BcNUdzleWLJ_E8ijpN53-Xa6grMc/edit?gid=93027188#gid=93027188"
+             target="_blank" class="btn-secondary">
+            🔎 Résumés des séances précédentes
+          </a>
+         
+        </div>
+      </section>
+
+      <!-- Identité pédagogique CEH : pliée/dépliée -->
+      <details class="fold pedago" id="pedago">
+        <summary>
+          <span class="fold-title">🎓 Notre pédagogie · Identité CEH</span>
+          <span class="fold-sub">Piliers, mantras, charte, conventions & outils pratiques</span>
+          <span class="fold-caret" aria-hidden="true"></span>
+        </summary>
+
+        <div class="fold-content">
+          <!-- PILIERS + MANTRAS -->
+          <div class="grid-2">
+            <div>
+              <h3 class="sub-title">Les 3 piliers</h3>
+              <div class="grid-3">
+                <div class="tile">
+                  <strong>Apprendre en créant</strong><br>
+                  <span class="muted">Toujours un objet visible (jeu, scène, quiz) à montrer en 10–15 min.</span>
+                  <ul class="clean" style="margin-top:6px">
+                    <li>Projet 10 (Tir spatial) → un tir unique avant les clones.</li>
+                    <li>Projet 12 (Mini-boutique) → 3 produits avant d’ajouter budget.</li>
+                    <li>Projet 14 (Machine à sons) → 4 touches avant la boucle auto.</li>
+                  </ul>
+                </div>
+                <div class="tile">
+                  <strong>Décomposer</strong><br>
+                  <span class="muted">Découper en micro-étapes + tester après chaque ajout.</span>
+                  <ul class="clean" style="margin-top:6px">
+                    <li><strong>Rythme 3–5–2 :</strong> 3 min d’explication, 5 min de code, 2 min de test.</li>
+                    <li>Un seul paramètre change à la fois.</li>
+                    <li>On fixe un <em>“min viable”</em> avant tout bonus.</li>
+                  </ul>
+                </div>
+                <div class="tile">
+                  <strong>Coopérer</strong><br>
+                  <span class="muted">Pairs observateurs : expliquer, vérifier, proposer une micro-amélioration.</span>
+                  <ul class="clean" style="margin-top:6px">
+                    <li>30 s d’observation → 1 hypothèse de test.</li>
+                    <li>Feedback sandwich : 👍 → à revoir → 👍.</li>
+                    <li>“Je verbalise pendant que tu cliques”.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <h3 class="sub-title" style="margin-top:14px">Mantras en séance</h3>
+              <ul class="clean">
+                <li>Une étape à la fois</li>
+                <li>Teste petit et souvent</li>
+                <li>Explique ton code à voix haute</li>
+                <li>On ne clique pas vite, on clique juste</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="sub-title">Charte animateur (6 points)</h3>
+              <ul class="clean checklist">
+                <li>Cadre clair : objectifs, temps, règles.</li>
+                <li>Guidage minimal : orienter sans donner la solution.</li>
+                <li>Pensée algo : “quelles étapes ?”.</li>
+                <li>Erreur = donnée : lire → reproduire → corriger.</li>
+                <li>Pacing : explication courte → 3 min code → test.</li>
+                <li>Clôture : sauvegarde + “ce que j’ai compris”.</li>
+              </ul>
+
+              <h3 class="sub-title" style="margin-top:14px">Langage commun</h3>
+              <div class="tile" style="min-height:auto">
+                <div style="text-align:left">
+                  <div>• “Qu’est-ce que ton programme <em>fait</em> à chaque étape ?”</div>
+                  <div>• “Montre-moi la plus petite partie du code qui marche.”</div>
+                  <div>• “Si ça marche une fois, on généralise.”</div>
+                  <div>• “Quelle variable garde la mémoire ici ?”</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONVENTIONS + FEEDBACK -->
+          <div class="grid-2-wide" style="margin-top:14px">
+            <div class="card" style="background:#121a2b;border-color:rgba(255,255,255,.08);">
+              <h3 class="sub-title" style="margin-top:0">Conventions (douces)</h3>
+              <p class="muted" style="margin:0">
+                <strong>Variables :</strong> Score, Vies, Temps, aCle, DirectionTir<br>
+                <strong>Messages :</strong> TirCommence, MAJ_HUMEUR, NouvelleManche<br>
+                <strong>Costumes :</strong> costume1_neutre, costume2_content, …<br>
+                <strong>Fichiers :</strong> <span class="kbd">projets.html</span>, <span class="kbd">consignes-ecoles-nancy.html</span>, <span class="kbd">consignes-sigis.html</span>
+              </p>
+              <ul class="clean donts" style="margin-top:8px">
+                <li>Noms vagues : “data”, “truc” → préférer des noms explicites.</li>
+                <li>Messages génériques : “go/ok” → préférer des messages métier (“TirCommence”).</li>
+                <li>Empiler des blocs sans test → toujours un test court après un ajout.</li>
+              </ul>
+            </div>
+
+            <div class="card" style="background:#121a2b;border-color:rgba(255,255,255,.08);">
+              <h3 class="sub-title" style="margin-top:0">Feedback élève (positif + actionnable)</h3>
+              <p class="muted" style="margin:0">
+                <strong>Bravo :</strong> ce qui marche (et pourquoi).<br>
+                <strong>À clarifier :</strong> nom de variable / consigne.<br>
+                <strong>Prochain pas :</strong> micro-étape concrète (ex. “ajouter le test si…”).
+              </p>
+              <ul class="clean" style="margin-top:8px">
+                <li>✅ Affichage en 10 min (quelque chose se passe à l’écran).</li>
+                <li>✅ Une variable “clé” visible qui change (Score/Vies/Temps…).</li>
+                <li>✅ L’élève explique 2 étapes de son algorithme à l’oral.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- OUTILS PRATIQUES EN PLUS -->
+          <div class="grid-2-wide" style="margin-top:14px">
+            <div class="tile">
+              <h3 class="sub-title" style="margin-top:0">Scaffold algorithmique (prêt à dicter)</h3>
+              <div class="callout">
+                <strong>Entrées</strong> → <span class="muted">qu’est-ce qui déclenche ?</span><br>
+                <strong>Étapes</strong> → <span class="muted">dans quel ordre ?</span><br>
+                <strong>Tests</strong> → <span class="muted">si… alors… sinon…</span><br>
+                <strong>Sortie</strong> → <span class="muted">qu’est-ce qu’on voit ?</span>
+              </div>
+              <ul class="clean" style="margin-top:8px">
+                <li><strong>Tir spatial :</strong> Entrée = espace → Étapes = “aller au canon”, “monter” → Test = “touche Alien ?” → Sortie = Score +1.</li>
+                <li><strong>Mini-boutique :</strong> Entrée = clic produit → Étapes = Total = Total + prix → Test = “Total ≤ Budget ?” → Sortie = message “peut payer”.</li>
+                <li><strong>Labyrinthe :</strong> Entrée = flèches → Étapes = bouger → Test = “touche couleur mur ?” → Sortie = revenir en arrière.</li>
+              </ul>
+            </div>
+
+            <div class="tile">
+              <h3 class="sub-title" style="margin-top:0">Routines d’ambiance & gestion du calme</h3>
+              <ul class="clean checklist">
+                <li><strong>Pause 60 s silencieuse</strong> → on respire, on observe un binôme.</li>
+                <li><strong>“Mode test”</strong> → 2 min sans ajouter de blocs : on exécute et on lit.</li>
+                <li><strong>“Écho”</strong> → je dis la consigne, 2 élèves la répètent avec leurs mots.</li>
+              </ul>
+              <ul class="clean" style="margin-top:6px">
+                <li>Un objectif commun + 1 bonus pour les rapides (son, effet, message).</li>
+                <li>Repères visuels (pictos, couleurs) pour lecteurs fragiles.</li>
+                <li>Pairing “pilote / navigateur” (le navigateur verbalise).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+
+<details class="fold videos-ceh" id="tutos-video">
+  <summary>
+    <span class="fold-title">🎥 Tutoriels vidéo Scratch</span>
+    <span class="fold-sub">23 vidéos · Débutants + Experts · Explications courtes & efficaces</span>
+    <span class="fold-caret" aria-hidden="true"></span>
+  </summary>
+
+  <div class="fold-content">
+
+    <p class="muted" style="margin-bottom:15px;">
+      Retrouvez ici l’ensemble des vidéos pédagogiques CEH : 10 vidéos débutants + 13 vidéos avancées.  
+      Chaque carte contient la vidéo YouTube intégrée + un résumé clair et concis.
+    </p>
+
+    <!-- ========================================================= -->
+    <!-- 🔵 SECTION 1 — DÉBUTANTS (10 vidéos) -->
+    <!-- ========================================================= -->
+
+    <h3 class="sub-title" style="margin-top:10px;">🔵 Niveau Débutant (10 vidéos)</h3>
+
+    <div class="video-grid">
+
+      <!-- 1 -->
+      <div class="video-card">
+        <h4>Interface Scratch</h4>
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/KPwbsSmV_1k" allowfullscreen></iframe></div>
+        <p class="video-desc">Découverte complète de l’interface : scène, blocs, scripts, sprites, menus et organisation générale.</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="video-card">
+        <h4>Restaurer un sprite / blocs</h4>
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/GVYX-iotsj4" allowfullscreen></iframe></div>
+        <p class="video-desc">Comment récupérer un sprite ou un script supprimé via l’historique ou les options de restauration.</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="video-card">
+        <h4>Boucle répéter</h4>
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/Q5Ck-dFAwL8" allowfullscreen></iframe></div>
+        <p class="video-desc">Comprendre et utiliser la boucle “répéter” pour créer des actions répétées ou rythmiques.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="video-card">
+        <h4>Choisir un sprite</h4>
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/x59uLgd_wfY" allowfullscreen></iframe></div>
+        <p class="video-desc">Comment afficher, filtrer et ajouter des sprites depuis la bibliothèque Scratch.</p>
+      </div>
+
+      <!-- 5 -->
+      <div class="video-card">
+        <h4>Changer sprite associé</h4>
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/kJ0SuEy7WRQ" allowfullscreen></iframe></div>
+        <p class="video-desc">Associer un script existant à un autre sprite et gérer correctement les interactions.</p>
+      </div>
+
+      <!-- 6 -->
+      <div class="video-card">
+        <h4>Blocs Stylo</h4>
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/vOnax3i5erI" allowfullscreen></iframe></div>
+        <p class="video-desc">Apprendre à dessiner avec Scratch : tracés, épaisseur, couleurs, déplacements programmés.</p>
+      </div>
+
+      <!-- 7 -->
+      <div class="video-card">
+        <h4>Modifier costumes</h4>
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/dxRCiIjVCkk" allowfullscreen></iframe></div>
+        <p class="video-desc">Modifier les costumes, créer des variations graphiques et préparer des animations simples.</p>
+      </div>
+
+      <!-- 8 -->
+      <div class="video-card">
+        <h4>Dessiner un sprite</h4>
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/CchlSYjtl6A" allowfullscreen></iframe></div>
+        <p class="video-desc">Utilisation de l’éditeur graphique pour dessiner un sprite : pinceau, formes, importation.</p>
+      </div>
+
+      <!-- 9 -->
+      <div class="video-card">
+        <h4>Déplacer un personnage</h4>
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/qMwQgeVCShI" allowfullscreen></iframe></div>
+        <p class="video-desc">Déplacement simple d’un personnage : avancer, tourner, gestion des trajectoires.</p>
+      </div>
+
+      <!-- 10 -->
+      <div class="video-card">
+        <h4>Faire parler un lutin</h4>
+        <div class="video-wrap"><iframe src="https://www.youtube.com/embed/Aqvmo6-_Dlc" allowfullscreen></iframe></div>
+        <p class="video-desc">Utilisation des bulles “dire” et “penser”, synchronisation et mise en scène des dialogues.</p>
+      </div>
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- 🔶 SECTION 2 — EXPERTS (13 vidéos) -->
+    <!-- ========================================================= -->
+
+    <h3 class="sub-title" style="margin-top:30px;">🔶 Niveau Expert (13 vidéos)</h3>
+
+    <div class="video-grid">
+
+      <div class="video-card"><h4>Les blocs son</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/mbe8ulk0IZ0" allowfullscreen></iframe></div><p class="video-desc">Comprendre et utiliser les blocs son : intensité, rythme, effets, actions instantanées.</p></div>
+
+      <div class="video-card"><h4>GIF animés en arrière-plan</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/6-NM4L8v1oc" allowfullscreen></iframe></div><p class="video-desc">Intégrer un GIF animé dans Scratch et l’utiliser comme fond dynamique.</p></div>
+
+      <div class="video-card"><h4>Fusionner deux projets Scratch</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/6iaO5iZ1yZY" allowfullscreen></iframe></div><p class="video-desc">Comment combiner deux projets Scratch en un seul sans perdre les scripts.</p></div>
+
+      <div class="video-card"><h4>Créer une scène qui bouge (scrolling)</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/vZYKwaoTx9E" allowfullscreen></iframe></div><p class="video-desc">Créer l’effet de déplacement d’un décor comme dans les jeux de plateforme.</p></div>
+
+      <div class="video-card"><h4>Créer un décor animé</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/G54o0bZNY8g" allowfullscreen></iframe></div><p class="video-desc">Décors dynamiques : animations, transitions, effets visuels.</p></div>
+
+      <div class="video-card"><h4>Créer une barre de vie</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/xq1bT78o3QQ" allowfullscreen></iframe></div><p class="video-desc">Créer une barre de vie évolutive pour les jeux : variables, costumes, conditions.</p></div>
+
+      <div class="video-card"><h4>Créer une vie multiple</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/5lkwzsY1fmg" allowfullscreen></iframe></div><p class="video-desc">Système de vies multiples avec sprites et compteurs graphiques.</p></div>
+
+      <div class="video-card"><h4>Ajouter un timer</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/jsgtXY8W7e8" allowfullscreen></iframe></div><p class="video-desc">Ajouter un chrono précis, retour au calme ou défis de rapidité.</p></div>
+
+      <div class="video-card"><h4>Créer un écran de fin</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/IDiRvWR3pWY" allowfullscreen></iframe></div><p class="video-desc">Créer un écran GAME OVER ou BRAVO avec messages et animations.</p></div>
+
+      <div class="video-card"><h4>Créer un écran de début</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/CMWx3-mwpE8" allowfullscreen></iframe></div><p class="video-desc">Créer un menu : bouton “Commencer”, consigne d’accueil, transition.</p></div>
+
+      <div class="video-card"><h4>Créer un écran pause</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/XgT2vnDnt0k" allowfullscreen></iframe></div><p class="video-desc">Mettre le jeu en pause : gel des scripts, écran temporaire, reprise.</p></div>
+
+      <div class="video-card"><h4>Créer un sprite qui suit la souris</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/YhuYPpl7q6w" allowfullscreen></iframe></div><p class="video-desc">Déplacements fluides basés sur la souris : poursuite, lissage, inertie.</p></div>
+
+      <div class="video-card"><h4>Créer des dialogues avancés</h4><div class="video-wrap"><iframe src="https://www.youtube.com/embed/6YjGfWix2LE" allowfullscreen></iframe></div><p class="video-desc">Dialogues scénarisés, choix multiples, synchronisation audio/animation.</p></div>
+
+    </div> 
+</details>
+
+<!-- ========================================================= -->
+<!-- 🕹️ ACCORDEON — PROJETS SCRATCH CEH -->
+<!-- ========================================================= -->
+
+<details class="fold" id="projets-scratch">
+  <summary>
+    <span class="fold-title">🕹️ Projets Scratch CEH – projets complets avec code</span>
+    <span class="fold-sub">CE2 · CM1 · CM2 — Fiches + Codes Scratch</span>
+    <span class="fold-caret" aria-hidden="true"></span>
+  </summary>
+
+  <div class="fold-content">
+
+    <div class="container">
+      
+      <!-- INTRO PROJETS -->
+      <section class="card intro">
+        <h2>Espace Animateurs – Projets Scratch CE2–CM1–CM2</h2>
+        <p>
+          25 projets progressifs pour ateliers Scratch : fiches complètes,
+          consignes pédagogiques, jeux de fin de séance et dépannage rapide.
+        </p>
+        <p>
+          Chaque carte ci-dessous correspond à un projet.  
+          Le bouton <strong>« Fiche »</strong> ouvre la fiche détaillée  
+          (<code>projet01.html</code> → <code>projet20.html</code> + projets externes).
+        </p>
+        <ul>
+          <li>Objectifs et compétences travaillées.</li>
+          <li>Déroulés séance par séance (45 min).</li>
+          <li>Jeux d’ouverture & clôture.</li>
+          <li>Bugs fréquents et correctifs rapides.</li>
+        </ul>
+      </section>
+
+      <!-- GRILLE DES PROJETS -->
+      <section class="projects-grid">
+
+        <!-- 🔥 ICI commencent les 25 projets EXACTEMENT comme tu les avais -->
+        <!-- Je n’ai absolument rien modifié dans tes cartes -->
+        <!-- Juste encapsulé dans un accordion, aucun impact visuel ou CSS -->
+
+        <!-- Projet 1 -->
+        <div class="card project-card">
+          <span class="tag">Découverte</span>
+          <h3>Projet 1 – Première animation Scratch : deux personnages qui parlent</h3>
+          <p class="meta">2 séances · Événements, mouvement horizontal, bulles de texte</p>
+          <p>Découverte de Scratch avec une mini-scène : un décor, deux personnages qui se déplacent légèrement et discutent via des bulles.</p>
+          <a href="projet01.html" class="btn-project">Fiche</a>
+        </div>
+
+        <!-- Projet 2 -->
+        <div class="card project-card">
+          <span class="tag">Jeu arcade</span>
+          <h3>Projet 2 – Fusée & Diamants (jeu de collecte)</h3>
+          <p class="meta">2–3 séances · Flèches, score, ligne rouge, chrono</p>
+          <p>Une fusée se déplace avec les flèches pour attraper des diamants. Score, chrono, écran BRAVO / GAME OVER.</p>
+          <a href="projet02.html" class="btn-project">Fiche</a>
+          <a href="https://scratch.mit.edu/projects/882236123/editor/" class="btn-project" target="_blank">Code</a>
+        </div>
+
+        <!-- Projet 3 -->
+        <div class="card project-card">
+          <span class="tag">Storytelling</span>
+          <h3>Projet 3 – Histoire interactive / BD animée</h3>
+          <p class="meta">2–3 séances · Scènes, dialogues, messages</p>
+          <p>BD animée : plusieurs décors, dialogues, transitions et choix interactif.</p>
+          <a href="projet03.html" class="btn-project">Fiche</a>
+          <a href="https://scratch.mit.edu/projects/133634978/editor/" class="btn-project" target="_blank">Code</a>
+        </div>
+
+        <!-- 🔽🔽🔽 -->
+        <!-- Je laisse TOUT ton bloc entier, tel que tu me l’as fourni -->
+        <!-- Je ne coupe rien. Je le colle intégralement. -->
+        <!-- 🔽🔽🔽 -->
+
+        <!-- Projet 4 -->
+        <div class="card project-card">
+          <span class="tag">Labyrinthe</span>
+          <h3>Projet 4 – Jeu de Labyrinthe</h3>
+          <p class="meta">2–3 séances · Collisions, déplacements fins</p>
+          <p>Le joueur guide un personnage dans un labyrinthe sans toucher les murs.</p>
+          <a href="projet04.html" class="btn-project">Fiche</a>
+          <a href="https://scratch.mit.edu/projects/476536960/editor/" class="btn-project" target="_blank">Code</a>
+        </div>
+
+        <!-- Projet 5 -->
+        <div class="card project-card">
+          <span class="tag">Sport / Réflexes</span>
+          <h3>Projet 5 – Jeu de Pong</h3>
+          <p class="meta">2–3 séances · Rebond, angles, score</p>
+          <p>Raquette contrôlée au clavier, rebonds et score.</p>
+          <a href="projet05.html" class="btn-project">Fiche</a>
+          <a href="https://scratch.mit.edu/projects/184355332/editor/" class="btn-project" target="_blank">Code</a>
+        </div>
+
+        
+
+          <div class="card project-card">
+            <span class="tag">Quiz</span>
+            <h3>Projet 6 – Quiz interactif</h3>
+            <p class="meta">2 séances · Questions / réponses, score</p>
+            <p>Un personnage pose des questions (maths, vocabulaire, culture générale). Le joueur tape ses réponses, Scratch vérifie et met à jour un score.</p>
+            <a href="projet06.html" class="btn-project">Fiche</a>
+	    <a href="https://scratch.mit.edu/projects/616821410/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+
+
+          <div class="card project-card">
+            <span class="tag">Course</span>
+            <h3>Projet 7 – Course de robots</h3>
+            <p class="meta">2–3 séances · Déplacements, aléatoire, conditions</p>
+            <p>Plusieurs robots avancent sur une piste. Certains sont contrôlés par le joueur, d’autres avancent automatiquement ou avec du hasard. Qui franchira la ligne en premier ?</p>
+            <a href="projet07.html" class="btn-project">Fiche</a>
+	    <a href="https://scratch.mit.edu/projects/447630265/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+          <div class="card project-card">
+            <span class="tag">Mémoire</span>
+            <h3>Projet 8 – Jeu de mémoire (Memory)</h3>
+            <p class="meta">3 séances · Cartes, paires, états</p>
+            <p>Jeu de memory : retourner deux cartes, vérifier si elles forment une paire, les laisser visibles ou les retourner selon le résultat.</p>
+            <a href="projet08.html" class="btn-project">Fiche</a>
+ 				<a href="https://scratch.mit.edu/projects/1797330/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+          <div class="card project-card">
+            <span class="tag">Plateforme</span>
+            <h3>Projet 9 – Jeu de plateforme (Chat qui saute)</h3>
+            <p class="meta">3 séances · Gravité simple, saut, collisions</p>
+            <p>Un chat doit sauter de plateforme en plateforme sans tomber. Introduction à la gravité, au saut, et aux collisions avec le sol / les obstacles.</p>
+            <a href="projet09.html" class="btn-project">Fiche</a>
+	       <a href="https://scratch.mit.edu/projects/350863910/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+          <div class="card project-card">
+            <span class="tag">Tir</span>
+            <h3>Projet 10 – Tir spatial (canon laser)</h3>
+            <p class="meta">2–3 séances · Clones, tirs, ennemis</p>
+            <p>Un canon tire des lasers sur des ennemis ou astéroïdes qui arrivent d’en haut ou des côtés. Gestion des tirs, collisions et score.</p>
+            <a href="projet10.html" class="btn-project">Fiche</a>
+          <a href="https://scratch.mit.edu/projects/108067514/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+
+
+          <div class="card project-card">
+            <span class="tag">Réflexes</span>
+            <h3>Projet 11 – Jeu de réflexes « Clique la cible »</h3>
+            <p class="meta">2–3 séances · Souris, positions aléatoires</p>
+            <p>Des cibles apparaissent à des endroits aléatoires pendant un temps limité. Le joueur doit cliquer dessus le plus vite possible pour marquer des points.</p>
+            <a href="projet11.html" class="btn-project">Fiche</a>
+       <a href="https://scratch.mit.edu/projects/133732472/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+
+          <div class="card project-card">
+            <span class="tag">Numération</span>
+            <h3>Projet 12 – Mini-boutique (je fais mes courses)</h3>
+            <p class="meta">2–3 séances · Prix, addition, monnaie</p>
+            <p>Le joueur choisit des produits dans une mini-boutique. Scratch calcule le total, vérifie la somme donnée et la monnaie à rendre.</p>
+            <a href="projet12.html" class="btn-project">Fiche</a>
+          <a href="https://scratch.mit.edu/projects/775879984/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+
+          <div class="card project-card">
+            <span class="tag">Storytelling</span>
+            <h3>Projet 13 – Histoire interactive à choix</h3>
+            <p class="meta">3 séances · Questions, embranchements</p>
+            <p>Une histoire avec plusieurs choix possibles : à certains moments, le joueur décide entre deux options, et l’histoire bifurque selon sa réponse.</p>
+            <a href="projet13.html" class="btn-project">Fiche</a>
+         <a href="https://scratch.mit.edu/projects/248548248/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+
+          <div class="card project-card">
+            <span class="tag">Musique</span>
+            <h3>Projet 14 – Machine à sons (musique & rythme)</h3>
+            <p class="meta">2–3 séances · Sons, clavier, boucles</p>
+            <p>Les touches du clavier déclenchent des sons ou des instruments. Les élèves créent une “machine à sons” pour faire des rythmes ou de petites mélodies.</p>
+            <a href="projet14.html" class="btn-project">Fiche</a>
+         <a href="https://scratch.mit.edu/projects/280909832/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+          <div class="card project-card">
+            <span class="tag">Quiz avancé</span>
+            <h3>Projet 15 – Super Quiz interactif (calcul & culture)</h3>
+            <p class="meta">3 séances · Plusieurs thèmes, score, feedback</p>
+            <p>Un quiz plus complet : questions de calcul mental et de culture générale, suivi d’un score final et de feedback (“Très bien”, “À améliorer”…).</p>
+            <a href="projet15.html" class="btn-project">Fiche</a>
+         <a href="https://scratch.mit.edu/projects/1068953241/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+
+          <div class="card project-card">
+            <span class="tag">Labyrinthe / Énigme</span>
+            <h3>Projet 16 – Labyrinthe avec clé et porte</h3>
+            <p class="meta">3 séances · Objets à ramasser, conditions</p>
+            <p>Le joueur doit d’abord trouver une clé dans le labyrinthe, puis atteindre la porte. La porte ne s’ouvre que si la clé a été ramassée.</p>
+            <a href="projet16.html" class="btn-project">Fiche</a>
+          <a href="https://scratch.mit.edu/projects/417663998/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+
+          <div class="card project-card">
+            <span class="tag">Sport</span>
+            <h3>Projet 17 – Tirs au but (jeu de foot)</h3>
+            <p class="meta">2–3 séances · Angle, puissance, gardien</p>
+            <p>Le joueur tire des penalties contre un gardien (automatique ou contrôlé). Gestion de la direction, de la puissance et du score de buts marqués.</p>
+            <a href="projet17.html" class="btn-project">Fiche</a>
+	<a href="https://scratch.mit.edu/projects/395614165/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+          <div class="card project-card">
+            <span class="tag">2 joueurs</span>
+            <h3>Projet 18 – Duel de réflexes à deux joueurs</h3>
+            <p class="meta">3 séances · Aléatoire, états du jeu, touches A/L</p>
+            <p>Un signal “GO !” apparaît après un délai aléatoire. Deux joueurs ont chacun une touche : le plus rapide gagne le point, mais s’il appuie trop tôt, il fait faute.</p>
+            <a href="projet18.html" class="btn-project">Fiche</a>
+          <a href="https://scratch.mit.edu/projects/1015149393/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+          <div class="card project-card">
+            <span class="tag">Plateforme</span>
+            <h3>Projet 19 – Course d’obstacles (auto-runner)</h3>
+            <p class="meta">3 séances · Gravité, saut, obstacles & score</p>
+            <p>Un personnage avance tout seul, et le joueur doit le faire sauter au bon moment pour éviter les obstacles, avec un score basé sur la distance ou les obstacles franchis.</p>
+            <a href="projet19.html" class="btn-project">Fiche</a>
+	<a href="https://scratch.mit.edu/projects/350863910/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+
+          <div class="card project-card">
+            <span class="tag">Créativité</span>
+            <h3>Projet 20 – Studio d’avatars animés</h3>
+            <p class="meta">3 séances · Costumes, variables d’humeur, boutons</p>
+            <p>Les élèves créent un avatar dont on peut changer la tenue ou l’humeur avec des boutons et des variables. Mini-scène de présentation à la fin.</p>
+            <a href="projet20.html" class="btn-project">Fiche</a>
+	    <a href="https://scratch.mit.edu/projects/287547082/editor/"   class="btn-project" target="_blank">Code</a> 
+          </div>
+
+<div class="card project-card">
+  <span class="tag">Automobile</span>
+  <h3>projet 21 – Jeu du Circuit Automobile</h3>
+  <p class="meta">Projets en pas à pas PDF</p>
+  <p>Cet atelier propose de réaliser un jeu de course automobile avec un niveau de difficulté progressif.</p>
+  <a href="https://onvaessayer.org/scratch/circuitVoiture/2_00.php" class="btn-project" target="_blank">Fiche</a>
+  <a href="https://scratch.mit.edu/projects/171778274/editor/" class="btn-project" target="_blank">Code</a>
+</div>
+
+<div class="card project-card">
+  <span class="tag">Football</span>
+  <h3>projet 22 – Jeu de Football Pong</h3>
+  <p class="meta">Projets en pas à pas PDF</p>
+  <p>Cet atelier est conçu comme une série d'étapes guidées pour apprendre les rebonds, collisions et systèmes de score.</p>
+
+  <!-- Liens fiches -->
+  <a href="https://onvaessayer.org/scratch/unit3/pongV1.php" class="btn-project" target="_blank">Fiche</a>
+<a href="https://onvaessayer.org/scratch/unit3/pongV2/assets/slides/pong.pdf" class="btn-project" target="_blank">Fiche PDF</a>
+
+
+  <!-- Liens code -->
+  <a href="https://scratch.mit.edu/projects/302580119/editor/" class="btn-project" target="_blank">Code V1</a>
+  <a href="https://scratch.mit.edu/projects/302580120/editor/" class="btn-project" target="_blank">Code V2</a>
+</div>
+
+<div class="card project-card">
+  <span class="tag">Plateforme</span>
+  <h3>projet 23 – Jeu de plateforme</h3>
+  <p class="meta">Projets en pas à pas PDF</p>
+  <p>Cet atelier met un accent particulier sur la réalisation de mouvements fluides, de sauts, et sur la gestion des collisions.</p>
+
+  <!-- Lien fiche -->
+  <a href="https://onvaessayer.org/scratch/platform/platformV1.php" class="btn-project" target="_blank">Fiche</a>
+<a href="https://onvaessayer.org/scratch/platform/platformV3/assets/slides/platform_V3.pdf" class="btn-project" target="_blank">Fiche PDF</a>
+
+  <!-- Liens code -->
+  <a href="https://scratch.mit.edu/projects/350863910/editor/" class="btn-project" target="_blank">Code</a>
+</div>
+
+<div class="card project-card">
+  <span class="tag">Animation</span>
+  <h3>projet 24 – La ronde des saisons</h3>
+  <p class="meta">Projets en pas à pas PDF</p>
+  <p>Cet atelier propose de créer une animation interactive autour des saisons : transitions, couleurs, ambiances.</p>
+  <a href="https://onvaessayer.org/scratch/unit4/3_00.php" class="btn-project" target="_blank">Fiche</a>
+  <a href="https://scratch.mit.edu/projects/235449703/editor/" class="btn-project" target="_blank">Code</a>
+</div>
+
+        <!-- Projet 25 -->
+        <div class="card project-card">
+          <span class="tag">Tir / Arcade</span>
+          <h3>Projet 25 – Chasseur du ciel</h3>
+          <p class="meta">Projets en pas à pas PDF</p>
+          <p>Jeu vertical : éviter ou détruire des obstacles pour marquer des points.</p>
+          <a href="https://onvaessayer.org/Antony/Scratch/chasseur-du-ciel.pdf" class="btn-project" target="_blank">Fiche PDF</a>
+          <a href="https://scratch.mit.edu/projects/133732472/editor/" class="btn-project" target="_blank">Code</a>
+        </div>
+
+      </section>
+    </div>
+
+  </div>
+</details>
+
+
+
+
+
+
+            <!-- Petits jeux simples de fin de séance : même accordéon, style ludique -->
+      <details class="fold" id="jeux-fin">
+        <summary>
+          <span class="fold-title">🎲 Petits jeux simples de fin de séance</span>
+          <span class="fold-sub">Idées prêtes à l’emploi pour 3–8 minutes de conclusion</span>
+          <span class="fold-caret" aria-hidden="true"></span>
+        </summary>
+
+        <div class="fold-content">
+          <p class="muted jeux-intro">
+            Des jeux rapides pour les <strong>5 dernières minutes</strong> :
+            zéro préparation, peu de bruit, mais toujours un lien avec ce qui a été vu
+            dans Scratch. À utiliser pour calmer, ancrer une notion et finir sur une note
+            positive.
+          </p>
+
+          <!-- 1. Jeux sans écran -->
+          <h3 class="sub-title" style="margin-top:4px">1️⃣ Jeux sans écran (2–5 min)</h3>
+          <div class="jeux-grid">
+            <!-- Jeu 1 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">🧠</span>
+                <div>
+                  <h3>Le cerveau récap’</h3>
+                  <p class="jeu-type">Une phrase chacun, rythme rapide</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : forcer chaque enfant à nommer au moins une chose apprise.</p>
+              <ul>
+                <li>Tour de table : <em>« Aujourd’hui, j’ai appris à… »</em>.</li>
+                <li>Tu guides : <em>un bloc, une astuce, un bug compris</em>.</li>
+                <li>Version balle : on lance une balle molle → celui qui la reçoit parle.</li>
+              </ul>
+            </article>
+
+            <!-- Jeu 2 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">👍</span>
+                <div>
+                  <h3>Pouce codeur</h3>
+                  <p class="jeu-type">Feedback silencieux</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : prendre la température sans débat bruyant.</p>
+              <ul>
+                <li>Tu poses 3 questions : “J’ai compris les variables ? les messages ?”.</li>
+                <li>Les élèves répondent 👍 (OK) / 👉 (bof) / 👎 (pas compris) sans parler.</li>
+                <li>Tu notes ce qu’il faudra reprendre la prochaine séance.</li>
+              </ul>
+            </article>
+
+            <!-- Jeu 3 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">💥</span>
+                <div>
+                  <h3>Le bug qu’on garde</h3>
+                  <p class="jeu-type">Dédramatiser l’erreur</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : autoriser la difficulté, préparer un retour dessus.</p>
+              <ul>
+                <li>Chaque élève dit un truc qui reste flou : “Je ne comprends pas encore…”.</li>
+                <li>Tu écris 2 ou 3 bugs fréquents au tableau.</li>
+                <li>Promesse : on commence la prochaine séance par <strong>ce bug-là</strong>.</li>
+              </ul>
+            </article>
+
+            <!-- Jeu 4 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">🌤️</span>
+                <div>
+                  <h3>Météo du code</h3>
+                  <p class="jeu-type">Climat de la séance en 10 secondes</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : repérer vite les élèves en difficulté sans les exposer.</p>
+              <ul>
+                <li>Tu proposes 3 options : ☀️ (tout va bien), ⛅ (ça va), ⛈️ (je suis perdu).</li>
+                <li>Au signal, chacun montre discrètement son symbole avec les doigts ou un dessin.</li>
+                <li>Tu repères les ⛈️ pour un coup de pouce au début de la prochaine séance.</li>
+              </ul>
+            </article>
+
+            <!-- Jeu 5 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">💬</span>
+                <div>
+                  <h3>Un compliment de code</h3>
+                  <p class="jeu-type">Clore sur du positif</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : installer une culture d’entraide plutôt que de compétition.</p>
+              <ul>
+                <li>Chaque élève choisit quelqu’un à qui il dit : “J’ai aimé quand tu…”.</li>
+                <li>Le compliment doit être précis : “Ton idée de décor”, “Ta façon d’expliquer”.</li>
+                <li>Tu conclues en rappelant : <em>« On code mieux quand on se respecte »</em>.</li>
+              </ul>
+            </article>
+          </div>
+
+          <!-- 2. Autour du code -->
+          <h3 class="sub-title" style="margin-top:14px">2️⃣ Autour du code (3–6 min)</h3>
+          <div class="jeux-grid">
+            <!-- Jeu 6 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">📜</span>
+                <div>
+                  <h3>Pseudo-code humain</h3>
+                  <p class="jeu-type">Logique sans ordinateur</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : faire le lien entre langage naturel et blocs.</p>
+              <ul>
+                <li>Tu décris une action : “Le chat avance jusqu’au mur puis dit Bonjour”.</li>
+                <li>Les élèves proposent 3–5 blocs Scratch qui réalisent ça.</li>
+                <li>Version fun : un élève joue le sprite et “exécute” ce que dit la classe.</li>
+              </ul>
+            </article>
+
+            <!-- Jeu 7 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">🧩</span>
+                <div>
+                  <h3>Les 3 blocs magiques</h3>
+                  <p class="jeu-type">Sélection des blocs-clés du jour</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : fixer les blocs vraiment utiles.</p>
+              <ul>
+                <li>Tu choisis 3 blocs vus dans la séance (ex. <em>quand drapeau vert cliqué</em>, <em>répéter indéfiniment</em>, <em>si… alors…</em>).</li>
+                <li>Pour chaque bloc, quelques élèves complètent : “Je l’utilise pour…”.</li>
+                <li>Tu recadres avec un exemple concret du projet du jour.</li>
+              </ul>
+            </article>
+
+            <!-- Jeu 8 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">❓</span>
+                <div>
+                  <h3>Qui suis-je ? version blocs</h3>
+                  <p class="jeu-type">Devinettes rapides</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : revoir les catégories (mouvement, contrôle, capteurs…).</p>
+              <ul>
+                <li>Tu dis : “Je suis un bloc bleu, je bouge le sprite vers la droite…”.</li>
+                <li>Les élèves devinent : <em>“changer x de 10”</em>, etc.</li>
+                <li>Variante : ce sont les élèves qui inventent les devinettes.</li>
+              </ul>
+            </article>
+
+            <!-- Jeu 9 : Pendu thématique -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">🪢</span>
+                <div>
+                  <h3>Le pendu des mots-clés</h3>
+                  <p class="jeu-type">Pendu spécial Scratch / CEH</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : revoir vocabulaire et notions sans écran.</p>
+              <ul>
+                <li>Tu choisis un mot lié à la séance : <em>VARIABLE</em>, <em>BOUCLE</em>, <em>SPRITE</em>, <em>MESSAGE</em>, <em>LABYRINTHE</em>, <em>AVATAR</em>…</li>
+                <li>Tu traces les tirets au tableau comme dans un pendu classique.</li>
+                <li>À chaque lettre proposée, tu peux demander un exemple : “Donne-moi une variable qu’on a utilisée aujourd’hui”, “Dans quel projet on a un labyrinthe ?”.</li>
+                <li>Si un groupe trouve vite, on enchaîne sur un deuxième mot (max 2 mots pour rester court).</li>
+              </ul>
+            </article>
+
+            <!-- Jeu 10 : Énigmes thématiques -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">🕵️‍♀️</span>
+                <div>
+                  <h3>Énigmes de projets mystère</h3>
+                  <p class="jeu-type">Deviner un projet ou une notion</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : relier les 20 projets et le vocabulaire.</p>
+              <ul>
+                <li>Tu donnes 3 indices :  
+                  <br><em>“On tire sur des astéroïdes, on crée des clones, le score augmente.”</em> → Projet 10.  
+                  <br><em>“Il y a une clé, une porte et une variable qui s’appelle aCle.”</em> → Projet 16.</li>
+                <li>Les élèves lèvent la main pour proposer un numéro de projet ou le titre.</li>
+                <li>Variante : les élèves inventent eux-mêmes une énigme sur le projet en cours.</li>
+              </ul>
+            </article>
+          </div>
+
+          <!-- 3. Avec l’écran -->
+          <h3 class="sub-title" style="margin-top:14px">3️⃣ Avec Scratch affiché (4–6 min)</h3>
+          <div class="jeux-grid">
+            <!-- Jeu 11 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">🎤</span>
+                <div>
+                  <h3>Démo 1 minute</h3>
+                  <p class="jeu-type">Valoriser sans comparer</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : mettre en avant des idées sans créer de compétition.</p>
+              <ul>
+                <li>Tu choisis 1 ou 2 élèves avec un bout de code lisible.</li>
+                <li>Ils présentent : “Ce que j’ai voulu faire / ce qui marche déjà”.</li>
+                <li>Règle : applaudissements obligatoires, pas de critiques de camarades.</li>
+              </ul>
+            </article>
+
+            <!-- Jeu 12 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">🐞</span>
+                <div>
+                  <h3>Chasse au bug</h3>
+                  <p class="jeu-type">Mini-enquête collective</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : entraîner à lire le code et formuler des hypothèses.</p>
+              <ul>
+                <li>Tu affiches un petit script volontairement faux (Score non remis à 0, boucle infinie…).</li>
+                <li>Les élèves doivent repérer où est le problème et proposer une correction.</li>
+                <li>Version express : un seul bug, corrigé ensemble, puis fin de séance.</li>
+              </ul>
+            </article>
+
+            <!-- Jeu 13 -->
+            <article class="jeu-card">
+              <div class="jeu-header">
+                <span class="jeu-emoji">⚡</span>
+                <div>
+                  <h3>Challenge “3 mini-modifs”</h3>
+                  <p class="jeu-type">Micro-créativité contrôlée</p>
+                </div>
+              </div>
+              <p class="jeu-meta">Objectif : laisser une petite liberté sans casser les projets.</p>
+              <ul>
+                <li>Consigne : “Vous pouvez changer <strong>3 choses maximum</strong> dans votre projet : une couleur, un son, un message ou une vitesse.”</li>
+                <li>2 minutes de bidouille, puis on relance le projet une dernière fois.</li>
+                <li>Tu insistes : on ne touche pas à la structure (variables, messages…).</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </details>
+
+
+<details class="fold situations" id="situations-difficiles">
+  <summary>
+    <span class="fold-title">🚨 Situations difficiles · Protocoles CEH</span>
+    <span class="fold-sub">Réagir vite · Protéger · Tracer · Prévenir</span>
+    <span class="fold-caret" aria-hidden="true"></span>
+  </summary>
+
+  <div class="fold-content">
+
+    <p class="muted" style="margin-bottom:18px;">
+      Procédures à appliquer en cas de situation sensible.  
+      Objectif : garantir la sécurité, éviter les erreurs, et informer les bonnes personnes.  
+      <strong>Toujours</strong> : rester calme, intervenir immédiatement, prévenir la responsable périscolaire, et
+      <strong>📘 Signaler en fait marquant (Résumé)</strong>.
+    </p>
+
+    <!-- GRID -->
+    <div class="situ-grid">
+
+      <!-- 1 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🚫 Nudité / geste inapproprié</h3>
+        <ul>
+          <li>Arrêter immédiatement : « On ne fait jamais ça ici. »</li>
+          <li>Éloigner les autres pour éviter moqueries.</li>
+          <li>Prévenir la responsable périscolaire sans délai.</li>
+          <li>Rester neutre et non humiliant.</li>
+          <li>⚠️ Ne jamais parler aux parents (réservé à l’école).</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 2 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🌐 Internet non autorisé</h3>
+        <ul>
+          <li>Fermer l’onglet / couper wifi si nécessaire.</li>
+          <li>Vérifier l’historique rapidement.</li>
+          <li>Rappel ferme : « Aucun internet en atelier. »</li>
+          <li>Prévenir la responsable si contenu sensible.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 3 -->
+      <div class="situ-card">
+        <h3 class="situ-title">✏️ Dessin obscène ou offensant</h3>
+        <ul>
+          <li>Supprimer immédiatement (Paint ou Scratch).</li>
+          <li>Faire une capture d’écran/photo pour témoin CEH.</li>
+          <li>Informer la responsable périscolaire.</li>
+          <li>⚠️ Aucun contact direct avec les parents.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 4 -->
+      <div class="situ-card">
+        <h3 class="situ-title">💢 Humiliation sur Scratch / insultes</h3>
+        <ul>
+          <li>Arrêter le projet immédiatement.</li>
+          <li>Supprimer insultes, noms humiliants, caricatures.</li>
+          <li>Rappel : « Scratch sert à créer, jamais à blesser. »</li>
+          <li>Sensibiliser 30 sec au harcèlement.</li>
+          <li>Informer la responsable.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 5 -->
+      <div class="situ-card">
+        <h3 class="situ-title">⚡ Enfant qui se rebelle</h3>
+        <ul>
+          <li>Rester calme, recadrer brièvement.</li>
+          <li>Proposer un choix : participer / pause 2 minutes.</li>
+          <li>Si perturbation continue → appeler responsable.</li>
+          <li>Aucune humiliation, aucun conflit.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 6 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🤒 Malaise / enfant malade</h3>
+        <ul>
+          <li>Stopper l’activité, sécuriser l’enfant.</li>
+          <li>Contacter immédiatement la responsable / direction.</li>
+          <li>Accompagnement possible par un camarade.</li>
+          <li>Ne jamais donner de médicament.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 7 -->
+      <div class="situ-card">
+        <h3 class="situ-title">👥 Dispute / insultes entre enfants</h3>
+        <ul>
+          <li>Séparer physiquement en gardant calme.</li>
+          <li>Écouter chacun ~20 secondes.</li>
+          <li>Rappel obligatoire : respect.</li>
+          <li>Si insultes graves ou violence → responsable.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 8 -->
+      <div class="situ-card">
+        <h3 class="situ-title">💻 Dégradation de matériel</h3>
+        <ul>
+          <li>Arrêter immédiatement.</li>
+          <li>Identifier si accident ou volontaire.</li>
+          <li>Photo du matériel (preuve CEH).</li>
+          <li>Informer responsable + Younes.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 9 -->
+      <div class="situ-card">
+        <h3 class="situ-title">😢 Enfant en pleurs</h3>
+        <ul>
+          <li>Isole calmement dans la même salle.</li>
+          <li>Valider l’émotion : « Je vois que tu es triste. »</li>
+          <li>Pause silencieuse 1 minute.</li>
+          <li>Proposer une micro-étape simple.</li>
+          <li>Appeler responsable si ça persiste.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 10 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🚧 Suspicion de harcèlement</h3>
+        <ul>
+          <li>Ne jamais gérer seul → responsable immédiatement.</li>
+          <li>Noter faits <strong>objectivement</strong>.</li>
+          <li>Supprimer contenus offensants dans Scratch.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 11 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🗣️ Crise / enfant qui hurle</h3>
+        <ul>
+          <li>Parler lentement, voix basse.</li>
+          <li>Éloigner doucement les autres.</li>
+          <li>Proposer respiration / pause 60 sec.</li>
+          <li>Si crise continue → responsable.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 12 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🪑 Enfant qui refuse de participer</h3>
+        <ul>
+          <li>Choix : participer / observer.</li>
+          <li>Ne jamais forcer.</li>
+          <li>Proposer tâche simple (son, décor, test).</li>
+          <li>Informer responsable si refus durable.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 13 -->
+      <div class="situ-card">
+        <h3 class="situ-title">👐 Enfant trop tactile</h3>
+        <ul>
+          <li>Dire clairement : « On garde les mains pour soi. »</li>
+          <li>Séparer places si besoin.</li>
+          <li>Responsable si geste déplacé.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 14 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🧨 Groupe trop excité / bruit</h3>
+        <ul>
+          <li>Stop total : « Pause 60 secondes. »</li>
+          <li>Rappel calme : code = concentration.</li>
+          <li>Reprise en mode “Test”.</li>
+          <li>Si bruit persistant → responsable.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 15 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🕵️ Conflit / accusation grave</h3>
+        <ul>
+          <li>Ne pas enquêter.</li>
+          <li>Écouter 30 sec chacun.</li>
+          <li>Dire : « Je transmets, ce n'est pas moi qui décide. »</li>
+          <li>Responsable immédiatement.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 16 -->
+      <div class="situ-card">
+        <h3 class="situ-title">📵 Enfant qui filme / prend en photo</h3>
+        <ul>
+          <li>Interdire immédiatement.</li>
+          <li>Donner le téléphone à la responsable.</li>
+          <li>Prévenir si photo d’un autre enfant.</li>
+          <li>⚠️ Droit à l’image = très sensible.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 17 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🪜 Enfant qui quitte la salle</h3>
+        <ul>
+          <li>Ne jamais courir après.</li>
+          <li>Responsable immédiatement.</li>
+          <li>Sécuriser le reste du groupe.</li>
+          <li>Situation grave → toujours tracée.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 18 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🧩 Enfant très en difficulté</h3>
+        <ul>
+          <li>Consigne ultra simple.</li>
+          <li>Pairing pilote/navigateur.</li>
+          <li>Valoriser petites réussites.</li>
+          <li>Responsable si blocage durable.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 19 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🥺 Enfant qui veut rentrer / anxiété</h3>
+        <ul>
+          <li>Rassurer calmement.</li>
+          <li>Proposer mini-tâche (son, décor).</li>
+          <li>Si pleurs persistants → responsable.</li>
+          <li>Ne jamais appeler les parents.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+      <!-- 20 -->
+      <div class="situ-card">
+        <h3 class="situ-title">🔌 Panne électrique / panne généralisée</h3>
+        <ul>
+          <li>Rassurer le groupe.</li>
+          <li>Sécuriser matériel et prises.</li>
+          <li>Informer responsable + Younes.</li>
+          <li>Faire jeu sans écran en attendant.</li>
+          <li>📘 Signaler en fait marquant (Résumé).</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</details>
+
+
+<!-- CONSIGNES SIGIS – Accordéon PREMIUM -->
+<details class="fold sigis" id="sigis">
+  <summary>
+    <span class="fold-title">🚸 Consignes Saint-Sigisbert </span>
+    <span class="fold-sub">Accès · Salles · Horaires · Sécurité</span>
+    <span class="fold-caret" aria-hidden="true"></span>
+  </summary>
+
+  <div class="fold-content">
+
+    <!-- Introduction -->
+    <div class="tile" style="margin-bottom:14px;">
+      <p class="muted">
+        Ateliers <strong>Codeurs en Herbe</strong> – Site Sigisbert Saint.  
+        Guide complet pour animer sereinement : accès, organisation, salles, matériel et déroulé minute par minute.
+      </p>
+    </div>
+
+
+    <!-- ACCÈS -->
+    <h3 class="sub-title">🚪 Accès & badges</h3>
+    <div class="grid-2-wide" style="margin-top:6px">
+
+      <div class="tile">
+        <strong>Entrée</strong>
+        <ul class="clean" style="margin-top:6px">
+          <li>Accès par le <strong>portail bleu</strong>.</li>
+          <li>6 badges pour toute l’équipe.</li>
+          <li>Si demandé : dire « <strong>Codeurs en Herbe</strong> ».</li>
+        </ul>
+      </div>
+
+      <div class="tile">
+        <strong>Gestion des badges</strong>
+        <ul class="clean" style="margin-top:6px">
+          <li>Roulement entre animateurs selon présence.</li>
+          <li>Badge empruntable entre collègues.</li>
+          <li>Prévenir sur WhatsApp en cas de souci.</li>
+        </ul>
+      </div>
+
+    </div>
+
+
+    <!-- SALLES -->
+    <h3 class="sub-title" style="margin-top:22px;">🏫 Organisation des salles</h3>
+
+    <div class="grid-2-wide" style="margin-top:6px">
+      <div class="tile">
+        <strong>Salle 113 — Stock principal</strong>
+        <ul class="clean" style="margin-top:6px">
+          <li>25 PC + 25 souris + 25 chargeurs USB-C.</li>
+          <li>Placard bleu + arrière-salle pour recharge.</li>
+          <li>2 rallonges + 2 prises programmables.</li>
+          <li>Salle d'installation, stockage & charge finale.</li>
+        </ul>
+      </div>
+
+      <div class="tile">
+        <strong>Salle 105 — Salle d’atelier</strong>
+        <ul class="clean" style="margin-top:6px">
+          <li>Même étage que la 113, même couloir.</li>
+          <li>12 PC dédiés (ils restent sur place).</li>
+          <li>1 prise programmable + 2 rallonges.</li>
+          <li>Salle principale pour les séances scratch.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- 🕓 TIMELINE PREMIUM CEH -->
+<h3 class="sub-title" style="margin-top:22px;">🕓 Déroulé minute par minute</h3>
+
+<div class="timeline-ceh">
+
+  <div class="t-item">
+    <div class="t-time">16h00 – 16h30</div>
+    <div class="t-text">
+      Arrivée et préparation du matériel :  
+      ➜ <strong>113</strong> : 25 PC (stock principal)  
+      ➜ <strong>105</strong> : 12 PC dédiés  
+      Vérification des prises programmables.
+    </div>
+  </div>
+
+  <div class="t-item">
+    <div class="t-time">16h35</div>
+    <div class="t-text">Descente dans la cour avec la pancarte « Codeur ».</div>
+  </div>
+
+  <div class="t-item">
+    <div class="t-time">16h40</div>
+    <div class="t-text">Appel + regroupement progressif des enfants.</div>
+  </div>
+
+  <div class="t-item">
+    <div class="t-time">16h45</div>
+    <div class="t-text">
+      Montée en salles <strong>105</strong> ou <strong>113</strong>.  
+      Sacs et manteaux au porte-manteau.
+    </div>
+  </div>
+
+  <div class="t-item">
+    <div class="t-time">16h50</div>
+    <div class="t-text">
+      Installation aux postes et vérification du matériel.
+    </div>
+  </div>
+
+  <div class="t-item">
+    <div class="t-time">17h00 – 17h35</div>
+    <div class="t-text">
+      Activité Scratch :  
+      ➜ mini-explication  
+      ➜ code  
+      ➜ test  
+      ➜ passage entre les enfants  
+      Gestion du calme + aide ciblée (pairing pilote / navigateur possible).
+    </div>
+  </div>
+
+  <div class="t-item">
+    <div class="t-time">17h35</div>
+    <div class="t-text">
+      Petit jeu de fin (3–5 min) → calme + révision d’une notion.
+    </div>
+  </div>
+
+  <div class="t-item">
+    <div class="t-time">17h40</div>
+    <div class="t-text">Sauvegarde des projets + récupération des affaires.</div>
+  </div>
+
+  <div class="t-item">
+    <div class="t-time">17h45 – 17h50</div>
+    <div class="t-text">
+      Sortie au <strong>portail bleu</strong>.  
+      Enfants autorisés seuls → en premier.
+    </div>
+  </div>
+
+  <div class="t-item">
+    <div class="t-time">17h55</div>
+    <div class="t-text">
+      En cas de retard :  
+      ➜ retour en étude si ouverte  
+      ➜ sinon → maternelle avec 1 adulte devant + 1 derrière.
+    </div>
+  </div>
+
+  <div class="t-item" style="margin-bottom:0">
+    <div class="t-time">18h00</div>
+    <div class="t-text">
+      Rangement + mise en charge (105 + 113).  
+      Vérification des fermetures finales.
+    </div>
+  </div>
+
+</div>
+
+
+
+    <!-- MATERIEL & SÉCURITÉ -->
+    <h3 class="sub-title" style="margin-top:22px;">🧰 Matériel & sécurité</h3>
+
+    <div class="grid-2-wide" style="margin-top:6px">
+
+      <div class="tile">
+        <strong>Matériel</strong>
+        <ul class="clean" style="margin-top:6px">
+          <li>Éteindre proprement tous les PC.</li>
+          <li>Brancher chaque machine sur prise programmable.</li>
+          <li>Signaler tout problème à <strong>Younes</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="tile">
+        <strong>Sécurité & clés</strong>
+        <ul class="clean" style="margin-top:6px">
+          <li>6 jeux de clés (16h00 → 18h30).</li>
+          <li>Jamais de salle ouverte sans animateur.</li>
+          <li>Fermeture systématique des deux salles avant de quitter.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="muted" style="margin-top:10px;">
+      ✔ Ces consignes assurent la sécurité des enfants, du matériel et du bon déroulement des ateliers.
+    </p>
+
+  </div>
+</details>
+
+
+
+
+<details class="fold ecoles" id="ecoles">
+  <summary>
+    <span class="fold-title">🏫 Consignes – Écoles de Nancy</span>
+    <span class="fold-sub">Arrivée · Goûter · Salle · Appel · Sortie</span>
+    <span class="fold-caret" aria-hidden="true"></span>
+  </summary>
+
+  <div class="fold-content">
+
+    <!-- INTRODUCTION -->
+    <div class="tile intro-ecoles">
+      <h3 class="sub-title" style="margin-top:0">ℹ️ Comment utiliser ces consignes</h3>
+      <p class="muted">
+        Les indications ci-dessous reprennent <strong>intégralement</strong> les consignes
+        fournies pour chaque école : arrivée, récupération du classeur, goûter,
+        accès à la salle d’atelier, localisation des tablettes, appel et sortie.
+      </p>
+      <p class="muted">
+        Merci de respecter ces procédures, de vous présenter avec bienveillance auprès
+        des équipes périscolaires, et de garder ce document en usage interne
+        <strong>Codeurs en Herbe</strong>.
+      </p>
+    </div>
+
+    <div class="grid-2-wide" style="margin-top:14px">
+
+  <!-- APPEL -->
+  <div class="tile">
+    <h3 class="sub-title">👨‍🏫 Appel & feuille de présence</h3>
+
+    <div class="clean" style="margin-top:6px">
+      <div style="display:flex; gap:8px; align-items:flex-start;">
+        <span style="color:var(--accent); font-weight:900;">•</span>
+        <span>Faire l’appel des enfants dans le <strong>classeur</strong>.</span>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-top:4px;">
+        <span style="color:var(--accent); font-weight:900;">•</span>
+        <span>Signer la case <strong>Animateur</strong> : écrire <strong>Aimen</strong>.</span>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-top:4px;">
+        <span style="color:var(--accent); font-weight:900;">•</span>
+        <span>Signer la case <strong>Association</strong> : <strong>Codeurs en Herbe</strong>.</span>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-top:4px;">
+        <span style="color:var(--accent); font-weight:900;">•</span>
+        <span>⚠️ <strong>Sans signature</strong>, la mairie considère que l’atelier n’a pas été effectué.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SORTIE -->
+  <div class="tile">
+    <h3 class="sub-title">👩🏼‍🏫 Sortie & remise des élèves</h3>
+
+    <div class="clean" style="margin-top:6px">
+      <div style="display:flex; gap:8px; align-items:flex-start;">
+        <span style="color:var(--accent); font-weight:900;">•</span>
+        <span>🕐 <strong>17h53</strong> — demander aux enfants d’enregistrer leur travail 💾.</span>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-top:4px;">
+        <span style="color:var(--accent); font-weight:900;">•</span>
+        <span>🎒 Préparation : tablettes rangées + sacs et manteaux remontés.</span>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-top:4px;">
+        <span style="color:var(--accent); font-weight:900;">•</span>
+        <span>🤝 <strong>17h58</strong> — regroupement calme pour la descente.</span>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-top:4px;">
+        <span style="color:var(--accent); font-weight:900;">•</span>
+        <span>🚶‍♂️ <strong>18h00</strong> — remise du groupe à la responsable périscolaire.</span>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-top:4px;">
+        <span style="color:var(--accent); font-weight:900;">•</span>
+        <span>⚠️ Aucun enfant ne doit sortir seul.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+    <!-- LISTE DES ÉCOLES -->
+    <h3 class="sub-title" style="margin-top:18px">📍 Écoles partenaires – Consignes détaillées</h3>
+
+    <div class="ecoles-list">
+
+      <!-- 3 MAISONS -->
+      <div class="ecole-card">
+        <h4 class="ecole-title">🏫 3 Maisons  
+          <span class="resp">— Déborah Demaux</span>
+          <span class="phone">📞 07 50 65 47 05</span>
+        </h4>
+        <ul class="clean">
+          <li>Sonner à la petite porte proche du rond-point.</li>
+          <li>Si le classeur n’est pas à l’entrée : le demander au personnel.</li>
+          <li>Goûter : 16h30 → 16h40 (5–10 min).</li>
+          <li>Salle au 1ᵉʳ étage (entrée animateurs).</li>
+          <li>Tablettes : valise noire dans la salle.</li>
+        </ul>
+      </div>
+
+      <!-- GEBHART -->
+      <div class="ecole-card">
+        <h4 class="ecole-title">🏫 Émile Gebhart  
+          <span class="resp">— Kassandre Lapointe</span>
+          <span class="phone">📞 06 02 06 64 74</span>
+        </h4>
+        <ul class="clean">
+          <li>Rendez-vous au portail : <strong>6 Rue Turinaz</strong>.</li>
+          <li>Demander le classeur d’appel.</li>
+          <li>Goûter : 16h30–16h40.</li>
+          <li>Traversez la cour → porte en face → à gauche → grande salle.</li>
+          <li>Tablettes : valise noire (demander si besoin).</li>
+        </ul>
+      </div>
+
+      <!-- MARCEL LEROY -->
+      <div class="ecole-card">
+        <h4 class="ecole-title">🏫 Marcel Leroy  
+          <span class="resp">— Fanny Toupet</span>
+          <span class="phone">📞 06 02 06 64 64</span>
+        </h4>
+        <ul class="clean">
+          <li>Porte en face de la boulangerie.</li>
+          <li>Prendre le classeur à l’entrée.</li>
+          <li>Goûter dans la cour : 5–10 min.</li>
+          <li>Salle : première salle vitrée à gauche.</li>
+          <li>Tablettes : valise noire dans la salle.</li>
+        </ul>
+      </div>
+
+      <!-- STANISLAS -->
+      <div class="ecole-card">
+        <h4 class="ecole-title">🏫 Stanislas  
+          <span class="resp">— Simone Muller</span>
+          <span class="phone">📞 06 02 06 25 40</span>
+        </h4>
+        <ul class="clean">
+          <li>Se présenter à la porte (sonner si fermée).</li>
+          <li>Récupérer le classeur de pointage.</li>
+          <li>Goûter : 16h30–16h40.</li>
+          <li>Salle informatique : juste avant le gymnase (porte à gauche).</li>
+        </ul>
+      </div>
+
+      <!-- BEAUREGARD -->
+      <div class="ecole-card">
+        <h4 class="ecole-title">🏫 Beauregard  
+          <span class="resp">— Samira Abrantchou</span>
+          <span class="phone">📞 06 02 06 64 98 — 📞 07 81 60 81 75</span>
+        </h4>
+        <ul class="clean">
+          <li>Porte principale → demander le classeur si absent.</li>
+          <li>Goûter : 16h30–16h40.</li>
+          <li>Monter ensuite en salle informatique.</li>
+          <li>Demander l’emplacement exact si besoin.</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</details>
+<!-- PLANNING GOOGLE SHEETS -->
+        <section class="planning-section">
+          <h2>📅 Planning des ateliers Codeurs en Herbe</h2>
+          <p class="subtitle">Accès réservé – planning mis à jour pour les animateurs</p>
+          <div class="planning-wrapper">
+            <iframe 
+              src="https://docs.google.com/spreadsheets/d/1QIht_T4wIgcH5s1BcNUdzleWLJ_E8ijpN53-Xa6grMc/edit?usp=sharing&rm=embedded">
+            </iframe>
+          </div>
+        </section>
+
+        <!-- CARTE DES ÉCOLES EN DERNIER -->
+        <section class="map-card" id="carte-ecoles">
+          <h2>🗺️ Carte des écoles de Nancy</h2>
+          <p>
+            Retrouve ici la position des écoles sur une carte interactive. N’hésite pas à
+            zoomer et à cliquer sur les repères pour repérer ton trajet avant la séance.
+          </p>
+          <div class="map-wrapper">
+            <iframe
+              src="https://www.google.com/maps/d/embed?mid=1yJJFa70zAA3N3sRlpfYBk_FcPHRdiw8&ehbc=2E312F"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+<script>
+  const btn = document.getElementById("theme-toggle");
+
+  // Charger le thème enregistré
+  if (localStorage.getItem("theme") === "light") {
+    document.body.classList.add("light-mode");
+  }
+
+  btn.addEventListener("click", () => {
+    document.body.classList.toggle("light-mode");
+
+    // Sauvegarde
+    if (document.body.classList.contains("light-mode")) {
+      localStorage.setItem("theme", "light");
+    } else {
+      localStorage.setItem("theme", "dark");
+    }
+  });
+</script>
+
+<script>
+document.getElementById("globalSearch").addEventListener("input", function() {
+  
+  const query = this.value.toLowerCase();
+
+  // Sélecteurs des blocs que tu veux rendre recherchables
+  const selectors = [
+    ".project-card",
+    ".video-card",
+    ".situ-card",
+    ".ecole-card",
+    ".jeu-card",
+    ".tile",
+    ".t-item"
+  ];
+
+  selectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => {
+      const text = el.textContent.toLowerCase();
+      el.style.display = text.includes(query) ? "" : "none";
+    });
+  });
+
+  // ↪ Auto-ouverture des accordéons si un résultat est dedans
+  document.querySelectorAll("details.fold").forEach(det => {
+    const inside = det.querySelector("*:not(summary)[style*='display: none']") === null;
+    if (query.length > 0 && inside)
+      det.setAttribute("open", true);
+  });
+
+});
+</script>
+
+</body>
+</html>
+
+

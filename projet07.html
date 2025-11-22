@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 7 – Course de robots | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 7 – Course de robots</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Vitesse, obstacles & condition de victoire</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu de course à 1 ou 2 joueurs</span>
+      <p>
+        Les élèves créent un jeu de course : deux robots roulent sur une piste vue de dessus,
+        évitent des obstacles et tentent de franchir la ligne d’arrivée en premier.
+        Le jeu peut être joué :
+      </p>
+      <ul>
+        <li>soit en solo (un joueur contre un robot automatique),</li>
+        <li>soit à deux joueurs (un robot par élève, sur le même clavier).</li>
+      </ul>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min (adaptable 35–60 min).  
+        Version recommandée : d’abord 2 joueurs humains, puis éventuellement un robot “automatique”.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Déplacement continu dans une même direction (axe x ou y).</li>
+        <li>Contrôle clavier pour un ou deux sprites.</li>
+        <li>Gestion d’obstacles et détection de collision.</li>
+        <li>Condition de victoire claire (franchir une ligne d’arrivée).</li>
+        <li>Introduction d’un compteur (tours, manches gagnées). </li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Créer la piste & déplacer un robot</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a une piste, une ligne de départ/arrivée et un robot qui avance sur la piste.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Imaginer une piste simple : une grande ligne droite ou un circuit rectangulaire.</li>
+        <li>Décider du sens de la course : de bas en haut ou de gauche à droite.</li>
+        <li>Prévoir une phrase d’explication :  
+          « On va faire une course vue de dessus : la voiture/robot est un point qui se déplace sur la piste. »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – « Petite course debout » (3–4 min)</h3>
+      <ul>
+        <li>Faire se lever une rangée de 4–5 élèves.</li>
+        <li>Poser un point de départ et d’arrivée symboliques (table, mur…).</li>
+        <li>Dire : « Vous faites 3 pas quand je dis “avance”, vous vous arrêtez quand je dis “stop”. »  
+            → petite “course” ultra simple pour introduire la notion de départ/arrivée.</li>
+        <li>Transition : « Dans Scratch, ce seront des robots qui feront la course sur une piste. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer la piste de course (10–12 min)</p>
+      <ul>
+        <li>Dans l’onglet <strong>Arrière-plan</strong> : dessiner une piste vue de dessus.</li>
+        <li>Proposition simple :  
+          – un grand rectangle de couleur au centre = piste,  
+          – un fond d’une autre couleur autour = “hors piste”.</li>
+        <li>Tracer une ligne de départ (en bas) et une ligne d’arrivée (en haut) avec une couleur bien visible (blanc ou rouge).</li>
+        <li>Insister : « Gardez la piste assez large pour que les robots ne sortent pas trop facilement. »</li>
+      </ul>
+
+      <p class="time">2) Créer le robot 1 (5–7 min)</p>
+      <ul>
+        <li>Ajouter un sprite simple (robot, voiture, flèche…).</li>
+        <li>Le réduire si besoin pour qu’il tienne bien sur la piste.</li>
+        <li>Le placer juste derrière la ligne de départ, au centre.</li>
+        <li>Enregistrer le projet → nom conseillé : <strong>Prénom_CourseRobot</strong>.</li>
+      </ul>
+
+      <p class="time">3) Déplacement du robot 1 (15–20 min)</p>
+      <ul>
+        <li>Expliquer : « On va dire au robot : avance quand j’appuie sur une touche. »</li>
+        <li>Script de base (version “appui répété”) :  
+          – « quand touche flèche haut pressée → changer y de 5 »  
+          – « quand touche flèche gauche pressée → changer x de -5 »  
+          – « quand touche flèche droite pressée → changer x de 5 ».  
+          (Choisir si la piste est verticale ou horizontale et adapter x/y.)</li>
+        <li>Faire tester : les élèves déplacent le robot sur la piste jusqu’à la ligne d’arrivée, sans encore tester la victoire.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler : « On code d’abord le <strong>robot 1 uniquement</strong>. On ne touche pas encore aux obstacles ni au robot 2. »</li>
+        <li>Pour les rapides : autoriser à changer la couleur du robot ou de la piste, pas plus.</li>
+        <li>Quand tu expliques : « Mains posées sur les genoux 5 secondes, on regarde l’écran. »</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Un tour de piste » (3–4 min)</h3>
+      <ul>
+        <li>Consigne : « Faites un aller-retour entre la ligne de départ et la ligne d’arrivée sans quitter la piste. »</li>
+        <li>But : tester le contrôle du robot, calmement.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, chacun a créé une piste, une ligne de départ/arrivée et un premier robot
+        qui peut se déplacer au clavier sans quitter l’écran. La semaine prochaine, on ajoutera
+        un deuxième robot et on fera une vraie course avec une victoire claire. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Ajouter le second robot, les obstacles & la victoire</h2>
+      <p class="meta">Objectif : avoir une vraie course : 2 robots, obstacles simples, première arrivée = gagnant.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Décider a priori :  
+          – touches pour Robot 1 (ex : flèches),  
+          – touches pour Robot 2 (ex : Q / D / Z ou A / D / W selon clavier).</li>
+        <li>Préparer une phrase simple :  
+          « On va partager le clavier : chaque joueur a ses propres touches. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Course de doigts » (3–4 min)</h3>
+      <ul>
+        <li>Les élèves posent leurs deux index sur la table.</li>
+        <li>Dire : « Quand je dis GO, vous avancez vos deux doigts vers moi le plus vite possible, mais sans décoller les doigts. »</li>
+        <li>But : introduire la notion de “commande” et de “course à 2”.</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Ajouter le robot 2 (10–12 min)</p>
+      <ul>
+        <li>Dupliquer le robot 1 → obtenir un robot 2 (couleur différente).</li>
+        <li>Le placer sur la ligne de départ, légèrement à gauche ou à droite du robot 1.</li>
+        <li>Renommer les sprites clairement : <strong>Robot1</strong> et <strong>Robot2</strong>.</li>
+        <li>Adapter son script de déplacement :  
+          – Par exemple :  
+            • « quand touche lettre W pressée → changer y de 5 »  
+            • « quand touche lettre A pressée → changer x de -5 »  
+            • « quand touche lettre D pressée → changer x de 5 »  
+          (ou autre combinaison simple).</li>
+      </ul>
+
+      <p class="time">2) Ajouter des obstacles simples (10–15 min)</p>
+      <ul>
+        <li>Créer 2–4 obstacles : petits rectangles colorés posés sur la piste.</li>
+        <li>Choisir une couleur unique pour les obstacles (ex. rouge foncé).</li>
+        <li>Deux options simples pour la pénalité :
+          <ul>
+            <li><strong>Option A :</strong> si robot touche un obstacle → il recule un peu.</li>
+            <li><strong>Option B :</strong> s’il touche un obstacle → retour à la ligne de départ.</li>
+          </ul>
+        </li>
+        <li>Exemple (pour Robot1) :  
+          – dans un script séparé avec boucle « répéter indéfiniment » :  
+            • « si touche [Obstacle1] ou touche [Obstacle2] alors aller à x:(position de départ) y:(position de départ) ».  
+          (Même principe pour Robot2.)</li>
+        <li>Faire tester : robots qui roulent et “se cognent” aux obstacles.</li>
+      </ul>
+
+      <p class="time">3) Condition de victoire (10–12 min)</p>
+      <ul>
+        <li>Choisir une méthode unique pour la classe :</li>
+        <li><strong>Option ligne d’arrivée en couleur :</strong>  
+          – Utiliser un test de couleur : si le robot touche la couleur de la ligne d’arrivée → message de victoire.</li>
+        <li><strong>Option sprite “Arrivée” :</strong>  
+          – Créer un sprite Arrivée (drapeau) placé sur la ligne d’arrivée → si le robot le touche, il gagne.</li>
+        <li>Exemple pour Robot1 :  
+          – « si touche [Arrivée] alors dire "Robot 1 a gagné !" pendant 2 s et arrêter tous. »</li>
+        <li>Pour Robot2, même principe avec un message différent :  
+          – « Robot 2 a gagné ! »</li>
+        <li>Tester plusieurs petites courses à deux, sur le même clavier.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler que c’est un <strong>jeu d’atelier</strong>, pas un championnat officiel.</li>
+        <li>Si les élèves s’énervent sur la compétition :  
+          – « On change de rôle : celui qui perd explique ce qu’il va modifier pour la prochaine course. »</li>
+        <li>Fixer une règle claire : au bout de 2–3 parties, on échange les postes ou les rôles.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Course silencieuse » (3–5 min)</h3>
+      <ul>
+        <li>Consigne : « On fait une dernière course, mais en silence complet. »</li>
+        <li>But : faire redescendre l’excitation tout en restant dans le thème.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « On a maintenant une vraie course jouable à deux : deux robots, des obstacles, une
+        ligne d’arrivée et un message de victoire. La prochaine fois, on ajoutera un petit
+        compteur de manches et on laissera les élèves ajuster la difficulté. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Compteur de manches, difficulté & tests croisés</h2>
+      <p class="meta">Objectif : enrichir le jeu (compteur, niveau de difficulté) et faire tester les jeux par d’autres élèves.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Préparer au tableau un mini-schéma :  
+          « Manche 1 → Manche 2 → Manche 3 → Gagnant final ».</li>
+        <li>Décider si tu veux surtout :
+          <ul>
+            <li>un compteur de manches (qui gagne le plus de courses),</li>
+            <li>ou des réglages de difficulté (plus d’obstacles, piste plus serrée…).</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Jeu d’activation – « 2 manches gagnantes » (3–4 min)</h3>
+      <ul>
+        <li>Poser la question : « Si on joue 3 courses, comment on sait qui est le gagnant ? »</li>
+        <li>Réponse attendue : celui qui gagne 2 manches sur 3.</li>
+        <li>Transition : « On va créer un compteur de manches pour suivre le gagnant. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer les variables de manches (15–20 min)</p>
+      <ul>
+        <li>Créer deux variables :  
+          – <strong>ManchesRobot1</strong>  
+          – <strong>ManchesRobot2</strong></li>
+        <li>Au début du jeu (drapeau vert) :  
+          – « mettre ManchesRobot1 à 0 »  
+          – « mettre ManchesRobot2 à 0 ».</li>
+        <li>Dans le script de victoire de Robot1 :  
+          – avant « arrêter tous », ajouter : « changer ManchesRobot1 par 1 ».</li>
+        <li>Dans celui de Robot2 :  
+          – « changer ManchesRobot2 par 1 ».</li>
+        <li>Option simple pour faire rejouer :  
+          – Au lieu d’“arrêter tous”, on peut :  
+            • « dire 'Robot 1 a gagné cette manche !' pendant 2 s »  
+            • remettre les robots sur la ligne de départ  
+            • laisser les joueurs relancer la course (ou utiliser une touche pour “nouvelle manche”).</li>
+        <li>Expliquer aux élèves que le “vrai gagnant” est celui qui a le plus de manches gagnées après plusieurs courses.</li>
+      </ul>
+
+      <p class="time">2) Ajuster la difficulté (10–15 min)</p>
+      <ul>
+        <li>Proposer 2–3 leviers simples :  
+          – resserrer un peu la piste,  
+          – ajouter 1 ou 2 obstacles de plus,  
+          – changer légèrement la vitesse (par ex. pas 5 mais 7 pour un robot).</li>
+        <li>Important : rappeler que le jeu doit rester jouable, pas impossible.</li>
+        <li>Demander à chaque élève :  
+          – « Est-ce que ton jeu est plutôt facile, moyen ou difficile ? »</li>
+      </ul>
+
+      <p class="time">3) Tests croisés (10–12 min)</p>
+      <ul>
+        <li>Mettre les élèves par groupes de 2 ou 3.</li>
+        <li>Chaque groupe teste la course d’un autre groupe pendant 5–7 minutes.</li>
+        <li>Ils doivent donner un retour simple :  
+          – 1 point positif (“J’ai aimé…”),  
+          – 1 suggestion (“Tu pourrais…”).</li>
+      </ul>
+
+      <h3>Jeu de clôture – « La course la plus claire » (5 min)</h3>
+      <ul>
+        <li>Demander : « Qu’est-ce qui fait qu’une course est agréable à jouer ? »</li>
+        <li>Liste possible au tableau :  
+          – piste lisible,  
+          – obstacles visibles,  
+          – robots bien contrastés,  
+          – règles simples (“celui qui passe la ligne gagne”).</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Nous avons terminé un jeu de course complet : deux robots contrôlés au clavier,
+        des obstacles, une ligne d’arrivée, un compteur de manches et une difficulté que
+        chacun a pu régler. Les élèves ont testé les jeux des autres et vu ce qui rend
+        une course agréable à jouer. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Le robot sort de la piste facilement</strong>  
+          → Vérifier que la piste est suffisamment large.  
+          → Proposer de ralentir le déplacement (changer x/y de 3 au lieu de 5).</li>
+
+        <li><strong>Les deux robots avancent avec les mêmes touches</strong>  
+          → Revoir les scripts : Robot1 doit utiliser les flèches, Robot2 les lettres.  
+          → Bien distinguer les sprites (noms : Robot1, Robot2).</li>
+
+        <li><strong>Les obstacles n’ont aucun effet</strong>  
+          → Vérifier que la condition « si touche [Obstacle] » est dans une boucle “répéter indéfiniment”.  
+          → Vérifier qu’on teste les bons sprites (et pas seulement la piste).</li>
+
+        <li><strong>Le message de victoire ne s’affiche jamais</strong>  
+          → Vérifier que le robot touche bien la couleur ou le sprite choisi pour l’arrivée.  
+          → Faire un test simple : placer le robot directement sur la ligne d’arrivée et cliquer sur drapeau vert.</li>
+
+        <li><strong>Les manches ne se comptent pas</strong>  
+          → Vérifier l’emplacement de « changer ManchesRobot1 par 1 » (il doit être dans le “si victoire de Robot1”).  
+          → Vérifier que la variable est affichée sur la scène.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques (sans matériel en plus)</h3>
+      <ul>
+        <li>Quand un élève bloque, lui faire expliquer <strong>avec ses mots</strong> ce qu’il veut que le robot fasse.</li>
+        <li>Encourager l’entraide contrôlée :  
+          – « Si ton code marche, tu peux aider ton voisin, mais une personne à la fois. »</li>
+        <li>En fin de séance, faire toujours un mini-résumé oral :  
+          – « Qu’avons-nous ajouté aujourd’hui ? »  
+          – « Quel bloc avez-vous le plus utilisé ? » (répéter, si, touche, etc.)</li>
+      </ul>
+    </div>
+
+
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  /* --- PARTIE ALGORITHME --- */
+  .algo-section {
+    margin-top: 18px;
+    padding: 18px 16px 20px 16px;
+    border-radius: var(--radius);
+    border: 1px solid #d0d7de;
+    background: #f7f7f7;
+    box-shadow: var(--shadow-soft);
+    font-family: "Courier New", monospace;
+  }
+
+  .algo-section > h2 {
+    color: #2c3e50;
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+  }
+
+  .algo-section > p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .titre-sprite {
+    font-weight: bold;
+    font-size: 0.95rem;
+    background: #eaf2f8;
+    padding: 6px 10px;
+    border-left: 6px solid #5dade2;
+    margin: 10px 0 6px;
+    border-radius: 4px;
+  }
+
+  .bloc {
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-left: 6px solid;
+    background-color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  }
+
+  .evenement { border-color: #FFD500; background-color: #fff8d1; }
+  .mouvement { border-color: #4C97FF; background-color: #dceeff; }
+  .apparence { border-color: #9966FF; background-color: #f0e6ff; }
+  .controle { border-color: #FFAB19; background-color: #ffe9cc; }
+  .son { border-color: #CF63CF; background-color: #fce4fc; }
+  .capteurs { border-color: #5CB1D6; background-color: #e0f6fb; }
+  .operateurs { border-color: #59C059; background-color: #e5fbe5; }
+
+  @media (max-width: 600px) {
+    .algo-section { padding: 14px 12px 16px 12px; }
+  }
+</style>
+
+<!-- === ALGORYTHME DU PROJET 7 – COURSE DE ROBOTS === -->
+<div class="algo-section">
+  <h2>🤖 Algorithme du Projet Scratch – Course de Robots</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Vitesse, obstacles & condition de victoire</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🏁 Séance 1 – Créer la piste & déplacer un robot</h2>
+
+    <div class="titre-sprite">🎨 Scène – Piste de course</div>
+    <div class="bloc apparence">dessiner une piste vue de dessus (rectangle ou circuit)</div>
+    <div class="bloc apparence">ajouter une ligne de départ (en bas) et une ligne d’arrivée (en haut)</div>
+    <div class="bloc apparence">utiliser une couleur bien visible pour les lignes</div>
+
+    <div class="titre-sprite">🤖 Sprite 1 – Robot 1 (joueur 1)</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à x:(0) y:(-140)</div>
+    <div class="bloc evenement">quand [touche flèche haut] pressée → <span class="mouvement">changer y de (5)</span></div>
+    <div class="bloc evenement">quand [touche flèche gauche] pressée → <span class="mouvement">changer x de (-5)</span></div>
+    <div class="bloc evenement">quand [touche flèche droite] pressée → <span class="mouvement">changer x de (5)</span></div>
+    <div class="bloc apparence">facultatif : changer la couleur ou le costume du robot</div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>⚡ Séance 2 – Ajouter le second robot, les obstacles & la victoire</h2>
+
+    <div class="titre-sprite">🤖 Sprite 2 – Robot 2 (joueur 2)</div>
+    <div class="bloc evenement">dupliquer le robot 1 et le renommer [Robot2]</div>
+    <div class="bloc mouvement">changer la couleur du robot 2</div>
+    <div class="bloc mouvement">placer légèrement à gauche/droite du robot 1 sur la ligne de départ</div>
+    <div class="bloc evenement">quand [touche W] pressée → <span class="mouvement">changer y de (5)</span></div>
+    <div class="bloc evenement">quand [touche A] pressée → <span class="mouvement">changer x de (-5)</span></div>
+    <div class="bloc evenement">quand [touche D] pressée → <span class="mouvement">changer x de (5)</span></div>
+
+    <div class="titre-sprite">🟥 Obstacles</div>
+    <div class="bloc apparence">créer 2 à 4 petits rectangles rouges comme obstacles</div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc controle" style="margin-left:20px;">si <span class="capteurs">touche [Obstacle]</span> alors →
+      <span class="mouvement">aller à x:(position départ) y:(position départ)</span> →
+      <span class="apparence">dire [Oups, obstacle !] pendant (1) seconde</span>
+    </div>
+
+    <div class="titre-sprite">🏁 Ligne d’arrivée</div>
+    <div class="bloc capteurs">si [touche couleur (blanche ou rouge)] alors → <span class="apparence">dire [Robot 1 a gagné !]</span> → <span class="controle">arrêter tous</span></div>
+    <div class="bloc capteurs">même script pour le Robot 2 avec message [Robot 2 a gagné !]</div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🏆 Séance 3 – Compteur de manches, difficulté & tests croisés</h2>
+
+    <div class="titre-sprite">📊 Variables de score</div>
+    <div class="bloc controle">créer [ManchesRobot1] et [ManchesRobot2]</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → <span class="controle">mettre [ManchesRobot1] à (0)</span> et <span class="controle">mettre [ManchesRobot2] à (0)</span></div>
+
+    <div class="titre-sprite">🤖 Victoire d’un robot</div>
+    <div class="bloc controle">si <span class="capteurs">touche [Arrivée]</span> alors →
+      <span class="controle">changer [ManchesRobot1] de (1)</span> →
+      <span class="apparence">dire [Robot 1 a gagné cette manche !] pendant (2) secondes</span> →
+      <span class="mouvement">aller à x:(0) y:(-140)</span> →
+      <span class="controle">attendre (1) seconde</span>
+    </div>
+
+    <div class="bloc controle">si <span class="capteurs">touche [Arrivée]</span> alors →
+      <span class="controle">changer [ManchesRobot2] de (1)</span> →
+      <span class="apparence">dire [Robot 2 a gagné cette manche !] pendant (2) secondes</span> →
+      <span class="mouvement">retourner sur la ligne de départ</span>
+    </div>
+
+    <div class="titre-sprite">🎚️ Ajustement de difficulté</div>
+    <div class="bloc mouvement">modifier la vitesse : “changer y de (7)” au lieu de (5)</div>
+    <div class="bloc apparence">ajouter des obstacles supplémentaires</div>
+    <div class="bloc apparence">resserrer la piste pour un mode “expert”</div>
+
+    <div class="titre-sprite">🧪 Tests croisés</div>
+    <div class="bloc controle">inviter un autre groupe à tester la course</div>
+    <div class="bloc apparence">observer : “la piste est-elle claire ?”, “les obstacles sont-ils visibles ?”</div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc mouvement">ajouter un compteur de tours (variable “Tours”)</div>
+    <div class="bloc apparence">faire clignoter la ligne d’arrivée avec changement d’effet couleur</div>
+    <div class="bloc son">jouer un son [victoire] pour le robot gagnant</div>
+    <div class="bloc controle">envoyer un message [Rejouer] pour recommencer la manche automatiquement</div>
+    <div class="bloc capteurs">créer un robot automatique : avancer seul + éviter les obstacles (niveau avancé)</div>
+  </div>
+</div>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 8 – Jeu de mémoire (Memory) | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 8 – Jeu de mémoire (Memory)</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Paires, logique & variables</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu de Memory avec cartes retournées</span>
+      <p>
+        Les élèves programment un jeu de Memory : des cartes sont posées face cachée,
+        le joueur retourne deux cartes à la fois et doit retrouver les paires.
+        On gère l’affichage des cartes, la vérification des paires, le score et un
+        message final. Le thème des cartes peut être libre : animaux, drapeaux,
+        formes, nombres…
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : commencer avec peu de cartes (4 ou 6) pour bien comprendre la logique.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Gérer plusieurs sprites “cartes” avec des costumes différents.</li>
+        <li>Utiliser les messages (broadcast) pour synchroniser les cartes.</li>
+        <li>Utiliser des variables (nombre de cartes retournées, score, paires trouvées).</li>
+        <li>Utiliser des conditions <strong>si … alors … sinon …</strong> pour vérifier les paires.</li>
+        <li>Structurer un tour de jeu : premier clic, deuxième clic, puis vérification.</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Créer les cartes & les retourner</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a 4 ou 6 cartes qui peuvent se retourner (face cachée / face visible) au clic.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Décider du nombre de cartes de départ :  
+          – CE2 : 4 cartes (2 paires),  
+          – CM1/CM2 : 6 ou 8 cartes (3–4 paires).</li>
+        <li>Choisir un thème simple : formes géométriques, fruits, nombres…</li>
+        <li>Préparer une explication courte :  
+          « Une carte a deux images : une face cachée identique pour toutes, et une face visible différente. »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – « Memory dans la tête » (5 min)</h3>
+      <ul>
+        <li>Sur une feuille ou au tableau, dessiner 4 cases numérotées (1 à 4). Derrière chaque numéro, tu notes en secret 2 paires (ex : 🍎, 🍎, ⭐, ⭐).</li>
+        <li>Demander à la classe : « Choisissez deux numéros, on va voir si c’est une paire ! »</li>
+        <li>Révéler les symboles et laisser les élèves réessayer 2 ou 3 fois.</li>
+        <li>Transition : « Notre jeu fera la même chose, mais dans Scratch avec des cartes qui se retournent. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer une carte de base (face cachée / visible) (15–20 min)</p>
+      <ul>
+        <li>Dans Scratch, garder le chat ou le supprimer, puis créer un nouveau sprite “Carte”.</li>
+        <li>Dans l’éditeur de costumes du sprite “Carte” :</li>
+        <li>
+          <ul>
+            <li>Costume 1 = <strong>dos de carte</strong> (même image pour toutes les cartes) :  
+              – rectangle avec une couleur uniforme,  
+              – éventuellement un petit motif au centre.</li>
+            <li>Costume 2 = <strong>face visible</strong> (premier symbole / image du Memory) :  
+              – par ex. une pomme, une étoile, un chiffre, etc.</li>
+          </ul>
+        </li>
+        <li>Renommer les costumes pour plus de clarté :  
+          – “dos” et “face1”.</li>
+        <li>Expliquer :  
+          « Toutes les cartes auront le même dos, mais pas la même face visible. »</li>
+      </ul>
+
+      <p class="time">2) Script pour retourner la carte au clic (15–20 min)</p>
+      <ul>
+        <li>Sur le sprite Carte, ajouter le script :  
+          – « quand drapeau vert cliqué → basculer sur le costume "dos" » (toutes les cartes commencent cachées).</li>
+        <li>Pour le clic :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué »  
+              – « si costume = "dos" alors basculer sur "face1" »  
+              – « sinon basculer sur "dos" »</li>
+          </ul>
+        </li>
+        <li>Expliquer simplement :  
+          « Si on voit le dos → on montre la face. Si on voit la face → on cache. »</li>
+        <li>Tester : cliquer plusieurs fois sur la carte pour vérifier que le changement s’alterne bien.</li>
+      </ul>
+
+      <p class="time">3) Dupliquer la carte (si le temps le permet) (5–7 min)</p>
+      <ul>
+        <li>Dupliquer le sprite Carte pour obtenir 2 cartes identiques (même dos, même face1).</li>
+        <li>Les placer côte à côte sur la scène.</li>
+        <li>Expliquer que ce sera la première paire du jeu.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Insister : « On reste pour l’instant sur 1 seule carte jusqu’à ce qu’elle se retourne bien. Après seulement, on duplique. »</li>
+        <li>Pour les rapides : autoriser à améliorer le dos de la carte (décor graphique) mais pas à multiplier les cartes trop vite.</li>
+        <li>Si bruit :  
+          – « On fait une minute de clic-test en silence : chacun vérifie juste que sa carte se retourne. »</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Retourne/Cache » (3–4 min)</h3>
+      <ul>
+        <li>Consigne : « À mon signal, tout le monde clique pour mettre sa carte en mode ‘dos’. À mon deuxième signal, on clique pour la mettre en mode ‘face’. »</li>
+        <li>But : tester le code ensemble, de façon synchronisée et calme.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, on a appris à créer une carte avec un dos et une face,
+        et à la faire se retourner au clic. La prochaine fois, on va créer plusieurs
+        paires et on commencera à vérifier automatiquement si deux cartes retournées sont identiques. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Gérer les paires & le score</h2>
+      <p class="meta">Objectif : constituer 2 à 4 paires de cartes, détecter quand deux cartes sont identiques, ajouter un score simple.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Rappeler pour toi le principe du tour de jeu :  
+          – on retourne une carte (1ère),  
+          – on retourne une 2e carte,  
+          – on vérifie si elles sont identiques,  
+          – si oui, elles restent visibles (ou disparaissent), sinon on les remet face cachée.</li>
+        <li>Préparer une phrase simple à dire aux élèves :  
+          « Scratch va devoir se souvenir de la première carte retournée. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Retenir la première » (3–4 min)</h3>
+      <ul>
+        <li>Tu montres rapidement au tableau 2 symboles (ex : A et B) puis tu effaces.</li>
+        <li>Demander : « Qui se souvient du premier symbole ? »</li>
+        <li>Transition : « Dans notre jeu, c’est Scratch qui devra se souvenir de la première carte retournée. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer plusieurs paires de cartes (10–15 min)</p>
+      <ul>
+        <li>À partir de la carte de base, créer :  
+          – 2 cartes avec face1 (par ex. 🐱),  
+          – 2 cartes avec face2 (par ex. 🐶),  
+          – éventuellement 2 cartes avec face3 (selon le niveau).</li>
+        <li>Techniquement, il y a 2 options :</li>
+        <li>
+          <ul>
+            <li><strong>Option A (simple) :</strong>  
+              – 1 sprite par carte, avec 2 costumes (“dos” + “face unique”).  
+              – Dupliquer le sprite et modifier uniquement le costume face visible (face2, face3…).</li>
+            <li><strong>Option B (plus avancée) :</strong>  
+              – 1 sprite “Carte” avec plusieurs costumes (dos, face1, face2, face3…)  
+              – et plusieurs clones.  
+              – → À garder plutôt pour les CM1/CM2 à l’aise.</li>
+          </ul>
+        </li>
+        <li>Recommander l’Option A pour garder la logique simple.</li>
+      </ul>
+
+      <p class="time">2) Variables de tour : mémoriser la 1ère carte (15–20 min)</p>
+      <ul>
+        <li>Créer les variables (pour tous les sprites) :  
+          – <strong>Carte1</strong> (pour stocker l’identifiant de la 1ère carte),  
+          – <strong>Carte2</strong> (pour la 2e carte),  
+          – <strong>Score</strong> (nombre de paires trouvées).</li>
+        <li>Au début (drapeau vert) sur un sprite “Gestion” (ou un des sprites cartes) :  
+          – « mettre Carte1 à 0 »  
+          – « mettre Carte2 à 0 »  
+          – « mettre Score à 0 ».</li>
+        <li>Sur chaque carte, adapter le script du clic. Par exemple pour la carte “Chat1” :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué »  
+              – si costume = “dos” alors :  
+                • basculer sur “faceChat”  
+                • si Carte1 = 0 alors mettre Carte1 à "chat"  
+                • sinon mettre Carte2 à "chat"  
+                • envoyer le message "verifierPaire" (broadcast)  
+              – sinon (si on est déjà face visible) : ne rien faire ou repasser en dos selon la logique voulue.</li>
+          </ul>
+        </li>
+        <li>Pour la carte “Chat2”, même principe : accepter qu’elle aussi remplisse Carte1 ou Carte2 avec "chat".</li>
+        <li>Pour les cartes “Chien1/Chien2”, utiliser la valeur "chien".</li>
+      </ul>
+
+      <p class="time">3) Script de vérification de la paire (10–12 min)</p>
+      <ul>
+        <li>Créer un sprite “GestionJeu” (ou utiliser le décor) pour gérer la vérification.</li>
+        <li>Sur ce sprite :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois "verifierPaire" »  
+              – « si Carte1 ≠ 0 ET Carte2 ≠ 0 alors »  
+                • « si Carte1 = Carte2 alors »  
+                  · dire "Bravo, paire trouvée !" pendant 1 s  
+                  · changer Score par 1  
+                  · éventuellement envoyer un message "laisserVisible" (option avancée),  
+                • « sinon »  
+                  · dire "Ce n’est pas la même carte." pendant 1 s  
+                  · envoyer un message "remettreDos" pour toutes les cartes,  
+                • remettre Carte1 à 0, Carte2 à 0.</li>
+          </ul>
+        </li>
+        <li>Extérieur : sur chaque carte, réagir au message "remettreDos" en repassant sur le costume “dos”.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Procéder lentement : expliquer d’abord la logique avec la voix, puis seulement coder.</li>
+        <li>Pour les élèves perdus, proposer :  
+          – « On commence par gérer seulement 2 cartes (1 paire). Quand ça marche, on ajoute les autres. »</li>
+        <li>Les rapides peuvent : soigner les dessins de cartes, mais pas augmenter le nombre de cartes au-delà de ce qu’ils gèrent. </li>
+      </ul>
+
+      <h3>Jeu de clôture – « Paires imaginaires » (3–4 min)</h3>
+      <ul>
+        <li>Demander : « Si Carte1 = 'chat' et Carte2 = 'chien', qu’est-ce qui se passe ? »</li>
+        <li>Varier avec d’autres combinaisons à l’oral pour vérifier la compréhension de la condition.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons créé plusieurs cartes, et Scratch commence à
+        comprendre si deux cartes retournées vont ensemble ou non. On a mis en
+        place des variables pour mémoriser la 1ère et la 2e carte, et un début
+        de score. La prochaine fois, on terminera le jeu : toutes les paires,
+        un message de fin et des tests entre élèves. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Fin de partie, message final & tests</h2>
+      <p class="meta">Objectif : terminer le jeu (toutes les paires, message de fin, éventuellement chronomètre), puis le tester entre élèves.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Décider si tu veux aussi ajouter un petit chronomètre (option pour les plus à l’aise).</li>
+        <li>Préparer deux phrases de fin :  
+          – « Bravo, tu as trouvé toutes les paires ! »  
+          – « Tu peux rejouer pour aller plus vite. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Combien de paires ? » (3–4 min)</h3>
+      <ul>
+        <li>Demander : « Si vous avez 6 cartes au total, combien de paires ça fait ? » (Réponse : 3)</li>
+        <li>Faire le même jeu avec 4 cartes, 8 cartes…</li>
+        <li>Transition : « Dans notre Memory, la partie se termine quand toutes les paires sont trouvées. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Terminer la grille de cartes (10–15 min)</p>
+      <ul>
+        <li>Vérifier que chaque élève a bien le nombre prévu de paires (par ex. 3 paires = 6 cartes).</li>
+        <li>Bien positionner les cartes en grille (2x3, 3x4…) pour que le jeu soit lisible.</li>
+        <li>Rappel rapide : toutes les cartes doivent réagir au message "remettreDos".</li>
+      </ul>
+
+      <p class="time">2) Condition de fin de partie (10–15 min)</p>
+      <ul>
+        <li>On suppose :  
+          – Score = nombre de paires trouvées.</li>
+        <li>Créer une variable <strong>PairesTotales</strong>.</li>
+        <li>Au début (drapeau vert) :  
+          – « mettre PairesTotales à X » (X = 2, 3 ou 4 selon le niveau).</li>
+        <li>Dans le script du “GestionJeu”, après chaque paire trouvée (quand on change Score par 1) :</li>
+        <li>
+          <ul>
+            <li>Ajouter :  
+              – « si Score = PairesTotales alors »  
+                • « dire "Bravo, tu as trouvé toutes les paires !" pendant 3 s »  
+                • éventuellement « arrêter tous ».</li>
+          </ul>
+        </li>
+        <li>Expliquer :  
+          « Quand le score atteint le nombre total de paires, on sait que la partie est finie. »</li>
+      </ul>
+
+      <p class="time">3) Option : chronomètre (pour les élèves avancés) (8–10 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Temps</strong>.</li>
+        <li>Au début du jeu (drapeau vert) :  
+          – « mettre Temps à 0 ».</li>
+        <li>Faire un script séparé (sur GestionJeu ou sur le décor) :  
+          – « quand drapeau vert cliqué »  
+            • « répéter indéfiniment »  
+              · « attendre 1 seconde »  
+              · « changer Temps par 1 ».</li>
+        <li>À la fin (quand Score = PairesTotales) :  
+          – au lieu de dire juste « Bravo », dire :  
+            « Bravo, tu as trouvé toutes les paires en (Temps) secondes ! ».</li>
+      </ul>
+
+      <p class="time">4) Tests en binômes (10–12 min)</p>
+      <ul>
+        <li>Par deux :  
+          – élève A joue au Memory de B,  
+          – élève B observe et note :  
+            • “Ce que j’ai aimé” (ex : lisible, joli thème),  
+            • “Ce qui peut être amélioré” (ex : cartes trop collées, texte trop petit).</li>
+        <li>Échanger les rôles au bout de 5–7 minutes.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Quel Memory tu préfères ? » (5 min)</h3>
+      <ul>
+        <li>Demander aux élèves :  
+          – « Qu’est-ce qui rend un Memory agréable à jouer ? »  
+          – « Préférez-vous beaucoup de cartes (difficile) ou peu de cartes (rapide) ? »</li>
+        <li>Faire émerger 2–3 critères :  
+          – cartes bien visibles,  
+          – thème clair,  
+          – temps de réaction suffisant (ne pas aller trop vite). </li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons terminé un véritable jeu de Memory : plusieurs
+        paires de cartes, un score, une fin de partie quand toutes les paires
+        sont trouvées, et parfois même un chronomètre. Les élèves ont testé le
+        jeu de leurs camarades et vu ce qui rend un Memory agréable ou difficile. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Les cartes ne se retournent pas</strong>  
+          → Vérifier que le script « quand ce sprite est cliqué » est bien sur chaque carte.  
+          → Vérifier les noms de costumes (“dos”, “faceChat”, etc.).</li>
+
+        <li><strong>Carte1 ou Carte2 restent bloquées</strong>  
+          → Vérifier que Carte1 et Carte2 sont bien remises à 0 après chaque vérification.  
+          → Ajouter un affichage temporaire des variables pour comprendre ce qui se passe.</li>
+
+        <li><strong>Les paires correctes sont remises dos quand même</strong>  
+          → Vérifier l’ordre des blocs :  
+            – d’abord tester « si Carte1 = Carte2 »,  
+            – ne pas envoyer “remettreDos” si c’est une bonne paire.</li>
+
+        <li><strong>Le score ne correspond pas au nombre de paires</strong>  
+          → Vérifier que « changer Score par 1 » se trouve uniquement dans le cas “bonne paire”.</li>
+
+        <li><strong>Fin de partie ne se déclenche pas</strong>  
+          → Vérifier la valeur de PairesTotales.  
+          → Vérifier que la condition est bien « si Score = PairesTotales ».</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire expliquer par les élèves, à voix haute, le déroulé d’un tour :  
+          « Je clique une première carte, puis une deuxième… »</li>
+        <li>Encourager un travail par étapes :  
+          – d’abord 1 paire,  
+          – puis 2 paires,  
+          – seulement ensuite le score et la fin de partie.</li>
+        <li>Pour les plus rapides :  
+          – ajouter une “super paire” qui vaut 2 points,  
+          – ou un décor sonore (petit son quand on trouve une paire).</li>
+        <li>En cas d’agitation : proposer un “tour de jeu lent” où l’on clique très calmement et où l’on commente ce que fait le programme.</li>
+      </ul>
+    </div>
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  /* --- PARTIE ALGORITHME --- */
+  .algo-section {
+    margin-top: 18px;
+    padding: 18px 16px 20px 16px;
+    border-radius: var(--radius);
+    border: 1px solid #d0d7de;
+    background: #f7f7f7;
+    box-shadow: var(--shadow-soft);
+    font-family: "Courier New", monospace;
+  }
+
+  .algo-section > h2 {
+    color: #2c3e50;
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+  }
+
+  .algo-section > p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .titre-sprite {
+    font-weight: bold;
+    font-size: 0.95rem;
+    background: #eaf2f8;
+    padding: 6px 10px;
+    border-left: 6px solid #5dade2;
+    margin: 10px 0 6px;
+    border-radius: 4px;
+  }
+
+  .bloc {
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-left: 6px solid;
+    background-color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  }
+
+  .evenement { border-color: #FFD500; background-color: #fff8d1; }
+  .mouvement { border-color: #4C97FF; background-color: #dceeff; }
+  .apparence { border-color: #9966FF; background-color: #f0e6ff; }
+  .controle { border-color: #FFAB19; background-color: #ffe9cc; }
+  .son { border-color: #CF63CF; background-color: #fce4fc; }
+  .capteurs { border-color: #5CB1D6; background-color: #e0f6fb; }
+  .operateurs { border-color: #59C059; background-color: #e5fbe5; }
+
+  @media (max-width: 600px) {
+    .algo-section { padding: 14px 12px 16px 12px; }
+  }
+</style>
+
+<!-- === ALGORYTHME DU PROJET 8 – JEU DE MÉMOIRE === -->
+<div class="algo-section">
+  <h2>🧠 Algorithme du Projet Scratch – Jeu de Mémoire (Memory)</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Paires, logique & variables</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🃏 Séance 1 – Créer les cartes & les retourner</h2>
+
+    <div class="titre-sprite">🎨 Sprite – Carte de base</div>
+    <div class="bloc apparence">costume 1 = dos de carte (identique pour toutes)</div>
+    <div class="bloc apparence">costume 2 = face visible (image ou symbole différent)</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → <span class="apparence">basculer sur le costume [dos]</span></div>
+
+    <div class="bloc evenement">quand ce sprite est cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">costume = "dos"</span> alors →
+      <span class="apparence">basculer sur "face1"</span>  
+      sinon →
+      <span class="apparence">basculer sur "dos"</span>
+    </div>
+    <div class="bloc apparence">tester le clic : la carte se retourne et se recache</div>
+    <div class="bloc controle">dupliquer le sprite pour obtenir 2 cartes identiques (1 paire)</div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>🎯 Séance 2 – Gérer les paires & le score</h2>
+
+    <div class="titre-sprite">📊 Variables</div>
+    <div class="bloc controle">créer [Carte1], [Carte2] et [Score]</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué →  
+      <span class="controle">mettre [Carte1] à (0)</span> →  
+      <span class="controle">mettre [Carte2] à (0)</span> →  
+      <span class="controle">mettre [Score] à (0)</span>
+    </div>
+
+    <div class="titre-sprite">🃏 Script sur chaque carte</div>
+    <div class="bloc evenement">quand ce sprite est cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">costume = "dos"</span> alors →  
+      <span class="apparence">basculer sur [faceX]</span>  
+      <span class="controle">si [Carte1 = 0] alors mettre [Carte1] à "X"</span>  
+      <span class="controle">sinon mettre [Carte2] à "X"</span>  
+      <span class="controle">envoyer le message [verifierPaire]</span>
+    </div>
+
+    <div class="titre-sprite">⚙️ Sprite GestionJeu</div>
+    <div class="bloc evenement">quand je reçois [verifierPaire]</div>
+    <div class="bloc controle">si <span class="operateurs">[Carte1 ≠ 0 ET Carte2 ≠ 0]</span> alors :</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">[Carte1 = Carte2]</span> alors →  
+      <span class="apparence">dire [Bravo, paire trouvée !] pendant (1) seconde</span> →  
+      <span class="controle">changer [Score] de (1)</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">
+      sinon →  
+      <span class="apparence">dire [Ce n’est pas la même carte.] pendant (1) seconde</span> →  
+      <span class="controle">envoyer le message [remettreDos]</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">mettre [Carte1] à (0) et [Carte2] à (0)</div>
+
+    <div class="bloc evenement">quand je reçois [remettreDos]</div>
+    <div class="bloc apparence">basculer sur le costume [dos]</div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🏆 Séance 3 – Fin de partie, message final & tests</h2>
+
+    <div class="titre-sprite">📊 Variable supplémentaire</div>
+    <div class="bloc controle">créer [PairesTotales]</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → <span class="controle">mettre [PairesTotales] à (3)</span> (exemple)</div>
+
+    <div class="titre-sprite">🏁 Fin de partie</div>
+    <div class="bloc controle">dans le script de vérification :</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">[Score = PairesTotales]</span> alors →  
+      <span class="apparence">dire [Bravo ! Tu as trouvé toutes les paires !] pendant (3) secondes</span> →  
+      <span class="controle">arrêter tous</span>
+    </div>
+
+    <div class="titre-sprite">⏱️ Option – Chronomètre</div>
+    <div class="bloc controle">créer [Temps]</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué → <span class="controle">mettre [Temps] à (0)</span></div>
+    <div class="bloc controle">répéter indéfiniment :</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      <span class="controle">attendre (1) seconde</span> → <span class="controle">changer [Temps] de (1)</span>
+    </div>
+    <div class="bloc controle">à la fin du jeu → <span class="apparence">dire [Bravo, trouvé en (Temps) secondes !]</span></div>
+
+    <div class="titre-sprite">🤝 Tests en binômes</div>
+    <div class="bloc apparence">A joue au Memory de B, puis on échange les rôles</div>
+    <div class="bloc apparence">chaque joueur donne 1 point positif et 1 idée d’amélioration</div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc controle">ajouter une “super paire” qui vaut 2 points</div>
+    <div class="bloc apparence">faire disparaître les cartes trouvées (se cacher)</div>
+    <div class="bloc son">jouer un son [ding] pour une bonne paire</div>
+    <div class="bloc apparence">changer le décor selon l’avancement (niveau 1 / niveau 2)</div>
+    <div class="bloc controle">envoyer un message [Rejouer] pour recommencer la partie</div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</body>
+</html>

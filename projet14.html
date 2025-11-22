@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 14 – Machine à sons (musique & rythme) | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 14 – Machine à sons (musique & rythme)</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Sons, rythmes, boucles & clavier</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Instrument virtuel et séquenceur rythmique</span>
+      <p>
+        Les élèves créent une petite “machine à sons” dans Scratch : 
+        différentes touches du clavier déclenchent des sons (batterie, notes, effets),
+        puis ils ajoutent une boucle rythmique automatique. On termine par de
+        petites “performances” où les élèves jouent leur instrument virtuel.
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : commencer avec 4 touches sonores, puis enrichir le nombre de sons et de motifs.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Utiliser les blocs son dans Scratch (jouer un son, changer le tempo, etc.).</li>
+        <li>Associer des touches du clavier à des actions précises.</li>
+        <li>Créer une boucle rythmique répétitive.</li>
+        <li>Structurer une interface simple (boutons, indications de touches).</li>
+        <li>Coopérer lors de petites “performances” (à deux sur un même clavier, par exemple).</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Clavier sonore : 4 touches = 4 sons</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a un projet où 4 touches différentes du clavier déclenchent 4 sons différents.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Vérifier que le son fonctionne sur les postes (volume, casque si nécessaire).</li>
+        <li>Décider d’une première configuration de touches simple, par exemple :  
+          – A = grosse caisse,  
+          – S = caisse claire,  
+          – D = cymbale,  
+          – F = clap.</li>
+        <li>Préparer une phrase d’introduction :  
+          « On va transformer le clavier en instrument de musique. Chaque touche déclenche un son. »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – “Clap rythmique” (5 min)</h3>
+      <ul>
+        <li>Demander à la classe de frapper dans les mains sur un rythme simple :  
+          – animateur : “1 – 2 – 3 – 4”,  
+          – élèves : clap sur “1” uniquement.</li>
+        <li>Changer le rythme : clap sur “1” et “3”, puis sur tous les temps.</li>
+        <li>Transition : « Dans Scratch, ce sera le clavier qui fera “clap”, “boum”, etc. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Préparer la scène et un sprite “Table de mixage” (5–8 min)</p>
+      <ul>
+        <li>Arrière-plan : uni ou discret, pour bien lire les indications.</li>
+        <li>Créer un sprite “Table de mixage” ou simple rectangle avec, en costume, les lettres A, S, D, F écrites dessus (ou à côté).</li>
+        <li>Pour l’instant, ce sprite sert surtout à montrer visuellement quelles touches utiliser.</li>
+      </ul>
+
+      <p class="time">2) Découvrir les sons dans Scratch (5–7 min)</p>
+      <ul>
+        <li>Sur n’importe quel sprite, onglet <strong>Sons</strong> :</li>
+        <li>
+          <ul>
+            <li>montrer comment ajouter un son
+        <li>montrer comment ajouter un son dans la bibliothèque (ex. “Drum”, “Clap”, “Piano”, “Pop”).</li>
+        <li>Faire tester quelques sons à toute la classe, puis laisser chaque élève choisir 4 sons différents.</li>
+      </ul>
+
+      <p class="time">3) Associer chaque touche à un son (15–20 min)</p>
+      <ul>
+        <li>Créer 1 sprite par son (ou garder un seul sprite avec plusieurs scripts, au choix selon le niveau).</li>
+        <li>Pour chaque son :</li>
+        <li>
+          <ul>
+            <li>« quand touche [A] pressée » → « jouer le son [Drum1] »</li>
+            <li>« quand touche [S] pressée » → « jouer le son [Clap] »</li>
+            <li>« quand touche [D] pressée » → « jouer le son [Snare] »</li>
+            <li>« quand touche [F] pressée » → « jouer le son [Cymbal] »</li>
+          </ul>
+        </li>
+        <li>Tester calmement : presser les touches une à une, puis en rythme.</li>
+        <li>Expliquer : « Scratch peut jouer plusieurs sons en même temps, c’est une vraie batterie virtuelle ! »</li>
+      </ul>
+
+      <p class="time">4) Ajouter un visuel au déclenchement (optionnel – 5–7 min)</p>
+      <ul>
+        <li>Pour chaque touche, faire changer le costume du sprite pendant 0.2 seconde :</li>
+        <li>
+          <ul>
+            <li>« quand touche [A] pressée → jouer le son [Drum] → basculer sur costume 2 → attendre 0.2 s → costume 1 ».</li>
+          </ul>
+        </li>
+        <li>Option : changer la couleur ou ajouter un effet visuel (“effet couleur de 25”).</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Mini-concert silencieux” (5 min)</h3>
+      <ul>
+        <li>Demander : « Faites votre rythme préféré, mais avec le son coupé ! »</li>
+        <li>But : travailler la coordination et canaliser l’excitation après la découverte des sons.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons créé une batterie virtuelle avec 4 touches 
+        qui déclenchent chacune un son différent. La prochaine fois, nous 
+        apprendrons à faire jouer Scratch tout seul, en boucle, pour créer un rythme. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Boucles rythmiques automatiques</h2>
+      <p class="meta">Objectif : créer un rythme automatique (batterie) avec des boucles et un tempo ajustable.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Préparer une petite démonstration sonore (batterie simple : boum, clap, boum, clap).</li>
+        <li>Préparer une phrase :  
+          « Aujourd’hui, on programme Scratch pour qu’il joue seul, comme un batteur. »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – “Clap machine” (5 min)</h3>
+      <ul>
+        <li>Demander à la classe : “Je suis la machine, je fais clap toutes les secondes.”</li>
+        <li>Frapper un clap régulier (1 par seconde), puis accélérer : “0,5 seconde !”</li>
+        <li>Transition : « Dans Scratch, on fera pareil : on répétera un son toutes les X secondes. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer un sprite “Batterie” (8–10 min)</p>
+      <ul>
+        <li>Choisir un son fort (Drum, Kick ou Snare).</li>
+        <li>Ajouter un script :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué → répéter indéfiniment → jouer le son [Drum] → attendre 1 s ».</li>
+          </ul>
+        </li>
+        <li>Tester : entendre un battement régulier.</li>
+      </ul>
+
+      <p class="time">2) Ajouter un deuxième instrument (10–12 min)</p>
+      <ul>
+        <li>Créer un sprite “Clap” ou “Hi-hat”.</li>
+        <li>Script :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué → attendre 0.5 s → répéter indéfiniment → jouer le son [Clap] → attendre 1 s ».</li>
+          </ul>
+        </li>
+        <li>Expliquer : “Ce sprite commence en décalé, pour créer un rythme entre les deux sons.”</li>
+        <li>Tester les deux ensemble, ajuster le tempo.</li>
+      </ul>
+
+      <p class="time">3) Ajouter un tempo variable (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Tempo</strong> (pour tous les sprites).</li>
+        <li>Au démarrage : « mettre Tempo à 1 ».</li>
+        <li>Remplacer tous les “attendre 1 s” par “attendre Tempo secondes”.</li>
+        <li>Créer deux boutons (sprites) : “+” et “–” avec :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué → changer Tempo par -0.1 » (pour accélérer).</li>
+            <li>« quand ce sprite est cliqué → changer Tempo par 0.1 » (pour ralentir).</li>
+          </ul>
+        </li>
+        <li>Tester : faire varier la vitesse du rythme en temps réel.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Trouve ton tempo” (5 min)</h3>
+      <ul>
+        <li>Consigne : “Choisis un tempo qui te plaît et garde-le pendant 15 secondes.”</li>
+        <li>But : calmer le rythme et maîtriser le contrôle du temps.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, Scratch a appris à jouer tout seul grâce à la boucle 
+        “répéter indéfiniment” et au tempo. On a même pu changer la vitesse 
+        en direct avec des boutons. Prochaine étape : combiner la machine 
+        et les touches pour jouer à deux ! »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Performances & duo sonore</h2>
+      <p class="meta">Objectif : faire jouer la machine (boucle) + le clavier manuel, puis organiser de mini “performances”.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Préparer une courte démo : lancer le rythme automatique, puis ajouter des sons au clavier.</li>
+        <li>Préparer la consigne :  
+          « Aujourd’hui, on va jouer à deux : Scratch fait la batterie, toi tu fais la mélodie. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Batteur & musicien” (5 min)</h3>
+      <ul>
+        <li>Un élève tape un rythme sur la table (batteur),  
+            un autre fait des sons de bouche (musicien).</li>
+        <li>Changer les rôles, puis transition : “Dans Scratch, on va coder ces deux rôles.”</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Lancer la batterie automatique + sons manuels (15–20 min)</p>
+      <ul>
+        <li>Combiner le code des séances 1 et 2 :</li>
+        <li>
+          <ul>
+            <li>“quand drapeau vert cliqué” (pour la boucle batterie)</li>
+            <li>et “quand touche A pressée…” (pour le jeu manuel).</li>
+          </ul>
+        </li>
+        <li>Tester : lancer le drapeau, puis jouer des sons en direct.</li>
+      </ul>
+
+      <p class="time">2) Ajouter un effet visuel (8–10 min)</p>
+      <ul>
+        <li>Créer un sprite “Lumières” :  
+          – changer effet couleur à chaque son,  
+          – ou changer de costume sur le rythme.</li>
+        <li>Astuce : “quand je reçois message ‘battement’ → changer effet couleur de 25”.</li>
+        <li>Permet d’avoir un spectacle sonore + visuel.</li>
+      </ul>
+
+      <p class="time">3) Mini-performances en duo (10–12 min)</p>
+      <ul>
+        <li>Mettre les élèves par deux :  
+          – élève 1 : lance la batterie,  
+          – élève 2 : joue au clavier.</li>
+        <li>Chaque duo joue 30 secondes, pendant que la classe écoute.</li>
+        <li>Changer les rôles ensuite.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Silence musical” (3–4 min)</h3>
+      <ul>
+        <li>Tout le monde appuie sur Stop. On écoute 10 secondes de silence complet.</li>
+        <li>Transition apaisée : “La musique, c’est aussi savoir s’arrêter ensemble.”</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Les enfants ont joué leur première “performance Scratch” : une machine
+        à rythme automatique et des sons en direct. Ils ont découvert la logique
+        des boucles, du tempo et la coordination clavier/système. Une activité
+        ludique, sonore et collaborative. »
+      </p>
+    </div>
+
+    <!-- ASTUCES -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+      <ul>
+        <li><strong>Pas de son ?</strong>  
+          → Vérifier que le volume du PC n’est pas à 0 et que Scratch a le son actif.  
+          → Tester dans l’onglet “Sons” directement.</li>
+        <li><strong>Rythme trop rapide ou trop lent ?</strong>  
+          → Ajuster la variable Tempo.  
+          → Vérifier qu’il n’y a pas de “attendre 0 s” dans la boucle.</li>
+        <li><strong>Les sons se chevauchent ?</strong>  
+          → Ajouter “attendre jusqu’à ce que touche relâchée” ou “attendre 0.2 s” après chaque son.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Encourager les enfants à découvrir de nouveaux sons (instrument, voix, effets).</li>
+        <li>Pour les rapides :  
+          – ajouter un fond clignotant sur le rythme,  
+          – ou enregistrer un son vocal (Scratch permet de le faire).</li>
+        <li>Si la classe devient trop excitée :  
+          – faire une “pause silence” d’1 minute,  
+          – puis relancer calmement la musique.</li>
+      </ul>
+    </div>
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  .algo-section{
+    margin-top:18px;padding:18px 16px 20px 16px;border-radius:var(--radius);
+    border:1px solid #d0d7de;background:#f7f7f7;box-shadow:var(--shadow-soft);
+    font-family:"Courier New",monospace;
+  }
+  .algo-section>h2{color:#2c3e50;margin-bottom:4px;font-size:1.05rem;}
+  .algo-section>p{font-size:.85rem;color:#555;margin-bottom:10px;}
+  .titre-sprite{font-weight:bold;font-size:.95rem;background:#eaf2f8;
+    padding:6px 10px;border-left:6px solid #5dade2;margin:10px 0 6px;border-radius:4px;}
+  .bloc{padding:6px 10px;margin:4px 0;border-left:6px solid;background:#fff;
+    border-radius:6px;font-size:.85rem;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .evenement{border-color:#FFD500;background:#fff8d1;}
+  .mouvement{border-color:#4C97FF;background:#dceeff;}
+  .apparence{border-color:#9966FF;background:#f0e6ff;}
+  .controle{border-color:#FFAB19;background:#ffe9cc;}
+  .son{border-color:#CF63CF;background:#fce4fc;}
+  .capteurs{border-color:#5CB1D6;background:#e0f6fb;}
+  .operateurs{border-color:#59C059;background:#e5fbe5;}
+  @media(max-width:600px){.algo-section{padding:14px 12px 16px 12px;}}
+</style>
+
+<!-- === ALGORYTHME DU PROJET 14 – MACHINE À SONS === -->
+<div class="algo-section">
+  <h2>🎶 Algorithme du Projet Scratch – Machine à sons (musique & rythme)</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Sons, rythmes, boucles & clavier</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🎹 Séance 1 – Clavier sonore : 4 touches = 4 sons</h2>
+
+    <div class="titre-sprite">🎨 Scène & Interface</div>
+    <div class="bloc apparence">fond simple avec lettres A – S – D – F visibles</div>
+
+    <div class="titre-sprite">🥁 Sprite – Sons manuels</div>
+    <div class="bloc evenement">quand touche [A] pressée</div>
+    <div class="bloc son" style="margin-left:20px;">jouer le son [Drum1]</div>
+
+    <div class="bloc evenement">quand touche [S] pressée</div>
+    <div class="bloc son" style="margin-left:20px;">jouer le son [Clap]</div>
+
+    <div class="bloc evenement">quand touche [D] pressée</div>
+    <div class="bloc son" style="margin-left:20px;">jouer le son [Snare]</div>
+
+    <div class="bloc evenement">quand touche [F] pressée</div>
+    <div class="bloc son" style="margin-left:20px;">jouer le son [Cymbal]</div>
+
+    <div class="bloc apparence">option : changer de costume ou couleur pendant 0.2 s pour un effet visuel</div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>🔁 Séance 2 – Boucles rythmiques automatiques</h2>
+
+    <div class="titre-sprite">🥁 Sprite – Batterie automatique</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      répéter indéfiniment :<br>
+      <span class="son" style="margin-left:20px;">jouer le son [Drum]</span><br>
+      <span class="controle" style="margin-left:20px;">attendre (1) s</span>
+    </div>
+
+    <div class="titre-sprite">👏 Sprite – Clap décalé</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      attendre (0.5) s<br>
+      répéter indéfiniment :<br>
+      <span class="son" style="margin-left:20px;">jouer le son [Clap]</span><br>
+      <span class="controle" style="margin-left:20px;">attendre (1) s</span>
+    </div>
+
+    <div class="titre-sprite">⏱️ Variable : Tempo</div>
+    <div class="bloc controle">
+      créer [Tempo]<br>
+      quand [drapeau vert] cliqué → mettre [Tempo] à (1)
+    </div>
+
+    <div class="bloc controle">
+      remplacer les “attendre 1 s” par “attendre (Tempo) secondes”
+    </div>
+
+    <div class="titre-sprite">🎚️ Boutons “+” et “–”</div>
+    <div class="bloc evenement">quand ce sprite (“+”) est cliqué → changer [Tempo] de (-0.1)</div>
+    <div class="bloc evenement">quand ce sprite (“–”) est cliqué → changer [Tempo] de (0.1)</div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🎵 Séance 3 – Performances & duo sonore</h2>
+
+    <div class="titre-sprite">🎶 Combiner batterie + clavier</div>
+    <div class="bloc controle">
+      lancer la batterie automatique au drapeau vert<br>
+      utiliser les touches A–S–D–F pour jouer en direct
+    </div>
+
+    <div class="titre-sprite">💡 Sprite – Effets visuels</div>
+    <div class="bloc controle">
+      quand je reçois [battement] → changer effet couleur de 25
+    </div>
+
+    <div class="titre-sprite">🎤 Mini-performance</div>
+    <div class="bloc apparence">
+      élève 1 : batterie (automatique)<br>
+      élève 2 : clavier sonore (manuel)<br>
+      jouer 30 s, puis inverser les rôles
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc son">ajouter d’autres instruments (piano, voix, guitare, etc.)</div>
+    <div class="bloc apparence">créer un fond qui clignote au rythme</div>
+    <div class="bloc controle">enregistrer un son vocal et l’utiliser comme percussion</div>
+    <div class="bloc operateurs">lier le tempo à une variable “vitesse” pour un mode turbo</div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</body>
+</html>

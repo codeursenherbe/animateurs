@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 12 – Mini-boutique (je fais mes courses) | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 12 – Mini-boutique (je fais mes courses)</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Prix, total, monnaie et logique</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Simulation de boutique / math</span>
+      <p>
+        Les élèves créent une petite boutique interactive : plusieurs produits
+        avec un prix affiché, un panier virtuel et un total qui se met à jour
+        automatiquement quand on clique sur les articles. On peut ensuite
+        ajouter un budget et, pour les plus grands, un calcul de monnaie à rendre.
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : CE2 → seulement total et budget simple,  
+        CM1/CM2 → ajout du calcul de monnaie.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Créer une interface simple (articles, prix, zone de total).</li>
+        <li>Utiliser des variables pour stocker un total (<strong>Total</strong>) et un budget (<strong>Budget</strong>).</li>
+        <li>Programmer des réactions au clic (ajout au panier, remise à zéro).</li>
+        <li>Lier Scratch à des notions mathématiques : addition, comparaison, éventuellement soustraction (monnaie).</li>
+        <li>Structurer un mini-système : choisir, payer, vérifier si le budget suffit.</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Créer la boutique et le total</h2>
+      <p class="meta">Objectif : à la fin, chaque élève a une boutique avec 3 à 4 produits cliquables et un total qui augmente correctement.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Choisir un thème de boutique : goûter, fournitures scolaires, jouets simples.</li>
+        <li>Prévoir quelques prix faciles à manipuler : 2, 3, 5, 8, 10 (éviter trop de décimaux).</li>
+        <li>Préparer une phrase simple pour introduire :  
+          « Quand on clique sur un produit, on l’ajoute au panier, et le total augmente. »</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – « Mini-boutique au tableau » (5 min)</h3>
+      <ul>
+        <li>Au tableau, écrire 3 produits avec prix :  
+          – Biscuit : 3,  
+          – Jus : 4,  
+          – Crayon : 2.</li>
+        <li>Poser quelques scénarios rapides :  
+          – « Si je prends un biscuit et un jus, combien je dois payer ? »  
+          – « Si je prends 2 biscuits, combien ça fait ? »</li>
+        <li>Transition : « Dans Scratch, c’est le programme qui fera les additions. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer la scène de boutique (8–10 min)</p>
+      <ul>
+        <li>Arrière-plan : fond clair, éventuellement des étagères dessinées.</li>
+        <li>Prévoir en bas à droite ou à gauche une zone “Total : …” (qui affichera la variable).  
+            → Pour l’instant, juste un texte dessiné : “Total :”.</li>
+      </ul>
+
+      <p class="time">2) Créer les produits (10–15 min)</p>
+      <ul>
+        <li>Créer 3 ou 4 sprites “produits” :  
+          – Ex : Pomme, Jus, Gâteau, Livre.</li>
+        <li>Pour chaque sprite produit :</li>
+        <li>
+          <ul>
+            <li>Soit dessiner l’objet,</li>
+            <li>soit utiliser une image de la bibliothèque, puis la réduire.</li>
+          </ul>
+        </li>
+        <li>Ajouter visuellement le prix à côté (texte dans le décor ou costume avec prix écrit).  
+            Ex : “3”, “5”, etc.</li>
+        <li>Important : garder des prix entiers au début.</li>
+      </ul>
+
+      <p class="time">3) Créer la variable Total (5–7 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Total</strong> (pour tous les sprites).</li>
+        <li>Sur un sprite de gestion (ou un des produits) :  
+          – « quand drapeau vert cliqué → mettre Total à 0 ».</li>
+        <li>Afficher la variable Total sur la scène, près du texte “Total :”.</li>
+      </ul>
+
+      <p class="time">4) Faire réagir les produits au clic (10–12 min)</p>
+      <ul>
+        <li>Pour chaque produit, adapter le même schéma. Exemple pour un produit à 3 :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué »  
+              – « changer Total par 3 »  
+              – éventuellement « jouer un son court » ou « dire "Ajouté au panier" pendant 1 s ».</li>
+          </ul>
+        </li>
+        <li>Pour un produit à 5, “changer Total par 5”, etc.</li>
+        <li>Tester : cliquer plusieurs fois sur différents produits, vérifier que Total augmente comme prévu.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Insister : « On clique calmement pour vérifier le calcul, pas pour faire le plus gros total du monde. »</li>
+        <li>Pour les rapides : autoriser à soigner le dessin des produits, mais pas encore à ajouter des dizaines de nouveaux articles.</li>
+        <li>Pour une remontée de bruit : proposer une “minute total 0” : tous cliquent une seule fois sur un produit, puis se concentrent sur la valeur de Total avant d’ajouter autre chose.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Devine le Total » (3–4 min)</h3>
+      <ul>
+        <li>Demander à 1 ou 2 élèves :  
+          – « Clique sur 2 produits de ton choix et dis-nous ce que tu penses obtenir avant de regarder Total. »</li>
+        <li>Comparer mentalement (calcul mental) et le total calculé par Scratch.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons créé une petite boutique avec des produits,
+        chacun avec un prix, et un total qui augmente automatiquement quand
+        on clique. La prochaine fois, on ajoutera un budget et un bouton
+        pour vider le panier, puis on verra si le client peut payer ou non. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Budget, panier et “Je peux payer ou pas ?”</h2>
+      <p class="meta">Objectif : ajouter un budget, un bouton pour vider le panier et vérifier si le total dépasse ou non le budget.</p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Choisir un budget simple : 20 ou 30 unités (selon les prix choisis).</li>
+        <li>Préparer une phrase type :  
+          « Le client n’a que 20. Si le total est supérieur à 20, il ne peut pas payer. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Courses imaginaires » (3–4 min)</h3>
+      <ul>
+        <li>Reprendre l’exemple du tableau :  
+          – Budget 10,  
+          – Liste de produits avec prix.</li>
+        <li>Poser : « Si je prends ceci + cela, est-ce que je dépasse 10 ? »</li>
+        <li>Transition : « Notre mini-boutique Scratch va faire ces vérifications pour nous. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer la variable Budget (5–7 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Budget</strong> (pour tous les sprites).</li>
+        <li>Au démarrage (sur un sprite Gestion) :  
+          – « mettre Budget à 20 » (ou 30, selon ton choix).</li>
+        <li>Afficher la variable Budget sur la scène, près d’un texte “Budget :”.</li>
+      </ul>
+
+      <p class="time">2) Bouton “Effacer le panier” (10–12 min)</p>
+      <ul>
+        <li>Créer un nouveau sprite “Bouton” :  
+          – rectangle avec texte “Vider” ou “Nouveau panier”.</li>
+        <li>Script :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué »  
+              – « mettre Total à 0 »  
+              – éventuellement « dire "Panier vidé" pendant 1 s ».</li>
+          </ul>
+        </li>
+        <li>Tester : cliquer sur plusieurs produits, vérifier le Total, puis cliquer sur le bouton pour remettre à 0.</li>
+      </ul>
+
+      <p class="time">3) Vérifier si on peut payer (15–18 min)</p>
+      <ul>
+        <li>Ajouter un bouton “Payer” (ou utiliser le même bouton en changeant son rôle, mais mieux vaut un bouton dédié).</li>
+        <li>Script sur le bouton “Payer” :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué »  
+              – « si Total ≤ Budget alors »  
+                · « dire "Achat possible, tout est payé." pendant 2 s »  
+              – « sinon »  
+                · « dire "Tu n’as pas assez d’argent." pendant 2 s ».</li>
+          </ul>
+        </li>
+        <li>Expliquer :  
+          « Si le Total est inférieur ou égal au Budget, le client peut payer. Sinon, il doit enlever quelque chose. »</li>
+        <li>Faire tester plusieurs scénarios :  
+          – panier petit → possible,  
+          – panier énorme → impossible,  
+          – panier exactement égal au budget.</li>
+      </ul>
+
+      <p class="time">4) Mini scénarios guidés (5–8 min)</p>
+      <ul>
+        <li>Proposer des missions écrites au tableau :  
+          – “Fais un panier de Total = 10 ou moins”,  
+          – “Fais exprès un panier trop cher, puis corrige-le pour respecter le budget”.</li>
+        <li>Les élèves réalisent et testent ces scénarios tranquillement.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Insister sur le côté “simulation”, pas sur un jeu de compétition :  
+          « L’objectif est que ton calcul soit juste, pas d’avoir le plus cher. »</li>
+        <li>Pour les rapides : autoriser à ajouter un produit ou deux de plus, à condition de bien configurer le prix et le script “changer Total par …”.</li>
+        <li>Si la classe s’éparpille : pause “discussion” de 2 minutes sur ce que fait le code “si Total ≤ Budget alors… sinon…”.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Panier idéal » (3–5 min)</h3>
+      <ul>
+        <li>Poser la question : « Si ton Budget est 20, quel serait ton panier idéal dans ta boutique ? »</li>
+        <li>Demander à quelques élèves de décrire oralement leurs choix, sans reprogrammer.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Nous avons ajouté un budget, un bouton pour vider le panier et un bouton
+        pour vérifier si le client peut payer. Notre mini-boutique fait maintenant
+        des calculs et des comparaisons comme dans une vraie situation d’achat. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Rendre la monnaie (pour CM1/CM2) et tests croisés</h2>
+      <p class="meta">
+        Objectif : pour les plus grands, calcul de monnaie à rendre.  
+        Pour les plus jeunes, consolider budget et scénarios de panier.
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Prévoir une version simplifiée pour les CE2 :  
+          – répétition de scénarios “possible / pas possible”,  
+          – pas de calcul de monnaie obligatoire.</li>
+        <li>Préparer un exemple de monnaie :  
+          – “Budget 20, Total 13, monnaie = 7”.</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Monnaie dans la tête » (5 min)</h3>
+      <ul>
+        <li>Au tableau :  
+          – “Tu as 20, tu dépenses 13, combien il te reste ?”  
+          – “Tu as 10, tu dépenses 4, combien il te reste ?”</li>
+        <li>Transition : « Notre mini-boutique peut aussi dire quelle monnaie il faut rendre. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas (version CM1/CM2)</h3>
+
+      <p class="time">1) Variable Monnaie (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Monnaie</strong> (pour tous les sprites).</li>
+        <li>Au début (drapeau vert) :  
+          – « mettre Monnaie à 0 ».</li>
+        <li>Dans le script du bouton “Payer”, dans le cas où Total ≤ Budget :</li>
+        <li>
+          <ul>
+            <li>Ajouter :  
+              – « mettre Monnaie à Budget - Total » (bloc opérateur “-”).  
+              – puis « dire "Achat possible, à rendre : " + Monnaie pendant 3 s ».</li>
+          </ul>
+        </li>
+        <li>Tester avec plusieurs paniers pour voir si la monnaie est correcte.</li>
+      </ul>
+
+      <p class="time">2) Version consolidée CE2 (sans monnaie) (en parallèle) (10–15 min)</p>
+      <ul>
+        <li>Pour les CE2 ou les élèves en difficulté, proposer :</li>
+        <li>
+          <ul>
+            <li>des scénarios écrits au tableau :  
+              – “Fais un panier qui coûte exactement 10”,  
+              – “Fais un panier de 15 ou moins avec au moins 3 produits”.</li>
+            <li>un travail dirigé sur les prix :  
+              – “Quel produit est le moins cher ? le plus cher ?”</li>
+          </ul>
+        </li>
+        <li>Ils gardent l’ancienne logique “peut payer / ne peut pas payer” sans calcul de monnaie.</li>
+      </ul>
+
+      <p class="time">3) Tests croisés (10–12 min)</p>
+      <ul>
+        <li>Par deux :</li>
+        <li>
+          <ul>
+            <li>élève A joue le rôle du client sur la boutique de B :  
+              – il choisit un panier,  
+              – clique sur Payer,  
+              – vérifie le message “possible / pas possible” ou la monnaie.</li>
+            <li>élève B observe et corrige si besoin.</li>
+          </ul>
+        </li>
+        <li>Échanger les rôles après 5–7 minutes.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Question boutique » (5 min)</h3>
+      <ul>
+        <li>Demander à plusieurs élèves :</li>
+        <li>
+          <ul>
+            <li>« Qu’est-ce qui était le plus difficile : bien programmer le Total ou comprendre le Budget ? »</li>
+            <li>« Si tu devais ajouter un nouveau produit à ta boutique, ce serait quoi et à quel prix ? »</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Nous avons une mini-boutique complète : des produits cliquables, un
+        total qui se met à jour, un budget, un bouton pour vider le panier et,
+        pour certains, un calcul de monnaie à rendre. Les élèves ont pu se
+        mettre dans la peau d’un client et d’un caissier, tout en pratiquant
+        le calcul mental dans Scratch. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Total ne bouge pas</strong>  
+          → Vérifier que chaque produit a bien son script « quand ce sprite est cliqué → changer Total par … ».  
+          → Tester en cliquant sur un seul produit plusieurs fois.</li>
+
+        <li><strong>Budget n’apparaît pas</strong>  
+          → Vérifier que la variable Budget est cochée dans la liste des variables.</li>
+
+        <li><strong>Le message “peut payer / peut pas payer” semble incorrect</strong>  
+          → Revoir la condition : « si Total ≤ Budget alors… sinon… ».  
+          → Tester avec des valeurs très simples (Total = 5, Budget = 10, etc.).</li>
+
+        <li><strong>Monnaie est négative ou bizarre</strong>  
+          → Vérifier que le calcul est bien “Budget - Total”.  
+          → Vérifier que Total et Budget ont les valeurs attendues au moment du clic sur Payer.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire régulièrement verbaliser ce que fait le programme :  
+          « Quand je clique ici, qu’est-ce que le code fait exactement ? »</li>
+        <li>Encourager à lier le projet à la vie réelle :  
+          « Où as-tu déjà vu ce genre de situation, dans la vraie vie ? » (épicerie, supermarché, cantine…).</li>
+        <li>Pour les plus rapides :  
+          – ajouter un “client” sous forme de sprite avec une bulle qui commente (“C’est trop cher”, “Bonne affaire”),  
+          – ou créer plusieurs budgets (bouton Budget 10, Budget 20…).</li>
+        <li>En cas d’agitation : passer par un petit jeu oral de 2 minutes au tableau (simuler un achat à la craie) avant de revenir à l’écran.</li>
+      </ul>
+    </div>
+
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  .algo-section{
+    margin-top:18px;padding:18px 16px 20px 16px;border-radius:var(--radius);
+    border:1px solid #d0d7de;background:#f7f7f7;box-shadow:var(--shadow-soft);
+    font-family:"Courier New",monospace;
+  }
+  .algo-section>h2{color:#2c3e50;margin-bottom:4px;font-size:1.05rem;}
+  .algo-section>p{font-size:.85rem;color:#555;margin-bottom:10px;}
+  .titre-sprite{font-weight:bold;font-size:.95rem;background:#eaf2f8;
+    padding:6px 10px;border-left:6px solid #5dade2;margin:10px 0 6px;
+    border-radius:4px;}
+  .bloc{padding:6px 10px;margin:4px 0;border-left:6px solid;background:#fff;
+    border-radius:6px;font-size:.85rem;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .evenement{border-color:#FFD500;background:#fff8d1;}
+  .mouvement{border-color:#4C97FF;background:#dceeff;}
+  .apparence{border-color:#9966FF;background:#f0e6ff;}
+  .controle{border-color:#FFAB19;background:#ffe9cc;}
+  .son{border-color:#CF63CF;background:#fce4fc;}
+  .capteurs{border-color:#5CB1D6;background:#e0f6fb;}
+  .operateurs{border-color:#59C059;background:#e5fbe5;}
+  @media(max-width:600px){.algo-section{padding:14px 12px 16px 12px;}}
+</style>
+
+<!-- === ALGORYTHME DU PROJET 12 – MINI-BOUTIQUE === -->
+<div class="algo-section">
+  <h2>🛒 Algorithme du Projet Scratch – Mini-boutique (je fais mes courses)</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Prix, total, budget & monnaie</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🧾 Séance 1 – Créer la boutique et le total</h2>
+
+    <div class="titre-sprite">🎨 Scène</div>
+    <div class="bloc apparence">fond clair avec zones “Produits” et “Total :” dessinées</div>
+
+    <div class="titre-sprite">🍎 Sprite – Produit 1 (ex : Pomme à 3)</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle">aucune action spéciale au départ</div>
+    <div class="bloc evenement">quand ce sprite est cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      changer [Total] de (3)<br>
+      <span class="apparence">dire [Ajouté au panier] pendant (1) s</span>
+    </div>
+
+    <div class="titre-sprite">🧃 Sprite – Produit 2 (ex : Jus à 5)</div>
+    <div class="bloc evenement">quand ce sprite est cliqué → changer [Total] de (5)</div>
+
+    <div class="titre-sprite">💰 Variable : Total</div>
+    <div class="bloc controle">
+      créer [Total]<br>
+      quand [drapeau vert] cliqué → mettre [Total] à (0)
+    </div>
+
+    <div class="bloc apparence">afficher la variable Total près du texte “Total :”</div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>💵 Séance 2 – Budget, panier et “Je peux payer ?”</h2>
+
+    <div class="titre-sprite">🏦 Variable : Budget</div>
+    <div class="bloc controle">
+      créer [Budget]<br>
+      quand [drapeau vert] cliqué → mettre [Budget] à (20)
+    </div>
+
+    <div class="titre-sprite">🔁 Sprite : Bouton “Vider le panier”</div>
+    <div class="bloc evenement">quand ce sprite est cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      mettre [Total] à (0)<br>
+      <span class="apparence">dire [Panier vidé] pendant (1) s</span>
+    </div>
+
+    <div class="titre-sprite">✅ Sprite : Bouton “Payer”</div>
+    <div class="bloc evenement">quand ce sprite est cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">[Total ≤ Budget]</span> alors :<br>
+      <span class="apparence" style="margin-left:20px;">dire [Achat possible ! Tout est payé.] pendant (2) s</span><br>
+      sinon :<br>
+      <span class="apparence" style="margin-left:20px;">dire [Pas assez d’argent !] pendant (2) s</span>
+    </div>
+
+    <div class="bloc controle">afficher les variables Budget et Total sur la scène</div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>💶 Séance 3 – Calcul de monnaie (CM1/CM2)</h2>
+
+    <div class="titre-sprite">💵 Variable : Monnaie</div>
+    <div class="bloc controle">créer [Monnaie] → mettre à (0)</div>
+
+    <div class="bloc controle">
+      dans le bouton “Payer”, dans le cas où [Total ≤ Budget] :<br>
+      <span class="controle" style="margin-left:20px;">mettre [Monnaie] à (Budget − Total)</span><br>
+      <span class="apparence" style="margin-left:20px;">
+        dire [Achat possible, à rendre : (Monnaie)] pendant (3) s
+      </span>
+    </div>
+
+    <div class="titre-sprite">📊 Tests & missions</div>
+    <div class="bloc controle">Mission 1 : faire un panier exactement égal au Budget</div>
+    <div class="bloc controle">Mission 2 : faire exprès un panier trop cher → corriger</div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc apparence">ajouter un sprite “Client” qui commente : [Bonne affaire !] / [Trop cher !]</div>
+    <div class="bloc controle">créer des budgets différents (10, 20, 30) avec des boutons de sélection</div>
+    <div class="bloc controle">ajouter des sons : “clic”, “validation”, “erreur”</div>
+    <div class="bloc operateurs">ajouter des prix avec centimes pour les plus grands (3.5, 7.2…)</div>
+  </div>
+</div>
+
+
+
+  </div>
+</body>
+</html>

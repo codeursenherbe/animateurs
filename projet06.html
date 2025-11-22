@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 6 – Quiz interactif | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 6 – Quiz interactif</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 2 à 3 séances · Questions, score & feedback</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL DU PROJET -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Questions / Réponses & logique</span>
+      <p>
+        Les élèves créent un quiz sur un thème de leur choix (animaux, pays, maths,
+        histoire, sport…). Scratch pose des questions, récupère les réponses,
+        corrige en direct, compte le score et affiche un message final différent
+        selon le résultat. Projet idéal pour relier Scratch avec d’autres matières.
+      </p>
+      <p class="meta">
+        Organisation type : 2 séances de 45 min (avec possibilité de 3e séance de finition / extension).
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Formuler des questions simples et claires.</li>
+        <li>Utiliser la fonctionnalité <strong>demander … et attendre</strong> de Scratch.</li>
+        <li>Utiliser une variable <strong>Score</strong> (+1 pour chaque bonne réponse).</li>
+        <li>Programmer des conditions <strong>si … alors / sinon</strong> pour vérifier une réponse.</li>
+        <li>Afficher un message final adapté au résultat (score faible / moyen / élevé).</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Construire le quiz et le score</h2>
+      <p class="meta">
+        Objectif : à la fin, chaque élève a un quiz de 3 à 5 questions, avec un score qui augmente quand la réponse est correcte.
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Choisir 1 ou 2 thèmes simples à proposer (ex. animaux, capitales, opérations de calcul mental…).</li>
+        <li>Préparer 3–4 exemples de questions / réponses sur votre thème pour guider les élèves.</li>
+        <li>Décider si les questions seront :  
+          – ouvertes (réponse texte : “Paris”),  
+          – ou à réponse courte numérique (ex. “3 + 4 = ?”).</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – « Animateur-quiz » (5 min)</h3>
+      <ul>
+        <li>L’animateur joue le rôle de Scratch :  
+          – pose une question à tout le groupe (“Combien font 5 + 3 ?”),  
+          – les élèves lèvent la main pour répondre.</li>
+        <li>Demander ensuite :  
+          – « Qu’est-ce que Scratch devra faire ? »  
+          – Réponses attendues : poser la question, écouter la réponse, dire si c’est bon, compter les points.</li>
+        <li>Conclusion : « On va apprendre à faire un mini-animateur-quiz dans l’ordinateur. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Choix du thème et écriture des questions (10–15 min)</p>
+      <ul>
+        <li>Demander aux élèves de choisir un thème (ou en imposer 1–2 si besoin de cadrer).</li>
+        <li>Sur brouillon papier : écrire <strong>3 questions</strong> avec leur réponse exacte.  
+          – Rappel : questions simples, phrases courtes, une seule bonne réponse.</li>
+        <li>Passer vérifier rapidement :  
+          – orthographe approximative correcte (surtout dans la réponse),  
+          – clarté de la question.</li>
+      </ul>
+
+      <p class="time">2) Mise en place du “présentateur” (5–7 min)</p>
+      <ul>
+        <li>Dans Scratch, choisir un sprite “présentateur” (personnage, robot, magicien…).</li>
+        <li>Fond simple (classe, scène de TV, décor neutre).</li>
+        <li>Script de base :  
+          – « quand drapeau vert cliqué »  
+          – « dire "Bienvenue dans mon quiz !" pendant 2 s ».  
+          (Juste pour lancer.)</li>
+      </ul>
+
+      <p class="time">3) Créer la variable Score (5 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Score</strong> (pour tous les sprites).</li>
+        <li>Au début (dans “quand drapeau vert cliqué”) :  
+          – « mettre Score à 0 ».</li>
+        <li>Vérifier que Score s’affiche dans un coin de la scène.</li>
+      </ul>
+
+      <p class="time">4) Programmer la première question (15–20 min)</p>
+      <ul>
+        <li>Dans le script du présentateur, après “Bienvenue…” :</li>
+        <li>Ajouter :  
+          – « poser la question "… ?" et attendre » (bloc <em>Demander</em>),  
+          – bloc <strong>si … alors</strong> :  
+            • condition : « réponse = "BonneRéponse" »  
+            • dans <em>alors</em> :  
+              – « dire "Bravo !" pendant 2 s »  
+              – « changer Score par 1 »  
+            • dans <em>sinon</em> :  
+              – « dire "Non, la bonne réponse était …" pendant 2 s ».</li>
+        <li>Faire tester plusieurs fois la première question pour vérifier :  
+          – Score augmente seulement si la réponse est correcte,  
+          – le message d’erreur affiche bien la bonne réponse.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « 1 question, 1 test » (3–5 min)</h3>
+      <ul>
+        <li>Consigne : « Pendant 3 minutes, vous faites jouer votre quiz à votre voisin, mais seulement la première question. »</li>
+        <li>Chaque élève doit faire jouer son voisin, puis inverser les rôles.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, on a commencé notre quiz : on a choisi un thème, écrit
+        des questions, programmé un présentateur qui pose au moins une question
+        et qui corrige en direct en augmentant un score. La prochaine fois, on
+        ajoutera les questions suivantes et un message final selon le résultat. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Questions suivantes & message final</h2>
+      <p class="meta">
+        Objectif : terminer le quiz avec plusieurs questions, un score final et un message personnalisé.
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Prévoir un exemple de script avec 2 ou 3 questions enchaînées.</li>
+        <li>Préparer en tête 2 types de messages finaux :  
+          – “Tu peux t’améliorer” pour score faible,  
+          – “Super résultat !” pour bon score.</li>
+      </ul>
+
+      <h3>Jeu d’activation – « Selon ton score, je te dis… » (3–4 min)</h3>
+      <ul>
+        <li>Faire un mini-quiz oral de 3 questions au groupe entier.</li>
+        <li>Demander : « Si quelqu’un a 0/3, qu’est-ce que je peux dire ? Si quelqu’un a 3/3 ? »</li>
+        <li>Faire émerger des formules bienveillantes :  
+          – “Tu peux réessayer”, “Tu t’es bien débrouillé”, “Excellent !”.</li>
+        <li>Transition : « On va apprendre à faire ça automatiquement dans Scratch. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Révision & duplication de la première question (10–15 min)</p>
+      <ul>
+        <li>Afficher le script de la première question.</li>
+        <li>Montrer comment dupliquer les blocs (clic droit → Dupliquer) pour gagner du temps.</li>
+        <li>Pour chaque nouvelle question :  
+          – modifier le texte de la question,  
+          – modifier la <strong>bonne réponse</strong> dans la condition.</li>
+        <li>Objectif : avoir au moins 3 questions par élève (idéal 4 ou 5, selon niveau). </li>
+      </ul>
+
+      <p class="time">2) Enchaîner les questions proprement (10–15 min)</p>
+      <ul>
+        <li>Insister sur l’ordre : Question 1 → correction → Question 2 → correction → etc.</li>
+        <li>Exemple de structure textuelle :  
+          – “Bienvenue…”  
+          – Question 1 + correction  
+          – Question 2 + correction  
+          – Question 3 + correction  
+          – “Fin du quiz”.</li>
+        <li>Faire tester par les élèves : lancer le quiz et répondre volontairement bon / mauvais pour vérifier le score.</li>
+      </ul>
+
+      <p class="time">3) Message final selon le score (10–12 min)</p>
+      <ul>
+        <li>À la fin de toutes les questions, ajouter des blocs :  
+          – « si Score ≥ 3 alors dire "Super, tu as " + Score + " bonnes réponses !" pendant 3 s »  
+          – « sinon dire "Tu as " + Score + " bonne(s) réponse(s). Tu peux réessayer !" pendant 3 s ».</li>
+        <li>Adapter le seuil selon le nombre total de questions (par ex. Score ≥ 4 si 5 questions).</li>
+        <li>Montrer un exemple en direct au tableau ou à voix haute.</li>
+      </ul>
+
+      <p class="time">4) Tests en duo (5–8 min)</p>
+      <ul>
+        <li>Par binômes :  
+          – A joue au quiz de B,  
+          – B observe si le score est correct et si les messages finaux ont du sens.</li>
+        <li>Inversion des rôles au bout de 3–4 minutes.</li>
+      </ul>
+
+      <h3>Jeu de clôture – « Inventer une nouvelle question » (5 min)</h3>
+      <ul>
+        <li>Consigne : « Sur votre cahier, inventez 1 nouvelle question pour votre quiz avec sa réponse exacte. »</li>
+        <li>Ce sera une “extension” possible pour la séance suivante ou pour les plus rapides.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « On a maintenant des quiz complets : plusieurs questions, un score qui compte
+        les bonnes réponses, un message final différent selon le résultat, et des tests
+        entre vous. Ceux qui le souhaitent pourront ajouter d’autres questions ou
+        améliorer la présentation. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 (OPTIONNELLE) -->
+    <div class="card">
+      <h2>Séance 3 (optionnelle) – Finitions, thèmes avancés & présentations</h2>
+      <p class="meta">
+        Objectif : améliorer l’ergonomie, le visuel et, pour les plus à l’aise, ajouter quelques variantes.
+      </p>
+      <p class="time">Durée indicative : 45 min (au choix du centre)</p>
+
+      <h3>Idées d’améliorations proposées</h3>
+      <ul>
+        <li>Ajouter un écran d’accueil avec “Cliquer pour commencer”.</li>
+        <li>Changer de fond ou de costume entre les questions (ambiance TV, jeu, etc.).</li>
+        <li>Ajouter des sons courts pour “bonne réponse” / “mauvaise réponse”.</li>
+        <li>Créer des questions à choix multiple (A/B/C) en demandant au joueur d’écrire A, B ou C.</li>
+      </ul>
+
+      <h3>Organisation suggérée</h3>
+      <ul>
+        <li>1er temps (15–20 min) : chacun améliore son propre quiz.</li>
+        <li>2e temps (15–20 min) : tests croisés par groupes de 2 ou 3.</li>
+        <li>3e temps (5–10 min) : 1 ou 2 quizzes “coup de cœur” présentés à tout le groupe.</li>
+      </ul>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>Le score ne monte jamais</strong>  
+          → Vérifier que :  
+          – la variable <em>Score</em> existe bien,  
+          – le bloc « changer Score par 1 » est dans la partie <em>alors</em> de la condition “bonne réponse”.</li>
+
+        <li><strong>Le score augmente même si la réponse est fausse</strong>  
+          → Vérifier le texte dans la condition :  
+          – la chaîne de caractères doit être exactement la même que la bonne réponse attendue (majuscules, accents si possible).</li>
+
+        <li><strong>Les questions s’affichent dans le désordre</strong>  
+          → Vérifier l’ordre des blocs dans le script du présentateur :  
+          – question 1 + correction,  
+          – puis question 2 + correction,  
+          – etc. Pas de blocs intercalés.</li>
+
+        <li><strong>Les messages finaux ne correspondent pas au score</strong>  
+          → Vérifier la condition :  
+          – par exemple, « si Score ≥ 3 » doit être placé avant le « sinon » general.  
+          – Tester avec un score faible et un score élevé.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques (sans matériel supplémentaire)</h3>
+      <ul>
+        <li>Faire toujours écrire les questions sur papier avant de coder : ça évite de perdre du temps dans Scratch.</li>
+        <li>Rappeler que le but n’est pas d’avoir “beaucoup” de questions, mais quelques questions claires et correctes.</li>
+        <li>En cas d’agitation :  
+          – demander une pause de 30 secondes sans clavier,  
+          – proposer que les élèves lisent à haute voix une de leurs questions à un voisin.</li>
+        <li>Valoriser les quiz bienveillants et clairs : on évite les questions pièges ou trop compliquées pour les camarades.</li>
+      </ul>
+    </div>
+
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  /* --- PARTIE ALGORITHME --- */
+  .algo-section {
+    margin-top: 18px;
+    padding: 18px 16px 20px 16px;
+    border-radius: var(--radius);
+    border: 1px solid #d0d7de;
+    background: #f7f7f7;
+    box-shadow: var(--shadow-soft);
+    font-family: "Courier New", monospace;
+  }
+
+  .algo-section > h2 {
+    color: #2c3e50;
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+  }
+
+  .algo-section > p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .titre-sprite {
+    font-weight: bold;
+    font-size: 0.95rem;
+    background: #eaf2f8;
+    padding: 6px 10px;
+    border-left: 6px solid #5dade2;
+    margin: 10px 0 6px;
+    border-radius: 4px;
+  }
+
+  .bloc {
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-left: 6px solid;
+    background-color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  }
+
+  .evenement { border-color: #FFD500; background-color: #fff8d1; }
+  .mouvement { border-color: #4C97FF; background-color: #dceeff; }
+  .apparence { border-color: #9966FF; background-color: #f0e6ff; }
+  .controle { border-color: #FFAB19; background-color: #ffe9cc; }
+  .son { border-color: #CF63CF; background-color: #fce4fc; }
+  .capteurs { border-color: #5CB1D6; background-color: #e0f6fb; }
+  .operateurs { border-color: #59C059; background-color: #e5fbe5; }
+
+  @media (max-width: 600px) {
+    .algo-section { padding: 14px 12px 16px 12px; }
+  }
+</style>
+
+<!-- === ALGORYTHME DU PROJET 6 – QUIZ INTERACTIF === -->
+<div class="algo-section">
+  <h2>🧠 Algorithme du Projet Scratch – Quiz interactif</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 2 à 3 séances · Questions, score & feedback</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🎤 Séance 1 – Construire le quiz et le score</h2>
+
+    <div class="titre-sprite">🤖 Sprite 1 – Présentateur / Animateur</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc apparence">dire [Bienvenue dans mon quiz !] pendant (2) secondes</div>
+    <div class="bloc controle">mettre [Score] à (0)</div>
+
+    <div class="titre-sprite">❓ Première question</div>
+    <div class="bloc capteurs">demander [Combien font 5 + 3 ?] et attendre</div>
+    <div class="bloc controle">si <span class="operateurs">[réponse = 8]</span> alors → 
+      <span class="apparence">dire [Bravo !] pendant (2) secondes</span> →
+      <span class="controle">changer [Score] de (1)</span>
+    </div>
+    <div class="bloc controle">sinon → 
+      <span class="apparence">dire [Non, la bonne réponse était 8.] pendant (2) secondes</span>
+    </div>
+
+    <div class="bloc apparence">dire [Fin de la 1ʳᵉ question] pendant (1) seconde</div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>🧩 Séance 2 – Enchaînement de questions & message final</h2>
+
+    <div class="titre-sprite">🤖 Sprite 1 – Présentateur</div>
+    <div class="bloc controle">répéter pour chaque question :</div>
+    <div class="bloc capteurs" style="margin-left:20px;">demander [Question 2 : capitale de la France ?] et attendre</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">[réponse = Paris]</span> alors →
+      <span class="apparence">dire [Bonne réponse !] pendant (2) secondes</span> →
+      <span class="controle">changer [Score] de (1)</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">
+      sinon →
+      <span class="apparence">dire [Non, c’était Paris.] pendant (2) secondes</span>
+    </div>
+
+    <div class="bloc capteurs" style="margin-left:20px;">demander [Question 3 : combien de pattes a une araignée ?] et attendre</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si <span class="operateurs">[réponse = 8]</span> alors →
+      <span class="controle">changer [Score] de (1)</span> →
+      <span class="apparence">dire [Excellent !] pendant (2) secondes</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">
+      sinon →
+      <span class="apparence">dire [Raté, c’était 8 !] pendant (2) secondes</span>
+    </div>
+
+    <div class="titre-sprite">🏁 Message final</div>
+    <div class="bloc controle">si <span class="operateurs">[Score ≥ 3]</span> alors →
+      <span class="apparence">dire [Super, tu as (Score) bonnes réponses !] pendant (3) secondes</span>
+    </div>
+    <div class="bloc controle">sinon →
+      <span class="apparence">dire [Tu as (Score) bonne(s) réponse(s). Tu peux réessayer !] pendant (3) secondes</span>
+    </div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🎨 Séance 3 (optionnelle) – Finitions, sons & variantes</h2>
+
+    <div class="bloc apparence">ajouter un fond “Écran d’accueil” → dire [Clique pour commencer !] pendant (2 s)</div>
+    <div class="bloc son">jouer un son [Bonne réponse] quand la réponse est correcte</div>
+    <div class="bloc son">jouer un son [Erreur] quand la réponse est fausse</div>
+    <div class="bloc apparence">changer de décor entre les questions (ex. scène TV)</div>
+    <div class="bloc controle">ajouter un petit effet “flash” avec bloc [changer effet couleur par 25]</div>
+    <div class="bloc capteurs">pour les plus avancés : créer des questions à choix A/B/C</div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc controle">ajouter une 3ᵉ catégorie de score (faible / moyen / fort)</div>
+    <div class="bloc apparence">afficher un écran de fin personnalisé selon le résultat</div>
+    <div class="bloc controle">envoyer un message [Rejouer] pour relancer automatiquement le quiz</div>
+    <div class="bloc son">ajouter une petite musique d’ambiance pendant les questions</div>
+  </div>
+</div>
+
+
+
+  </div>
+</body>
+</html>

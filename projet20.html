@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 20 – Studio d’avatars animés | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 20 – Studio d’avatars animés</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Costumes, expressions, boutons & mini-scènes</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Projet créatif et calme – Fin de cycle</span>
+      <p>
+        Les élèves créent un “studio d’avatars” dans Scratch : un personnage 
+        (ou plusieurs) dont on peut changer l’apparence (vêtements, couleurs), 
+        l’expression (content, fâché, surpris) et la posture grâce à des boutons 
+        ou des touches. En fin de projet, ils créent une mini-scène où leur avatar 
+        fait une petite présentation ou une pose finale.
+      </p>
+      <p class="meta">
+        Organisation type : 3 séances de 45 min.  
+        Recommandation : projet idéal pour fin de période / fin d’année, 
+        plus calme, centré sur la créativité et la précision des consignes.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Utiliser et créer plusieurs costumes pour un même sprite (variantes d’avatar).</li>
+        <li>Programmer des boutons (sprites) ou touches clavier pour changer de costume.</li>
+        <li>Utiliser des variables pour mémoriser l’humeur ou la tenue choisie.</li>
+        <li>Créer une petite mise en scène (avatar qui parle / se présente).</li>
+        <li>Organiser son projet : lisibilité, noms clairs, interface agréable.</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Créer l’avatar de base & ses costumes</h2>
+      <p class="meta">
+        Objectif : à la fin, chaque élève a un sprite “Avatar” avec au moins 3 costumes 
+        différents (par ex. 3 tenues ou 3 expressions du visage).
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Décider si les élèves partent d’un sprite existant (ex. personnage Scratch) ou dessinent leur propre avatar.</li>
+        <li>Préparer une phrase d’intro :  
+          « On va créer un personnage qui peut changer de tête, de tenue, d’humeur… comme un studio d’essayage virtuel. »</li>
+        <li>Prévenir que ce projet est plus calme et précis : beaucoup de détails visuels.</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – “Expressions du visage” (5–7 min)</h3>
+      <ul>
+        <li>Demander aux élèves d’afficher successivement, sans parler :</li>
+        <li>
+          <ul>
+            <li>un visage content,</li>
+            <li>un visage surpris,</li>
+            <li>un visage fâché.</li>
+          </ul>
+        </li>
+        <li>Transition : « On va apprendre à faire la même chose avec un personnage dans Scratch. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Préparer la scène & l’avatar (10–12 min)</p>
+      <ul>
+        <li>Arrière-plan : simple (studio photo, fond uni, etc.).</li>
+        <li>Supprimer éventuellement le chat par défaut.</li>
+        <li>Ajouter un sprite “Avatar” :</li>
+        <li>
+          <ul>
+            <li>soit choisir un personnage existant et le modifier,</li>
+            <li>soit dessiner un personnage simple (corps + tête) dans l’onglet Costumes.</li>
+          </ul>
+        </li>
+        <li>Conseiller de garder un style simple (formes géométriques, pas trop de détails au début).</li>
+      </ul>
+
+      <p class="time">2) Créer plusieurs costumes (15–18 min)</p>
+      <ul>
+        <li>Dupliquer le costume de base 2 à 3 fois :</li>
+        <li>
+          <ul>
+            <li>Costume 1 : expression neutre / tenue n°1,</li>
+            <li>Costume 2 : expression contente (sourire),</li>
+            <li>Costume 3 : expression surprise (yeux grands ouverts, bouche en “O”),</li>
+            <li>option : Costume 4 fâché (sourcils en bas, bouche vers le bas).</li>
+          </ul>
+        </li>
+        <li>Montrer comment :</li>
+        <li>
+          <ul>
+            <li>modifier uniquement les yeux et la bouche pour garder le même corps,</li>
+            <li>changer la couleur d’un vêtement (outil pot de peinture) pour créer une tenue différente.</li>
+          </ul>
+        </li>
+        <li>But : avoir au moins 3 costumes clairement différents mais reconnaissables comme le même personnage.</li>
+      </ul>
+
+      <p class="time">3) Script simple de test des costumes (10–12 min)</p>
+      <ul>
+        <li>Sur le sprite Avatar :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « basculer sur costume 1 »  
+              – « dire "Bienvenue au studio d’avatars !" pendant 2 s ».</li>
+            <li>Tester manuellement les costumes avec les boutons de Scratch pour vérifier que tout va bien.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Insister : « On prend le temps de bien dessiner. Ce projet est plus artistique, ce n’est pas une course. »</li>
+        <li>Pour les rapides : autoriser à créer un quatrième costume “déguisement” (ex. lunettes de soleil), sans ajouter encore de code.</li>
+        <li>Si certains se perdent dans les détails : les recentrer sur l’essentiel (3 costumes terminés avant d’ajouter des accessoires). </li>
+      </ul>
+
+      <h3>Jeu de clôture – “Choisis ton préféré” (3–5 min)</h3>
+      <ul>
+        <li>Demander : « Quel costume préfères-tu sur ton avatar ? Pourquoi ? »</li>
+        <li>Inviter 2–3 élèves à montrer brièvement leur avatar (sans projeter forcément, juste à l’animateur). </li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, chaque élève a créé un avatar avec plusieurs costumes : 
+        différentes expressions ou tenues. Nous avons travaillé la précision dans 
+        le dessin et la cohérence du personnage. La prochaine fois, nous ajouterons 
+        des boutons ou touches clavier pour changer l’apparence en un clic. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Boutons & changement d’apparence</h2>
+      <p class="meta">
+        Objectif : ajouter des “boutons” ou des touches pour choisir l’humeur/tenue, 
+        et éventuellement mémoriser le choix dans une variable.
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Préparer un exemple sur papier : 3 boutons (“Content”, “Surpris”, “Fâché”) qui changent la tête.</li>
+        <li>Préparer une phrase :  
+          « Aujourd’hui, on va pouvoir cliquer sur un bouton pour dire à l’avatar : sois content, sois surpris, etc. »</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Bouton invisible” (5–7 min)</h3>
+      <ul>
+        <li>Dire : « Quand je dis un mot, vous changez votre visage. »</li>
+        <li>Exemples :</li>
+        <li>
+          <ul>
+            <li>“Content” → les élèves sourient,</li>
+            <li>“Surpris” → yeux grands ouverts,</li>
+            <li>“Fâché” → sourcils froncés.</li>
+          </ul>
+        </li>
+        <li>Transition : « On va coder ces “mots-boutons” dans Scratch, mais en cliquant ou avec le clavier. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer les boutons (10–12 min)</p>
+      <ul>
+        <li>Ajouter 3 petits sprites “boutons” en bas de l’écran :</li>
+        <li>
+          <ul>
+            <li>Bouton 1 : “Content” (ou une icône simple de sourire),</li>
+            <li>Bouton 2 : “Surpris”,</li>
+            <li>Bouton 3 : “Fâché” (ou “Autre humeur” selon les costumes disponibles).</li>
+          </ul>
+        </li>
+        <li>Les placer bien espacés, avec un texte lisible (écrire le mot ou une lettre simple : C, S, F).</li>
+      </ul>
+
+      <p class="time">2) Variable Humeur (10–12 min)</p>
+      <ul>
+        <li>Créer une variable <strong>Humeur</strong> (pour tous les sprites).</li>
+        <li>Au démarrage (sur l’Avatar ou un sprite gestion) :</li>
+        <li>
+          <ul>
+            <li>« mettre Humeur à "neutre" »</li>
+            <li>« basculer sur costume 1 » (par exemple “neutre”).</li>
+          </ul>
+        </li>
+        <li>Expliquer : Humeur va juste garder une trace du bouton choisi.</li>
+      </ul>
+
+      <p class="time">3) Programmer les boutons (15–18 min)</p>
+      <ul>
+        <li>Sur le bouton “Content” :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué »  
+              – « mettre Humeur à "content" »  
+              – « envoyer à tous [MAJ_HUMEUR] ».</li>
+          </ul>
+        </li>
+        <li>Sur le bouton “Surpris” :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué »  
+              – « mettre Humeur à "surpris" »  
+              – « envoyer à tous [MAJ_HUMEUR] ».</li>
+          </ul>
+        </li>
+        <li>Sur le bouton “Fâché” (ou autre) :</li>
+        <li>
+          <ul>
+            <li>« quand ce sprite est cliqué »  
+              – « mettre Humeur à "fache" » (sans accent pour simplifier)  
+              – « envoyer à tous [MAJ_HUMEUR] ».</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="time">4) Réagir au message côté Avatar (10–12 min)</p>
+      <ul>
+        <li>Sur le sprite Avatar :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois [MAJ_HUMEUR] » :</li>
+            <li>« si Humeur = "content" alors basculer sur costume 2 »</li>
+            <li>« sinon si Humeur = "surpris" alors basculer sur costume 3 »</li>
+            <li>« sinon si Humeur = "fache" alors basculer sur costume 4 »</li>
+            <li>« sinon basculer sur costume 1 » (neutre).</li>
+          </ul>
+        </li>
+        <li>Tester calmement : cliquer sur chaque bouton et vérifier que l’avatar change bien.</li>
+        <li>Option : ajouter aussi des touches clavier (C, S, F) qui font la même chose que les boutons.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler qu’il ne s’agit pas d’un jeu de points :  
+          « Le but est que votre interface fonctionne bien, pas d’aller vite. »</li>
+        <li>Pour les rapides : autoriser à ajouter un bouton “Random” qui met Humeur à un choix aléatoire parmi les trois (avec un petit bloc de hasard).</li>
+        <li>En cas de bavardage : proposer une “pause calme” où chacun teste les boutons de son voisin sans parler, juste en observant les changements d’avatar.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Humeur préférée” (3–5 min)</h3>
+      <ul>
+        <li>Demander : « Si ton avatar devait rester dans une humeur pendant une journée, laquelle tu choisirais ? »</li>
+        <li>Cela permet de finir sur une note légère sans refaire du code.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons transformé nos avatars en personnages interactifs :
+        des boutons (ou touches) permettent de changer leur humeur et leur costume.
+        Les élèves ont manipulé une variable Humeur et des messages pour commander
+        le changement d’apparence. La prochaine séance, nous créerons une petite
+        scène où l’avatar se présente et termine dans l’humeur choisie. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 -->
+    <div class="card">
+      <h2>Séance 3 – Mini-scène : l’avatar se présente</h2>
+      <p class="meta">
+        Objectif : créer une mini-animation où l’avatar se présente, 
+        puis le joueur choisit son humeur finale (présentation personnalisée).
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Préparer 2–3 exemples de petites phrases simples :</li>
+        <li>
+          <ul>
+            <li>“Bonjour, je m’appelle …”</li>
+            <li>“J’aime …”</li>
+            <li>“Aujourd’hui, je suis … (content/surpris/etc.)”</li>
+          </ul>
+        </li>
+        <li>Prévenir les enfants qu’on ne demande pas une vraie autobiographie, juste un petit texte simple et positif.</li>
+      </ul>
+
+      <h3>Jeu d’activation – “Mini-présentation orale” (5–7 min)</h3>
+      <ul>
+        <li>Proposer à quelques élèves (volontaires) de dire une phrase :</li>
+        <li>
+          <ul>
+            <li>“Je m’appelle … et j’aime …”</li>
+          </ul>
+        </li>
+        <li>Transition : « Votre avatar va faire quelque chose de similaire, mais sur l’écran. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Script de présentation (10–12 min)</p>
+      <ul>
+        <li>Sur le sprite Avatar, compléter le script du drapeau vert :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « mettre Humeur à "neutre" »  
+              – « basculer sur costume 1 »  
+              – « dire "Bonjour, je suis ton avatar." pendant 2 s »  
+              – « dire "Tu peux choisir mon humeur avec les boutons." pendant 2 s ».</li>
+          </ul>
+        </li>
+        <li>Pour les plus avancés, autoriser des textes plus personnalisés (prénom fictif, activités, etc.).</li>
+      </ul>
+
+      <p class="time">2) Humeur finale choisie par l’utilisateur (10–12 min)</p>
+      <ul>
+        <li>Idée : après la présentation, laisser quelques secondes pour cliquer sur un bouton et mettre l’avatar dans une humeur, puis afficher une phrase finale utilisant cette humeur.</li>
+        <li>Sur l’Avatar, après la présentation, ajouter :</li>
+        <li>
+          <ul>
+            <li>« attendre 5 secondes » (le temps de cliquer)  
+              – « si Humeur = "content" alors dire "Je suis de super bonne humeur !" pendant 2 s »  
+              – « sinon si Humeur = "surpris" alors dire "Je suis très étonné aujourd’hui !" pendant 2 s »  
+              – « sinon si Humeur = "fache" alors dire "Je suis un peu contrarié…" pendant 2 s »  
+              – « sinon dire "Tu n’as pas choisi, je reste neutre." pendant 2 s ».</li>
+          </ul>
+        </li>
+        <li>Tester : lancer le drapeau, laisser le temps de cliquer sur un bouton, voir le message final adapté.</li>
+      </ul>
+
+      <p class="time">3) Option : changer aussi l’arrière-plan selon l’humeur (10–12 min)</p>
+      <ul>
+        <li>Pour les CM1/CM2 ou les rapides :</li>
+        <li>
+          <ul>
+            <li>Créer plusieurs arrière-plans :</li>
+            <li>– fond “ensoleillé” pour Humeur = content,</li>
+            <li>– fond “nuit / étoiles” pour surpris,</li>
+            <li>– fond “pluie” pour fâché ou triste.</li>
+          </ul>
+        </li>
+        <li>Sur la scène :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois [MAJ_HUMEUR] »  
+              – « si Humeur = "content" → basculer sur fond ensoleillé »  
+              – etc.</li>
+          </ul>
+        </li>
+        <li>Option : ne le proposer qu’aux élèves à l’aise, pour ne pas surcharger les autres.</li>
+      </ul>
+
+      <p class="time">4) Tests croisés & partage (8–10 min)</p>
+      <ul>
+        <li>Par deux :</li>
+        <li>
+          <ul>
+            <li>élève A teste l’avatar de B :  
+              – regarde la présentation,  
+              – clique sur les boutons,  
+              – regarde la phrase finale.</li>
+            <li>B observe et note :  
+              – “Est-ce que les boutons sont clairs ?”  
+              – “Est-ce que les expressions sont bien visibles ?”</li>
+            <li>On inverse les rôles ensuite.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Jeu de clôture – “Pose finale calme” (5 min)</h3>
+      <ul>
+        <li>Demander à chacun de lancer son avatar, de choisir une humeur, puis de laisser l’avatar “poser” sur l’écran (sans toucher au clavier).</li>
+        <li>Moment de fin visuelle calme : l’animateur peut se promener et regarder les différentes poses sur les écrans.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Les élèves ont terminé un studio d’avatars interactif : ils peuvent 
+        changer l’expression ou la tenue de leur personnage, utiliser des 
+        boutons pour afficher différentes humeurs, et lancer une mini-présentation 
+        animée. C’est un projet plus artistique, idéal pour valoriser la créativité 
+        tout en consolidant les notions de costumes, variables, messages et 
+        organisation d’un projet Scratch. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>L’avatar ne change pas de costume</strong>  
+          → Vérifier que le message [MAJ_HUMEUR] est bien envoyé par les boutons.  
+          → Vérifier que les textes des valeurs de Humeur sont strictement identiques (content / surpris / fache).</li>
+
+        <li><strong>Les boutons ne réagissent pas</strong>  
+          → Vérifier que l’on a bien “quand ce sprite est cliqué” sur chaque bouton.  
+          → Vérifier que les boutons ne sont pas trop petits ou cachés derrière un autre sprite.</li>
+
+        <li><strong>Les costumes ne sont pas très lisibles</strong>  
+          → Encourager à simplifier : gros yeux, bouche exagérée, couleurs contrastées.  
+          → Rappeler de zoomer dans l’éditeur de dessins pour mieux travailler les détails.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Encourager les élèves à nommer clairement leurs costumes :  
+          – costume1_neutre, costume2_content, etc. (même si ce n’est pas obligatoire, ça aide à s’y retrouver).</li>
+        <li>Mettre en avant que ce projet peut servir pour d’autres activités :  
+          – avatar porte-parole de la classe,  
+          – avatar de consigne (“Aujourd’hui, on révise…”),  
+          – etc.</li>
+        <li>Pour les plus rapides :</li>
+        <li>
+          <ul>
+            <li>ajouter un deuxième avatar (un ami, un animal) qui change d’humeur aussi,</li>
+            <li>ou enregistrer une voix associée à chaque humeur (si matériel audio disponible).</li>
+          </ul>
+        </li>
+        <li>En cas d’agitation : proposer une “pause observation” : 2 minutes où les élèves ne touchent plus au clavier et regardent le travail d’un camarade (avatar, couleurs, expressions), puis retour calme au code.</li>
+      </ul>
+    </div>
+
+<!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  .algo-section{
+    margin-top:18px;padding:18px 16px 20px 16px;border-radius:var(--radius);
+    border:1px solid #d0d7de;background:#f7f7f7;box-shadow:var(--shadow-soft);
+    font-family:"Courier New",monospace;
+  }
+  .algo-section>h2{color:#2c3e50;margin-bottom:4px;font-size:1.05rem;}
+  .algo-section>p{font-size:.85rem;color:#555;margin-bottom:10px;}
+  .titre-sprite{font-weight:bold;font-size:.95rem;background:#eaf2f8;
+    padding:6px 10px;border-left:6px solid #5dade2;margin:10px 0 6px;border-radius:4px;}
+  .bloc{padding:6px 10px;margin:4px 0;border-left:6px solid;background:#fff;
+    border-radius:6px;font-size:.85rem;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .evenement{border-color:#FFD500;background:#fff8d1;}
+  .mouvement{border-color:#4C97FF;background:#dceeff;}
+  .apparence{border-color:#9966FF;background:#f0e6ff;}
+  .controle{border-color:#FFAB19;background:#ffe9cc;}
+  .son{border-color:#CF63CF;background:#fce4fc;}
+  .capteurs{border-color:#5CB1D6;background:#e0f6fb;}
+  .operateurs{border-color:#59C059;background:#e5fbe5;}
+  @media(max-width:600px){.algo-section{padding:14px 12px 16px 12px;}}
+</style>
+
+<!-- === ALGORYTHME DU PROJET 20 – STUDIO D’AVATARS ANIMÉS === -->
+<div class="algo-section">
+  <h2>🧑‍🎨 Algorithme du Projet Scratch – Studio d’avatars animés</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 3 séances · Costumes, expressions, boutons & mini-scènes</p>
+
+  <!-- SÉANCE 1 -->
+  <div class="section">
+    <h2>🎭 Séance 1 – Créer l’avatar et ses costumes</h2>
+
+    <div class="titre-sprite">🎨 Scène & Avatar</div>
+    <div class="bloc apparence">
+      Arrière-plan simple (studio, couleur unie).<br>
+      Sprite : “Avatar” (chat modifié ou dessin personnel).
+    </div>
+
+    <div class="bloc controle">
+      Dupliquer le costume de base 2–3 fois :<br>
+      Costume 1 : neutre · Costume 2 : content · Costume 3 : surpris · (Option 4 : fâché)
+    </div>
+
+    <div class="titre-sprite">🧍 Sprite : Avatar</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      basculer sur costume (1)<br>
+      dire [Bienvenue au studio d’avatars !] pendant (2) s
+    </div>
+  </div>
+
+  <!-- SÉANCE 2 -->
+  <div class="section">
+    <h2>🎛️ Séance 2 – Boutons & changement d’humeur</h2>
+
+    <div class="titre-sprite">📊 Variable</div>
+    <div class="bloc controle">
+      créer [Humeur] (pour tous les sprites)<br>
+      quand [drapeau vert] cliqué → mettre [Humeur] à [neutre]
+    </div>
+
+    <div class="titre-sprite">🔘 Sprites – Boutons</div>
+    <div class="bloc evenement">quand ce sprite est cliqué (ex : bouton “Content”)</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      mettre [Humeur] à [content]<br>
+      envoyer à tous [MAJ_HUMEUR]
+    </div>
+
+    <div class="bloc evenement">quand ce sprite est cliqué (ex : bouton “Surpris”)</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      mettre [Humeur] à [surpris]<br>
+      envoyer à tous [MAJ_HUMEUR]
+    </div>
+
+    <div class="bloc evenement">quand ce sprite est cliqué (ex : bouton “Fâché”)</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      mettre [Humeur] à [fache]<br>
+      envoyer à tous [MAJ_HUMEUR]
+    </div>
+
+    <div class="titre-sprite">🧍 Avatar – Réaction au message</div>
+    <div class="bloc evenement">quand je reçois [MAJ_HUMEUR]</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      si [Humeur = content] → basculer sur costume (2)<br>
+      sinon si [Humeur = surpris] → costume (3)<br>
+      sinon si [Humeur = fache] → costume (4)<br>
+      sinon → costume (1)
+    </div>
+
+    <div class="bloc operateurs">
+      Option : associer des touches (C = content, S = surpris, F = fâché)
+    </div>
+  </div>
+
+  <!-- SÉANCE 3 -->
+  <div class="section">
+    <h2>🎬 Séance 3 – Mini-scène : l’avatar se présente</h2>
+
+    <div class="titre-sprite">🗣️ Script de présentation</div>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle" style="margin-left:20px;">
+      mettre [Humeur] à [neutre]<br>
+      basculer sur costume (1)<br>
+      dire [Bonjour, je suis ton avatar !] 2 s<br>
+      dire [Tu peux choisir mon humeur avec les boutons.] 2 s<br>
+      attendre (5) s
+    </div>
+
+    <div class="titre-sprite">😀 Humeur finale choisie</div>
+    <div class="bloc controle">
+      si [Humeur = content] → dire [Je suis de super bonne humeur !] 2 s<br>
+      sinon si [Humeur = surpris] → dire [Je suis très étonné !] 2 s<br>
+      sinon si [Humeur = fache] → dire [Je suis un peu contrarié…] 2 s<br>
+      sinon → dire [Tu n’as pas choisi, je reste neutre.] 2 s
+    </div>
+
+    <div class="titre-sprite">🌈 Variante – Changement de décor</div>
+    <div class="bloc apparence">
+      Sur la scène :<br>
+      quand je reçois [MAJ_HUMEUR] →<br>
+      si [Humeur = content] → fond “soleil”<br>
+      si [Humeur = surpris] → fond “étoiles”<br>
+      si [Humeur = fache] → fond “pluie”
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc apparence">ajouter un deuxième avatar ou un animal compagnon</div>
+    <div class="bloc son">associer un son à chaque humeur (voix ou musique courte)</div>
+    <div class="bloc controle">ajouter un bouton “Random” → choisir humeur aléatoire</div>
+    <div class="bloc apparence">créer un écran final “pose” avec message personnalisé</div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</body>
+</html>

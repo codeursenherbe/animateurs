@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projet 2 – Fusée & Diamants (jeu de collecte) | Espace Animateurs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --accent: #1b4f72;
+      --accent-soft: #d6eaf8;
+      --text-main: #2c3e50;
+      --text-muted: #7f8c8d;
+      --border: #d0d7de;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    a.back-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(15,23,42,.06);
+    }
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    h3 {
+      font-size: 1rem;
+      margin: 8px 0 4px;
+      color: var(--text-main);
+    }
+    p, li {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .time {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
+
+    <header>
+      <img src="logo-ceh.png" alt="Codeurs en Herbe" />
+      <div>
+        <h1>Projet 2 – Fusée & Diamants (jeu de collecte)</h1>
+        <p>Niveau : CE2 – CM1 – CM2 · 2 à 3 séances · Déplacements, score, chrono & écrans de fin</p>
+      </div>
+    </header>
+
+    <!-- RÉSUMÉ GLOBAL -->
+    <div class="card">
+      <h2>Résumé du projet</h2>
+      <span class="tag">Jeu arcade – réflexes & score</span>
+      <p>
+        Une fusée en bas de l’écran se déplace à droite et à gauche avec les flèches. 
+        Des diamants tombent du haut : quand la fusée en attrape un, le joueur gagne 1 point. 
+        Si un diamant atteint la ligne rouge (Line) en bas sans être attrapé, le score baisse de 1.  
+        Quand le joueur atteint 15 points, un écran “BRAVO” s’affiche. Si le temps est écoulé ou 
+        si le score tombe trop bas, un écran “GAME OVER” apparaît. Un chronomètre limite la partie.
+      </p>
+      <p class="meta">
+        Organisation type : 2 séances de 45 min (structure) + 1 séance de finitions (optionnelle).  
+        Recommandation : CE2 → focus mouvement + score ; CM1/CM2 → ajouter chrono + écrans “Bravo / Game Over”.
+      </p>
+    </div>
+
+    <!-- COMPÉTENCES -->
+    <div class="card">
+      <h2>Compétences travaillées</h2>
+      <ul>
+        <li>Déplacer un sprite avec les flèches (axe X).</li>
+        <li>Créer un objet qui tombe (diamant) et se repositionne en haut.</li>
+        <li>Gérer un score (gagner/perdre des points) avec des variables.</li>
+        <li>Utiliser une ligne “limite” (Line) pour détecter les erreurs.</li>
+        <li>Gérer un chrono simple (compte à rebours) et des écrans de fin (bravo / game over).</li>
+      </ul>
+    </div>
+
+    <!-- SÉANCE 1 -->
+    <div class="card">
+      <h2>Séance 1 – Fusée, ligne rouge & diamants qui tombent</h2>
+      <p class="meta">
+        Objectif : à la fin, chaque élève a une fusée qui se déplace à droite/gauche, 
+        un diamant qui tombe et une ligne rouge en bas (Line) qui “rattrape” les diamants.
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance (préparation animateur)</h3>
+      <ul>
+        <li>Préparer un petit pitch très simple :  
+          « La fusée doit récupérer des diamants dans l’espace. S’ils touchent la ligne rouge, tu perds des points. »</li>
+        <li>Visualiser l’écran :  
+          – fusée en bas au centre,  
+          – diamants qui tombent du haut,  
+          – ligne rouge horizontale juste au-dessus du bord inférieur,  
+          – fond “espace” ou ciel sombre.</li>
+      </ul>
+
+      <h3>Jeu d’ouverture – “Rattrape le trésor” (5–7 min)</h3>
+      <ul>
+        <li>Au centre de la classe, mimer une fusée qui se déplace seulement à gauche/droite.</li>
+        <li>L’animateur fait tomber une balle imaginaire du plafond :  
+          “Si tu es bien placé, tu l’attrapes, sinon elle tombe au sol.”</li>
+        <li>Transition : « Dans Scratch, on va programmer exactement ça avec une fusée et des diamants. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Préparer le décor & la ligne rouge (10–12 min)</p>
+      <ul>
+        <li>Arrière-plan : choisir un décor espace ou ciel sombre.</li>
+        <li>Créer le sprite “Line” :</li>
+        <li>
+          <ul>
+            <li>Ajouter un nouveau sprite, le dessiner comme un long rectangle horizontal rouge.</li>
+            <li>Le placer tout en bas de l’écran, juste au-dessus du bord (par ex. y = -130).</li>
+            <li>Le renommer clairement : <strong>Line</strong>.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="time">2) Créer & configurer la fusée (10–12 min)</p>
+      <ul>
+        <li>Supprimer le chat si besoin.</li>
+        <li>Ajouter un sprite “Fusée” (ou “Rocket”).</li>
+        <li>Réduire sa taille si nécessaire (40–60 %).</li>
+        <li>La placer en bas de l’écran, au centre (x ≈ 0, y ≈ -110).</li>
+        <li>Renommer le sprite : <strong>Fusee</strong> (sans accent dans le code pour éviter les soucis).</li>
+      </ul>
+
+      <p class="time">3) Programmer le déplacement de la fusée (15–18 min)</p>
+      <ul>
+        <li>Sur le sprite <strong>Fusee</strong> :</li>
+        <li>
+          <ul>
+            <li>Script 1 (position de départ) :</li>
+            <li>« quand drapeau vert cliqué »  
+              – « aller à x:0 y:-110 ».</li>
+          </ul>
+        </li>
+        <li>Script 2 (déplacements) :</li>
+        <li>
+          <ul>
+            <li>« quand touche flèche droite pressée »  
+              – « changer x de 10 ».</li>
+            <li>« quand touche flèche gauche pressée »  
+              – « changer x de -10 ».</li>
+          </ul>
+        </li>
+        <li>Tester calmement : la fusée se déplace bien en bas de l’écran, uniquement sur l’axe horizontal.</li>
+      </ul>
+
+      <p class="time">4) Créer le diamant qui tombe (10–12 min)</p>
+      <ul>
+        <li>Ajouter un sprite “Diamant” (ou autre forme brillante).</li>
+        <li>Le placer en haut de l’écran (y ≈ 170).</li>
+        <li>Réduire sa taille (30–50 %).</li>
+        <li>Sur le sprite <strong>Diamant</strong> :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « aller à position x: (nombre aléatoire entre -200 et 200) y: 170 »  
+              – « montrer »  
+              – « répéter indéfiniment » :  
+                · « changer y de -5 »  
+                · « si touche Line alors »  
+                  · « aller à x: (nombre aléatoire entre -200 et 200) y: 170 »  
+                · « attendre 0.02 s » (optionnel pour adoucir le mouvement).</li>
+          </ul>
+        </li>
+        <li>Tester : le diamant tombe, puis dès qu’il touche la ligne rouge, il remonte en haut à un endroit différent.</li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler : « Ce n’est pas une course. On fait d’abord fonctionner la fusée, ensuite seulement les diamants. »</li>
+        <li>Pour les rapides : autoriser à changer légèrement la vitesse du diamant (4, 6…) en restant raisonnable.</li>
+        <li>Si ça s’excite : proposer une consigne :  
+          « Pendant 2 minutes, on ne touche qu’aux flèches pour tester la fusée, pas au reste du clavier. »</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Attrape 3 fois” (3–5 min)</h3>
+      <ul>
+        <li>Consigne : « Essayez d’attraper 3 fois de suite le diamant (juste en le touchant avec la fusée, sans encore compter les points). »</li>
+        <li>Mettre l’accent sur le contrôle du déplacement, pas sur la vitesse frénétique.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Aujourd’hui, nous avons mis en place la base du jeu : une fusée qui 
+        se déplace en bas avec les flèches, une ligne rouge et un diamant qui 
+        tombe en boucle. La prochaine séance, nous ajouterons le score, les 
+        pénalités, le chronomètre et les écrans Bravo / Game Over. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 2 -->
+    <div class="card">
+      <h2>Séance 2 – Score, pénalités & écrans de fin</h2>
+      <p class="meta">
+        Objectif : ajouter le score (+1 / -1), un chrono simple et les écrans BRAVO (15 points) 
+        et GAME OVER (score trop bas ou temps écoulé).
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Avant la séance</h3>
+      <ul>
+        <li>Préparer une explication simple :  
+          « Attraper un diamant = +1 point. Laisser passer un diamant (il touche la ligne rouge) = -1 point. »</li>
+        <li>Décider de la durée de la partie : par exemple 60 secondes.</li>
+      </ul>
+
+      <h3>Jeu d’activation – “+1 / -1” (5–7 min)</h3>
+      <ul>
+        <li>Sur le tableau, écrire Score = 0.</li>
+        <li>Dire :  
+          – “Attrapé !” → ajouter +1,  
+          – “Raté !” → ajouter -1.</li>
+        <li>Faire quelques séquences : “Attrapé, attrapé, raté…” et demander aux élèves de donner le score à haute voix.</li>
+        <li>Transition : « Scratch fera la même chose avec la variable Score. »</li>
+      </ul>
+
+      <h3>Déroulé pas à pas</h3>
+
+      <p class="time">1) Créer les variables Score & Temps (10–12 min)</p>
+      <ul>
+        <li>Créer deux variables (pour tous les sprites) :</li>
+        <li>
+          <ul>
+            <li><strong>Score</strong></li>
+            <li><strong>Temps</strong></li>
+          </ul>
+        </li>
+        <li>Sur le sprite <strong>Fusee</strong> ou un sprite “gestion” :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué »  
+              – « mettre Score à 0 »  
+              – « mettre Temps à 60 » (par ex.)</li>
+          </ul>
+        </li>
+        <li>Vérifier que Score et Temps sont visibles sur la scène (pour que les élèves voient les changements en direct).</li>
+      </ul>
+
+      <p class="time">2) Score +1 quand la fusée attrape un diamant (10–12 min)</p>
+      <ul>
+        <li>Sur le sprite <strong>Diamant</strong>, compléter le script :</li>
+        <li>
+          <ul>
+            <li>Dans la boucle “répéter indéfiniment” :</li>
+            <li>Avant de tester la ligne rouge, ajouter :</li>
+            <li>« si touche Fusee alors »  
+              – « changer Score par 1 »  
+              – « aller à x:(nombre aléatoire entre -200 et 200) y:170 ».</li>
+          </ul>
+        </li>
+        <li>Tester : à chaque fois que le diamant touche la fusée, le score augmente d’1, puis le diamant repart du haut.</li>
+      </ul>
+
+      <p class="time">3) Score -1 si le diamant touche la ligne rouge (10–12 min)</p>
+      <ul>
+        <li>Sur le même script du Diamant, dans la partie “si touche Line alors…” :</li>
+        <li>
+          <ul>
+            <li>« si touche Line alors »  
+              – « changer Score par -1 »  
+              – « aller à x:(nombre aléatoire entre -200 et 200) y:170 ».</li>
+          </ul>
+        </li>
+        <li>Tester : laisser volontairement passer des diamants pour voir Score descendre.</li>
+        <li>Faire réfléchir les élèves : “Si je laisse passer trop de diamants, que va-t-il se passer au score ?”</li>
+      </ul>
+
+      <p class="time">4) Chronomètre Temps (10–12 min)</p>
+      <ul>
+        <li>Sur un sprite gestion (par exemple la scène ou la fusée) :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué » (compléter le script existant) :</li>
+            <li>après avoir mis Temps à 60 :  
+              – « répéter jusqu’à ce que Temps = 0 » :  
+                · « attendre 1 seconde »  
+                · « changer Temps par -1 »</li>
+              – quand la boucle est finie, envoyer un message de fin :</li>
+            <li>« envoyer à tous [Fin_Temps] ».</li>
+          </ul>
+        </li>
+        <li>Tester : vérifier que le Temps diminue bien de 60 à 0 pendant la partie.</li>
+      </ul>
+
+      <p class="time">5) Écrans Bravo & Game Over (10–12 min)</p>
+      <ul>
+        <li>Créer deux sprites texte :</li>
+        <li>
+          <ul>
+            <li><strong>Bravo</strong> : texte “BRAVO !” au centre de l’écran, caché au départ.</li>
+            <li><strong>GameOver</strong> : texte “GAME OVER” ou “Partie terminée”, caché au départ.</li>
+          </ul>
+        </li>
+        <li>Sur chaque sprite Bravo / GameOver :</li>
+        <li>
+          <ul>
+            <li>« quand drapeau vert cliqué → cacher »</li>
+          </ul>
+        </li>
+        <li><strong>Condition Bravo (Score ≥ 15)</strong> :</li>
+        <li>
+          <ul>
+            <li>Sur la fusée ou la scène :</li>
+            <li>« répéter indéfiniment »  
+              – « si Score ≥ 15 alors »  
+                · « envoyer à tous [Bravo] »  
+                · « arrêter tous ».</li>
+          </ul>
+        </li>
+        <li>Sur le sprite Bravo :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois [Bravo] »  
+              – « montrer »  
+              – éventuellement « dire "Tu as récupéré 15 diamants !" pendant 3 s ».</li>
+          </ul>
+        </li>
+        <li><strong>Condition Game Over (temps fini ou score trop bas)</strong> :</li>
+        <li>
+          <ul>
+            <li>Sur la scène :</li>
+            <li>« quand je reçois [Fin_Temps] »  
+              – « envoyer à tous [GameOver] »  
+              – « arrêter tous ».</li>
+            <li>Option : ajouter aussi :  
+              – « si Score &lt; -5 alors envoyer [GameOver] » dans une boucle.</li>
+          </ul>
+        </li>
+        <li>Sur le sprite GameOver :</li>
+        <li>
+          <ul>
+            <li>« quand je reçois [GameOver] »  
+              – « montrer »  
+              – « dire "Partie terminée. Score : " &amp; Score pendant 3 s ».</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Conseils gestion du calme</h3>
+      <ul>
+        <li>Rappeler que l’on ne “matraque” pas les flèches :  
+          « Le but est d’anticiper le diamant, pas d’agiter la fusée dans tous les sens. »</li>
+        <li>Pour les rapides : autoriser à ajuster la difficulté (vitesse des diamants, durée du temps) mais en expliquant leur choix.</li>
+        <li>En cas d’excitation : proposer une “partie silencieuse” de 2 minutes où chacun joue une fois sans parler, puis fait un retour calme sur son score maximum.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Atteins 5 points” (3–5 min)</h3>
+      <ul>
+        <li>Consigne : « Essayez d’atteindre au moins 5 points avant la fin du chrono. Ce n’est pas grave si vous ratez, on ajustera la difficulté la prochaine fois. »</li>
+      </ul>
+
+      <h3>Résumé animateur fin de séance</h3>
+      <p>
+        « Les élèves ont maintenant un vrai jeu : la fusée gagne 1 point en 
+        attrapant les diamants, en perd 1 s’ils touchent la ligne rouge, et la 
+        partie est limitée par un chrono, avec des écrans Bravo / Game Over. 
+        Une troisième séance peut servir à affiner la difficulté et décorer. »
+      </p>
+    </div>
+
+    <!-- SÉANCE 3 (FINITIONS / OPTIONNELLE) -->
+    <div class="card">
+      <h2>Séance 3 – Finitions, difficulté & tests croisés (optionnelle)</h2>
+      <p class="meta">
+        Objectif : régler la difficulté, améliorer la lisibilité (taille, vitesse, couleurs) 
+        et permettre aux élèves de tester les jeux les uns des autres.
+      </p>
+      <p class="time">Durée indicative : 45 min</p>
+
+      <h3>Jeu d’activation – “Trop difficile / Trop facile” (5–7 min)</h3>
+      <ul>
+        <li>Au tableau, écrire :</li>
+        <li>
+          <ul>
+            <li>Trop facile : on gagne tout le temps, aucun stress.</li>
+            <li>Trop difficile : on perd tout le temps, on se décourage.</li>
+          </ul>
+        </li>
+        <li>Question : « Quel est le plus amusant ? »  
+            → Réponse attendue : un jeu “juste assez difficile”.</li>
+      </ul>
+
+      <h3>Réglage de la difficulté (15–20 min)</h3>
+      <ul>
+        <li>Demander à chaque élève :  
+          « Ton jeu est actuellement : trop facile, trop dur, ou plutôt équilibré ? »</li>
+        <li>Proposer des leviers simples :</li>
+        <li>
+          <ul>
+            <li><strong>Diamants trop lents :</strong> augmenter la vitesse (changer y de -5 → -7 ou -8).</li>
+            <li><strong>Diamants trop rapides :</strong> réduire la vitesse (changer y de -5 → -3).</li>
+            <li><strong>Temps trop long :</strong> mettre Temps à 45 au lieu de 60.</li>
+            <li><strong>Temps trop court :</strong> mettre Temps à 75 au lieu de 60.</li>
+            <li><strong>Objectif 15 points trop difficile :</strong> passer à 10 points pour Bravo pour certains groupes.</li>
+          </ul>
+        </li>
+        <li>Encourager à changer UNE chose à la fois, puis tester.</li>
+      </ul>
+
+      <h3>Tests croisés (10–15 min)</h3>
+      <ul>
+        <li>Par deux : A joue le jeu de B, puis inversement.</li>
+        <li>Questions à se poser :</li>
+        <li>
+          <ul>
+            <li>“Est-ce que tu comprends rapidement ce qu’il faut faire ?”</li>
+            <li>“Est-ce que les diamants vont trop vite / trop lentement pour toi ?”</li>
+            <li>“Est-ce que l’écran Bravo / Game Over arrive au bon moment ?”</li>
+          </ul>
+        </li>
+        <li>Les élèves peuvent ensuite ajuster leur jeu en fonction des retours.</li>
+      </ul>
+
+      <h3>Jeu de clôture – “Meilleur score calme” (5 min)</h3>
+      <ul>
+        <li>Consigne : « Vous faites chacun deux parties en jouant calmement. Notez votre meilleur score, sans tricher sur le temps ni sur les paramètres. »</li>
+        <li>But : conclure sur une attitude concentrée et respectueuse du travail de chacun.</li>
+      </ul>
+
+      <h3>Résumé animateur fin de projet</h3>
+      <p>
+        « Les élèves ont finalisé un jeu de collecte complet : fusée contrôlée 
+        au clavier, diamants qui tombent, score positif/négatif, chrono, écrans 
+        de fin et difficulté ajustée. Ils ont testé les jeux des autres et 
+        commencé à réfléchir comme de vrais “game designers”. »
+      </p>
+    </div>
+
+    <!-- ASTUCES & DÉPANNAGE -->
+    <div class="card">
+      <h2>Dépannage rapide & astuces animateur</h2>
+
+      <h3>Problèmes fréquents</h3>
+      <ul>
+        <li><strong>On n’arrive plus à écrire dans les blocs (chiffres ou texte)</strong><br>
+          → Ce n’est pas le cadenas clavier, c’est un bug de Scratch.  
+          Solution : réduire la fenêtre de Scratch avec le bouton “–” (le petit tiret à côté du carré et de la croix), 
+          puis la réagrandir. L’écriture redevient possible dans les champs.</li>
+
+        <li><strong>Le diamant ne remonte plus en haut</strong><br>
+          → Vérifier que dans les tests “si touche Fusee” et “si touche Line” on a bien :  
+          « aller à x:(nombre aléatoire…) y:170 ».  
+          → Vérifier que le diamant n’est pas caché (ajouter “montrer” au début).</li>
+
+        <li><strong>Le score ne bouge pas</strong><br>
+          → Vérifier que “changer Score par 1 / -1” est bien à l’intérieur des blocs “si touche Fusee” / “si touche Line”.  
+          → Vérifier que Score est bien différent de 0 au démarrage (mettre Score à 0 une seule fois au drapeau vert).</li>
+
+        <li><strong>Le Temps reste toujours à 60</strong><br>
+          → Vérifier la boucle “répéter jusqu’à ce que Temps = 0” avec “changer Temps par -1” et “attendre 1 seconde”.  
+          → Vérifier qu’il n’y a pas un deuxième script qui remet Temps à 60 pendant la partie.</li>
+
+        <li><strong>Bravo ou Game Over ne s’affichent jamais</strong><br>
+          → Vérifier qu’on envoie bien les messages [Bravo] / [GameOver] ou [Fin_Temps].  
+          → Vérifier que les sprites Bravo et GameOver sont cachés au drapeau vert mais “montrer” quand ils reçoivent leur message.</li>
+      </ul>
+
+      <h3>Astuces pédagogiques</h3>
+      <ul>
+        <li>Faire expliquer à l’oral :  
+          – “Quand le diamant touche la fusée, que se passe-t-il dans le programme ?”  
+          – “Quand il touche la ligne rouge ?”  
+          – “Quand le temps arrive à 0 ?”</li>
+        <li>Insister sur la lecture du score et du temps : c’est un moyen concret de lier maths et jeu.</li>
+        <li>Pour les plus rapides :  
+          – ajouter un deuxième diamant avec une couleur différente (plus rapide = +2 / -2 points),  
+          – ou un effet visuel sur la fusée quand elle attrape un diamant (grossir 0.1 s, puis revenir normal).</li>
+        <li>En cas d’agitation : proposer une mini-pause “sans clavier” de 1 minute, où les élèves décrivent simplement le fonctionnement de leur jeu à un voisin (sans coder), puis retour au test.</li>
+      </ul>
+    </div>
+
+   <!-- === STYLE SUPPLÉMENTAIRE POUR LA PARTIE ALGORITHME === -->
+<style>
+  /* --- PARTIE ALGORITHME --- */
+  .algo-section {
+    margin-top: 18px;
+    padding: 18px 16px 20px 16px;
+    border-radius: var(--radius);
+    border: 1px solid #d0d7de;
+    background: #f7f7f7;
+    box-shadow: var(--shadow-soft);
+    font-family: "Courier New", monospace;
+  }
+
+  .algo-section > h2 {
+    color: #2c3e50;
+    margin-bottom: 4px;
+    font-size: 1.05rem;
+  }
+
+  .algo-section > p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .algo-session {
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px dashed #ccc;
+  }
+
+  .titre-sprite {
+    font-weight: bold;
+    font-size: 0.95rem;
+    background: #eaf2f8;
+    padding: 6px 10px;
+    border-left: 6px solid #5dade2;
+    margin: 10px 0 6px;
+    border-radius: 4px;
+  }
+
+  .script {
+    margin-bottom: 12px;
+    padding-left: 8px;
+    border-left: 3px dotted #ccc;
+  }
+
+  .script .bloc {
+    margin-left: 10px;
+  }
+
+  .bloc {
+    padding: 6px 10px;
+    margin: 4px 0;
+    border-left: 6px solid;
+    background-color: #ffffff;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  }
+
+  .evenement {
+    border-color: #FFD500;
+    background-color: #fff8d1;
+  }
+
+  .mouvement {
+    border-color: #4C97FF;
+    background-color: #dceeff;
+  }
+
+  .apparence {
+    border-color: #9966FF;
+    background-color: #f0e6ff;
+  }
+
+  .controle {
+    border-color: #FFAB19;
+    background-color: #ffe9cc;
+  }
+
+  .son {
+    border-color: #CF63CF;
+    background-color: #fce4fc;
+  }
+
+  .capteurs {
+    border-color: #5CB1D6;
+    background-color: #e0f6fb;
+  }
+
+  .operateurs {
+    border-color: #59C059;
+    background-color: #e5fbe5;
+  }
+
+  @media (max-width: 600px) {
+    .algo-section {
+      padding: 14px 12px 16px 12px;
+    }
+  }
+</style>
+
+<!-- === ALGORYTHME DU PROJET 2 – FUSÉE & DIAMANTS === -->
+<div class="algo-section">
+  <h2>🚀 Algorithme du Projet Scratch – Fusée & Diamants</h2>
+  <p>Niveau : CE2 – CM1 – CM2 · 2 à 3 séances · Jeu de collecte avec score et chronomètre</p>
+
+  <!-- SPRITE 1 -->
+  <div class="section">
+    <h2>🎮 Sprite 1 – Fusée (joueur principal)</h2>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à x:(0) y:(-130)</div>
+    <div class="bloc controle">répéter indéfiniment</div>
+    <div class="bloc controle" style="margin-left:20px;">si [touche flèche droite pressée ?] alors → 
+      <span class="mouvement">changer x de (10)</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">si [touche flèche gauche pressée ?] alors → 
+      <span class="mouvement">changer x de (-10)</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">si [touche flèche haut pressée ?] alors → 
+      <span class="mouvement">changer y de (5)</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">si [touche flèche bas pressée ?] alors → 
+      <span class="mouvement">changer y de (-5)</span>
+    </div>
+    <div class="bloc controle" style="margin-left:20px;">si [touche espace pressée ?] alors → 
+      <span class="apparence">jouer le son “whoosh”</span>
+    </div>
+    <div class="bloc controle">fin</div>
+  </div>
+
+  <!-- SPRITE 2 -->
+  <div class="section">
+    <h2>💎 Sprite 2 – Diamant (objet à attraper)</h2>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle">répéter indéfiniment</div>
+    <div class="bloc mouvement" style="margin-left:20px;">aller à x:(nombre aléatoire entre -200 et 200) y:(180)</div>
+    <div class="bloc mouvement" style="margin-left:20px;">glisser en (3) secondes à y:(-180)</div>
+    <div class="bloc controle" style="margin-left:20px;">si [touche la fusée ?] alors :</div>
+    <div class="bloc" style="margin-left:40px;">
+      <span class="apparence">cacher</span> → 
+      <span class="mouvement">aller à position aléatoire</span> → 
+      <span class="controle">attendre (0.5) secondes</span> → 
+      <span class="apparence">montrer</span> → 
+      <span class="controle">changer [Score] de (1)</span>
+    </div>
+    <div class="bloc controle">fin</div>
+  </div>
+
+  <!-- SPRITE 3 -->
+  <div class="section">
+    <h2>🟥 Sprite 3 – Ligne rouge (barre de danger)</h2>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc mouvement">aller à y:(-160)</div>
+    <div class="bloc apparence">changer la couleur en rouge vif</div>
+    <div class="bloc controle">répéter indéfiniment</div>
+    <div class="bloc controle" style="margin-left:20px;">si [le diamant touche la ligne ?] alors → 
+      <span class="controle">changer [Score] de (-1)</span>
+    </div>
+  </div>
+
+  <!-- SPRITE 4 -->
+  <div class="section">
+    <h2>🕒 Sprite 4 – Chronomètre</h2>
+    <div class="bloc evenement">quand [drapeau vert] cliqué</div>
+    <div class="bloc controle">mettre [Temps] à (30)</div>
+    <div class="bloc controle">répéter (30) fois :</div>
+    <div class="bloc controle" style="margin-left:20px;">attendre (1) seconde → 
+      <span class="controle">changer [Temps] de (-1)</span>
+    </div>
+    <div class="bloc controle">si [Temps = 0] alors → 
+      <span class="apparence">diffuser “fin de partie”</span>
+    </div>
+  </div>
+
+  <!-- SPRITES 5 & 6 -->
+  <div class="section">
+    <h2>🏁 Sprites 5 & 6 – Écrans de fin (Bravo / Game Over)</h2>
+    <div class="titre-sprite">🏆 Sprite 5 – BRAVO</div>
+    <div class="bloc evenement">quand je reçois [fin de partie]</div>
+    <div class="bloc controle">si [Score ≥ 15] alors → 
+      <span class="apparence">montrer l’écran BRAVO</span>
+    </div>
+
+    <div class="titre-sprite">💀 Sprite 6 – GAME OVER</div>
+    <div class="bloc evenement">quand je reçois [fin de partie]</div>
+    <div class="bloc controle">si [Score &lt; 15] alors → 
+      <span class="apparence">montrer l’écran GAME OVER</span>
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="section">
+    <h2>🛠️ Bonus et variantes possibles</h2>
+    <div class="bloc mouvement">ajouter un défilement d’arrière-plan (deux sprites “espace” qui bougent en boucle)</div>
+    <div class="bloc apparence">jouer un son de réussite quand un diamant est attrapé</div>
+    <div class="bloc controle">augmenter la vitesse du diamant après chaque point (difficulté progressive)</div>
+  </div>
+</div>
+
+
+
+  </div>
+</body>
+</html>
