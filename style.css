@@ -1351,3 +1351,85 @@ summary::-webkit-details-marker {
     font-size: .9rem;
   }
 }
+
+/* --------------------------------------------------------
+   📊 TABLEAU DE BORD CEH — Styles Premium
+   -------------------------------------------------------- */
+
+/* Conteneur des filtres */
+.dashboard-ceh select {
+  background: #0f1625 !important;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  font-size: .9rem;
+  outline: none;
+  transition: border var(--transition-fast);
+}
+
+.dashboard-ceh select:focus {
+  border-color: var(--accent);
+}
+
+/* Bouton "Générer la synthèse" */
+#btn-generate-analysis {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  color: #0f172a;
+  border: 1px solid rgba(255,255,255,0.25);
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: transform var(--transition-fast), 
+              box-shadow var(--transition-fast);
+}
+
+#btn-generate-analysis:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* Zone texte de sortie */
+#analysis-output {
+  background: #0f1625;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  font-size: .9rem;
+  padding: 12px;
+  line-height: 1.45;
+  resize: vertical;
+  height: 200px;
+  box-shadow: var(--shadow-card);
+}
+
+#analysis-output:focus {
+  border-color: var(--accent);
+}
+
+/* Titres des graphiques */
+.dashboard-ceh h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+/* Carte contenant chaque graphique */
+.dashboard-ceh .tile {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-fast), 
+              box-shadow var(--transition-fast);
+}
+
+.dashboard-ceh .tile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
