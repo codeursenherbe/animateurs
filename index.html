@@ -74,84 +74,6 @@
         </div>
       </section>
 
-<!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
-<!-- 📊 TABLEAU DE BORD CEH — ACCORDÉON PRO -->
-<!-- ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ -->
-
-<details class="fold dashboard-ceh">
-  <summary>
-    <span class="fold-title">📊 Tableau de bord CEH — Statistiques & Analyse</span>
-    <span class="fold-caret"></span>
-  </summary>
-
-  <div class="fold-content">
-    
-    <!-- 🔍 FILTRES -->
-    <div style="display:flex; gap:14px; flex-wrap:wrap; margin-bottom:18px;">
-      <div>
-        <label style="font-size:0.85rem; color:#94a3b8;">École :</label><br>
-        <select id="db-ecole" style="padding:8px; border-radius:8px; background:#0f1625; color:#fff;">
-          <option value="all">Toutes</option>
-        </select>
-      </div>
-
-      <div>
-        <label style="font-size:0.85rem; color:#94a3b8;">Jour :</label><br>
-        <select id="db-jour" style="padding:8px; border-radius:8px; background:#0f1625; color:#fff;">
-          <option value="all">Tous</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- 📊 GRAPHIQUES -->
-    <div class="tile" style="margin-bottom:18px;">
-      <h3 style="margin-bottom:10px; color:var(--accent)">📅 Séances par mois</h3>
-      <div id="chart-seances-mois" style="width:100%; height:350px;"></div>
-    </div>
-
-    <div class="tile" style="margin-bottom:18px;">
-      <h3 style="margin-bottom:10px; color:var(--accent)">👤 Séances par animateur</h3>
-      <div id="chart-seances-anim" style="width:100%; height:350px;"></div>
-    </div>
-
-    <div class="tile" style="margin-bottom:18px;">
-      <h3 style="margin-bottom:10px; color:var(--accent)">🏫 Séances par école</h3>
-      <div id="chart-seances-ecole" style="width:100%; height:350px;"></div>
-    </div>
-
-
-    <!-- 👤 STATISTIQUES PAR ANIMATEUR -->
-    <div class="tile" style="margin-bottom:18px;">
-      <h3 style="margin-bottom:6px; color:var(--accent)">📌 Suivi par animateur</h3>
-      <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:10px;">
-        Statistiques globales jusqu’à aujourd’hui (toutes écoles) : nombre d’ateliers réalisés
-        par animateur (sans compter les séances futures) et récap des résumés manquants.
-      </p>
-      <div id="stats-anims"></div>
-    </div>
-
-
-
-    <!-- 🧠 ANALYSE DYNAMIQUE -->
-    <div class="tile" style="margin-top:24px;">
-      <h3 style="margin-bottom:10px; color:var(--accent)">🧠 Analyse pédagogique automatique</h3>
-      <p style="color:var(--text-muted); margin-bottom:12px;">
-        Génère une synthèse automatique basée sur tous les résumés correspondant à l’école et au jour choisis ci-dessus.
-      </p>
-
-      <button id="btn-generate-analysis" 
-              style="padding:10px 18px; border-radius:12px; background:var(--accent); color:#000; font-weight:700; cursor:pointer;">
-        Générer la synthèse
-      </button>
-
-      <textarea id="analysis-output"
-                style="width:100%; height:220px; margin-top:12px; background:#0f1625; color:#fff; padding:12px; border-radius:12px; border:1px solid var(--border-subtle); font-size:0.9rem;">
-      </textarea>
-    </div>
-
-  </div>
-</details>
-
 
 <!-- ============================= -->
 <!-- 🔍 Identité pédagogique CEH -->
@@ -1631,6 +1553,57 @@
 
   </div>
 </details>
+
+
+<!-- ========================================================= -->
+<!-- 📊 ACCORDÉON — TABLEAU DE BORD CEH -->
+<!-- ========================================================= -->
+
+<details class="fold dashboard-ceh" id="dashboard-ceh">
+  <summary>
+    <span class="fold-title">📊 Tableau de bord des ateliers CEH</span>
+    <span class="fold-sub">Statistiques automatiques - Google Sheets</span>
+    <span class="fold-caret" aria-hidden="true"></span>
+  </summary>
+
+  <div class="fold-content">
+
+    <!-- ===================================================== -->
+    <!-- 📅 GRAPHIQUE : Séances par mois -->
+    <!-- ===================================================== -->
+    <section class="tile" style="margin-bottom:20px;">
+      <h3 class="sub-title">📅 Séances réalisées par mois</h3>
+      <div id="chart-seances-month" style="width:100%; height:340px;"></div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- 🏫 GRAPHIQUE : Séances par école -->
+    <!-- ===================================================== -->
+    <section class="tile" style="margin-bottom:20px;">
+      <h3 class="sub-title">🏫 Séances réalisées par école</h3>
+      <div id="chart-seances-school" style="width:100%; height:340px;"></div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- ⛔ RÉSUMÉS MANQUANTS -->
+    <!-- ===================================================== -->
+    <section class="tile">
+      <h3 class="sub-title">⛔ Résumés manquants</h3>
+      <p>Résumé manquants :</p>
+      <ul id="missing-summaries" class="clean" style="margin-top:10px; margin-left:10px;"></ul>
+    </section>
+
+  </div>
+</details>
+
+
+
+
+
+
+
+
+
 <!-- PLANNING GOOGLE SHEETS -->
         <section class="planning-section">
           <h2>📅 Planning des ateliers Codeurs en Herbe</h2>
@@ -1715,380 +1688,195 @@ document.getElementById("globalSearch").addEventListener("input", function() {
 </script>
 
 
-<!-- =======================================================
-     📊 TABLEAU DE BORD CEH — JAVASCRIPT (GVIZ SÉCURISÉ)
-     ======================================================= -->
-<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+// =====================================================
+//  BLOC 2 — Chargement AUTOMATIQUE Google Sheets
+// =====================================================
+
+// 🔵 ID Google Sheet CEH
+const SHEET_ID = "1QIht_T4wIgcH5s1BcNUdzleWLJ_E8ijpN53-Xa6grMc";
+// 🔵 Onglet DATA-DASHBOARD (gid)
+const GID = "232672011";
+
+// 🔗 URL JSON exportée automatiquement par Google Sheets
+const SHEET_URL =
+  `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
+
+// Tableau final contenant tous les ateliers CEH
+let seancesCEH = [];
+
+// Fonction de chargement
+function loadDashboardData() {
+  return fetch(SHEET_URL)
+    .then(res => res.text())
+    .then(text => {
+      // Google renvoie un JSON encapsulé → on extrait proprement
+      const json = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
+
+      const rows = json.table.rows;
+
+      seancesCEH = rows.map(r => {
+        const c = r.c;
+
+        const dateBrute = c[0] ? c[0].v : "";         // Col A
+        const ecole = c[1] ? c[1].v : "";             // Col B
+        const animateur = c[2] ? c[2].v : "";         // Col C
+        const jour = c[3] ? c[3].v : "";              // Col D
+        const resume = c[4] ? c[4].v : "";            // Col E
+
+        return {
+          date: dateBrute,
+          dateObj: dateBrute ? new Date(dateBrute) : null,
+          ecole,
+          animateur,
+          jour,
+          resume
+        };
+      });
+
+      console.log("📥 Données Google Sheets chargées :", seancesCEH);
+      return seancesCEH;
+    })
+    .catch(err => {
+      console.error("❌ Erreur de chargement Google Sheets :", err);
+    });
+}
+</script>
+
+
 
 <script>
-// ======================================================
-// 📊 TABLEAU DE BORD CEH – DATA-DASHBOARD (A→E)
-// A : Date brute (AAAA-MM-JJ)
-// B : École
-// C : Animateur
-// D : Jour (Lundi, Mardi…)
-// E : Résumé
-// ======================================================
+// =====================================================
+//  BLOC 3 — Graphiques + Résumés manquants + Initialisation
+// =====================================================
 
+// Charger Google Charts
 google.charts.load("current", { packages: ["corechart"] });
-google.charts.setOnLoadCallback(loadDashboardData);
 
-const SHEET_URL =
-  "https://docs.google.com/spreadsheets/d/1QIht_T4wIgcH5s1BcNUdzleWLJ_E8ijpN53-Xa6grMc/gviz/tq?sheet=DATA-DASHBOARD";
+// -----------------------------------------------------
+// 1️⃣ Fonction : Séances par mois
+// -----------------------------------------------------
+function drawChartByMonth() {
+  const dataTable = new google.visualization.DataTable();
+  dataTable.addColumn("string", "Mois");
+  dataTable.addColumn("number", "Séances");
 
-const PLACEHOLDER_RESUME = "!!!!!!!!!!!!!Résumé non réalisé!!!!!!!!!!!!!!!!!";
-
-let dashboardRows = []; // {dateObj, dateStr, ecole, anim, jour, resume, isFuture}
-
-// -----------------------------
-// 🔧 Utilitaire : parse GViz
-// -----------------------------
-function parseGViz(gvizText) {
-  const json = JSON.parse(gvizText.substring(47).slice(0, -2));
-  const cols = json.table.cols.map(c => c.label);
-  const rows = json.table.rows.map(r =>
-    r.c.map(c => {
-      if (!c) return "";
-      if (typeof c.v === "string") return c.v;
-      if (typeof c.v === "number") return c.v;
-      if (c.f) return c.f;
-      if (c.v && typeof c.v === "string") return c.v;
-      return "";
-    })
-  );
-  return { cols, rows };
-}
-
-// -----------------------------
-// 🔧 Utilitaire : parse Date
-// -----------------------------
-function parseDateCell(cell) {
-  if (!cell) return null;
-
-  // Format natif GViz : "Date(2025,10,13)"
-  if (typeof cell === "string" && cell.startsWith("Date(")) {
-    const parts = cell.replace("Date(", "").replace(")", "").split(",");
-    const year = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10); // 0–11
-    const day = parseInt(parts[2], 10);
-    return new Date(year, month, day);
-  }
-
-  // Format ISO AAAA-MM-JJ
-  if (typeof cell === "string" && cell.includes("-")) {
-    return new Date(cell);
-  }
-
-  // Fallback : tenter new Date()
-  return new Date(cell);
-}
-
-// -----------------------------
-// 1️⃣ Chargement principal
-// -----------------------------
-async function loadDashboardData() {
-  try {
-    const txt = await fetch(SHEET_URL).then(x => x.text());
-    const parsed = parseGViz(txt);
-
-    const todayMidnight = new Date();
-    todayMidnight.setHours(0, 0, 0, 0);
-
-    // On mappe les colonnes A–E
-    dashboardRows = parsed.rows.map(r => {
-      const rawDate = r[0];          // A : Date brute
-      const ecole  = r[1] || "";     // B : École
-      const anim   = r[2] || "";     // C : Animateur
-      const jour   = r[3] || "";     // D : Jour (Lundi…)
-      let resume   = r[4] || "";     // E : Résumé
-
-      const dateObj = parseDateCell(rawDate);
-      let dateStr = rawDate || "";
-
-      if (dateObj && !isNaN(dateObj)) {
-        // au format AAAA-MM-JJ
-        dateStr = dateObj.toISOString().substring(0, 10);
-      }
-
-      const dateClean = dateObj
-        ? new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate())
-        : null;
-
-      const isFuture = !!(dateClean && dateClean.getTime() > todayMidnight.getTime());
-
-      // ⚠️ On ne remplit le placeholder que pour les séances passées
-      if (!isFuture && (!resume || resume.trim() === "")) {
-        resume = PLACEHOLDER_RESUME;
-      }
-
-      return { dateObj, dateStr, ecole, anim, jour, resume, isFuture };
-    });
-
-    fillFilters();
-    updateDashboard();
-
-    document.getElementById("db-ecole").addEventListener("change", updateDashboard);
-    document.getElementById("db-jour").addEventListener("change", updateDashboard);
-    document
-      .getElementById("btn-generate-analysis")
-      .addEventListener("click", generateAnalysis);
-
-  } catch (e) {
-    console.error("Erreur lors du chargement du Dashboard CEH :", e);
-  }
-}
-
-// -----------------------------
-// 2️⃣ Filtres (École / Jour)
-// -----------------------------
-function fillFilters() {
-  const selE = document.getElementById("db-ecole");
-  const selJ = document.getElementById("db-jour");
-
-  // On garde le premier <option> "Toutes / Tous"
-  // puis on ajoute dynamiquement
-  const ecoles = Array.from(
-    new Set(dashboardRows.map(r => r.ecole).filter(Boolean))
-  ).sort();
-
-  const jours = Array.from(
-    new Set(dashboardRows.map(r => r.jour).filter(Boolean))
-  );
-
-  ecoles.forEach(ec => {
-    const o = document.createElement("option");
-    o.value = ec;
-    o.textContent = ec;
-    selE.appendChild(o);
-  });
-
-  jours.forEach(j => {
-    const o = document.createElement("option");
-    o.value = j;
-    o.textContent = j;
-    selJ.appendChild(o);
-  });
-}
-
-// -----------------------------
-// 3️⃣ Lignes filtrées (école + jour, sans futur)
-// -----------------------------
-function getFilteredRows() {
-  const ecole = document.getElementById("db-ecole").value;
-  const jour  = document.getElementById("db-jour").value;
-
-  return dashboardRows.filter(r => {
-    if (r.isFuture) return false; // on ne compte pas les futurs ateliers
-    const matchE = (ecole === "all") || (r.ecole === ecole);
-    const matchJ = (jour  === "all") || (r.jour  === jour);
-    return matchE && matchJ;
-  });
-}
-
-// -----------------------------
-// 4️⃣ Mise à jour globale du TDB
-// -----------------------------
-function updateDashboard() {
-  const filtered = getFilteredRows();
-
-  drawChartByMonth(filtered);
-  drawChartBySchool(filtered);
-  drawChartByAnimator(filtered);
-  renderStatsByAnimator(); // stats globales par animateur (<= aujourd’hui)
-}
-
-// -----------------------------
-// 5️⃣ Graphique : Séances par mois
-// -----------------------------
-function drawChartByMonth(rows) {
   const counts = {};
 
-  rows.forEach(r => {
-    if (!r.dateObj || isNaN(r.dateObj)) return;
-    const key = r.dateObj.toLocaleString("fr-FR", { month: "long", year: "numeric" });
+  seancesCEH.forEach(s => {
+    if (!s.dateObj) return;
+    if (s.resume === "!!!!!!!!!!!!!Résumé non réalisé!!!!!!!!!!!!!!!!!") return; // on compte seulement les séances réalisées
+    const key = s.dateObj.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
     counts[key] = (counts[key] || 0) + 1;
   });
 
-  const data = new google.visualization.DataTable();
-  data.addColumn("string", "Mois");
-  data.addColumn("number", "Séances");
+  Object.entries(counts).forEach(([mois, nb]) => {
+    dataTable.addRow([mois, nb]);
+  });
 
-  Object.entries(counts).forEach(([k, v]) => data.addRow([k, v]));
-
-  new google.visualization.ColumnChart(
-    document.getElementById("chart-seances-mois")
-  ).draw(data, {
+  const options = {
     backgroundColor: "transparent",
-    legend: "none"
-  });
+    titleTextStyle: { color: "#ffffff" },
+    legend: { textStyle: { color: "#ffffff" } },
+    hAxis: {
+      textStyle: { color: "#ffffff" },
+      gridlines: { color: "rgba(255,255,255,0.15)" }
+    },
+    vAxis: {
+      textStyle: { color: "#ffffff" },
+      gridlines: { color: "rgba(255,255,255,0.15)" },
+      minValue: 0
+    },
+    colors: ["#0d74a3"]
+  };
+
+  const chart = new google.visualization.ColumnChart(
+    document.getElementById("chart-seances-month")
+  );
+  chart.draw(dataTable, options);
 }
 
-// -----------------------------
-// 6️⃣ Graphique : Séances par école
-// -----------------------------
-function drawChartBySchool(rows) {
+// -----------------------------------------------------
+// 2️⃣ Fonction : Séances par école
+// -----------------------------------------------------
+function drawChartBySchool() {
+  const dataTable = new google.visualization.DataTable();
+  dataTable.addColumn("string", "École");
+  dataTable.addColumn("number", "Séances");
+
   const counts = {};
-  rows.forEach(r => {
-    if (!r.ecole) return;
-    counts[r.ecole] = (counts[r.ecole] || 0) + 1;
+
+  seancesCEH.forEach(s => {
+    if (s.resume === "!!!!!!!!!!!!!Résumé non réalisé!!!!!!!!!!!!!!!!!") return;
+    counts[s.ecole] = (counts[s.ecole] || 0) + 1;
   });
 
-  const data = new google.visualization.DataTable();
-  data.addColumn("string", "École");
-  data.addColumn("number", "Séances");
+  Object.entries(counts).forEach(([ecole, nb]) => {
+    dataTable.addRow([ecole, nb]);
+  });
 
-  Object.entries(counts).forEach(([e, v]) => data.addRow([e, v]));
-
-  new google.visualization.BarChart(
-    document.getElementById("chart-seances-ecole")
-  ).draw(data, {
+  const options = {
     backgroundColor: "transparent",
-    legend: "none"
-  });
+    legend: { textStyle: { color: "#ffffff" } },
+    titleTextStyle: { color: "#ffffff" },
+    hAxis: {
+      textStyle: { color: "#ffffff" },
+      gridlines: { color: "rgba(255,255,255,0.15)" },
+      minValue: 0
+    },
+    vAxis: {
+      textStyle: { color: "#ffffff" },
+      gridlines: { color: "rgba(255,255,255,0.15)" }
+    },
+    colors: ["#0d74a3"]
+  };
+
+  const chart = new google.visualization.BarChart(
+    document.getElementById("chart-seances-school")
+  );
+  chart.draw(dataTable, options);
 }
 
-// -----------------------------
-// 7️⃣ Graphique : Séances par animateur
-// (dans le contexte des filtres École/Jour)
-// -----------------------------
-function drawChartByAnimator(rows) {
-  const counts = {};
-  rows.forEach(r => {
-    if (!r.anim) return;
-    counts[r.anim] = (counts[r.anim] || 0) + 1;
-  });
+// -----------------------------------------------------
+// 3️⃣ Liste : Résumés manquants
+// -----------------------------------------------------
+function renderMissingSummaries() {
+  const box = document.getElementById("missing-summaries");
+  box.innerHTML = "";
 
-  const data = new google.visualization.DataTable();
-  data.addColumn("string", "Animateur");
-  data.addColumn("number", "Séances");
+  const MISSING_TAG = "!!!!!!!!!!!!!Résumé non réalisé!!!!!!!!!!!!!!!!!";
 
-  Object.entries(counts).forEach(([a, v]) => data.addRow([a, v]));
+  const missing = seancesCEH.filter(s => s.resume === MISSING_TAG);
 
-  new google.visualization.PieChart(
-    document.getElementById("chart-seances-anim")
-  ).draw(data, {
-    backgroundColor: "transparent"
-  });
-}
-
-// -----------------------------
-// 8️⃣ Stats globales par animateur
-//   - nb ateliers réalisés (<= aujourd’hui)
-//   - résumés manquants (placeholder)
-// -----------------------------
-function renderStatsByAnimator() {
-  const container = document.getElementById("stats-anims");
-  if (!container) return;
-
-  const todayMidnight = new Date();
-  todayMidnight.setHours(0, 0, 0, 0);
-
-  const perAnimTotal   = {};
-  const perAnimMissing = {};
-
-  dashboardRows.forEach(r => {
-    if (!r.dateObj || isNaN(r.dateObj)) return;
-
-    const dateClean = new Date(
-      r.dateObj.getFullYear(),
-      r.dateObj.getMonth(),
-      r.dateObj.getDate()
-    );
-
-    // On ignore les séances futures
-    if (dateClean.getTime() > todayMidnight.getTime()) return;
-
-    const anim = r.anim || "(sans nom)";
-    perAnimTotal[anim] = (perAnimTotal[anim] || 0) + 1;
-
-    if (r.resume === PLACEHOLDER_RESUME) {
-      if (!perAnimMissing[anim]) perAnimMissing[anim] = [];
-      perAnimMissing[anim].push(r);
-    }
-  });
-
-  const anims = Object.keys(perAnimTotal).sort();
-
-  if (anims.length === 0) {
-    container.innerHTML = "<p>Aucune séance passée enregistrée pour l’instant.</p>";
+  if (missing.length === 0) {
+    box.innerHTML = `<li style="color:#8fd68f;">✔ Aucun résumé manquant</li>`;
     return;
   }
 
-  let html = '<table style="width:100%; font-size:0.85rem; border-collapse:collapse;">';
-  html += "<thead><tr>";
-  html += "<th style='text-align:left; padding:4px 6px;'>Animateur</th>";
-  html += "<th style='text-align:right; padding:4px 6px;'>Ateliers réalisés (≤ aujourd’hui)</th>";
-  html += "<th style='text-align:right; padding:4px 6px;'>Résumés manquants</th>";
-  html += "</tr></thead><tbody>";
-
-  anims.forEach(a => {
-    const total = perAnimTotal[a] || 0;
-    const missingList = perAnimMissing[a] || [];
-    html += "<tr>";
-    html += `<td style="padding:4px 6px;">${a}</td>`;
-    html += `<td style="padding:4px 6px; text-align:right;">${total}</td>`;
-    html += `<td style="padding:4px 6px; text-align:right;">${missingList.length}</td>`;
-    html += "</tr>";
+  missing.forEach(s => {
+    const li = document.createElement("li");
+    // Format demandé : École (2025-11-27 – vendredi)
+    li.textContent = `${s.ecole} (${s.date} – ${s.jour})`;
+    box.appendChild(li);
   });
+}
 
-  html += "</tbody></table>";
-
-  // Détails des résumés manquants
-  html += "<div style='margin-top:10px; font-size:0.85rem;'>";
-  Object.entries(perAnimMissing).forEach(([anim, list]) => {
-    if (!list.length) return;
-    html += `<p style="margin:4px 0;"><strong>${anim}</strong> – résumés manquants :</p><ul style="margin:0 0 6px 16px; padding:0;">`;
-    list.forEach(r => {
-      html += `<li>Saber il te manque le résumé du ${r.dateStr} à ${r.ecole} (${r.jour})`
-        .replace("Saber", anim); // on adapte le texte d’exemple à chaque animateur
-      html += "</li>";
+// -----------------------------------------------------
+// 4️⃣ Initialisation principale du Tableau de bord CEH
+// -----------------------------------------------------
+function initDashboardCEH() {
+  loadDashboardData().then(() => {
+    google.charts.setOnLoadCallback(() => {
+      drawChartByMonth();
+      drawChartBySchool();
+      renderMissingSummaries();
     });
-    html += "</ul>";
   });
-  html += "</div>";
-
-  container.innerHTML = html;
 }
 
-// -----------------------------
-// 9️⃣ Synthèse "ChatGPT"
-//   -> prépare un bloc de texte à copier-coller
-// -----------------------------
-function generateAnalysis() {
-  const ecole = document.getElementById("db-ecole").value;
-  const jour  = document.getElementById("db-jour").value;
-  const rows  = getFilteredRows();
-
-  const labelEcole = (ecole === "all") ? "Toutes les écoles" : ecole;
-  const labelJour  = (jour  === "all") ? "Tous les jours"   : jour;
-
-  const blocs = rows.map(r => {
-    return `Date : ${r.dateStr} – École : ${r.ecole} – Animateur : ${r.anim} – Jour : ${r.jour}
-Résumé :
-${r.resume}`;
-  });
-
-  const output = document.getElementById("analysis-output");
-  output.value =
-`Synthèse pédagogique CEH à générer avec ChatGPT
-
-Contexte :
-- École : ${labelEcole}
-- Jour : ${labelJour}
-- Nombre de séances prises en compte : ${rows.length}
-
-Merci de produire une synthèse structurée (points clés, réussites, difficultés, points de vigilance, pistes pour la séance suivante) à partir des résumés ci-dessous.
-
-================= RÉSUMÉS BRUTS =================
-
-${blocs.join("\n\n-----------------------------\n\n")}
-
-=================================================
-
-Consigne : garde le ton CEH (bienveillant, concret, orienté apprentissages et ambiance de groupe).`;
-}
+// Lancement auto
+document.addEventListener("DOMContentLoaded", initDashboardCEH);
 </script>
-<!-- /FIN TABLEAU BORD CEH -->
 
 
 
