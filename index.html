@@ -1635,23 +1635,22 @@
     </main>
   </div>
 <script>
-  const btn = document.getElementById("theme-toggle");
+// 🌙 Gestion du thème — version SANS ERREURS
+const btn = document.getElementById("theme-toggle");
 
-  // Charger le thème enregistré
-  if (localStorage.getItem("theme") === "light") {
-    document.body.classList.add("light-mode");
-  }
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light-mode");
+}
 
+if (btn) {
   btn.addEventListener("click", () => {
     document.body.classList.toggle("light-mode");
-
-    // Sauvegarde
-    if (document.body.classList.contains("light-mode")) {
-      localStorage.setItem("theme", "light");
-    } else {
-      localStorage.setItem("theme", "dark");
-    }
+    localStorage.setItem(
+      "theme",
+      document.body.classList.contains("light-mode") ? "light" : "dark"
+    );
   });
+}
 </script>
 
 <script>
