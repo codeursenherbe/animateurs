@@ -1818,7 +1818,7 @@ function drawSessionsBySchool() {
 
   seances.forEach(s => {
     if (!s.ecole) return;
-    if (s.resume === MISSING_TAG) return; // on ne compte pas celles sans résumé
+  // On ne filtre plus — on compte toutes les séances valides
 
     counts[s.ecole] = (counts[s.ecole] || 0) + 1;
   });
