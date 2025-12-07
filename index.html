@@ -1729,7 +1729,7 @@ async function loadData() {
         ecole    : c[1]?.v || "",      // B: École
         animateur: c[2]?.v || "",      // C: Animateur
         jour     : c[3]?.v || "",      // D: Jour
-        resume   : c[4]?.v || ""       // E: Résumé
+        resume   : c[5]?.v || ""       // E: Résumé
       };
     });
 
@@ -1753,7 +1753,9 @@ function renderMissingSummaries() {
     return;
   }
 
-  const missing = seances.filter(s => s.resume === MISSING_TAG);
+  const missing = seances.filter(s => 
+	!s.resume || s.resume.trim() === "" || s.resume === MISSING_TAG
+  );
 
   if (!missing.length) {
     box.innerHTML = `<li style="color:#8fd68f;">✔ Aucun résumé manquant</li>`;
@@ -1783,7 +1785,7 @@ function drawSessionsByMonth() {
 
   seances.forEach(s => {
     if (!s.dateObj) return;
-    if (s.resume === MISSING_TAG) return; // on ne compte pas celles sans résumé
+    // On ne filtre plus — on compte toutes les séances valides
 
     const key = s.dateObj.toLocaleDateString("fr-FR", {
       month: "long",
