@@ -1720,20 +1720,33 @@ async function loadData() {
 
     const rows = json.table.rows || [];
 
-    seances = rows.map(r => {
-      const c = r.c || [];
-      const dateStr = c[0]?.v || "";   // A: Date
-      const dateObj = dateStr ? new Date(dateStr) : null;
+    function excelToJsDate(excelNumber) {
+  // 25569 = offset Excel → Unix date. *86400 s / jour * 1000 ms*
+  return new Date((excelNumber - 25569) * 86400 * 1000);
+}
 
-      return {
-        date     : dateStr,
-        dateObj  : dateObj,
-        ecole    : c[1]?.v || "",      // B: École
-        animateur: c[2]?.v || "",      // C: Animateur
-        jour     : c[3]?.v || "",      // D: Jour
-        resume   : c[4]?.v || ""       // E: Résumé
-      };
-    });
+seances = rows.map(r => {
+  const c = r.c || [];
+
+  let dateObj = null;
+  let dateLabel = "";
+
+  if (c[0]?.v !== null && c[0]?.v !== undefined) {
+    // c[0].v = numéro Google/Excel (ex : 45044)
+    dateObj = excelToJsDate(c[0].v);
+    dateLabel = dateObj.toISOString().split("T")[0];
+  }
+
+  return {
+    date     : dateLabel,         // format AAAA-MM-JJ propre
+    dateObj  : dateObj,
+    ecole    : c[1]?.v || "",
+    animateur: c[2]?.v || "",
+    jour     : c[3]?.v || "",
+    resume   : c[4]?.v || ""
+  };
+});
+
 
     console.log("📥 Données CEH chargées :", seances);
   } catch (e) {
