@@ -1714,17 +1714,15 @@ async function loadData() {
     const res  = await fetch(SHEET_URL);
     const text = await res.text();
 
-    // gViz renvoie du JS + un JSON au milieu → on découpe
-    const json = JSON.parse(
-      text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1)
-    );
-
-    const rows = json.table.rows || [];
-
-    function excelToJsDate(excelNumber) {
-  // 25569 = offset Excel → Unix date. *86400 s / jour * 1000 ms*
-  return new Date((excelNumber - 25569) * 86400 * 1000);
+   //new safe 
+const jsonText = text.match(/\{.*\}/s);
+if (!jsonText) {
+  console.error("Impossible d'extraire le JSON gViz.");
+  return;
 }
+const json = JSON.parse(jsonText[0]);
+
+const rows = json.table.rows || [];
 
 seances = rows.map(r => {
   const c = r.c || [];
@@ -1734,11 +1732,9 @@ seances = rows.map(r => {
   let dateStr = "";
 
   if (typeof dateValue === "number") {
-    // Conversion Excel → JS
     dateObj = new Date((dateValue - 25569) * 86400000);
     dateStr = dateObj.toISOString().split("T")[0];
   } else if (typeof dateValue === "string" && !isNaN(Date.parse(dateValue))) {
-    // Date ISO texte
     dateObj = new Date(dateValue);
     dateStr = dateObj.toISOString().split("T")[0];
   }
@@ -1752,6 +1748,7 @@ seances = rows.map(r => {
     resume   : c[4]?.v || ""
   };
 });
+
 
 
     console.log("📥 Données CEH chargées :", seances);
