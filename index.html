@@ -1687,106 +1687,127 @@ document.getElementById("globalSearch").addEventListener("input", function() {
 });
 </script>
 
-
-<!-- Google Charts loader -->
-<script src="https://www.gstatic.com/charts/loader.js"></script>
-
 <script>
 // =====================================================
-// 🚀 TABLEAU DE BORD CEH 2025 — VERSION OPTIMISÉE
+// 🚀 TABLEAU DE BORD CEH 2025 — VERSION FINALE
 // =====================================================
 
-// IDs Google Sheets
-const SHEET_ID = "1QIht_T4wIgcH5s1BcNUdzleWLJ_E8ijpN53-Xa6grMc";
-const GID = "232672011";
+// 📊 Paramètres Google Sheets
+const SHEET_ID   = "1QIht_T4wIgcH5s1BcNUdzleWLJ_E8ijpN53-Xa6grMc";
+const GID        = "232672011";
 const MISSING_TAG = "!!!!!!!!!!!!!Résumé non réalisé!!!!!!!!!!!!!!!!!";
 
 // URL gViz JSON
-const SHEET_URL =
-  `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
 
-// Données finales
+// Tableau global de séances
 let seances = [];
 
 // =====================================================
-// 1) Chargement Google Sheets
+// 1) Chargement des données Google Sheets
 // =====================================================
 async function loadData() {
-  const res = await fetch(SHEET_URL);
-  const text = await res.text();
+  try {
+    const res  = await fetch(SHEET_URL);
+    const text = await res.text();
 
-  // Extraction JSON sécurisé
-  const json = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
-  const rows = json.table.rows;
+    // gViz renvoie du JS + un JSON au milieu → on découpe
+    const json = JSON.parse(
+      text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1)
+    );
 
-  // Parsing rapide
-  seances = rows.map(r => {
-    const c = r.c;
-    const date = c[0]?.v || "";
-    return {
-      date,
-      dateObj: date ? new Date(date) : null,
-      ecole: c[1]?.v || "",
-      animateur: c[2]?.v || "",
-      jour: c[3]?.v || "",
-      resume: c[4]?.v || ""
-    };
-  });
+    const rows = json.table.rows || [];
 
-  console.log("📥 Données CEH chargées :", seances);
+    seances = rows.map(r => {
+      const c = r.c || [];
+      const dateStr = c[0]?.v || "";   // A: Date
+      const dateObj = dateStr ? new Date(dateStr) : null;
+
+      return {
+        date     : dateStr,
+        dateObj  : dateObj,
+        ecole    : c[1]?.v || "",      // B: École
+        animateur: c[2]?.v || "",      // C: Animateur
+        jour     : c[3]?.v || "",      // D: Jour
+        resume   : c[4]?.v || ""       // E: Résumé
+      };
+    });
+
+    console.log("📥 Données CEH chargées :", seances);
+  } catch (e) {
+    console.error("Erreur de chargement des données CEH :", e);
+  }
 }
 
 // =====================================================
-// 2) Résumés manquants
+// 2) Liste des résumés manquants
 // =====================================================
-function renderMissing() {
+function renderMissingSummaries() {
   const box = document.getElementById("missing-summaries");
+  if (!box) return;
+
   box.innerHTML = "";
+
+  if (!seances.length) {
+    box.innerHTML = `<li style="color:#ffb347;">⚠ Données non disponibles (Google Sheets inaccessible)</li>`;
+    return;
+  }
 
   const missing = seances.filter(s => s.resume === MISSING_TAG);
 
-  if (missing.length === 0) {
+  if (!missing.length) {
     box.innerHTML = `<li style="color:#8fd68f;">✔ Aucun résumé manquant</li>`;
     return;
   }
 
   missing.forEach(s => {
     const li = document.createElement("li");
-    li.textContent = `${s.ecole} (${s.date} – ${s.jour})`;
+    li.textContent = `${s.ecole} — ${s.date} (${s.jour})`;
     box.appendChild(li);
   });
 }
 
 // =====================================================
-// 3) Graphique : Séances par mois
+// 3) Graphique : Séances réalisées par mois
 // =====================================================
-function drawByMonth() {
+function drawSessionsByMonth() {
+  const container = document.getElementById("chart-seances-month");
+  if (!container || !seances.length) return;
+
   const data = new google.visualization.DataTable();
   data.addColumn("string", "Mois");
   data.addColumn("number", "Séances");
 
+  // Regroupement par mois (mois + année)
   const counts = {};
 
   seances.forEach(s => {
     if (!s.dateObj) return;
-    if (s.resume === MISSING_TAG) return;
+    if (s.resume === MISSING_TAG) return; // on ne compte pas celles sans résumé
+
     const key = s.dateObj.toLocaleDateString("fr-FR", {
-      month: "long", year: "numeric"
+      month: "long",
+      year : "numeric"
     });
+
     counts[key] = (counts[key] || 0) + 1;
   });
 
-  Object.entries(counts).forEach(([k, v]) => data.addRow([k, v]));
+  Object.entries(counts).forEach(([label, value]) => {
+    data.addRow([label, value]);
+  });
 
-  new google.visualization.ColumnChart(
-    document.getElementById("chart-seances-month")
-  ).draw(data, chartOptions());
+  const chart = new google.visualization.ColumnChart(container);
+  chart.draw(data, chartOptions());
 }
 
 // =====================================================
-// 4) Graphique : Séances par école
+// 4) Graphique : Séances réalisées par école
 // =====================================================
-function drawBySchool() {
+function drawSessionsBySchool() {
+  const container = document.getElementById("chart-seances-school");
+  if (!container || !seances.length) return;
+
   const data = new google.visualization.DataTable();
   data.addColumn("string", "École");
   data.addColumn("number", "Séances");
@@ -1794,19 +1815,22 @@ function drawBySchool() {
   const counts = {};
 
   seances.forEach(s => {
-    if (s.resume === MISSING_TAG) return;
+    if (!s.ecole) return;
+    if (s.resume === MISSING_TAG) return; // on ne compte pas celles sans résumé
+
     counts[s.ecole] = (counts[s.ecole] || 0) + 1;
   });
 
-  Object.entries(counts).forEach(([k, v]) => data.addRow([k, v]));
+  Object.entries(counts).forEach(([ecole, value]) => {
+    data.addRow([ecole, value]);
+  });
 
-  new google.visualization.BarChart(
-    document.getElementById("chart-seances-school")
-  ).draw(data, chartOptions());
+  const chart = new google.visualization.BarChart(container);
+  chart.draw(data, chartOptions());
 }
 
 // =====================================================
-// Options graphiques — mode sombre CEH
+// 5) Options graphiques – thème sombre CEH
 // =====================================================
 function chartOptions() {
   return {
@@ -1821,45 +1845,66 @@ function chartOptions() {
       textStyle: { color: "#ffffff" },
       gridlines: { color: "rgba(255,255,255,0.15)" }
     },
-    colors: ["#0d74a3"]
+    colors: ["#0d74a3"], // Bleu CEH
+    bar: { groupWidth: "60%" }
   };
 }
 
 // =====================================================
-// 5) Lancement central
+// 6) Initialisation centrale
 // =====================================================
 async function initDashboard() {
-  google.charts.load("current", { packages: ["corechart"] });
-
-  google.charts.setOnLoadCallback(async () => {
-    await loadData();
-    renderMissing();
-    drawByMonth();
-    drawBySchool();
-  });
+  await loadData();
+  renderMissingSummaries();
+  if (typeof google !== "undefined" && google.visualization) {
+    drawSessionsByMonth();
+    drawSessionsBySchool();
+  }
 }
 
 // =====================================================
-// 6) Redessiner en responsive
+// 7) Responsive : redessiner au resize
 // =====================================================
-window.addEventListener("resize", debounce(() => {
-  drawByMonth();
-  drawBySchool();
-}, 200));
-
-// Debounce utilitaire
-function debounce(fn, wait) {
-  let t;
+function debounce(fn, delay) {
+  let timer;
   return () => {
-    clearTimeout(t);
-    t = setTimeout(() => fn(), wait);
+    clearTimeout(timer);
+    timer = setTimeout(fn, delay);
   };
 }
 
-document.addEventListener("DOMContentLoaded", initDashboard);
+const redrawCharts = debounce(() => {
+  if (!seances.length) return;
+  drawSessionsByMonth();
+  drawSessionsBySchool();
+}, 200);
+
+window.addEventListener("resize", redrawCharts);
+
+// =====================================================
+// 8) Lancement après chargement de Google Charts
+// =====================================================
+
+// ⚠️ IMPORTANT : ce script suppose que
+// <script src="https://www.gstatic.com/charts/loader.js"></script>
+// est bien présent plus bas dans la page.
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof google === "undefined" || !google.charts) {
+    console.error("Google Charts n'est pas disponible.");
+    return;
+  }
+
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(initDashboard);
+});
 </script>
 
 
+
+
+<!-- Google Charts loader -->
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 </body>
