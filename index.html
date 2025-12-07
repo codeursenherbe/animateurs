@@ -1729,17 +1729,22 @@ async function loadData() {
 seances = rows.map(r => {
   const c = r.c || [];
 
+  const dateValue = c[0]?.v;
   let dateObj = null;
-  let dateLabel = "";
+  let dateStr = "";
 
-  if (c[0]?.v !== null && c[0]?.v !== undefined) {
-    // c[0].v = numéro Google/Excel (ex : 45044)
-    dateObj = excelToJsDate(c[0].v);
-    dateLabel = dateObj.toISOString().split("T")[0];
+  if (typeof dateValue === "number") {
+    // Conversion Excel → JS
+    dateObj = new Date((dateValue - 25569) * 86400000);
+    dateStr = dateObj.toISOString().split("T")[0];
+  } else if (typeof dateValue === "string" && !isNaN(Date.parse(dateValue))) {
+    // Date ISO texte
+    dateObj = new Date(dateValue);
+    dateStr = dateObj.toISOString().split("T")[0];
   }
 
   return {
-    date     : dateLabel,         // format AAAA-MM-JJ propre
+    date     : dateStr,
     dateObj  : dateObj,
     ecole    : c[1]?.v || "",
     animateur: c[2]?.v || "",
