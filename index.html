@@ -1635,6 +1635,7 @@
     </main>
   </div>
 <script>
+
 // 🌙 Gestion du thème — version SANS ERREURS
 const btn = document.getElementById("theme-toggle");
 
@@ -1686,12 +1687,13 @@ document.getElementById("globalSearch").addEventListener("input", function() {
 });
 </script>
 
-<!-- Google Charts loader -->
+
+<!-- Google Charts loader — doit être avant le dashboard -->
 <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script>
 // =====================================================
-// 🚀 TABLEAU DE BORD CEH 2025 — VERSION FINALE
+// 🚀 TABLEAU DE BORD CEH 2025 — VERSION FINALE STABLE
 // =====================================================
 
 // 📊 Paramètres Google Sheets
@@ -1701,7 +1703,6 @@ const MISSING_TAG = "!!!!!!!!!!!!!Résumé non réalisé!!!!!!!!!!!!!!!!!";
 
 // URL gViz JSON
 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tq=select%20A,B,C,D,E&tqx=out:json&gid=${GID}`;
-
 
 // Tableau global de séances
 let seances = [];
@@ -1714,44 +1715,42 @@ async function loadData() {
     const res  = await fetch(SHEET_URL);
     const text = await res.text();
 
-   //new safe 
-const jsonText = text.match(/\{.*\}/s);
-if (!jsonText) {
-  console.error("Impossible d'extraire le JSON gViz.");
-  return;
-}
-const json = JSON.parse(jsonText[0]);
+    const jsonText = text.match(/\{.*\}/s);
+    if (!jsonText) {
+      console.error("Impossible d'extraire le JSON gViz.");
+      return;
+    }
 
-const rows = json.table.rows || [];
+    const json = JSON.parse(jsonText[0]);
+    const rows = json.table.rows || [];
 
-seances = rows.map(r => {
-  const c = r.c || [];
+    seances = rows.map(r => {
+      const c = r.c || [];
+      const dateValue = c[0]?.v;
 
-  const dateValue = c[0]?.v;
-  let dateObj = null;
-  let dateStr = "";
+      let dateObj = null;
+      let dateStr = "";
 
-  if (typeof dateValue === "number") {
-    dateObj = new Date((dateValue - 25569) * 86400000);
-    dateStr = dateObj.toISOString().split("T")[0];
-  } else if (typeof dateValue === "string" && !isNaN(Date.parse(dateValue))) {
-    dateObj = new Date(dateValue);
-    dateStr = dateObj.toISOString().split("T")[0];
-  }
+      if (typeof dateValue === "number") {
+        dateObj = new Date((dateValue - 25569) * 86400000);
+        dateStr = dateObj.toISOString().split("T")[0];
+      } else if (typeof dateValue === "string" && !isNaN(Date.parse(dateValue))) {
+        dateObj = new Date(dateValue);
+        dateStr = dateObj.toISOString().split("T")[0];
+      }
 
-  return {
-    date     : dateStr,
-    dateObj  : dateObj,
-    ecole    : c[1]?.v || "",
-    animateur: c[2]?.v || "",
-    jour     : c[3]?.v || "",
-    resume   : c[4]?.v || ""
-  };
-});
-
-
+      return {
+        date     : dateStr,
+        dateObj  : dateObj,
+        ecole    : c[1]?.v || "",
+        animateur: c[2]?.v || "",
+        jour     : c[3]?.v || "",
+        resume   : c[4]?.v || ""
+      };
+    });
 
     console.log("📥 Données CEH chargées :", seances);
+
   } catch (e) {
     console.error("Erreur de chargement des données CEH :", e);
   }
@@ -1767,12 +1766,12 @@ function renderMissingSummaries() {
   box.innerHTML = "";
 
   if (!seances.length) {
-    box.innerHTML = `<li style="color:#ffb347;">⚠ Données non disponibles (Google Sheets inaccessible)</li>`;
+    box.innerHTML = `<li style="color:#ffb347;">⚠ Données non disponibles</li>`;
     return;
   }
 
-  const missing = seances.filter(s => 
-	!s.resume || s.resume.trim() === "" || s.resume === MISSING_TAG
+  const missing = seances.filter(s =>
+    !s.resume || s.resume.trim() === "" || s.resume === MISSING_TAG
   );
 
   if (!missing.length) {
@@ -1788,7 +1787,7 @@ function renderMissingSummaries() {
 }
 
 // =====================================================
-// 3) Graphique : Séances réalisées par mois
+// 3) Graphique : Séances par mois
 // =====================================================
 function drawSessionsByMonth() {
   const container = document.getElementById("chart-seances-month");
@@ -1798,12 +1797,10 @@ function drawSessionsByMonth() {
   data.addColumn("string", "Mois");
   data.addColumn("number", "Séances");
 
-  // Regroupement par mois (mois + année)
   const counts = {};
 
   seances.forEach(s => {
     if (!s.dateObj) return;
-    // On ne filtre plus — on compte toutes les séances valides
 
     const key = s.dateObj.toLocaleDateString("fr-FR", {
       month: "long",
@@ -1822,7 +1819,7 @@ function drawSessionsByMonth() {
 }
 
 // =====================================================
-// 4) Graphique : Séances réalisées par école
+// 4) Graphique : Séances par école
 // =====================================================
 function drawSessionsBySchool() {
   const container = document.getElementById("chart-seances-school");
@@ -1836,8 +1833,6 @@ function drawSessionsBySchool() {
 
   seances.forEach(s => {
     if (!s.ecole) return;
-  // On ne filtre plus — on compte toutes les séances valides
-
     counts[s.ecole] = (counts[s.ecole] || 0) + 1;
   });
 
@@ -1850,13 +1845,12 @@ function drawSessionsBySchool() {
 }
 
 // =====================================================
-// 5) Options graphiques – thème sombre CEH
+// 5) Options graphiques
 // =====================================================
 function chartOptions() {
   return {
     backgroundColor: "transparent",
     legend: { textStyle: { color: "#ffffff" } },
-    titleTextStyle: { color: "#ffffff" },
     hAxis: {
       textStyle: { color: "#ffffff" },
       gridlines: { color: "rgba(255,255,255,0.15)" }
@@ -1865,25 +1859,29 @@ function chartOptions() {
       textStyle: { color: "#ffffff" },
       gridlines: { color: "rgba(255,255,255,0.15)" }
     },
-    colors: ["#0d74a3"], // Bleu CEH
+    colors: ["#0d74a3"],
     bar: { groupWidth: "60%" }
   };
 }
 
 // =====================================================
-// 6) Initialisation centrale
+// 6) Initialisation finale — VERSION FIABLE
 // =====================================================
 async function initDashboard() {
   await loadData();
   renderMissingSummaries();
-  if (typeof google !== "undefined" && google.visualization) {
-    drawSessionsByMonth();
-    drawSessionsBySchool();
-  }
+  drawSessionsByMonth();
+  drawSessionsBySchool();
 }
 
 // =====================================================
-// 7) Responsive : redessiner au resize
+// 7) Charger Google Charts → puis lancer initDashboard()
+// =====================================================
+google.charts.load("current", { packages: ["corechart"] });
+google.charts.setOnLoadCallback(initDashboard);
+
+// =====================================================
+// 8) Responsive (redessiner au resize)
 // =====================================================
 function debounce(fn, delay) {
   let timer;
@@ -1893,37 +1891,13 @@ function debounce(fn, delay) {
   };
 }
 
-const redrawCharts = debounce(() => {
+window.addEventListener("resize", debounce(() => {
   if (!seances.length) return;
   drawSessionsByMonth();
   drawSessionsBySchool();
-}, 200);
+}, 200));
 
-window.addEventListener("resize", redrawCharts);
-
-// =====================================================
-// 8) Lancement après chargement de Google Charts
-// =====================================================
-
-// ⚠️ IMPORTANT : ce script suppose que
-// <script src="https://www.gstatic.com/charts/loader.js"></script>
-// est bien présent plus bas dans la page.
-
-document.addEventListener("DOMContentLoaded", () => {
-  if (typeof google === "undefined" || !google.charts) {
-    console.error("Google Charts n'est pas disponible.");
-    return;
-  }
-
-  google.charts.load("current", { packages: ["corechart"] });
-  google.charts.setOnLoadCallback(initDashboard);
-});
 </script>
-
-
-
-
-
 
 
 </body>
