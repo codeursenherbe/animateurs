@@ -1769,10 +1769,9 @@ function renderMissingSummaries() {
 
   const missing = seances.filter(s => {
     if (!s.dateObj) return false;
-    return (
-      s.dateObj <= today &&
-      (!s.resume || s.resume.trim() === "" || s.resume === MISSING_TAG)
-    );
+    if (s.dateObj > today) return false;
+
+    return !s.resume || s.resume.trim() === "" || s.resume === MISSING_TAG;
   });
 
   if (!missing.length) {
@@ -1800,22 +1799,22 @@ function drawSessionsByMonth() {
 
   const counts = {};
 
- seances.forEach(s => {
-  if (!s.dateObj) return;
-  if (s.dateObj > today) return; // ❗ exclure futur
+  seances.forEach(s => {
+    if (!s.dateObj) return;
+    if (s.dateObj > today) return;
 
-  if (!s.ecole) return;
-  counts[s.ecole] = (counts[s.ecole] || 0) + 1;
-});
+    const mois = s.dateObj.toISOString().slice(0, 7); // YYYY-MM
+    counts[mois] = (counts[mois] || 0) + 1;
+  });
 
-
-  Object.entries(counts).forEach(([label, value]) => {
-    data.addRow([label, value]);
+  Object.entries(counts).forEach(([mois, nb]) => {
+    data.addRow([mois, nb]);
   });
 
   const chart = new google.visualization.ColumnChart(container);
   chart.draw(data, chartOptions());
 }
+
 
 // =====================================================
 // 4) Graphique : Séances par école
@@ -1831,9 +1830,13 @@ function drawSessionsBySchool() {
   const counts = {};
 
   seances.forEach(s => {
-    if (!s.ecole) return;
-    counts[s.ecole] = (counts[s.ecole] || 0) + 1;
-  });
+  if (!s.dateObj) return;
+  if (s.dateObj > today) return; // ❗ exclure futur
+  if (!s.ecole) return;
+
+  counts[s.ecole] = (counts[s.ecole] || 0) + 1;
+});
+
 
   Object.entries(counts).forEach(([ecole, value]) => {
     data.addRow([ecole, value]);
