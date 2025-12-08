@@ -1634,25 +1634,6 @@
       </div>
     </main>
   </div>
-<script>
-
-// 🌙 Gestion du thème — version SANS ERREURS
-const btn = document.getElementById("theme-toggle");
-
-if (localStorage.getItem("theme") === "light") {
-  document.body.classList.add("light-mode");
-}
-
-if (btn) {
-  btn.addEventListener("click", () => {
-    document.body.classList.toggle("light-mode");
-    localStorage.setItem(
-      "theme",
-      document.body.classList.contains("light-mode") ? "light" : "dark"
-    );
-  });
-}
-</script>
 
 <script>
 document.getElementById("globalSearch").addEventListener("input", function() {
@@ -1730,16 +1711,27 @@ async function loadData() {
       const c = r.c || [];
       const dateValue = c[0]?.v;
 
-      let dateObj = null;
-      let dateStr = "";
+let dateObj = null;
+let dateStr = "";
 
-      if (typeof dateValue === "number") {
-        dateObj = new Date((dateValue - 25569) * 86400000);
-        dateStr = dateObj.toISOString().split("T")[0];
-      } else if (typeof dateValue === "string" && !isNaN(Date.parse(dateValue))) {
-        dateObj = new Date(dateValue);
-        dateStr = dateObj.toISOString().split("T")[0];
-      }
+// 1) Format Excel (numérique)
+if (typeof dateValue === "number") {
+  // Ajout d’un offset + correction fuseau
+  const excelEpoch = new Date(Date.UTC(1899, 11, 30));
+  dateObj = new Date(excelEpoch.getTime() + dateValue * 86400000);
+
+  dateStr = dateObj.toISOString().split("T")[0];
+}
+
+// 2) Format texte "AAAA-MM-JJ"
+else if (typeof dateValue === "string") {
+  const ts = Date.parse(dateValue);
+  if (!isNaN(ts)) {
+    dateObj = new Date(ts);
+    dateStr = dateObj.toISOString().split("T")[0];
+  }
+}
+
 
       return {
         date     : dateStr,
