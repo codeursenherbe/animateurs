@@ -1706,6 +1706,8 @@ const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tq
 
 // Tableau global de séances
 let seances = [];
+const today = new Date();
+today.setHours(0,0,0,0);
 
 // =====================================================
 // 1) Chargement des données Google Sheets
@@ -1765,14 +1767,13 @@ function renderMissingSummaries() {
 
   box.innerHTML = "";
 
-  if (!seances.length) {
-    box.innerHTML = `<li style="color:#ffb347;">⚠ Données non disponibles</li>`;
-    return;
-  }
-
-  const missing = seances.filter(s =>
-    !s.resume || s.resume.trim() === "" || s.resume === MISSING_TAG
-  );
+  const missing = seances.filter(s => {
+    if (!s.dateObj) return false;
+    return (
+      s.dateObj <= today &&
+      (!s.resume || s.resume.trim() === "" || s.resume === MISSING_TAG)
+    );
+  });
 
   if (!missing.length) {
     box.innerHTML = `<li style="color:#8fd68f;">✔ Aucun résumé manquant</li>`;
@@ -1799,16 +1800,14 @@ function drawSessionsByMonth() {
 
   const counts = {};
 
-  seances.forEach(s => {
-    if (!s.dateObj) return;
+ seances.forEach(s => {
+  if (!s.dateObj) return;
+  if (s.dateObj > today) return; // ❗ exclure futur
 
-    const key = s.dateObj.toLocaleDateString("fr-FR", {
-      month: "long",
-      year : "numeric"
-    });
+  if (!s.ecole) return;
+  counts[s.ecole] = (counts[s.ecole] || 0) + 1;
+});
 
-    counts[key] = (counts[key] || 0) + 1;
-  });
 
   Object.entries(counts).forEach(([label, value]) => {
     data.addRow([label, value]);
