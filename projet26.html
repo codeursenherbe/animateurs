@@ -19,36 +19,24 @@
 
   * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 
   body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background: var(--bg);
     color: var(--text-main);
-    padding: 16px;
+    line-height: 1.6;
   }
 
   .container {
     max-width: 900px;
     margin: 0 auto;
-  }
-
-  .back-link {
-    font-size: 0.85rem;
-    text-decoration: none;
-    color: var(--accent);
-    display: inline-block;
-    margin-bottom: 12px;
-  }
-
-  .back-link:hover {
-    text-decoration: underline;
+    padding: 16px;
   }
 
   .project-header {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .project-header h1 {
@@ -62,48 +50,39 @@
     color: var(--text-muted);
   }
 
+  main {
+    background: transparent;
+  }
+
   section {
     background: var(--card-bg);
     border-radius: var(--radius);
     border: 1px solid var(--border);
-    padding: 16px;
-    margin-bottom: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
     box-shadow: 0 2px 6px rgba(15,23,42,.06);
   }
 
   h2 {
-    font-size: 1.1rem;
-    margin-bottom: 6px;
     color: var(--accent);
+    font-size: 1.25rem;
+    margin-top: 0;
+    border-left: 4px solid var(--accent);
+    padding-left: 8px;
   }
 
   h3 {
-    font-size: 1rem;
-    margin: 10px 0 6px;
+    margin-top: 1.2rem;
+    font-size: 1.1rem;
   }
 
   h4 {
-    font-size: 0.95rem;
-    margin: 8px 0 4px;
-  }
-
-  p, li {
-    font-size: 0.9rem;
-    line-height: 1.5;
+    margin-top: 1rem;
+    font-size: 1rem;
   }
 
   ul, ol {
-    padding-left: 18px;
-    margin-bottom: 8px;
-  }
-
-  .box {
-    background: var(--accent-soft);
-    border-left: 4px solid var(--accent);
-    padding: 10px 12px;
-    border-radius: 6px;
-    margin: 8px 0 12px;
-    font-size: 0.9rem;
+    padding-left: 20px;
   }
 
   code {
@@ -111,7 +90,15 @@
     padding: 2px 6px;
     border-radius: 4px;
     font-family: Consolas, monospace;
-    font-size: 0.85rem;
+    font-size: 0.9em;
+  }
+
+  .box {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 6px;
   }
 
   .video-wrapper {
@@ -119,7 +106,7 @@
     padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
-    margin-top: 8px;
+    margin: 12px 0;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,.15);
   }
@@ -136,7 +123,7 @@
     text-align: center;
     font-size: 0.8rem;
     color: var(--text-muted);
-    margin-top: 24px;
+    margin: 24px 0;
   }
   </style>
 </head>
@@ -144,111 +131,378 @@
 <body>
   <div class="container">
 
-    <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
-
     <header class="project-header">
       <h1>Projet 26 – Atelier IA avec Scratch & Teachable Machine</h1>
-      <p>CE1 → CM2 · 3 séances · Initiation à l’intelligence artificielle</p>
+      <p>Fiche animateur complète · CE1 à CM2 · 3 séances</p>
     </header>
 
-    <!-- ACCUEIL -->
-    <section>
-      <h2>Accueil</h2>
-      <p>
-        Cette fiche animateur propose un atelier d’initiation à l’intelligence artificielle
-        avec Scratch 3 et Teachable Machine, destiné à des enfants déjà initiés à Scratch.
-      </p>
+    <!-- ⬇️ CONTENU STRICTEMENT IDENTIQUE À TA VERSION ⬇️ -->
 
-      <div class="box">
-        <strong>But :</strong> suivre cette fiche pas à pas pendant l’atelier.
-        Aucun prérequis en IA n’est nécessaire.
-      </div>
+    <!-- 🔴 ICI ON REPREND EXACTEMENT TON <main> ET TOUT SON CONTENU -->
+    <main>
+  <!-- ACCUEIL -->
+  <section id="accueil">
+    <h2>Accueil</h2>
+    <p>
+      Cette page est une fiche animateur pour un atelier d’initiation à l’intelligence artificielle
+      avec Scratch 3 et Teachable Machine, destiné à des enfants de CE1 à CM2 déjà initiés à Scratch.
+    </p>
+    <div class="box">
+      <strong>But :</strong> tu peux dérouler cette page pendant l’atelier et suivre les étapes dans l’ordre,
+      même si tu es débutant en IA. Les enfants savent déjà utiliser Scratch (labyrinthe, mémory).
+    </div>
 
-      <h3>Matériel nécessaire</h3>
-      <ul>
-        <li>1 ordinateur pour 2 enfants (caméra + micro).</li>
-        <li>Google Chrome à jour.</li>
-        <li>Connexion Internet stable.</li>
-        <li>Vidéoprojecteur pour les démonstrations.</li>
-      </ul>
-    </section>
+    <h3>Matériel nécessaire</h3>
+    <ul>
+      <li>1 ordinateur pour 2 enfants, avec caméra et micro fonctionnels.</li>
+      <li>Google Chrome installé et à jour sur chaque ordinateur.</li>
+      <li>Connexion Internet stable.</li>
+      <li>Un vidéoprojecteur pour montrer les étapes depuis ton poste.</li>
+    </ul>
+  </section>
 
-    <!-- ATELIER -->
-    <section>
-      <h2>Atelier IA avec Scratch (3 séances)</h2>
+  <!-- ATELIER 3 SEANCES -->
+  <section id="atelier">
+    <h2>Atelier IA avec Scratch (3 séances de 55 min)</h2>
 
-      <h3>Séance 1 – Découvrir l’IA et préparer les données</h3>
+    <!-- SEANCE 1 -->
+    <h3>Séance 1 – Découvrir l’IA et préparer les données</h3>
 
-      <h4>Objectifs</h4>
-      <ul>
-        <li>Comprendre le principe d’apprentissage par exemples.</li>
-        <li>Créer un projet Teachable Machine.</li>
-        <li>Collecter des images.</li>
-      </ul>
+    <h4>Avant la séance (animateur)</h4>
+    <ul>
+      <li>Vérifie que Chrome est installé et à jour sur chaque poste (voir section <a href="#chrome">Configurer Chrome</a>).</li>
+      <li>Teste la caméra : ouvrir Chrome et vérifier l’image avec un site de test ou l’appareil photo.</li>
+      <li>Ouvre une fois <code>https://teachablemachine.withgoogle.com</code> et fais un mini-projet test (3–4 images, bouton « Train Model »).</li>
+      <li>Prépare une feuille ou un tableau pour noter : binôme → classes choisies (ex. Binôme 1 : « PouceHaut / PouceBas »).</li>
+    </ul>
 
-      <h4>Collecte des images</h4>
-      <ul>
-        <li>Créer 2 classes différentes.</li>
-        <li>Prendre au moins 15 images par classe.</li>
-        <li>Varier les angles, distances et personnes.</li>
-      </ul>
+    <h4>Introduction avec les enfants (≈ 5 min)</h4>
+    <ol>
+      <li>Dis : « Vous savez déjà créer des jeux dans Scratch. Aujourd’hui, on va faire un programme qui <strong>apprend</strong> à reconnaître quelque chose, comme un geste ou un objet. »</li>
+      <li>Pose ces deux questions :
+        <ul>
+          <li>« Où voyez-vous des machines qui reconnaissent des choses ? » (téléphone, appareil photo, assistant vocal, etc.).</li>
+          <li>« Comment pensez-vous qu’elles ont appris ? »</li>
+        </ul>
+      </li>
+    </ol>
 
-      <h3>Séance 2 – Entraîner et tester le modèle</h3>
+    <h4>Jeu débranché « Qui est-ce ? » (≈ 10 min)</h4>
+    <ol>
+      <li>Explique : « Je pense à un animal, vous devez le trouver en posant des questions qui se répondent par OUI ou NON. »</li>
+      <li>Laisse les enfants poser des questions jusqu’à ce qu’ils trouvent.</li>
+      <li>Conclusion à dire :
+        <ul>
+          <li>« Ici, c’est <strong>vous</strong> qui inventez les questions pour deviner. »</li>
+          <li>« En IA, on va plutôt montrer <strong>plein d’exemples</strong> et laisser la machine apprendre toute seule à reconnaître. »</li>
+        </ul>
+      </li>
+    </ol>
 
-      <h4>Entraînement</h4>
-      <ul>
-        <li>Cliquer sur <strong>Train Model</strong>.</li>
-        <li>Attendre la fin de l’apprentissage.</li>
-        <li>Tester les prédictions avec la webcam.</li>
-      </ul>
+    <h4>Découverte rapide de Teachable Machine au vidéoprojecteur (≈ 10 min)</h4>
+    <ol>
+      <li>Sur ton ordinateur :
+        <ul>
+          <li>Ouvre Chrome.</li>
+          <li>Va sur <code>https://teachablemachine.withgoogle.com</code>.</li>
+          <li>Clique sur « Get Started » puis sur « Image Project » (modèle d’images standard).</li>
+        </ul>
+      </li>
+      <li>Explique : « Chaque bloc représente une <strong>classe</strong>, c’est-à-dire un type d’image que l’IA doit reconnaître (ex. “PouceHaut” et “PouceBas”). »</li>
+    </ol>
 
-      <h3>Séance 3 – Créer un mini-jeu Scratch</h3>
+    <h4>Création des projets par binômes (≈ 10 min)</h4>
+    <ol>
+      <li>Demande aux enfants de se mettre par 2 sur chaque ordinateur.</li>
+      <li>Donne les consignes à tous :
+        <ul>
+          <li>« Ouvrez Chrome. »</li>
+          <li>« Tapez : <code>https://teachablemachine.withgoogle.com</code> puis Entrée. »</li>
+          <li>« Cliquez sur “Get Started”, puis sur “Image Project”. »</li>
+        </ul>
+      </li>
+      <li>Dis : « Choisissez <strong>deux choses très différentes</strong> que vous pouvez montrer à la caméra : deux gestes, deux objets, etc. »</li>
+      <li>Note au tableau les choix de chaque binôme.</li>
+    </ol>
 
-      <h4>Principe</h4>
-      <ul>
-        <li>Récupérer la classe prédite.</li>
-        <li>Stocker le résultat dans une variable.</li>
-        <li>Modifier le comportement du sprite selon la classe.</li>
-      </ul>
-    </section>
+    <h4>Collecte des images (≈ 20 min)</h4>
+    <ol>
+      <li>Explique :
+        <ul>
+          <li>« Pour chaque classe, vous devez prendre au moins <strong>15 images</strong>. »</li>
+          <li>« Changez de personne, de distance, d’angle. »</li>
+          <li>« Évitez le visage complet si vous n’avez pas l’autorisation, utilisez plutôt les mains ou des objets. »</li>
+        </ul>
+      </li>
+      <li>Montre sur ton écran :
+        <ul>
+          <li>Cliquer sur « Class 1 », la renommer (ex. « PouceHaut »).</li>
+          <li>Cliquer sur « Webcam » et autoriser la caméra.</li>
+          <li>Prendre 15–20 photos variées.</li>
+        </ul>
+      </li>
+      <li>Faire pareil pour la seconde classe.</li>
+      <li>Circuler pour vérifier : 2 classes nommées + au moins 15 images chacune.</li>
+    </ol>
 
-    <!-- TEACHABLE MACHINE -->
-    <section>
-      <h2>Teachable Machine – Tutoriel</h2>
+    <h4>Clôture de la séance (≈ 5 min)</h4>
+    <ul>
+      <li>Dis : « La prochaine fois, on va appuyer sur un bouton pour que l’IA <strong>s’entraîne</strong> avec vos images, puis on testera ce qu’elle comprend. »</li>
+      <li>Demande à chaque binôme de garder la trace de leurs classes (cahier ou feuille).</li>
+    </ul>
 
-      <div class="video-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/1OD3Sr4gqxY"
-          title="Scratch & Teachable Machine"
-          allowfullscreen>
-        </iframe>
-      </div>
+    <!-- SEANCE 2 -->
+    <h3>Séance 2 – Entraîner et tester le modèle</h3>
 
-      <h3>Étapes principales</h3>
-      <ol>
-        <li>Aller sur <code>https://teachablemachine.withgoogle.com</code></li>
-        <li>Créer un projet d’images.</li>
-        <li>Ajouter des exemples.</li>
-        <li>Entraîner le modèle.</li>
-        <li>Exporter l’URL du modèle.</li>
-      </ol>
-    </section>
+    <h4>Avant la séance (animateur)</h4>
+    <ul>
+      <li>Vérifie que chaque binôme peut rouvrir son projet Teachable Machine.</li>
+      <li>Prépare un projet démo avec 2 classes déjà remplies pour montrer rapidement les étapes.</li>
+    </ul>
 
-    <!-- CHROME -->
-    <section>
-      <h2>Configurer Google Chrome</h2>
+    <h4>Rappel avec les enfants (≈ 5 min)</h4>
+    <ol>
+      <li>Questions :
+        <ul>
+          <li>« De quoi se compose votre projet ? » → 2 classes, plusieurs images.</li>
+          <li>« À quoi servent ces images ? » → à apprendre à l’IA.</li>
+        </ul>
+      </li>
+      <li>Explique : « Aujourd’hui, on va cliquer sur un bouton pour entraîner la machine, puis la tester. »</li>
+    </ol>
 
-      <ul>
-        <li>Mettre Chrome à jour.</li>
-        <li>Autoriser la caméra et le micro.</li>
-        <li>Tester la webcam avant la séance.</li>
-      </ul>
-    </section>
+    <h4>Entraînement du modèle (≈ 10 min)</h4>
+    <ol>
+      <li>Chaque binôme ouvre son projet Teachable Machine.</li>
+      <li>Au vidéoprojecteur, tu montres :
+        <ul>
+          <li>Clique sur <strong>Train Model</strong>.</li>
+          <li>Attends la fin (quelques dizaines de secondes à quelques minutes selon le nombre d’images).</li>
+        </ul>
+      </li>
+      <li>Explique : « L’ordinateur cherche des ressemblances dans les images de chaque classe. »</li>
+    </ol>
 
-    <footer>
-      Fiche animateur – Codeurs en Herbe · Projet 26
+    <h4>Tester le modèle dans Teachable Machine (≈ 20 min)</h4>
+    <ol>
+      <li>Montre la zone de prévisualisation avec la classe prédite et le pourcentage.</li>
+      <li>Demande à chaque binôme :
+        <ul>
+          <li>De montrer un exemple de la classe 1, puis de la classe 2.</li>
+          <li>De noter quand l’IA se trompe ou hésite.</li>
+        </ul>
+      </li>
+      <li>Discute :
+        <ul>
+          <li>Images floues, sombres ou trop similaires ?</li>
+          <li>Faut-il ajouter des images et réentraîner ?</li>
+        </ul>
+      </li>
+      <li>Si nécessaire, ajouter quelques images mieux cadrées puis relancer <strong>Train Model</strong>.</li>
+    </ol>
+
+    <h4>Préparer le lien vers Scratch (≈ 15 min)</h4>
+    <ol>
+      <li>Au vidéoprojecteur :
+        <ul>
+          <li>Clique sur <strong>Export Model</strong>.</li>
+          <li>Choisis l’option d’hébergement en ligne (URL du modèle).</li>
+          <li>Copie l’URL générée.</li>
+        </ul>
+      </li>
+      <li>Chaque binôme :
+        <ul>
+          <li>Exporte son propre modèle.</li>
+          <li>Copie l’URL dans un fichier texte ou sur un cahier (bien lisible).</li>
+        </ul>
+      </li>
+      <li>Explique : « Cette adresse permettra à Scratch d’utiliser votre IA dans un jeu. »</li>
+    </ol>
+
+    <h4>Clôture de la séance (≈ 5 min)</h4>
+    <ul>
+      <li>Dis : « La prochaine fois, nous ferons un mini‑jeu Scratch qui obéit à ce que voit votre IA. »</li>
+    </ul>
+
+    <!-- SEANCE 3 -->
+    <h3>Séance 3 – Créer un petit jeu contrôlé par l’IA</h3>
+
+    <h4>Avant la séance (animateur)</h4>
+    <ul>
+      <li>Prépare un projet Scratch de démonstration avec un sprite qui réagit à une variable représentant la classe prédite.</li>
+      <li>Choisis 1 ou 2 scénarios simples (Feu rouge / Feu Vert, quiz caméra).</li>
+    </ul>
+
+    <h4>Rappel (≈ 5 min)</h4>
+    <ol>
+      <li>Dis : « Votre IA sait maintenant reconnaître deux classes. Aujourd’hui, on va créer un jeu dans Scratch qui réagit en fonction de ce qu’elle voit. »</li>
+      <li>Présente les scénarios possibles et laisse chaque binôme choisir.</li>
+    </ol>
+
+    <h4>Création du projet Scratch (≈ 10 min)</h4>
+    <ol>
+      <li>Chaque binôme :
+        <ul>
+          <li>Ouvre Scratch (en ligne ou hors ligne).</li>
+          <li>Crée un nouveau projet.</li>
+          <li>Choisit un sprite et un décor adaptés.</li>
+        </ul>
+      </li>
+      <li>Rappelle comment créer une variable <code>score</code> et l’afficher.</li>
+    </ol>
+
+    <h4>Programmation de la détection IA (≈ 15 min)</h4>
+    <p>
+      La connexion exacte Teachable Machine → Scratch dépendra de l’extension ou du mod utilisé (par exemple un environnement pédagogique avec blocs IA).
+      L’idée générale reste la même.
+    </p>
+    <ul>
+      <li>Un script qui, régulièrement, interroge le modèle avec la webcam.</li>
+      <li>Le résultat (classe prédite) stocké dans une variable (par ex. <code>classe_IA</code>).</li>
+      <li>Des blocs <em>si &lt;classe_IA = "Classe1"&gt;</em> alors… pour modifier le comportement du sprite.</li>
+    </ul>
+
+    <h4>Ajout des règles du jeu (≈ 15 min)</h4>
+    <ol>
+      <li>Pour « Feu rouge / Feu vert » :
+        <ul>
+          <li>Si <code>classe_IA = "Vert"</code> → le sprite avance (changer x ou y).</li>
+          <li>Si <code>classe_IA = "Rouge"</code> → le sprite s’arrête ou recule.</li>
+          <li>Ajouter un score ou un temps limite.</li>
+        </ul>
+      </li>
+      <li>Pour « Quiz caméra » :
+        <ul>
+          <li>Le sprite choisit une consigne (« montre A » ou « montre B »).</li>
+          <li>L’IA prédit la classe après quelques secondes.</li>
+          <li>Si la prédiction correspond à la consigne, le score augmente.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h4>Tests croisés et discussion (≈ 10 min)</h4>
+    <ol>
+      <li>Organise des tests croisés : chaque binôme joue au jeu des autres.</li>
+      <li>Discute :
+        <ul>
+          <li>« Quand l’IA se trompe, pourquoi ? » (données, lumière, cadrage, gestes trop proches…).</li>
+          <li>« Que ferait-on pour améliorer le modèle ? » (plus d’images, nouvelles classes, meilleure collecte).</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <!-- FICHE TEACHABLE MACHINE -->
+  <section id="teachable">
+    <h2>Fiche Teachable Machine (pas à pas animateur)</h2>
+
+    <h3>Vidéo tutorielle en français</h3>
+    <p>Regarde ce tutoriel en français pour voir un exemple complet d’utilisation de Scratch avec Teachable Machine.</p>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/1OD3Sr4gqxY"
+              title="IA Programmation Scratch et Teachable Machine (FR)"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+
+    <h3>1. Ouvrir Teachable Machine</h3>
+    <ol>
+      <li>Ouvre Google Chrome.</li>
+      <li>Dans la barre d’adresse, tape : <code>https://teachablemachine.withgoogle.com</code> puis Entrée.</li>
+      <li>Accepte les conditions si le site les affiche.</li>
+    </ol>
+
+    <h3>2. Créer un projet d’images</h3>
+    <ol>
+      <li>Clique sur <strong>Get Started</strong> / <strong>Commencer</strong>.</li>
+      <li>Clique sur <strong>Image Project</strong>.</li>
+      <li>Choisis le modèle standard d’images.</li>
+    </ol>
+
+    <h3>3. Créer et renommer les classes</h3>
+    <ol>
+      <li>Par défaut : « Class 1 », « Class 2 ».</li>
+      <li>Clique sur « Class 1 » et renomme-la (ex. <code>PouceHaut</code>).</li>
+      <li>Clique sur « Class 2 » et renomme-la (ex. <code>PouceBas</code>).</li>
+    </ol>
+
+    <h3>4. Ajouter des images avec la webcam</h3>
+    <ol>
+      <li>Dans la zone de la première classe, clique sur <strong>Webcam</strong>.</li>
+      <li>Autorise la caméra si Chrome te le demande.</li>
+      <li>Prends 15–20 photos différentes : angles, distances, personnes.</li>
+      <li>Répète pour la seconde classe.</li>
+    </ol>
+
+    <h3>5. Entraîner le modèle</h3>
+    <ol>
+      <li>Quand chaque classe a assez d’images, clique sur <strong>Train Model</strong>.</li>
+      <li>Attends la fin de l’entraînement (quelques minutes max).</li>
+      <li>Teste la prédiction dans la fenêtre de prévisualisation.</li>
+    </ol>
+
+    <h3>6. Exporter le modèle (pour Scratch)</h3>
+    <ol>
+      <li>Clique sur <strong>Export Model</strong> / « Exporter le modèle ».</li>
+      <li>Choisis l’option d’hébergement en ligne (URL).</li>
+      <li>Copie l’URL générée et garde-la pour l’utiliser dans Scratch (ou dans un environnement avec blocs IA).</li>
+    </ol>
+  </section>
+
+  <!-- FICHE CHROME -->
+  <section id="chrome">
+    <h2>Configurer Google Chrome (caméra &amp; micro)</h2>
+
+    <h3>1. Mettre Chrome à jour</h3>
+    <ol>
+      <li>Ouvre Chrome.</li>
+      <li>Clique sur les trois points en haut à droite &rarr; <strong>Aide</strong> &rarr; <strong>À propos de Google Chrome</strong>.</li>
+      <li>Chrome installe les mises à jour, puis clique sur <strong>Relancer</strong> si nécessaire.</li>
+    </ol>
+
+    <h3>2. Vérifier la caméra et le micro</h3>
+    <ol>
+      <li>Dans Chrome : trois points &rarr; <strong>Paramètres</strong>.</li>
+      <li>Clique sur <strong>Confidentialité et sécurité</strong> &rarr; <strong>Paramètres des sites</strong>.</li>
+      <li>Clique sur <strong>Caméra</strong> :
+        <ul>
+          <li>Choisis le bon périphérique (caméra intégrée ou externe).</li>
+          <li>Vérifie que « Les sites peuvent demander l’autorisation d’utiliser votre caméra » est activé.</li>
+        </ul>
+      </li>
+      <li>Clique sur <strong>Microphone</strong> :
+        <ul>
+          <li>Choisis le bon micro (intégré, casque…).</li>
+          <li>Vérifie que « Les sites peuvent demander l’autorisation d’utiliser votre microphone » est activé.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>3. Autoriser Teachable Machine</h3>
+    <ol>
+      <li>Va sur <code>https://teachablemachine.withgoogle.com</code> dans Chrome.</li>
+      <li>Quand le site demande l’accès à la caméra ou au micro, clique sur <strong>Autoriser</strong>.</li>
+      <li>Si tu as déjà refusé :
+        <ul>
+          <li>Clique sur l’icône caméra à gauche de l’URL.</li>
+          <li>Dans « Autorisations », choisis « Autoriser » pour caméra et micro.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>4. Tester que tout fonctionne</h3>
+    <ol>
+      <li>Dans un projet Teachable Machine, clique sur « Webcam ».</li>
+      <li>Vérifie que l’image de la caméra apparaît.</li>
+      <li>Pour un projet audio, vérifie que les barres de niveau bougent quand tu parles.</li>
+    </ol>
+  </section>
+</main>
+        <footer>
+      Page pédagogique statique – Codeurs en Herbe
     </footer>
 
   </div>
 </body>
 </html>
+
