@@ -100,7 +100,19 @@
     margin: 12px 0;
     border-radius: 6px;
   }
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
 
+.project-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
   .video-wrapper {
     position: relative;
     padding-bottom: 56.25%;
@@ -133,16 +145,15 @@
 
   <a href="index.html" class="back-link">← Retour à l’Espace Animateurs</a>
 
-  <header class="hero-header">
-  <div class="hero-logo">
-    <img src="logo-ceh.png" alt="Codeurs en Herbe">
-  </div>
+  <header class="project-header">
+  <img src="logo-ceh.png" alt="Codeurs en Herbe" class="project-logo">
 
-  <div class="hero-title-block">
+  <div>
     <h1>Projet 26 – Atelier IA avec Scratch & Teachable Machine</h1>
-    <p class="hero-subtitle">Fiche animateur complète · CE1 à CM2 · 3 séances</p>
+    <p>Fiche animateur complète · CE1 à CM2 · 3 séances</p>
   </div>
 </header>
+
 
 
 </div>
@@ -517,6 +528,7 @@
   </div>
 </body>
 </html>
+
 
 
 
