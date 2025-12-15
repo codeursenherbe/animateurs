@@ -1433,3 +1433,14 @@ summary::-webkit-details-marker {
   box-shadow: var(--shadow-strong);
 }
 
+back-link {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
